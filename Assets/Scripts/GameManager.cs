@@ -20,10 +20,10 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    private void Start()
+    public void StartGame()
     {
-        //temp line to start the game
         NarrationManager.Instance.PlayNarration();
+
     }
 
     private void OnDestroy()
