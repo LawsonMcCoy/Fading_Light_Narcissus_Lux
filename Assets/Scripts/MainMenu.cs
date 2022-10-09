@@ -7,14 +7,11 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     #region Helper Functions
-    public void StartGame()
-    {
-        SceneManager.LoadScene("GameScene"); //Loads up GameScene.
-    }
 
     public void QuitGame()
     {
         Application.Quit(); //This should terminate the game.
     }
+
     #endregion
 }
