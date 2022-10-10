@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
 
-public class Entity : ScriptableObject
+public class Entity : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
