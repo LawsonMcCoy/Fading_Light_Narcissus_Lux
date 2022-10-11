@@ -2,10 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(Collider))]
-
-public abstract class Entity : MonoBehaviour
+public class Player : CombatEntity
 {
     // Start is called before the first frame update
     void Start()
