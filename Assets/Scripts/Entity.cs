@@ -7,15 +7,7 @@ using UnityEngine;
 
 public abstract class Entity : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //references to required components
+    [SerializeField] public Rigidbody rigidbody;
+    [SerializeField] public Collider collider;
 }
