@@ -335,6 +335,7 @@ GameObject:
   - component: {fileID: 522045692}
   - component: {fileID: 522045691}
   - component: {fileID: 522045693}
+  - component: {fileID: 522045694}
   m_Layer: 0
   m_Name: Cuby
   m_TagString: Untagged
@@ -520,11 +521,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 522045683}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b251016d2733ff357aa91d1072197e68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  commonData: {fileID: 11400000, guid: 6b0602edecbaa801c8a496d3a1efec01, type: 2}
+  movementModes:
+  - {fileID: 0}
+  - {fileID: 522045694}
+  - {fileID: 522045693}
   testForwardSpeed: 20
   forwardThrustMagnitude: 5
   liftPower: 3
@@ -586,6 +592,25 @@ MonoBehaviour:
   minTiltAngle: -30
   maxTurnAngle: 0
   speedBoostMagnitude: 5
+--- !u!114 &522045694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522045683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85dd970c19d9c780e995a5ea5b5cb3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  commonData: {fileID: 11400000, guid: 6b0602edecbaa801c8a496d3a1efec01, type: 2}
+  movementModes:
+  - {fileID: 0}
+  - {fileID: 522045694}
+  - {fileID: 522045693}
+  hoverSpeed: 15
+  turnSpeed: 5
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

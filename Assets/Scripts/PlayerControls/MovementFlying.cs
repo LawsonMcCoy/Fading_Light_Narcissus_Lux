@@ -41,15 +41,23 @@ public class MovementFlying : MovementMode
 
     private void OnEnable()
     {
+        Debug.Log("Now Flying");
+        //set the rigidbody to nonkinematic, so it can be control with forces
+        self.rigidbody.isKinematic = false;
+
         // Debug.Log("enabling movement mode: flying");
         //apply a forward force with this script is enabled
         Debug.Log(self);
         Debug.Log(self.rigidbody);
+        //Give a starting push everytime the player start flying
         self.rigidbody.AddForce(transform.forward * testForwardSpeed, ForceMode.Impulse);
         // self.rigidbody.velocity = transform.forward * testForwardSpeed;
+
+        //mark the mode as newly transition to
+        justEnabled = true;
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
         //get local velocity
         localVelocity = Quaternion.Inverse(self.rigidbody.rotation) * self.rigidbody.velocity;
@@ -71,6 +79,8 @@ public class MovementFlying : MovementMode
         {
             self.rigidbody.AddForce(transform.forward * speedBoostMagnitude);
         }
+
+        base.FixedUpdate();
     }
 
     private void AddLift()
@@ -106,11 +116,11 @@ public class MovementFlying : MovementMode
         //apply lift in the perpendicular to air flow and right side
         lift = Vector3.Cross(horizontalVelocity.normalized, transform.right) * liftMagnitude;
 
-        Debug.Log($"adding lift {lift}");
+        // Debug.Log($"adding lift {lift}");
         Vector3 horizontalLift = Vector3.ProjectOnPlane(lift, Vector3.up);
         float horizontalLiftBoost = 10.0f;
         horizontalLift = horizontalLift * horizontalLiftBoost;
-        Debug.Log($"horizonatal lift magnitude {horizontalLift.magnitude}");
+        // Debug.Log($"horizonatal lift magnitude {horizontalLift.magnitude}");
         Debug.DrawLine(transform.position, transform.position + lift, Color.red);
         self.rigidbody.AddForce(lift);
         // Vector3 forceApplicationOffset = transform.up * 0.5f;
@@ -173,7 +183,12 @@ public class MovementFlying : MovementMode
         self.rigidbody.MoveRotation(rotationMatrix);
     }
 
-    private void OnMove(InputValue input)
+    //************
+    //Player input
+    //************
+
+    //wasd input
+    protected override void OnMove(InputValue input)
     {
         //x component is turning, y component is tilting
         Vector2 moveVector = input.Get<Vector2>();
@@ -181,7 +196,35 @@ public class MovementFlying : MovementMode
         turnValue = -moveVector.x;
     }
 
-    //test function
+    //space key input
+    private void OnJumpTransition(InputValue input)
+    {
+        Debug.Log($"Flying space {input.isPressed}");
+        //if justEnabled is true and the space key is pressed
+        //then the space key is still pressed from transitioning
+        //to this state
+        if (justEnabled)
+        {
+            //if the space key is no longer held down set
+            //justEnabled to false so the script knows that
+            //next time the player presses the space key
+            //it is to transition out of this state
+            if (!input.isPressed)
+            {
+                justEnabled = false;
+            }
+        }
+        else
+        {
+            if (input.isPressed)
+            {
+                Debug.Log((int)Modes.HOVERING);
+                Transition(Modes.HOVERING);
+            }
+        }
+    }
+
+    //test function, shift input
     private void OnSpeedBoost(InputValue input)
     {
         speedBoost = input.isPressed;
