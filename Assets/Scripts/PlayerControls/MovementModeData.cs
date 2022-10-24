@@ -12,4 +12,9 @@ using UnityEngine;
 public class MovementModeData : ScriptableObject
 {
     public float maxSpeed; //a value for a max speed to prevent the game from breaking
+    public float isGroundedCheckDistance; //the distance that the player needs to be 
+                                          //off the ground in order to be considered in
+                                          //the air
+
+    public float maxForce;
 }

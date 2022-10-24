@@ -37,6 +37,12 @@ public class MovementHovering : MovementMode
         justEnabled = true;
     }
 
+    private void Start()
+    {
+        Debug.Log("Hovering start");
+        justEnabled = false;
+    }
+
     protected override void FixedUpdate()
     {
         //move the player 
@@ -60,10 +66,10 @@ public class MovementHovering : MovementMode
         turnValue = inputVector.x * turnSpeed;
     }
 
-    //space key input
-    private void OnJumpTransition(InputValue input)
+    //Shift key input
+    private void OnSprintFly(InputValue input)
     {
-        Debug.Log($"Hover space {input.isPressed}");
+        // Debug.Log($"Hover space {input.isPressed}");
         //if justEnabled is true and the space key is pressed
         //then the space key is still pressed from transitioning
         //to this state

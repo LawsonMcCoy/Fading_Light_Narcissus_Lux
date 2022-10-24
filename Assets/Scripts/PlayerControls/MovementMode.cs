@@ -61,10 +61,31 @@ public abstract class MovementMode : MonoBehaviour
     protected void Transition(Modes transitionToMode)
     {
         //enable new movement mode
+        // Debug.LogError($"Transitioning to {transitionToMode}");
         movementModes[(int)transitionToMode].enabled = true;
 
         //disable current mode
         this.enabled = false;
+    }
+
+    //A simple raycast frunction to check if the player is on the ground
+    //returns true if the player is one the ground and false if they are
+    //in the air
+    protected bool IsGrounded()
+    {
+        return Physics.Raycast(this.transform.position, Vector3.down, commonData.isGroundedCheckDistance);   
+    }
+
+    protected void AddForce(Vector3 force, ForceMode mode)
+    {
+        //limit the force to max force
+        if (force.magnitude > commonData.maxForce)
+        {
+            force = force.normalized * commonData.maxForce;
+        }
+
+        //apply force to rigidbody
+        self.rigidbody.AddForce(force, mode);
     }
 
     //Player input

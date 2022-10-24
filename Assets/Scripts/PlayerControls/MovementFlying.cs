@@ -47,10 +47,10 @@ public class MovementFlying : MovementMode
 
         // Debug.Log("enabling movement mode: flying");
         //apply a forward force with this script is enabled
-        Debug.Log(self);
-        Debug.Log(self.rigidbody);
+        // Debug.Log(self);
+        // Debug.Log(self.rigidbody);
         //Give a starting push everytime the player start flying
-        self.rigidbody.AddForce(transform.forward * testForwardSpeed, ForceMode.Impulse);
+        AddForce(transform.forward * testForwardSpeed, ForceMode.Impulse);
         // self.rigidbody.velocity = transform.forward * testForwardSpeed;
 
         //mark the mode as newly transition to
@@ -66,7 +66,7 @@ public class MovementFlying : MovementMode
         angleOfAttack = Mathf.Atan2(-localVelocity.y, localVelocity.z) * Mathf.Rad2Deg;
 
         //apply a thrust force
-        // self.rigidbody.AddForce(transform.forward * forwardThrustMagnitude);
+        // AddForce(transform.forward * forwardThrustMagnitude);
 
         //apply lift
         AddLift();
@@ -77,7 +77,9 @@ public class MovementFlying : MovementMode
         //test function to add forward speed
         if (speedBoost)
         {
-            self.rigidbody.AddForce(transform.forward * speedBoostMagnitude);
+            // AddForce(transform.forward * speedBoostMagnitude);
+            AddForce(transform.forward * speedBoostMagnitude, ForceMode.Force);
+
         }
 
         base.FixedUpdate();
@@ -122,9 +124,9 @@ public class MovementFlying : MovementMode
         horizontalLift = horizontalLift * horizontalLiftBoost;
         // Debug.Log($"horizonatal lift magnitude {horizontalLift.magnitude}");
         Debug.DrawLine(transform.position, transform.position + lift, Color.red);
-        self.rigidbody.AddForce(lift);
+        AddForce(lift, ForceMode.Force);
         // Vector3 forceApplicationOffset = transform.up * 0.5f;
-        // self.rigidbody.AddForceAtPosition(lift, transform.position + forceApplicationOffset);
+        // AddForceAtPosition(lift, transform.position + forceApplicationOffset);
 
         //calculate the induce drag
         inducedDragMagnitude = coefficientOfLift * coefficientOfLift * coefficientOfInducedDrag * horizontalVelocity.sqrMagnitude;
@@ -132,7 +134,7 @@ public class MovementFlying : MovementMode
         
         // Debug.Log(inducedDragMagnitude);
         Debug.DrawLine(transform.position, transform.position + inducedDrag, Color.green);
-        self.rigidbody.AddForce(inducedDrag);
+        AddForce(inducedDrag, ForceMode.Force);
     }
 
     private void AddTorque()
@@ -199,7 +201,7 @@ public class MovementFlying : MovementMode
     //space key input
     private void OnJumpTransition(InputValue input)
     {
-        Debug.Log($"Flying space {input.isPressed}");
+        // Debug.Log($"Flying space {input.isPressed}");
         //if justEnabled is true and the space key is pressed
         //then the space key is still pressed from transitioning
         //to this state
@@ -218,7 +220,7 @@ public class MovementFlying : MovementMode
         {
             if (input.isPressed)
             {
-                Debug.Log((int)Modes.HOVERING);
+                // Debug.Log((int)Modes.HOVERING);
                 Transition(Modes.HOVERING);
             }
         }
