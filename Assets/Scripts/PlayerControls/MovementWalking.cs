@@ -31,9 +31,6 @@ public class MovementWalking : MovementMode
 
         //Enable gravity when walking
         self.rigidbody.useGravity = true; 
-
-        //Disable physics rotation
-        self.rigidbody.freezeRotation = true;
     }
 
     //a helper function to check if the player is on the ground
@@ -44,11 +41,25 @@ public class MovementWalking : MovementMode
         {
             onGround = true;
 
+            //Disable physics rotation
+            self.rigidbody.freezeRotation = true;
+
+            //reset the rotate transform.up is the same as Vector3.up
+            Vector3 currentEuler = self.rigidbody.rotation.eulerAngles; //get the Euler angles
+            currentEuler.x = 0.0f; //set the rotation around x axis to 0
+            currentEuler.z = 0.0f; //set the rotation around z axis to 0
+            //Now we only have an rotation around the y axis, so up with this rotation is Vector3.up
+            // self.rigidbody.rotation = Quaternion.Euler(currentEuler);
+            self.rigidbody.MoveRotation(Quaternion.Euler(currentEuler));
+
             return true;
         }
         else
         {
             onGround = false;
+
+            //enable physics rotation while falling
+            self.rigidbody.freezeRotation = false;
 
             return false;
         }
