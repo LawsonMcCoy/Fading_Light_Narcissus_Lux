@@ -47,6 +47,12 @@ public abstract class MovementMode : MonoBehaviour
         inputReady = true;
     }
 
+    private void Start()
+    {
+        //lock the curser when controlling the player
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     protected virtual void FixedUpdate()
     {
         //cap the speed
