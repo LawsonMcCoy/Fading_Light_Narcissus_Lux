@@ -17,4 +17,6 @@ public class MovementModeData : ScriptableObject
                                           //the air
 
     public float maxForce;
+
+    public float inputDelayTime;
 }

@@ -32,7 +32,7 @@ public abstract class MovementMode : MonoBehaviour
     protected Vector3 moveVector;
     protected float speed; //speed variable to be set by the child class
 
-    protected bool justEnabled; //A variable value to prevent immediately transiting back to 
+    protected bool inputReady; //A variable value to prevent immediately transiting back to 
                                 //a mode that you just transition from when the button to transition
                                 //is the same
 
@@ -43,6 +43,8 @@ public abstract class MovementMode : MonoBehaviour
 
         //initial the move vector to zero
         moveVector = Vector3.zero;
+
+        inputReady = true;
     }
 
     protected virtual void FixedUpdate()
@@ -79,7 +81,7 @@ public abstract class MovementMode : MonoBehaviour
     //in the air
     protected bool IsGrounded()
     {
-        return Physics.Raycast(this.transform.position, Vector3.down, commonData.isGroundedCheckDistance);   
+        return Physics.Raycast(this.transform.position, Vector3.down, commonData.isGroundedCheckDistance + 0.1f);  //The last 0.1 is in case the raycast ends on the surface of the ground 
     }
 
     protected void AddForce(Vector3 force, ForceMode mode)
@@ -92,6 +94,15 @@ public abstract class MovementMode : MonoBehaviour
 
         //apply force to rigidbody
         self.rigidbody.AddForce(force, mode);
+    }
+
+    protected IEnumerator DelayInput()
+    {
+        inputReady = false;
+
+        yield return new WaitForSeconds(commonData.inputDelayTime);
+
+        inputReady = true;
     }
 
     //Player input

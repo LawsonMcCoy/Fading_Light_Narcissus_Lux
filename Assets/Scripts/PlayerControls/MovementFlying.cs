@@ -42,8 +42,11 @@ public class MovementFlying : MovementMode
     private void OnEnable()
     {
         Debug.Log("Now Flying");
-        //set the rigidbody to nonkinematic, so it can be control with forces
-        self.rigidbody.isKinematic = false;
+        //enable gravity
+        self.rigidbody.useGravity = true;
+
+        //enable rotation
+        self.rigidbody.freezeRotation = false;
 
         // Debug.Log("enabling movement mode: flying");
         //apply a forward force with this script is enabled
@@ -52,9 +55,6 @@ public class MovementFlying : MovementMode
         //Give a starting push everytime the player start flying
         AddForce(transform.forward * testForwardSpeed, ForceMode.Impulse);
         // self.rigidbody.velocity = transform.forward * testForwardSpeed;
-
-        //mark the mode as newly transition to
-        justEnabled = true;
     }
 
     protected override void FixedUpdate()
