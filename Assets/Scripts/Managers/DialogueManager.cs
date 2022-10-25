@@ -67,8 +67,11 @@ public class DialogueManager : MonoBehaviour
             if (clickableObject.CompareTag("Player"))
             {
                 Debug.Log("Clicked on a clickable object!");
-                showUI();
-                StartDialogue();
+                if (!isSpeaking()) //If the dialoguebox is already present (meaning that someone is already speaking)
+                {                  //Then don't re-do it.
+                    showUI();
+                    StartDialogue();
+                }
             }
         }
 
