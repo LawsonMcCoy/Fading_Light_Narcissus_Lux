@@ -201,28 +201,34 @@ public class MovementFlying : MovementMode
     //space key input
     private void OnJumpTransition(InputValue input)
     {
-        // Debug.Log($"Flying space {input.isPressed}");
+        Debug.Log($"Flying space {input.isPressed}");
         //if justEnabled is true and the space key is pressed
         //then the space key is still pressed from transitioning
         //to this state
-        if (justEnabled)
+        // if (justEnabled)
+        // {
+        //     //if the space key is no longer held down set
+        //     //justEnabled to false so the script knows that
+        //     //next time the player presses the space key
+        //     //it is to transition out of this state
+        //     if (!input.isPressed)
+        //     {
+        //         justEnabled = false;
+        //     }
+        // }
+        // else
+        // {
+        //     if (input.isPressed)
+        //     {
+        //         // Debug.Log((int)Modes.HOVERING);
+        //         Transition(Modes.HOVERING);
+        //     }
+        // }
+
+        if (input.isPressed)
         {
-            //if the space key is no longer held down set
-            //justEnabled to false so the script knows that
-            //next time the player presses the space key
-            //it is to transition out of this state
-            if (!input.isPressed)
-            {
-                justEnabled = false;
-            }
-        }
-        else
-        {
-            if (input.isPressed)
-            {
-                // Debug.Log((int)Modes.HOVERING);
-                Transition(Modes.HOVERING);
-            }
+            // Debug.Log((int)Modes.HOVERING);
+            Transition(Modes.HOVERING);
         }
     }
 

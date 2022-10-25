@@ -73,23 +73,28 @@ public class MovementHovering : MovementMode
         //if justEnabled is true and the space key is pressed
         //then the space key is still pressed from transitioning
         //to this state
-        if (justEnabled)
+        // if (justEnabled)
+        // {
+        //     //if the space key is no longer held down set
+        //     //justEnabled to false so the script knows that
+        //     //next time the player presses the space key
+        //     //it is to transition out of this state
+        //     if (!input.isPressed)
+        //     {
+        //         justEnabled = false;
+        //     }
+        // }
+        // else
+        // {
+        //     if (input.isPressed)
+        //     {
+        //         Transition(Modes.FLYING);
+        //     }
+        // }
+
+        if (input.isPressed)
         {
-            //if the space key is no longer held down set
-            //justEnabled to false so the script knows that
-            //next time the player presses the space key
-            //it is to transition out of this state
-            if (!input.isPressed)
-            {
-                justEnabled = false;
-            }
-        }
-        else
-        {
-            if (input.isPressed)
-            {
-                Transition(Modes.FLYING);
-            }
+            Transition(Modes.FLYING);
         }
     }
 }

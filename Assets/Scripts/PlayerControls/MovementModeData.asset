@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: MovementModeData
   m_EditorClassIdentifier: 
   maxSpeed: 1000
+  isGroundedCheckDistance: 1
+  maxForce: 25

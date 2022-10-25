@@ -60,12 +60,18 @@ public abstract class MovementMode : MonoBehaviour
     //will break the game
     protected void Transition(Modes transitionToMode)
     {
-        //enable new movement mode
-        // Debug.LogError($"Transitioning to {transitionToMode}");
-        movementModes[(int)transitionToMode].enabled = true;
+        //by defualt enabled only prevent Update and FixedUpdate from
+        //being called. Other functions should be manually checked
+        //if the script is enabled  
+        if (this.enabled)
+        {
+            //enable new movement mode
+            Debug.Log($"Transitioning to {transitionToMode}");
+            movementModes[(int)transitionToMode].enabled = true;
 
-        //disable current mode
-        this.enabled = false;
+            //disable current mode
+            this.enabled = false;
+        }
     }
 
     //A simple raycast frunction to check if the player is on the ground
