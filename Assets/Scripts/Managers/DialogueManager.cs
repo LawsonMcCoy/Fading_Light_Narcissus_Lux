@@ -110,25 +110,41 @@ public class DialogueManager : MonoBehaviour
     private void StartDialogue(Dialogue dialogue)
     {
         speakerName.text = dialogue.sentences[currSentenceIndex].character.fullName;
-        StartCoroutine(Type());
+        Instance.StartCoroutine(Type());
+    }
+
+    //This functions returns true if the displayed text is equal to the entire sentence.
+    private bool isTypedOut()
+    {
+        return textField.text == dialogue.sentences[currSentenceIndex].text ? true : false;
     }
 
     private void ContinueDialogue()
     {
-            //If our index is still in range with how many sentences we have...
-            if (currSentenceIndex < dialogue.sentences.Length - 1)
+            //If the entire sentence is already typed out, then advance to the next dialogue.
+            if (isTypedOut())
             {
-                //Increment it to go to the next sentence
-                currSentenceIndex++;
-                textField.text = ""; //Update the text field so that it's blank again (since it's a new sentence)
-                speakerName.text = dialogue.sentences[currSentenceIndex].character.fullName; //Update the speaker
-                StartCoroutine(Type()); //Start the Coroutine of typing out the next sentence
+                //If our index is still in range with how many sentences we have...
+                if (currSentenceIndex < dialogue.sentences.Length - 1)
+                {
+                    StopAllCoroutines(); //Failsafe
+                    //Increment it to go to the next sentence
+                    currSentenceIndex++;
+                    textField.text = ""; //Update the text field so that it's blank again (since it's a new sentence)
+                    speakerName.text = dialogue.sentences[currSentenceIndex].character.fullName; //Update the speaker
+                    StartCoroutine(Type()); //Start the Coroutine of typing out the next sentence
+                }
+                else 
+                {
+                    hideUI(); //If we no longer have sentences, hide the UI
+                    resetUI();
+                }
             }
-            else 
+            else //If not, stop the typing and set the displayed text equal to the entire dialogue (to skip the typing)
             {
-                hideUI(); //If we no longer have sentences, hide the UI
-                resetUI();
-            }
+                StopAllCoroutines();
+                textField.text = dialogue.sentences[currSentenceIndex].text;
+            } 
     }
 
     //Displays the DialogueBox UI
@@ -148,6 +164,7 @@ public class DialogueManager : MonoBehaviour
     //And the index for checking which sentence we are currently at will be set back to 0.
     private void resetUI()
     {
+        StopAllCoroutines(); //Stop all ongoing Coroutines (this is a failsafe)
         speakerName.text = "";
         currSentenceIndex = 0;
         textField.text = "";
