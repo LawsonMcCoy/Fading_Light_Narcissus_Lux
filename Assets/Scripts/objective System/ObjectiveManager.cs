@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//code worked on by david arenas
 public class ObjectiveManager : MonoBehaviour
 {
     public ObjectiveScriptableObject[] objectives;
@@ -23,8 +23,16 @@ public class ObjectiveManager : MonoBehaviour
         {
             if(objectives.Length > currentNumberInList - 1)
             {
+                //remove old listener
+                currentObjective.objectiveCompletion.RemoveListener(finished);
                 currentNumberInList += 1;
                 currentObjective = objectives[currentNumberInList];
+                //create new listener
+                currentObjective.objectiveCompletion.AddListener(finished);
+            }
+            else
+            {
+                Debug.Log("No more objectives");
             }
         }
     }
