@@ -7,7 +7,9 @@ public class MovementWalking : MovementMode
 {
     [SerializeField] private float walkSpeed;
     [SerializeField] private float turnSpeed;
-    [SerializeField] private float jumpForce; //How strong the player can jump
+    [SerializeField] private float jumpForceVertical; //How strong the player can jump upwards
+    [SerializeField] private float jumpForceHonrizontal; //How strong the player can jump horizontally
+
 
     private float turnValue;
     private bool onGround; //A bool value that is true when on the ground and false otherwise
@@ -112,8 +114,18 @@ public class MovementWalking : MovementMode
                 //On Ground, jump into the air
                 if (!input.isPressed)
                 {
+                    Vector3 jumpForceVector; //A vector that will represent the force the player
+                                       //is jumping with
+
+                    //compute vertical component
+                    jumpForceVector = Vector3.up * jumpForceVertical;
+
+                    //add the horizontal component to allow the player to 
+                    //jump over a distance by doing a running jump
+                    jumpForceVector += moveVector.normalized * jumpForceHonrizontal;
+
                     //jump with impulse
-                    self.rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                    self.rigidbody.AddForce(jumpForceVector, ForceMode.Impulse);
                 }
             }
             else

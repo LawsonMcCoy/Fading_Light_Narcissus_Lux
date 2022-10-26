@@ -21,6 +21,8 @@ public class MovementFlying : MovementMode
     [SerializeField] private float minTiltAngle; //expected negative
     [SerializeField] private float maxTurnAngle;
 
+    [SerializeField] private LayerMask collisionLayer;
+
     //inputs
     private float tiltValue;
     private float turnValue;
@@ -183,6 +185,23 @@ public class MovementFlying : MovementMode
 
         //rotate the player
         self.rigidbody.MoveRotation(rotationMatrix);
+    }
+
+    //Exit flying on collision
+    private void OnCollisionEnter(Collision collision)
+    {
+        LayerMask objectLayer; //the layer mask for the object collided with
+
+        //get the object's layer mask, by right shifting 1 the object's layer
+        //number of times
+        objectLayer = 1 << collision.gameObject.layer;
+
+        //if the game object is in the allowed collision layer
+        //transition to walking
+        if ((objectLayer & collisionLayer) != 0)
+        {
+            Transition(Modes.WALKING);
+        }
     }
 
     //************
