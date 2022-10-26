@@ -7,8 +7,12 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(HealthManager))]
 
-public class Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour
 {
+    //references to required components
+    [SerializeField] public Rigidbody rigidbody;
+    [SerializeField] public Collider collider;
+
     private HealthManager health;
 
     // Start is called before the first frame update
