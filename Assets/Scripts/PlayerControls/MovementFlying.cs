@@ -228,7 +228,7 @@ public class MovementFlying : MovementMode
         if (input.isPressed)
         {
             // Debug.Log((int)Modes.HOVERING);
-            Transition(Modes.HOVERING);
+            Transition(Modes.WALKING);
         }
     }
 
