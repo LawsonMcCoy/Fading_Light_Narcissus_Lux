@@ -1011,10 +1011,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueUI: {fileID: 1322242174}
-  dialoguePanel: {fileID: 122793607}
   speakerName: {fileID: 160191275}
   textField: {fileID: 842725619}
-  dialogue: {fileID: 11400000, guid: c3a1fc05907d8894e955f63ead45fefa, type: 2}
+  dialogue: {fileID: 11400000, guid: e5e8f713c48e22d49a38fa85873e29e8, type: 2}
   typeSpeed: 0.02
 --- !u!4 &1789652656
 Transform:

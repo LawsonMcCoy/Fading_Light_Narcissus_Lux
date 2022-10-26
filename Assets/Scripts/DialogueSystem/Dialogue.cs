@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
+///
+/// This struct reference to a line/sentence in a dialogue. In each sentence, there will be a Character speaking and the text in which they say.
+///
 public struct Sentence
 {
     public Character character; //Each sentence should have it's own speaker.
@@ -16,6 +19,5 @@ public struct Sentence
 [CreateAssetMenu(fileName = "New Dialogue", menuName = "Dialogue")]
 public class Dialogue : ScriptableObject
 {
-    public Character[] characters; //Depending on the number of speakers in a dialogue
     public Sentence[] sentences; //Number of sentences in this particular dialogue
 }

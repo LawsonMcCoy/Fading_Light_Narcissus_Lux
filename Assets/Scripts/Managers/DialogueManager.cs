@@ -10,14 +10,17 @@ public class DialogueManager : MonoBehaviour
     
     //Reference to the DialogueBoxUI and all its objects
     [SerializeField] private GameObject dialogueUI; //For the whole UI
-    [SerializeField] private RectTransform dialoguePanel; //For the panel
     [SerializeField] private Text speakerName; //For the speaker name being displayed in the UI
     [SerializeField] private Text textField; //For the dialogue text being displayed in the UI
 
-    //Reference to the dialogue within the UI.
-    [SerializeField] private Dialogue dialogue;
-    [SerializeField] private float typeSpeed;
-    private int textIndex = 0;
+    //Reference to the lines of dialogue (ScriptableObject)
+    ///
+    /// Ideally, we want to have the objects within the scene to be "Interactable" that holds their own dialogues
+    /// But for TESTING PURPOSES right now, there can only be one dialogue set within the inspector.
+    ///
+    [SerializeField] private Dialogue dialogue; 
+    [SerializeField] private float typeSpeed; //Float that sets the speed in which the letters in the dialogue gets typed out.
+    private int currSentenceIndex = 0; //Integer index that corresponds to the current sentence(s) in the dialogue.
 
     #endregion
 
@@ -38,10 +41,6 @@ public class DialogueManager : MonoBehaviour
 
     #region MonoBehaviour
 
-    private void Start()
-    {
-
-    }
     private void Awake()
     {
         // If the current Instance is NOT null (meaning there is a DialogueManager Instance active) AND it's not this one, then destroy it.
@@ -58,24 +57,27 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
-        //TESTING PURPOSES: Clicking on an object such as the capsule in the middle to advance the dialogue.
+        //TESTING PURPOSES: Clicking on an object such as the capsule in the middle to start the dialogue.
+        //Ideally, we want the Narration Manager to handle this, as certain Narration Sequences will have playing dialogue as a sequence.
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit) && Input.GetMouseButtonDown(0)) //If raycast hit and left clicked
         {
             Transform clickableObject = hit.transform;
-            if (clickableObject.CompareTag("Player"))
+            if (clickableObject.CompareTag("Player")) //If the clickable object is a player (TESTING PURPOSES: the capsule is a player)
             {
                 Debug.Log("Clicked on a clickable object!");
                 if (!isSpeaking()) //If the dialoguebox is already present (meaning that someone is already speaking)
                 {                  //Then don't re-do it.
                     showUI();
-                    StartDialogue();
+                    StartDialogue(dialogue);
                 }
             }
         }
-
-        if (Input.GetKeyDown("space") && isSpeaking() == true)
+        
+        //If the UI is showing (meaning isSpeaking is true), then that must mean that the dialogue is currently active.
+        //Pressing space (TESTING PURPOSES) advances the dialogue.
+        if (Input.GetKeyDown("space") && isSpeaking())
         {
             ContinueDialogue();
         }
@@ -83,7 +85,7 @@ public class DialogueManager : MonoBehaviour
     private IEnumerator Type()
     {
         //For each letter in our sentences, 
-        foreach (char letter in dialogue.sentences[textIndex].text.ToCharArray())
+        foreach (char letter in dialogue.sentences[currSentenceIndex].text.ToCharArray())
         {
             //Update the text field by adding each letter per iteration
             textField.text += letter;
@@ -95,34 +97,37 @@ public class DialogueManager : MonoBehaviour
 
     #region Helper Functions
 
+    //This function checks to see if there is a dialogue currently active
+    //(Just checks to see if the UI is on, meaning it is active)
     private bool isSpeaking()
     {
         return dialogueUI.activeSelf ? true : false;
     }
 
-    private void StartDialogue()
+    //This functions starts a certain dialogue passed as a parameter.
+    //For now, dialogue only contains one ScriptableObject set in the inspector.
+    //This function can be used to pass different dialogues and start them.
+    private void StartDialogue(Dialogue dialogue)
     {
-        speakerName.text = dialogue.sentences[textIndex].character.fullName;
+        speakerName.text = dialogue.sentences[currSentenceIndex].character.fullName;
         StartCoroutine(Type());
     }
 
     private void ContinueDialogue()
     {
             //If our index is still in range with how many sentences we have...
-            if (textIndex < dialogue.sentences.Length - 1)
+            if (currSentenceIndex < dialogue.sentences.Length - 1)
             {
                 //Increment it to go to the next sentence
-                textIndex++;
+                currSentenceIndex++;
                 textField.text = ""; //Update the text field so that it's blank again (since it's a new sentence)
-                speakerName.text = dialogue.sentences[textIndex].character.fullName; //Update the speaker
+                speakerName.text = dialogue.sentences[currSentenceIndex].character.fullName; //Update the speaker
                 StartCoroutine(Type()); //Start the Coroutine of typing out the next sentence
             }
             else 
             {
                 hideUI(); //If we no longer have sentences, hide the UI
-                textField.text = "";
-                textIndex = 0; //Reset the index to 0.
-                speakerName.text = " ";
+                resetUI();
             }
     }
 
@@ -138,4 +143,13 @@ public class DialogueManager : MonoBehaviour
         dialogueUI.SetActive(false);
     }
     #endregion
+
+    //Resets the DialogueBox UI, which means speaker name and the dialogue text will be blank
+    //And the index for checking which sentence we are currently at will be set back to 0.
+    private void resetUI()
+    {
+        speakerName.text = "";
+        currSentenceIndex = 0;
+        textField.text = "";
+    }
 }
