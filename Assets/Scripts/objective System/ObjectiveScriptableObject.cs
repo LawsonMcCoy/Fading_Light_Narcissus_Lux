@@ -7,9 +7,10 @@ using UnityEngine.Events;
 
 public class ObjectiveScriptableObject : ScriptableObject
 {
-    public int reachGoal;
+    private int reachGoal;
     public int enemiesToKill;//better to set this in editor
     public string Description;
+    public bool resetCourse;
 
     /*subscribe to this event to listen for the completion of objective
     event takes an int. Decrease number of enemies to kill until 0
@@ -21,8 +22,10 @@ public class ObjectiveScriptableObject : ScriptableObject
 
     private void OnEnable()
     {
-        reachGoal = 1; //change to 0 to represent completion
-        enemiesToKill = 1; //change to number of desired enemies to kill
+        if (resetCourse)
+        {
+            reachGoal = 1; //1 is used to represesnt incomplete
+        }
         if(objectiveCompletion == null)
         {
             objectiveCompletion = new UnityEvent<int>();

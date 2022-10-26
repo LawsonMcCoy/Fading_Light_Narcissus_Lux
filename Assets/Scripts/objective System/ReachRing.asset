@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dedabe918f7e5e34ea3b3753fac36e20, type: 3}
   m_Name: ReachRing
   m_EditorClassIdentifier: 
-  reachGoal: 1
   enemiesToKill: 0
   Description: Reach the green Ring
+  resetCourse: 1

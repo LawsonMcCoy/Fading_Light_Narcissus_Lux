@@ -185,20 +185,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
   m_PrefabInstance: {fileID: 145765279}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &461499344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 461499343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa829a5c30d7629408a70ae82026178c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Post: {fileID: 461499343}
-  objectiveScript: {fileID: 11400000, guid: fbe8da4d7ae78ed4e839e4c7bbb5d1fb, type: 2}
 --- !u!65 &461499345
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -474,7 +460,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectives:
   - {fileID: 11400000, guid: d9aca887687f3c149919a3d45a80b772, type: 2}
-  - {fileID: 11400000, guid: fbe8da4d7ae78ed4e839e4c7bbb5d1fb, type: 2}
 --- !u!1 &1370416387
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,7 +729,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa829a5c30d7629408a70ae82026178c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Post: {fileID: 2029977127}
+  Posts:
+  - {fileID: 2029977127}
+  - {fileID: 461499343}
   objectiveScript: {fileID: 11400000, guid: d9aca887687f3c149919a3d45a80b772, type: 2}
 --- !u!65 &2029977135
 BoxCollider:
@@ -754,7 +741,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2029977127}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.024999995, y: 0.024999999, z: 0.004999999}

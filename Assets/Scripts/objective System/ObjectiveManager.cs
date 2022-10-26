@@ -19,7 +19,7 @@ public class ObjectiveManager : MonoBehaviour
             currentObjective.objectiveCompletion.AddListener(finished);
         }
     }
-    void finished(int completionNumer)//0 for complete
+    private void finished(int completionNumer)//0 for complete
     {
         if(completionNumer == 0)
         {
