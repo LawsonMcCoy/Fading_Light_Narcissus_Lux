@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+
 //code worked on by david arenas
 public class ObjectiveManager : MonoBehaviour
 {
@@ -21,14 +23,18 @@ public class ObjectiveManager : MonoBehaviour
     {
         if(completionNumer == 0)
         {
-            if(objectives.Length > currentNumberInList - 1)
+            if(objectives.Length - 1 > currentNumberInList)
             {
                 //remove old listener
                 currentObjective.objectiveCompletion.RemoveListener(finished);
+                Debug.Log("mission accomplished");
                 currentNumberInList += 1;
                 currentObjective = objectives[currentNumberInList];
-                //create new listener
-                currentObjective.objectiveCompletion.AddListener(finished);
+                if (currentObjective != null)
+                {
+                    //create new listener
+                    currentObjective.objectiveCompletion.AddListener(finished);
+                }
             }
             else
             {

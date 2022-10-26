@@ -123,6 +123,95 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &145765279
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.8163109
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.300001
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 14.875326
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000002614557
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0000026145565
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Name
+      value: ring (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+--- !u!1 &461499343 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+  m_PrefabInstance: {fileID: 145765279}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &461499344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461499343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa829a5c30d7629408a70ae82026178c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Post: {fileID: 461499343}
+  objectiveScript: {fileID: 11400000, guid: fbe8da4d7ae78ed4e839e4c7bbb5d1fb, type: 2}
+--- !u!65 &461499345
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461499343}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.024999995, y: 0.024999999, z: 0.004999999}
+  m_Center: {x: 0, y: 0, z: -0.0000000018626451}
 --- !u!1 &556071973
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +314,7 @@ GameObject:
   - component: {fileID: 913746835}
   m_Layer: 0
   m_Name: Cuby
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -369,7 +458,7 @@ Transform:
   m_Children:
   - {fileID: 556071974}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &913746835
 MonoBehaviour:
@@ -385,7 +474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectives:
   - {fileID: 11400000, guid: d9aca887687f3c149919a3d45a80b772, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: fbe8da4d7ae78ed4e839e4c7bbb5d1fb, type: 2}
 --- !u!1 &1370416387
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,7 +570,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1619885215
 GameObject:
@@ -586,7 +675,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -632,6 +721,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ring
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
 --- !u!1 &2029977127 stripped
@@ -653,3 +746,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Post: {fileID: 2029977127}
   objectiveScript: {fileID: 11400000, guid: d9aca887687f3c149919a3d45a80b772, type: 2}
+--- !u!65 &2029977135
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029977127}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.024999995, y: 0.024999999, z: 0.004999999}
+  m_Center: {x: 0, y: 0, z: 0}

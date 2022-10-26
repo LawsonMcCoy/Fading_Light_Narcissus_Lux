@@ -22,6 +22,7 @@ public class ObjectiveScriptableObject : ScriptableObject
     private void OnEnable()
     {
         reachGoal = 1; //change to 0 to represent completion
+        enemiesToKill = 1; //change to number of desired enemies to kill
         if(objectiveCompletion == null)
         {
             objectiveCompletion = new UnityEvent<int>();
