@@ -19,6 +19,10 @@ public class ObjectiveScriptableObject : ScriptableObject
     [System.NonSerialized]
     public UnityEvent<int> objectiveCompletion;
 
+    //subscriber to activate the objective
+    [System.NonSerialized]
+    public UnityEvent activateObjective;
+
 
     private void OnEnable()
     {
@@ -26,9 +30,17 @@ public class ObjectiveScriptableObject : ScriptableObject
         {
             reachGoal = 1; //1 is used to represesnt incomplete
         }
+
+        //make sure the objective completion callback exists
         if(objectiveCompletion == null)
         {
             objectiveCompletion = new UnityEvent<int>();
+        }
+
+        //make sure the activateObjective callback exists
+        if (activateObjective == null)
+        {
+            activateObjective = new UnityEvent();
         }
     }
 
@@ -46,6 +58,12 @@ public class ObjectiveScriptableObject : ScriptableObject
     public void reachedGoal()
     {
         reachGoal = 0;
+        Debug.Log("objectiveCompletion");
         objectiveCompletion.Invoke(reachGoal);
+    }
+
+    public void Activate()
+    {
+        activateObjective.Invoke();
     }
 }

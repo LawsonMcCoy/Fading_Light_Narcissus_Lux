@@ -91,11 +91,58 @@ public class NarrationManager : MonoBehaviour
         // }
     }
 
+    //A function to unpause the narration
+    public void ReportCompletion()
+    {
+        Debug.Log("Completion Reported");
+        narrationPaused = false;
+    }
+
+    //*********************************
     //Visitor pattern process functions
+    //*********************************
+
     public void ProcessLoadScene(LoadSceneSequence sequence)
     {
         //load the scene for the narration sequence
         SceneManager.LoadScene((int)sequence.scene);
+    }
+
+    public void ProcessDialogue(DialogueSequence sequence)
+    {
+        //Have dialogue manager start the dialogue
+        Debug.Log(DialogueManager.Instance);
+        DialogueManager.Instance.StartDialogue(sequence.dialogueToStart);
+
+        //pause the dialogue until it finishes
+        narrationPaused = true;
+    }
+
+    public void ProcessObjective(ObjectiveSequence sequence)
+    {
+        //Have the objective system activate the objective
+        Debug.Log(sequence.objective);
+        ObjectiveManager.Instance.Activate(sequence.objective);
+
+        //pause the narration until the objective system reports completion
+        narrationPaused = true;
+    }
+
+    public void ProcessDelay(DelaySequence sequence)
+    {
+        //pause the narration
+        narrationPaused = true;
+
+        //begin timer to unpause
+        StartCoroutine(NarrationDelay(sequence.delayTime));
+    }
+
+    private IEnumerator NarrationDelay(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        //unpause the narration after some amount of time
+        narrationPaused = false;
     }
 
     private void OnDestroy()

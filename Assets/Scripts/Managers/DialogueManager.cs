@@ -46,13 +46,16 @@ public class DialogueManager : MonoBehaviour
         // If the current Instance is NOT null (meaning there is a DialogueManager Instance active) AND it's not this one, then destroy it.
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            // Destroy(this);
         }
         else
         {
             //Set DialogueManager Instance to this.
             Instance = this;
         }
+
+        //make sure the singleton exists accross scenes
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Update()
@@ -101,15 +104,17 @@ public class DialogueManager : MonoBehaviour
     //(Just checks to see if the UI is on, meaning it is active)
     private bool isSpeaking()
     {
-        return dialogueUI.activeSelf ? true : false;
+        return dialogueUI.activeSelf;
     }
 
     //This functions starts a certain dialogue passed as a parameter.
     //For now, dialogue only contains one ScriptableObject set in the inspector.
     //This function can be used to pass different dialogues and start them.
-    private void StartDialogue(Dialogue dialogue)
+    public void StartDialogue(Dialogue dialogue)
     {
+        Debug.Log($"Starting dialogue {dialogue.sentences[0].text}");
         speakerName.text = dialogue.sentences[currSentenceIndex].character.fullName;
+        showUI(); //activating the dialogue UI
         Instance.StartCoroutine(Type());
     }
 
@@ -138,6 +143,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     hideUI(); //If we no longer have sentences, hide the UI
                     resetUI();
+                    NarrationManager.Instance.ReportCompletion(); //report that the dialogue has ended
                 }
             }
             else //If not, stop the typing and set the displayed text equal to the entire dialogue (to skip the typing)
