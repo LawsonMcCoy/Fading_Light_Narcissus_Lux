@@ -251,8 +251,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 842725618}
   - {fileID: 1303492748}
+  - {fileID: 842725618}
   m_Father: {fileID: 1322242178}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -410,7 +410,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 122793607}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -447,7 +447,7 @@ MonoBehaviour:
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 
@@ -669,12 +669,12 @@ RectTransform:
   m_Children:
   - {fileID: 160191274}
   m_Father: {fileID: 122793607}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 134.961, y: -0.4940033}
-  m_SizeDelta: {x: 269.921, y: 134.634}
+  m_AnchoredPosition: {x: 118.422, y: 53.073}
+  m_SizeDelta: {x: 236.844, y: 106.78}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1303492749
 MonoBehaviour:
@@ -1013,7 +1013,7 @@ MonoBehaviour:
   dialogueUI: {fileID: 1322242174}
   speakerName: {fileID: 160191275}
   textField: {fileID: 842725619}
-  dialogue: {fileID: 11400000, guid: c3a1fc05907d8894e955f63ead45fefa, type: 2}
+  dialogue: {fileID: 11400000, guid: 763ec4480f768fc4ca7656aee995caa9, type: 2}
   typeSpeed: 0.02
 --- !u!4 &1789652656
 Transform:
