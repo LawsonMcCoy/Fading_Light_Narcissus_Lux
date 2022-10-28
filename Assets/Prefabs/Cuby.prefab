@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7926698076779587224}
   - component: {fileID: 7926698076779587225}
   m_Layer: 0
-  m_Name: Wings
+  m_Name: Right Wing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 7926698077053951639}
   - component: {fileID: 7926698077053951636}
   m_Layer: 0
-  m_Name: Wings (1)
+  m_Name: Left Wing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -7,7 +7,7 @@ public class Scenes : MonoBehaviour
     public enum ScenesList
     {
         MAIN_MENU,
-        TUTORIAL,
-        DEBUG
+        WELCOME_DIALOGUE,
+        TUTORIAL
     };
 }

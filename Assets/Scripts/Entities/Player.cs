@@ -9,6 +9,7 @@ public class Player : CombatEntity
 
     private void OnQuit()
     {
+        Debug.Log("QUITTING");
         Application.Quit();
     }
 }

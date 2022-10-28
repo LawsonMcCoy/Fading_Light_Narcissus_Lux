@@ -420,7 +420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 1
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
@@ -1900,13 +1900,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   narration:
   - {fileID: 11400000, guid: b1d562c1d408ec844bb085f96b988c17, type: 2}
-  - {fileID: 11400000, guid: c64e1c0f9acb466beb7c41beec53824a, type: 2}
-  - {fileID: 11400000, guid: a5000b9d35a1555938ea067cafec41b0, type: 2}
-  - {fileID: 11400000, guid: b983c6a3b1e7fca958c5d71a20b70e51, type: 2}
-  - {fileID: 11400000, guid: dc9587158e68176a68dc0bf73ff3cc4d, type: 2}
-  - {fileID: 11400000, guid: c20b1e4216f0b27da8f8bec7427fb5c8, type: 2}
-  - {fileID: 11400000, guid: a5000b9d35a1555938ea067cafec41b0, type: 2}
-  - {fileID: 11400000, guid: beef6770b5345fbbda3d807eff54ac09, type: 2}
+  - {fileID: 11400000, guid: f02f9ad75edf4ad4ebf4bb76710fdc2f, type: 2}
+  - {fileID: 11400000, guid: 09670698fa9fa7946b51b96224bb460a, type: 2}
+  - {fileID: 11400000, guid: 342f5b1a5ce90104c834aec57e4044e1, type: 2}
+  - {fileID: 11400000, guid: 03d5375d3f305cd4c9f2cf3e39a39c1c, type: 2}
+  - {fileID: 11400000, guid: fedede7d7f903904880c49abed7e63e9, type: 2}
 --- !u!4 &1624294489
 Transform:
   m_ObjectHideFlags: 0
