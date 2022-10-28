@@ -18,10 +18,12 @@ public class DialogueManager : MonoBehaviour
     /// Ideally, we want to have the objects within the scene to be "Interactable" that holds their own dialogues
     /// But for TESTING PURPOSES right now, there can only be one dialogue set within the inspector.
     ///
-    [SerializeField] private Dialogue dialogue; 
+    
+    //[SerializeField] private Dialogue insertedDialogue;
     [SerializeField] private float typeSpeed; //Float that sets the speed in which the letters in the dialogue gets typed out.
+    private Dialogue updateDialogue; //Holder of current dialogue sentence
     private int currSentenceIndex = 0; //Integer index that corresponds to the current sentence(s) in the dialogue.
-
+    private Player player;
     #endregion
 
 
@@ -53,13 +55,13 @@ public class DialogueManager : MonoBehaviour
             //Set DialogueManager Instance to this.
             Instance = this;
         }
-
         //make sure the singleton exists accross scenes
         DontDestroyOnLoad(this.gameObject);
     }
 
-    private void Update()
+private void Update()
     {
+        /*
         //TESTING PURPOSES: Clicking on an object such as the capsule in the middle to start the dialogue.
         //Ideally, we want the Narration Manager to handle this, as certain Narration Sequences will have playing dialogue as a sequence.
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -73,11 +75,11 @@ public class DialogueManager : MonoBehaviour
                 if (!isSpeaking()) //If the dialoguebox is already present (meaning that someone is already speaking)
                 {                  //Then don't re-do it.
                     showUI();
-                    StartDialogue(dialogue);
+                    StartDialogue(insertedDialogue);
                 }
             }
         }
-        
+        */
         //If the UI is showing (meaning isSpeaking is true), then that must mean that the dialogue is currently active.
         //Pressing space (TESTING PURPOSES) advances the dialogue.
         if (Input.GetKeyDown("space") && isSpeaking())
@@ -85,15 +87,15 @@ public class DialogueManager : MonoBehaviour
             ContinueDialogue();
         }
     }
-    private IEnumerator Type()
+    private IEnumerator Type(string text)
     {
         //For each letter in our sentences, 
-        foreach (char letter in dialogue.sentences[currSentenceIndex].text.ToCharArray())
+        foreach (char letter in text.ToCharArray())
         {
             //Update the text field by adding each letter per iteration
             textField.text += letter;
             //And then wait for typeSpeed seconds before displaying the next letter.
-            yield return new WaitForSeconds(typeSpeed);
+            yield return new WaitForSecondsRealtime(typeSpeed);
         }
     }
     #endregion
@@ -110,47 +112,68 @@ public class DialogueManager : MonoBehaviour
     //This functions starts a certain dialogue passed as a parameter.
     //For now, dialogue only contains one ScriptableObject set in the inspector.
     //This function can be used to pass different dialogues and start them.
-    public void StartDialogue(Dialogue dialogue)
+    public void StartDialogue(Dialogue startDialogue)
     {
-        Debug.Log($"Starting dialogue {dialogue.sentences[0].text}");
-        speakerName.text = dialogue.sentences[currSentenceIndex].character.fullName;
+        //Stop new input controls temporarily:
+        player = FindObjectOfType<Player>();
+        if (player != null)
+        {
+            player.playerInput.enabled = false;
+            Time.timeScale = 0; //pause game temp
+        }
+        
+        //Start dialogue:
+        updateDialogue = startDialogue;
+        string currentSentence = updateDialogue.sentences[currSentenceIndex].text;
+        Debug.Log($"Starting dialogue {currSentenceIndex}: {currentSentence}");
+        speakerName.text = updateDialogue.sentences[currSentenceIndex].character.fullName;
         showUI(); //activating the dialogue UI
-        Instance.StartCoroutine(Type());
+        Instance.StartCoroutine(Type(currentSentence)); // type inserted text
     }
 
     //This functions returns true if the displayed text is equal to the entire sentence.
     private bool isTypedOut()
     {
-        return textField.text == dialogue.sentences[currSentenceIndex].text ? true : false;
+        return textField.text == updateDialogue.sentences[currSentenceIndex].text;
     }
 
     private void ContinueDialogue()
     {
+        if (updateDialogue != null)
+        {
             //If the entire sentence is already typed out, then advance to the next dialogue.
             if (isTypedOut())
             {
                 //If our index is still in range with how many sentences we have...
-                if (currSentenceIndex < dialogue.sentences.Length - 1)
+                if (currSentenceIndex < updateDialogue.sentences.Length - 1)
                 {
                     StopAllCoroutines(); //Failsafe
+                
                     //Increment it to go to the next sentence
                     currSentenceIndex++;
                     textField.text = ""; //Update the text field so that it's blank again (since it's a new sentence)
-                    speakerName.text = dialogue.sentences[currSentenceIndex].character.fullName; //Update the speaker
-                    StartCoroutine(Type()); //Start the Coroutine of typing out the next sentence
+                    speakerName.text = updateDialogue.sentences[currSentenceIndex].character.fullName; //Update the speaker
+                    StartCoroutine(Type(updateDialogue.sentences[currSentenceIndex].text)); //Start the Coroutine of typing out the next sentence
                 }
                 else 
                 {
                     hideUI(); //If we no longer have sentences, hide the UI
                     resetUI();
-                    NarrationManager.Instance.ReportCompletion(); //report that the dialogue has ended
+                    if (player != null)
+                    { 
+                        player.playerInput.enabled = true; //give player back their control
+                        Time.timeScale = 1; //resume gameplay
+                    }
+                        
+                    NarrationManager.Instance.ReportCompletion(); //report that the dialogue has ended (needs to be modified for independencies)
                 }
             }
             else //If not, stop the typing and set the displayed text equal to the entire dialogue (to skip the typing)
             {
                 StopAllCoroutines();
-                textField.text = dialogue.sentences[currSentenceIndex].text;
+                textField.text = updateDialogue.sentences[currSentenceIndex].text;
             } 
+        }            
     }
 
     //Displays the DialogueBox UI

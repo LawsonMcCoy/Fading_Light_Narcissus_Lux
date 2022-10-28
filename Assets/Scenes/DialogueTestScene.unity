@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571343, b: 0.30692208, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -655,6 +655,14 @@ PrefabInstance:
       propertyPath: speakerName
       value: 
       objectReference: {fileID: 160191275}
+    - target: {fileID: 1997411482730373370, guid: 71a6fbc3f0f66249396f50495a2d2d90, type: 3}
+      propertyPath: lawsonDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: c3a1fc05907d8894e955f63ead45fefa, type: 2}
+    - target: {fileID: 1997411482730373370, guid: 71a6fbc3f0f66249396f50495a2d2d90, type: 3}
+      propertyPath: insertedDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 763ec4480f768fc4ca7656aee995caa9, type: 2}
     - target: {fileID: 1997411482730373371, guid: 71a6fbc3f0f66249396f50495a2d2d90, type: 3}
       propertyPath: m_Name
       value: DialogueManager

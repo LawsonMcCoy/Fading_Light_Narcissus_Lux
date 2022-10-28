@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17942a21488c9d62d96891e964b6098a, type: 3}
   m_Name: TestDialogueSequence
   m_EditorClassIdentifier: 
-  dialogueToStart: {fileID: 11400000, guid: c3a1fc05907d8894e955f63ead45fefa, type: 2}
+  dialogueToStart: {fileID: 11400000, guid: e5e8f713c48e22d49a38fa85873e29e8, type: 2}
