@@ -453,7 +453,7 @@ MonoBehaviour:
   - {fileID: 7926698077186288310}
   - {fileID: 7926698077186288311}
   - {fileID: 7926698077186288308}
-  walkSpeed: 25
+  walkSpeed: 50
   turnSpeed: 5
   jumpForceVertical: 15
   jumpForceHonrizontal: 10
