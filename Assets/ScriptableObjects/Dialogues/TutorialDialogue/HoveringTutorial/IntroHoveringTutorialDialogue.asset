@@ -20,13 +20,16 @@ MonoBehaviour:
     text: In the future, you would need to know how to hover above the ground to
       get through obstacles and enemies.
   - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
-    text: To transition into hover mode, jump and press space AGAIN in midair.
+    text: To transition into hover mode, jump and press SPACE AGAIN in midair.
   - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
     text: During hover mode, you can freely move around by using the WASD keys as
       well as using your mouse for the Camera.
   - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
-    text: Pressing space midair again would cancel hovering, drop your character
+    text: Pressing SPACE midair again would cancel hovering, drop your character
       down, and go back to Walking mode.
+  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
+    text: If you haven't got the hint, that means you can spam SPACE to transition
+      between walking and hovering and have control over the sky!
   - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
     text: Try hovering over the three different islands in front of you and collect
       the rings.

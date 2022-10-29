@@ -334,6 +334,8 @@ MonoBehaviour:
   rigidbody: {fileID: 7926698077186288309}
   collider: {fileID: 7926698077186288317}
   playerInput: {fileID: 7926698077186288307}
+  spawn: {fileID: 0}
+  spawnNumber: -10
 --- !u!114 &7926698077186288308
 MonoBehaviour:
   m_ObjectHideFlags: 0

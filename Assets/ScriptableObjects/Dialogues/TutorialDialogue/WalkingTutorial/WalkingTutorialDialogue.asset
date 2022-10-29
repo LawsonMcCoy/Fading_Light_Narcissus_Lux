@@ -15,6 +15,6 @@ MonoBehaviour:
   sentences:
   - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
     text: Walking is only allowed on the ground. (Can't walk on air cause you ain't
-      God)
+      God).
   - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
     text: Try pressing WASD to walk toward the yellow rings.

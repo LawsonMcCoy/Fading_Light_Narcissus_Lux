@@ -11,6 +11,7 @@ public class Scenes : MonoBehaviour
         WALKING_TUTORIAL,
         JUMPING_TUTORIAL,
         HOVERING_TUTORIAL,
-        FLYING_TUTORIAL
+        FLYING_TUTORIAL,
+        TEST_SCENE
     };
 }

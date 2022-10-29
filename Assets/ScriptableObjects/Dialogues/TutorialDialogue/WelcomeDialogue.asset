@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentences:
   - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
-    text: Hello! Welcome to the world of Eros! (Press ENTER to continue...)
+    text: Hello! Welcome to the world of Digi-Eros! (Press ENTER to continue...)
   - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
     text: This place is somewhere in the the digital realm where we practice the
       controls of Narcissus Lux.
@@ -34,4 +34,7 @@ MonoBehaviour:
 
 '
   - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
-    text: 'Enter to... Fading Lights: Narcissus Lux!'
+    text: You may quit the application at anytime by pressing the ESCAPE key. (Careful
+      with it as pressing it does NOT pause the game).
+  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
+    text: 'Enter to... Fading Lights: Narcissus Lux movement prototype!'
