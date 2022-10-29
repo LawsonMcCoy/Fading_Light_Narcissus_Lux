@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dedabe918f7e5e34ea3b3753fac36e20, type: 3}
-  m_Name: HoverRings
+  m_Script: {fileID: 11500000, guid: 829d73f1f82fb1cd395fcb0bf5e35461, type: 3}
+  m_Name: LoadFlyingTutorialSceneSequence
   m_EditorClassIdentifier: 
-  enemiesToKill: 0
-  Description: Hover through the three rings
-  resetCourse: 1
+  scene: 5
