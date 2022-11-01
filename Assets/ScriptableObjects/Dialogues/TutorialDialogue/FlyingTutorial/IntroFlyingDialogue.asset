@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61470bf509981514fb2f78cb92fda622, type: 3}
+  m_Name: IntroFlyingDialogue
+  m_EditorClassIdentifier: 
+  sentences:
+  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
+    text: "To fly, you MUST press SHIFT midair. You can do this in two ways: \n-
+      you jump and press SHIFT\n- you jump, hover, and then press Shift"
+  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
+    text: 'Note: the sequence [jump > hover > flying] would take you places even
+      further than [jump > flying].'
+  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
+    text: "During flying mode, you use WASD to angle/turn your character as it flies.\r\n-
+      W/S - tilt up/down\r\n- A/D - turn left/right\r slightly"
+  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
+    text: If you want to cancel flying, simply press SPACE to transition back to
+      walking mode. And prepare yourself to fall to your doom. (Bwahahaha)
+  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
+    text: Now, let's perfect your flying skills by flying through rings (again)!
+      Fly and collect 5 rings.
