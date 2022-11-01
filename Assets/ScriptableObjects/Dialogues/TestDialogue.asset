@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61470bf509981514fb2f78cb92fda622, type: 3}
   m_Name: TestDialogue
   m_EditorClassIdentifier: 
-  characters: []
   sentences:
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
     text: Greetings! I am Ika!
@@ -20,3 +19,5 @@ MonoBehaviour:
     text: Thanks for clicking me!
   - character: {fileID: 11400000, guid: 399f4d5a254d1f14d81c6799173a0dae, type: 2}
     text: Heeey, I'm here too!
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: SHUT UP YOU CHILDREN!!!!!!!!

@@ -7,25 +7,29 @@ using UnityEngine.UI;
 
 public class GoalPost : MonoBehaviour
 {
-    public GameObject[] Posts;
-    public ObjectiveScriptableObject objectiveScript;
+    [SerializeField] private GameObject[] Posts;
+    [SerializeField] private ObjectiveScriptableObject objectiveScript;
     private GameObject currentPost;
     private int currentIndex;
     private BoxCollider currentCollider;
 
-    void Start()
+    private void Start()
     {
-        //reset course if necessary
-        resetPosts();
-        //make sure each checkpoint has collider
-        ColliderCheck();
-        //make sure each cheackpoint has collisionDetect
-        CollisionDetectcheck();
-        currentIndex = 0;
-        currentPost = Posts[currentIndex];
-        currentPost.GetComponent<CollisionDetect>().makeCurrent();
+        // //reset course if necessary
+        // resetPosts();
+        // //make sure each checkpoint has collider
+        // ColliderCheck();
+        // //make sure each cheackpoint has collisionDetect
+        // CollisionDetectcheck();
+        // currentIndex = 0;
+        // currentPost = Posts[currentIndex];
+        // currentPost.GetComponent<CollisionDetect>().makeCurrent();
 
-        currentCollider = currentPost.GetComponent<BoxCollider>();
+        // currentCollider = currentPost.GetComponent<BoxCollider>();
+
+        Debug.Log("Goal Post Start");
+        //add listener to the SO
+        objectiveScript.activateObjective.AddListener(Activate);
     }
 
     private void CollisionDetectcheck()
@@ -77,15 +81,32 @@ public class GoalPost : MonoBehaviour
                     CP.AddComponent<BoxCollider>();
                     BC = CP.GetComponent<BoxCollider>();
                 }
-                else
-                {
-                    BC.isTrigger = true;
-                }
+
+                //make sure the collider is trigger
+                BC.isTrigger = true;
             }
             
          
         }
        
+    }
+
+    public void Activate()
+    {
+        Debug.Log("Activating goal post");
+        //make the posts appear
+        resetPosts();
+
+        //check the colliders on the posts
+        ColliderCheck();
+
+        //make sure each cheackpoint has collisionDetect
+        CollisionDetectcheck();
+
+        //set up objective
+        currentIndex = 0;
+        currentPost = Posts[currentIndex];
+        currentPost.GetComponent<CollisionDetect>().makeCurrent();
     }
 
     public void reachedAGoal()
