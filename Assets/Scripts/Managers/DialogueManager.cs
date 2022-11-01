@@ -82,7 +82,7 @@ private void Update()
         */
         //If the UI is showing (meaning isSpeaking is true), then that must mean that the dialogue is currently active.
         //Pressing space (TESTING PURPOSES) advances the dialogue.
-        if (Input.GetKeyDown("space") && isSpeaking())
+        if (Input.GetKeyDown("return") && isSpeaking())
         {
             ContinueDialogue();
         }

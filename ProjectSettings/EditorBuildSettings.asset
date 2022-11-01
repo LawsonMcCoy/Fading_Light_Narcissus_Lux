@@ -9,9 +9,21 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenuScene.unity
     guid: 840b8b71a3c5e704ea61ca6ad5310c4b
   - enabled: 1
-    path: Assets/Scenes/TutorialScene.unity
+    path: Assets/Scenes/WelcomeDialogueScene.unity
     guid: 2467c64460f6c8f7cadd66f1f3180791
   - enabled: 1
-    path: Assets/Scenes/TestScene.unity
+    path: Assets/Scenes/WalkingTutorialScene.unity
+    guid: fb10064014e667a4c8c15dad80127f38
+  - enabled: 1
+    path: Assets/Scenes/JumpingTutorialScene.unity
+    guid: 0bd3cf1903b19064da3cb0c898096e04
+  - enabled: 1
+    path: Assets/Scenes/HoveringTutorial.unity
+    guid: eff55c827cdd04f4885204c77d533254
+  - enabled: 1
+    path: Assets/Scenes/FlyingScene.unity
+    guid: 05ad605742393e34388208a8be1264ec
+  - enabled: 1
+    path: Assets/Scenes/TestScenes/TestScene.unity
     guid: 6cb955b63d3acd44ab18016b96ebedbc
   m_configObjects: {}

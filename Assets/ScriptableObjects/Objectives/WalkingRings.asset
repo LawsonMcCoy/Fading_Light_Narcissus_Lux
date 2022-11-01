@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: WalkingRings
   m_EditorClassIdentifier: 
   enemiesToKill: 0
-  Description: First set of rings, walk through
+  Description: Walk through 3 rings
   resetCourse: 1

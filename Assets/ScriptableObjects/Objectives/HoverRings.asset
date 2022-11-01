@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: HoverRings
   m_EditorClassIdentifier: 
   enemiesToKill: 0
-  Description: Second set of rings, hover through
+  Description: Hover through the three rings
   resetCourse: 1

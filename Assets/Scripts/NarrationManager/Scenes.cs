@@ -7,7 +7,11 @@ public class Scenes : MonoBehaviour
     public enum ScenesList
     {
         MAIN_MENU,
-        TUTORIAL,
-        DEBUG
+        WELCOME_DIALOGUE,
+        WALKING_TUTORIAL,
+        JUMPING_TUTORIAL,
+        HOVERING_TUTORIAL,
+        FLYING_TUTORIAL,
+        TEST_SCENE
     };
 }
