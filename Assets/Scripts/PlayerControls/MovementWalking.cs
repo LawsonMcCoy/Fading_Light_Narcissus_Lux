@@ -141,7 +141,8 @@ public class MovementWalking : MovementMode
             else
             {
                 //In midair, transition into Hovering
-                if (input.isPressed)
+                //note that you can only hover if you have stamina
+                if (input.isPressed && stamina.ResourceAmount() > 0)
                 {
                     Transition(Modes.HOVERING);
                 }
