@@ -463,6 +463,8 @@ MonoBehaviour:
   jumpForceVertical: 15
   jumpForceHonrizontal: 10
   staminaRegainRate: 5
+  staminaSprintLostRate: 5
+  sprintModifier: 2
 --- !u!114 &7926698077186288456
 MonoBehaviour:
   m_ObjectHideFlags: 0

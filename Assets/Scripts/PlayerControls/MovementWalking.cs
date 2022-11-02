@@ -10,9 +10,11 @@ public class MovementWalking : MovementMode
     [SerializeField] private float jumpForceVertical; //How strong the player can jump upwards
     [SerializeField] private float jumpForceHonrizontal; //How strong the player can jump horizontally
     [SerializeField] private float staminaRegainRate; //The amount of stamina regain per second while walking
-
+    [SerializeField] private float staminaSprintLostRate; //The amount of stamina lost per second whening sprinting
+    [SerializeField] private float sprintModifier; //The multiplier to the speed when you are sprinting
 
     private float turnValue;
+    private bool sprinting; //A boolean to check if the player is sprinting
     private bool onGround; //A bool value that is true when on the ground and false otherwise
                            //updated in the CheckGroundStatus function
 
@@ -79,17 +81,36 @@ public class MovementWalking : MovementMode
             //On ground 
 
             //move the player 
-            // self.rigidbody.MovePosition(self.rigidbody.position + (moveVector * Time.fixedDeltaTime));
             Vector3 horizontalVelocity = self.rigidbody.velocity;
             horizontalVelocity.y = 0.0f; //set vertical component to zero
-            self.rigidbody.AddForce(moveVector - self.rigidbody.velocity, ForceMode.Force);
+            if (!sprinting)
+            {
+                self.rigidbody.AddForce(moveVector - self.rigidbody.velocity, ForceMode.Force);
+            }
+            else
+            {
+                self.rigidbody.AddForce((sprintModifier * moveVector) - self.rigidbody.velocity, ForceMode.Force);
+            }
 
             //rotate the player
             Quaternion newRotation = self.rigidbody.rotation * Quaternion.Euler(0, turnValue * Time.fixedDeltaTime, 0);
             self.rigidbody.rotation = newRotation;
 
-            //Regain stamina when on ground only
-            stamina.Add(staminaRegainRate * Time.fixedDeltaTime);
+            if (!sprinting)
+            {
+                //Regain stamina when on ground only
+                stamina.Add(staminaRegainRate * Time.fixedDeltaTime);
+            }
+            else
+            {
+                //when sprinting lose stamina
+                stamina.Subtract(staminaSprintLostRate * Time.fixedDeltaTime);
+
+                if (stamina.ResourceAmount() == 0)
+                {
+                    sprinting = false;
+                }
+            }
         }
         else
         {
@@ -155,9 +176,11 @@ public class MovementWalking : MovementMode
     {
         if (inputReady)
         {
-            if (onGround)
+            if (onGround && stamina.ResourceAmount() > 0)
             {
-                //TODO implement sprinting
+                //If space is held down on the ground then
+                //the player is sprinting
+                sprinting = input.isPressed;
             }
             else
             {
