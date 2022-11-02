@@ -9,6 +9,7 @@ public class MovementWalking : MovementMode
     [SerializeField] private float turnSpeed;
     [SerializeField] private float jumpForceVertical; //How strong the player can jump upwards
     [SerializeField] private float jumpForceHonrizontal; //How strong the player can jump horizontally
+    [SerializeField] private float staminaRegainRate; //The amount of stamina regain per second while walking
 
 
     private float turnValue;
@@ -86,11 +87,17 @@ public class MovementWalking : MovementMode
             //rotate the player
             Quaternion newRotation = self.rigidbody.rotation * Quaternion.Euler(0, turnValue * Time.fixedDeltaTime, 0);
             self.rigidbody.rotation = newRotation;
+
+            //Regain stamina when on ground only
+            stamina.Add(staminaRegainRate * Time.fixedDeltaTime);
         }
         else
         {
             //In Midair
         }
+
+        //Regain stamina whenever in walking mode whether on ground or falling
+        // stamina.Add(staminaRegainRate * Time.fixedDeltaTime);
     }
 
     //************
@@ -134,7 +141,8 @@ public class MovementWalking : MovementMode
             else
             {
                 //In midair, transition into Hovering
-                if (input.isPressed)
+                //note that you can only hover if you have stamina
+                if (input.isPressed && stamina.ResourceAmount() > 0)
                 {
                     Transition(Modes.HOVERING);
                 }

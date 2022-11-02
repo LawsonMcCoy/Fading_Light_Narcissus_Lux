@@ -15,6 +15,7 @@ public abstract class MovementMode : MonoBehaviour
                                                                                    //index 0 is walking
                                                                                    //index 1 is hovering
                                                                                    //index 2 is flying
+    [SerializeField] protected StaminaManager stamina; //A reference to the stamina manager for the player
 
     //an enum for the movement modes define in the order 
     //walking, hovering, and flying, so that there int values

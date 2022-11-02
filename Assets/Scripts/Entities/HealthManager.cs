@@ -3,44 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 //Code worked on by David Arenas
 
-public class HealthManager : MonoBehaviour
+public class HealthManager : ResourceManager
 {
-    [SerializeField]
-    private float health;
-    public float maxHealth;
-    public bool dead;
-    // Start is called before the first frame update
-    void Start()
+    private bool dead;
+
+    protected override void Awake()
     {
+        //initialized base class data members
+        base.Awake();
+
+        //The entity is initailized to an alive state
         dead = false;
     }
 
-    public void add(float healthPoints)
+    //override the subtract function to kill the entity
+    //when health drops to zero or below
+    public override void Subtract(float damage)
     {
-        health += healthPoints;
-        if(health > maxHealth)
-        {
-            health = maxHealth;
-        }
-    }
+        base.Subtract(damage);
 
-    public void subtract(float damage)
-    {
-        health -= damage;
-        if(health >= 0.0)
+        if(resource <= 0.0)
         {
             dead = true;
             OnDeath();
         }
     }
+
+    //A function handle the processing for when an entity dies
+    //for most entitiy this is as simple as destroying the game
+    //object. However, special cases may override this for special 
+    //death processing
     protected virtual void OnDeath()
     {
         Destroy(gameObject);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
