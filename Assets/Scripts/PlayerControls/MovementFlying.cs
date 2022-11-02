@@ -220,7 +220,6 @@ public class MovementFlying : MovementMode
     //space key input
     private void OnJumpTransition(InputValue input)
     {
-        Debug.Log($"Flying space {input.isPressed}");
         //if justEnabled is true and the space key is pressed
         //then the space key is still pressed from transitioning
         //to this state

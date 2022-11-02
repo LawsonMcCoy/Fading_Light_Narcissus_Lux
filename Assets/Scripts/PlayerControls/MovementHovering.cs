@@ -7,6 +7,7 @@ public class MovementHovering : MovementMode
 {
     [SerializeField] private float hoverSpeed;
     [SerializeField] private float turnSpeed;
+    [SerializeField] private float passiveStaminaLostRate; //The amount of stamina lost per second while hovering
 
     private float turnValue;
 
@@ -54,6 +55,15 @@ public class MovementHovering : MovementMode
         //rotate the player
         Quaternion newRotation = self.rigidbody.rotation * Quaternion.Euler(0, turnValue * Time.fixedDeltaTime, 0);
         self.rigidbody.rotation = newRotation;
+
+        //consume stamina while in hovering mode
+        stamina.Subtract(passiveStaminaLostRate * Time.fixedDeltaTime); //lose stamina
+
+        //if all stamina has be lost transition to walking
+        if (stamina.ResourceAmount() == 0)
+        {
+            Transition(Modes.WALKING);
+        }
     }
 
     //************
