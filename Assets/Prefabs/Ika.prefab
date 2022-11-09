@@ -109,8 +109,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1950294487060986411}
   m_LocalRotation: {x: 0.21047173, y: -0, z: -0, w: 0.9776}
-  m_LocalPosition: {x: 0, y: 1.6750002, z: -2.940001}
-  m_LocalScale: {x: 0.33333334, y: 0.17807862, z: 0.2954642}
+  m_LocalPosition: {x: 0, y: 1.2562501, z: -2.2050006}
+  m_LocalScale: {x: 0.25, y: 0.13355896, z: 0.22159815}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8435698845848507069}
@@ -286,7 +286,7 @@ Transform:
   m_GameObject: {fileID: 8435698845848507070}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.91999984, y: 2.73, z: -8.3}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1950294486349228934}
@@ -523,7 +523,7 @@ MonoBehaviour:
   - {fileID: 7204556638568947313}
   - {fileID: 7204556638568947314}
   stamina: {fileID: 2271143012148580341}
-  hoverSpeed: 15
+  hoverSpeed: 18
   turnSpeed: 5
   passiveStaminaLostRate: 10
 --- !u!114 &7204556638568947312
@@ -546,7 +546,7 @@ MonoBehaviour:
   stamina: {fileID: 2271143012148580341}
   walkSpeed: 50
   turnSpeed: 5
-  jumpForceVertical: 10
+  jumpForceVertical: 15
   jumpForceHonrizontal: 5
   staminaRegainRate: 5
 --- !u!114 &7204556638568947598
