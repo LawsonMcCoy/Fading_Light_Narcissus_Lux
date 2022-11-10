@@ -17,11 +17,17 @@ public class MovementFlying : MovementMode
 
     [SerializeField] private float tiltSpeed;
     [SerializeField] private float turnSpeed;
-    [SerializeField] private float maxTiltAngle; //expected positive
-    [SerializeField] private float minTiltAngle; //expected negative
+    [Tooltip("Limits how much the player can tilt torwards the sky, expected value from 0-180")]
+    [SerializeField] private float maxTiltAngle; //expected value from 270-360
+    [Tooltip("Limits how much the player can tilt torwards the ground, expected value from 0-180")]
+    [SerializeField] private float minTiltAngle; //expected value from 0-90
     [SerializeField] private float maxTurnAngle;
 
     [SerializeField] private LayerMask collisionLayer;
+
+    //Testing
+    [SerializeField] private bool alternateTurning;
+    [SerializeField] private bool alternateTilting;
 
     //inputs
     private float tiltValue;
@@ -52,8 +58,6 @@ public class MovementFlying : MovementMode
 
         // Debug.Log("enabling movement mode: flying");
         //apply a forward force with this script is enabled
-        // Debug.Log(self);
-        // Debug.Log(self.rigidbody);
         //Give a starting push everytime the player start flying
         AddForce(transform.forward * testForwardSpeed, ForceMode.Impulse);
         // self.rigidbody.velocity = transform.forward * testForwardSpeed;
@@ -85,6 +89,8 @@ public class MovementFlying : MovementMode
         }
 
         base.FixedUpdate();
+
+        // Debug.Log($"tilt angle: {self.rigidbody.rotation.eulerAngles.x}");
     }
 
     private void AddLift()
@@ -141,28 +147,129 @@ public class MovementFlying : MovementMode
 
     private void AddTorque()
     {
+        float tiltTorqueMagnitude; //the magnitude of the tiltTorque
         Vector3 tiltTorque;
         Vector3 turnTorque;
 
-        // Debug.Log(angleOfAttack);
-        // if ((angleOfAttack < minTiltAngle && tiltValue < 0.0f) || (angleOfAttack > maxTiltAngle && tiltValue > 0.0f))
-        // {
-        //     Debug.Log("STOP!!");
-        //     //out of bounds tilt, stop tilting
-        //     tiltTorque = Vector3.zero;
-        // }
-        // else
-        // {
-        //     //tilt the player
-        //     tiltTorque = transform.right * tiltValue;
-        // }
-        tiltTorque = transform.right * tiltValue;
+        //test the two ways of tilting
+        if (alternateTilting)
+        {
+            //set the tilt value to the difference of current angle and max or min
+        
+            //get current angle
+            float currentTiltAngle = self.rigidbody.rotation.eulerAngles.x;
+
+            //Change angle from 360-270 and 0-90, to 0-180
+            currentTiltAngle = (currentTiltAngle + 90) % 360;
+
+            //compute the titlValue
+            if (tiltValue > 0)
+            {
+                //Tilt up (negative direction)
+                Debug.Log("Tilt up");
+                
+                // tiltValue =  currentTiltAngle - minTiltAngle;
+                tiltTorqueMagnitude = minTiltAngle - currentTiltAngle;
+            }
+            else if (tiltValue < 0)
+            {
+                //Tilt down (positive direction)
+                Debug.Log("Tilt down");
+
+                tiltTorqueMagnitude = maxTiltAngle - currentTiltAngle;
+            }
+            else
+            {
+                Debug.Log("No tilt");
+                //not tilting, reset to 90
+                tiltTorqueMagnitude = 90 - currentTiltAngle;
+
+                //not tilting, don't apply a torque
+                // tiltTorqueMagnitude = 0;
+            }
+        }
+        else
+        {
+            //get current angle
+            float currentTiltAngle = self.rigidbody.rotation.eulerAngles.x;
+
+            //get angularVelocity
+            float currentTiltVelocity = Mathf.Abs(self.rigidbody.angularVelocity.x);
+
+            //Change angle from 360-270 and 0-90, to 0-180
+            currentTiltAngle = (currentTiltAngle + 90) % 360;
+
+            //check if your tilt is withing bounds
+            Debug.Log($"Current tilt angle: {minTiltAngle}");
+            if (currentTiltAngle < minTiltAngle)
+            {
+                //tilted too high (facing sky)
+                Debug.Log($"Sky, angle: {currentTiltAngle}");
+                if (tiltValue > 0)
+                {
+                    Debug.Log("Allow");
+                    tiltTorqueMagnitude = tiltValue * (tiltSpeed - currentTiltVelocity);
+                }
+                else
+                {
+                    Debug.Log("Stopping");
+                    tiltTorqueMagnitude = currentTiltVelocity;
+                }
+            }
+            else if (currentTiltAngle > maxTiltAngle)
+            {
+                //tilted too low (facing ground)
+                Debug.Log($"ground, angle: {currentTiltAngle}");
+                if (tiltValue < 0)
+                {
+                    tiltTorqueMagnitude = tiltValue * (tiltSpeed - currentTiltVelocity);
+                }
+                else
+                {
+                    tiltTorqueMagnitude = -currentTiltVelocity;
+                }
+            }
+            else
+            {
+                //in range
+                Debug.Log($"In range, angle: {currentTiltAngle}");
+                tiltTorqueMagnitude = tiltValue * (tiltSpeed - currentTiltVelocity);
+            }
+        }
+        tiltTorque = transform.right * tiltTorqueMagnitude;
 
         //turn the palyer
+        if (alternateTurning)
+        {
+            //set the roll to 90 degrees in appropriate direction
+            float currentRollAngle = self.rigidbody.rotation.eulerAngles.z;
+
+            float rollTorqueMagnitude = (80 * turnValue) - currentRollAngle;
+
+            self.rigidbody.AddTorque(transform.forward * rollTorqueMagnitude, ForceMode.Impulse);
+
+            //add a tilt torque for turning
+            float turnTiltTorqueMagnitude = turnSpeed * turnValue;
+
+            Vector3 turnTiltTorque = transform.right * turnTiltTorqueMagnitude;
+
+            tiltTorque += turnTiltTorque;
+        }
+        else
+        {
+
+        }
         turnTorque = transform.forward * turnValue;
 
         //apply the torque
-        self.rigidbody.AddTorque(tiltTorque + turnTorque);
+        if (alternateTilting)
+        {
+            self.rigidbody.AddTorque(tiltTorque, ForceMode.Impulse);
+        }
+        else
+        {
+            self.rigidbody.AddTorque(tiltTorque + turnTorque);
+        }
     }
 
     private void rotatePlayer()
@@ -213,6 +320,71 @@ public class MovementFlying : MovementMode
     {
         //x component is turning, y component is tilting
         Vector2 moveVector = input.Get<Vector2>();
+
+        // //test the two ways of tilting
+        // if (alternateTilting)
+        // {
+        //     //set the tilt value to the difference of current angle and max or min
+            
+        //     //get current angle
+        //     float currentTiltAngle = self.rigidbody.rotation.eulerAngles.x;
+
+        //     //Change angle from 360-270 and 0-90, to 0-180
+        //     currentTiltAngle = (currentTiltAngle + 90) % 360;
+
+        //     //compute the titlValue
+        //     if (moveVector.y > 0)
+        //     {
+        //         //Tilt up (negative direction)
+        //         Debug.Log("Tilt up");
+                
+        //         // tiltValue =  currentTiltAngle - minTiltAngle;
+        //         tiltValue = minTiltAngle - currentTiltAngle;
+        //     }
+        //     else if (moveVector.y < 0)
+        //     {
+        //         //Tilt down (positive direction)
+        //         Debug.Log("Tilt down");
+
+        //         tiltValue = maxTiltAngle - currentTiltAngle;
+        //     }
+        //     else
+        //     {
+        //         Debug.Log("No tilt");
+        //         //not tilting, reset to 0
+        //         tiltValue = -currentTiltAngle;
+        //     }
+        // }
+        // else
+        // {
+        //     //get current angle
+        //     float currentTiltAngle = self.rigidbody.rotation.eulerAngles.x;
+
+        //     //Change angle from 360-270 and 0-90, to 0-180
+        //     currentTiltAngle = (currentTiltAngle + 90) % 360;
+
+        //     //check if your tilt is withing bounds
+        //     Debug.Log($"Current tilt angle: {currentTiltAngle}");
+        //     if (currentTiltAngle < 0)
+        //     {
+        //         //tilted too high (facing sky)
+        //         Debug.Log("Sky");
+        //         tiltValue = 0;
+        //     }
+        //     else if (currentTiltAngle > 180)
+        //     {
+        //         //tilted too low (facing ground)
+        //         Debug.Log("ground");
+        //         tiltValue = 0;
+        //     }
+        //     else
+        //     {
+        //         //in range
+        //         Debug.Log("In range");
+        //         tiltValue = -moveVector.y;
+        //     }
+        // }
+
         tiltValue = -moveVector.y;
         turnValue = -moveVector.x;
     }
@@ -220,29 +392,6 @@ public class MovementFlying : MovementMode
     //space key input
     private void OnJumpTransition(InputValue input)
     {
-        //if justEnabled is true and the space key is pressed
-        //then the space key is still pressed from transitioning
-        //to this state
-        // if (justEnabled)
-        // {
-        //     //if the space key is no longer held down set
-        //     //justEnabled to false so the script knows that
-        //     //next time the player presses the space key
-        //     //it is to transition out of this state
-        //     if (!input.isPressed)
-        //     {
-        //         justEnabled = false;
-        //     }
-        // }
-        // else
-        // {
-        //     if (input.isPressed)
-        //     {
-        //         // Debug.Log((int)Modes.HOVERING);
-        //         Transition(Modes.HOVERING);
-        //     }
-        // }
-
         if (input.isPressed)
         {
             // Debug.Log((int)Modes.HOVERING);
