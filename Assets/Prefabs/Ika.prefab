@@ -422,7 +422,8 @@ MonoBehaviour:
   collider: {fileID: 7204556638568947323}
   playerInput: {fileID: 7204556638568947317}
   spawn: {fileID: 0}
-  spawnNumber: -10
+  playerSpawnPointTag: 
+  yDeathDistance: -10
 --- !u!114 &7204556638568947314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,7 +505,7 @@ MonoBehaviour:
   collisionLayer:
     serializedVersion: 2
     m_Bits: 55
-  speedBoostMagnitude: 5
+  speedBoostMagnitude: 50
 --- !u!114 &7204556638568947313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,8 +547,9 @@ MonoBehaviour:
   stamina: {fileID: 2271143012148580341}
   walkSpeed: 50
   turnSpeed: 5
-  jumpForceVertical: 15
+  jumpForceVertical: 10
   jumpForceHonrizontal: 5
+  jumpForceStationary: 15
   staminaRegainRate: 5
 --- !u!114 &7204556638568947598
 MonoBehaviour:
