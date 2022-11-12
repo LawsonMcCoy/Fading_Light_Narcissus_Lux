@@ -13,7 +13,7 @@ public class AttachToMovingObject : MonoBehaviour
     {
         if (other.gameObject.tag == objTag)
         {
-            other.gameObject.transform.parent = this.transform;
+            other.gameObject.transform.SetParent(this.transform);
         }
     }
 
@@ -22,7 +22,7 @@ public class AttachToMovingObject : MonoBehaviour
     {
         if (other.gameObject.tag == objTag)
         {
-            other.gameObject.transform.parent = null;
+            other.gameObject.transform.SetParent(null);
         }
     }
 }
