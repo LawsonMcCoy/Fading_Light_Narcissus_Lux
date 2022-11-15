@@ -57,6 +57,9 @@ public class MovementFlying : MovementMode
         //Give a starting push everytime the player start flying
         AddForce(transform.forward * testForwardSpeed, ForceMode.Impulse);
         // self.rigidbody.velocity = transform.forward * testForwardSpeed;
+
+        modeUIColor = new Color(0f, 0.8f, 1f, 1f);
+        movementModeText.color = modeUIColor;
     }
 
     protected override void FixedUpdate()

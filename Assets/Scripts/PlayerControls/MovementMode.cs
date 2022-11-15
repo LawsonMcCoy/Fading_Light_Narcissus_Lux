@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 //I will be breaking up the three movement modes up into different 
 //scripts. This is to avoid a bunch of switch statements, and 
@@ -36,6 +37,9 @@ public abstract class MovementMode : MonoBehaviour
     protected bool inputReady; //A variable value to prevent immediately transiting back to 
                                 //a mode that you just transition from when the button to transition
                                 //is the same
+
+    [SerializeField] protected Text movementModeText;
+    protected Color modeUIColor;
 
     protected virtual void Awake()
     {
@@ -77,6 +81,8 @@ public abstract class MovementMode : MonoBehaviour
             //enable new movement mode
             Debug.Log($"Transitioning to {transitionToMode}");
             movementModes[(int)transitionToMode].enabled = true;
+
+            movementModeText.text = transitionToMode.ToString();
 
             //disable current mode
             this.enabled = false;

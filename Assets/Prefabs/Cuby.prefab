@@ -356,6 +356,7 @@ MonoBehaviour:
   - {fileID: 7926698077186288311}
   - {fileID: 7926698077186288308}
   stamina: {fileID: -7890786512376530125}
+  movementModeText: {fileID: 6654687541513789976}
   testForwardSpeed: 20
   forwardThrustMagnitude: 5
   liftPower: 3
@@ -438,6 +439,7 @@ MonoBehaviour:
   - {fileID: 7926698077186288311}
   - {fileID: 7926698077186288308}
   stamina: {fileID: -7890786512376530125}
+  movementModeText: {fileID: 6654687541513789976}
   hoverSpeed: 15
   turnSpeed: 5
   passiveStaminaLostRate: 10
@@ -459,6 +461,7 @@ MonoBehaviour:
   - {fileID: 7926698077186288311}
   - {fileID: 7926698077186288308}
   stamina: {fileID: -7890786512376530125}
+  movementModeText: {fileID: 6654687541513789976}
   walkSpeed: 50
   turnSpeed: 5
   jumpForceVertical: 15
@@ -476,7 +479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d78b2907ecf9744486bb01a433df197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxResource: 0
+  maxResource: 100
 --- !u!114 &-7890786512376530125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,6 +585,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7926698077186288318}
     m_Modifications:
+    - target: {fileID: 1669312167926494544, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_Text
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669312167926494544, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669312167926494544, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566606992444731009, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 340.953
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566606992444731009, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5436026844986832134, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -696,3 +719,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5436026844986832134, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
   m_PrefabInstance: {fileID: 5436026844490717000}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6654687541513789976 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1669312167926494544, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+  m_PrefabInstance: {fileID: 5436026844490717000}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

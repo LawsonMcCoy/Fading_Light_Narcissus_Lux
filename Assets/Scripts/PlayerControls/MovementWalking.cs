@@ -34,6 +34,9 @@ public class MovementWalking : MovementMode
 
         //Enable gravity when walking
         self.rigidbody.useGravity = true; 
+
+        modeUIColor = new Color(1f, 0.8f, 0f, 1f);
+        movementModeText.color = modeUIColor;
     }
 
     //a helper function to check if the player is on the ground
