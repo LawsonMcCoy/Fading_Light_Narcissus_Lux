@@ -1062,15 +1062,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7814810378859151553, guid: 4185544874abc688b952079e90c76f56, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7814810378859151553, guid: 4185544874abc688b952079e90c76f56, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7814810378859151553, guid: 4185544874abc688b952079e90c76f56, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7814810378859151553, guid: 4185544874abc688b952079e90c76f56, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1090,6 +1090,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7814810378859151553, guid: 4185544874abc688b952079e90c76f56, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814810380657141936, guid: 4185544874abc688b952079e90c76f56, type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814810380657141936, guid: 4185544874abc688b952079e90c76f56, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814810380657141936, guid: 4185544874abc688b952079e90c76f56, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814810380657141936, guid: 4185544874abc688b952079e90c76f56, type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814810380657141936, guid: 4185544874abc688b952079e90c76f56, type: 3}
+      propertyPath: m_FontData.m_AlignByGeometry
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
