@@ -11,6 +11,9 @@ public class PlayerHealth : HealthManager
     {
         Debug.Log("You died!");
         saveData.playerDeath.Invoke();
-        gameObject.transform.position = saveData.spawnPoint;
+        if (saveData.saveSuccesful)
+        {
+            gameObject.transform.position = saveData.spawnPoint;
+        }
     }
 }

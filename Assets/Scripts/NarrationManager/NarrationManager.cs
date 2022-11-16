@@ -20,6 +20,7 @@ public class NarrationManager : MonoBehaviour
     private int savedNarrationSequenceIndex; //An integer representing the index of the narration 
                                              //sequence that was last saved, Note this value will
                                              //made to be persistent later
+    private Scenes.ScenesList currentScene;   //the current scene
 
     //Narration Manager is a singleton
     public static NarrationManager Instance
@@ -105,6 +106,7 @@ public class NarrationManager : MonoBehaviour
     public void ProcessLoadScene(LoadSceneSequence sequence)
     {
         //load the scene for the narration sequence
+        currentScene = sequence.scene;
         SceneManager.LoadScene((int)sequence.scene);
     }
 
@@ -140,16 +142,25 @@ public class NarrationManager : MonoBehaviour
     public void ProcessSave(SaveSequence sequence)
     {
         Debug.Log(sequence.saveData);
-        //set player to spawn point
-        //want to change player position to spawn point at death, but should not do it here
-        //will instead only change narration index and change player position in PlayerHealth script
-        //sequence.saveData.Player.transform.position = sequence.saveData.spawnPoint.position;
 
-        //make listener for when player dies in order to return to saveindex
-        sequence.saveData.playerDeath.AddListener(playerDeath);
+        if(sequence.saveData.saveScene == currentScene)
+        {
+            //make listener for when player dies in order to return to saveindex
+            sequence.saveData.playerDeath.AddListener(playerDeath);
 
-        //set saveindex to current index
-        savedNarrationSequenceIndex = currentNarrationSequenceIndex;
+            sequence.saveData.saveSuccesful = true; //save was successful(in correct scene)
+
+            //set saveindex to current index
+            savedNarrationSequenceIndex = currentNarrationSequenceIndex;
+
+           
+        }
+        else
+        {
+            Debug.Log("You're Saving in the Wrong Scene!");
+            sequence.saveData.saveSuccesful = false; //save unsuccseful
+        }
+
     }
     public void playerDeath()
     {

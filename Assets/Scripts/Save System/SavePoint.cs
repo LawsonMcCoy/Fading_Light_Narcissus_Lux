@@ -9,7 +9,6 @@ public class SavePoint : MonoBehaviour
     void Start()
     {
         save.setSpawnPoint(gameObject.GetComponent<Transform>().position);
-        //save.setScene(gameObject.scene);
     }
 
     // Update is called once per frame
