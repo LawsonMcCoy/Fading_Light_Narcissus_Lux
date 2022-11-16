@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionDetect : MonoBehaviour
+[RequireComponent(typeof(BoxCollider))]
+
+public class Post : MonoBehaviour
 {
+
+    private GoalPost myGoalPostRef;
     private bool isCurrent;
-    private GoalPost goalPost;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,15 +21,15 @@ public class CollisionDetect : MonoBehaviour
     {
         
     }
+    public void initializePost(GoalPost goal)
+    {
+        gameObject.GetComponent<BoxCollider>().isTrigger = true;
+        myGoalPostRef = goal;
+    }
     public void makeCurrent()
     {
         isCurrent = true;
     }
-    public void giveGoalPost(GoalPost goal)
-    {
-        goalPost = goal;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (isCurrent)
@@ -36,10 +40,9 @@ public class CollisionDetect : MonoBehaviour
                 gameObject.SetActive(false);
                 isCurrent = false;
                 Debug.Log("Reached a goal");
-                goalPost.reachedAGoal();
+                myGoalPostRef.reachedAGoal();
             }
         }
- 
-    }
 
+    }
 }
