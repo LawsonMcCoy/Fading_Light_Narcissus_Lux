@@ -6,6 +6,7 @@ using UnityEngine;
 public class AttachToMovingObject : MonoBehaviour
 {
     [SerializeField] private string objTag;
+    [SerializeField] private Transform attachBase;  
     
     // When gameobject is on moving object, attach to it by making them
     // a child when triggered.
@@ -13,7 +14,8 @@ public class AttachToMovingObject : MonoBehaviour
     {
         if (other.gameObject.tag == objTag)
         {
-            other.gameObject.transform.SetParent(this.transform);
+            Debug.LogWarning("Attached");
+            other.gameObject.transform.SetParent(attachBase, true);
         }
     }
 
@@ -22,7 +24,8 @@ public class AttachToMovingObject : MonoBehaviour
     {
         if (other.gameObject.tag == objTag)
         {
-            other.gameObject.transform.SetParent(null);
+            Debug.LogWarning("Dettached");
+            other.gameObject.transform.SetParent(null, true);
         }
     }
 }
