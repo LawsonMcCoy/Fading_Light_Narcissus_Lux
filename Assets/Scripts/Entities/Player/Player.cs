@@ -22,4 +22,9 @@ public class Player : CombatEntity
         Debug.Log("QUITTING");
         Application.Quit();
     }
+
+    public void UpdateSpawn(Transform newSpawn)
+    {
+        spawn = newSpawn;
+    }
 }

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c37cba4f1ea47146e9e803ac82ad5e35, type: 3}
-  m_Name: FlowerObjectiveSequence
+  m_Script: {fileID: 11500000, guid: 17942a21488c9d62d96891e964b6098a, type: 3}
+  m_Name: FloatIslandDialogueSequence
   m_EditorClassIdentifier: 
-  objective: {fileID: 11400000, guid: 3117cd525f2309f4ab3b2f28ff8cf1b6, type: 2}
+  dialogueToStart: {fileID: 11400000, guid: 00b2fa2d0c1b0e141b50b795a1c74e5d, type: 2}
