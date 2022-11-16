@@ -10,14 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61470bf509981514fb2f78cb92fda622, type: 3}
-  m_Name: TestDialogue4
+  m_Name: FlyingDialogue
   m_EditorClassIdentifier: 
   sentences:
+  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
+    text: Holly Smokes. I'm....FLYING!!!
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: ATTA BOY!
   - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
-    text: This is gonna be a test for a long dialogue.
+    text: Now, remember! You can't easily look around by moving the camera with the
+      mouse anymore. The camera is set for you and moves along with you.
   - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
-    text: Veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeery
-      looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong
-      dialogue. Suuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuper loooooooooooooooooong.
+    text: During flying, use WASD to angle/turn your character as it flies.
   - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
-    text: Like very long.
+    text: 'Try tilting up by W and tilting down by S.
+
+      Turn left with A and
+      right with D.'

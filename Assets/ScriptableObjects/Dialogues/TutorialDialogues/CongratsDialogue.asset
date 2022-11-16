@@ -10,14 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61470bf509981514fb2f78cb92fda622, type: 3}
-  m_Name: WalkingDialogue
+  m_Name: CongratsDialogue
   m_EditorClassIdentifier: 
   sentences:
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: What're you looking at? Walk yourself to that playground, young boy!
-  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: You should know how by moving them WASD.
+    text: You did it, boy! Could be better but not bad.
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: ' Don''t you mean legs?'
+    text: That was awesome! Thanks for talking to me into this.
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Don't be smart with me, boy! Now get on top of that yellow flower.
+    text: Told you that you would love it.
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: We are pretty much done here. You can fly back to the island and practice
+      more on your techniques.
+  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
+    text: Will do! Thanks again, Gramps.
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: Aahhhh, get out of here! *grumble grumble*
