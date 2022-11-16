@@ -17,7 +17,6 @@ public class StaminaManager : ResourceManager
             resource = 0;
         }
 
-        Debug.Log($"Stamina left: {resource}");
         staminaUI.value = resource;
     }
 
@@ -26,7 +25,6 @@ public class StaminaManager : ResourceManager
     {
         base.Add(amountToAdd);
 
-        Debug.Log($"Stamina left: {resource}");
         staminaUI.value = resource;
     }
 }
