@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17942a21488c9d62d96891e964b6098a, type: 3}
-  m_Name: HoveringDialogueSequence
+  m_Script: {fileID: 11500000, guid: c37cba4f1ea47146e9e803ac82ad5e35, type: 3}
+  m_Name: BeginFlyingObjectiveSequence
   m_EditorClassIdentifier: 
-  dialogueToStart: {fileID: 11400000, guid: 763ec4480f768fc4ca7656aee995caa9, type: 2}
+  objective: {fileID: 11400000, guid: f4dd511b061db6b1da717acf03a26476, type: 2}
