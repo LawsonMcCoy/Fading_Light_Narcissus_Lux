@@ -7,16 +7,16 @@ public class Player : CombatEntity
 {
     [SerializeField] public PlayerInput playerInput;
     [SerializeField] private Transform spawn;
-    [SerializeField] private float spawnNumber;
+    [SerializeField] private float yDeathDistance;
 
     private void Update()
     {
-        if (this.transform.position.y <= spawnNumber && spawn != null)
+        if (this.transform.position.y <= yDeathDistance && spawn != null)
         {
             this.transform.position = spawn.position;
         }
     }
-
+    
     private void OnQuit()
     {
         Debug.Log("QUITTING");

@@ -9,6 +9,7 @@ public class MovementWalking : MovementMode
     [SerializeField] private float turnSpeed;
     [SerializeField] private float jumpForceVertical; //How strong the player can jump upwards
     [SerializeField] private float jumpForceHonrizontal; //How strong the player can jump horizontally
+    [SerializeField] private float jumpForceStationary; //How strong the player can jump when not moving
     [SerializeField] private float staminaRegainRate; //The amount of stamina regain per second while walking
 
 
@@ -43,7 +44,8 @@ public class MovementWalking : MovementMode
     //and update values accordingly
     private bool CheckGroundStatus()
     {
-        if (IsGrounded())
+        RaycastHit groundInfo;
+        if (IsGrounded(out groundInfo))
         {
             onGround = true;
 
@@ -51,6 +53,7 @@ public class MovementWalking : MovementMode
             self.rigidbody.freezeRotation = true;
 
             //reset the rotate transform.up is the same as Vector3.up
+            //self.rigidbody.rotation.SetLookRotation(this.transform.forward, groundInfo.normal);
             Vector3 currentEuler = self.rigidbody.rotation.eulerAngles; //get the Euler angles
             currentEuler.x = 0.0f; //set the rotation around x axis to 0
             currentEuler.z = 0.0f; //set the rotation around z axis to 0
@@ -128,10 +131,17 @@ public class MovementWalking : MovementMode
                 if (!input.isPressed)
                 {
                     Vector3 jumpForceVector; //A vector that will represent the force the player
-                                       //is jumping with
+                                             //is jumping with
 
                     //compute vertical component
-                    jumpForceVector = Vector3.up * jumpForceVertical;
+                    if (moveVector == Vector3.zero)
+                    {
+                        jumpForceVector = Vector3.up * jumpForceStationary;
+                    }
+                    else
+                    {
+                        jumpForceVector = Vector3.up * jumpForceVertical;
+                    }
 
                     //add the horizontal component to allow the player to 
                     //jump over a distance by doing a running jump

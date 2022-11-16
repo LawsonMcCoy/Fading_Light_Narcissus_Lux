@@ -11,51 +11,15 @@ public class GoalPost : MonoBehaviour
     [SerializeField] private ObjectiveScriptableObject objectiveScript;
     private GameObject currentPost;
     private int currentIndex;
-    private BoxCollider currentCollider;
 
     private void Start()
     {
-        // //reset course if necessary
-        // resetPosts();
-        // //make sure each checkpoint has collider
-        // ColliderCheck();
-        // //make sure each cheackpoint has collisionDetect
-        // CollisionDetectcheck();
-        // currentIndex = 0;
-        // currentPost = Posts[currentIndex];
-        // currentPost.GetComponent<CollisionDetect>().makeCurrent();
-
-        // currentCollider = currentPost.GetComponent<BoxCollider>();
-
         Debug.Log("Goal Post Start");
         //add listener to the SO
         objectiveScript.activateObjective.AddListener(Activate);
     }
 
-    private void CollisionDetectcheck()
-    {
-        for (int i = 0; i < Posts.Length; i++)
-        {
-            GameObject CP = Posts[i];
-            if (CP != null)
-            {
-                CollisionDetect cd = CP.GetComponent<CollisionDetect>();
 
-                if (cd == null)
-                {
-                    CP.AddComponent<CollisionDetect>();
-                    cd = CP.GetComponent<CollisionDetect>();
-                    cd.giveGoalPost(gameObject.GetComponent<GoalPost>());
-                }
-                else
-                {
-                    cd.giveGoalPost(gameObject.GetComponent<GoalPost>());
-                }
-            }
-
-
-        }
-    }
     private void resetPosts()
     {
         if (objectiveScript.resetCourse)
@@ -65,48 +29,38 @@ public class GoalPost : MonoBehaviour
                 Posts[i].SetActive(true);
             }
         }
-        
-    }
-    private void ColliderCheck()
-    {
         for (int i = 0; i < Posts.Length; i++)
         {
-            GameObject CP = Posts[i];
-            if (CP != null)
+            Post currentPostScript = Posts[i].GetComponent<Post>();
+            if(currentPostScript == null)
             {
-                BoxCollider BC = CP.GetComponent<BoxCollider>();
-
-                if (BC == null)
-                {
-                    CP.AddComponent<BoxCollider>();
-                    BC = CP.GetComponent<BoxCollider>();
-                }
-
-                //make sure the collider is trigger
-                BC.isTrigger = true;
+                Posts[i].AddComponent<Post>();
+                Posts[i].GetComponent<Post>().initializePost(gameObject.GetComponent<GoalPost>());
             }
-            
-         
+
         }
-       
+        
     }
 
     public void Activate()
     {
+        //the activate func from old objectivemanager script
+        //set the objective complete listener
+        objectiveScript.objectiveCompletion.AddListener(finished);
+
+        //activate the objective
+        //Debug.Log(objective);
+        //Debug.Log(objective.activateObjective);
+        //objective.activateObjective.Invoke(); not needed
+        //end of old objectivemanager script
         Debug.Log("Activating goal post");
-        //make the posts appear
-        resetPosts();
-
-        //check the colliders on the posts
-        ColliderCheck();
-
-        //make sure each cheackpoint has collisionDetect
-        CollisionDetectcheck();
+        //make the posts appear and give Post class to posts
+        resetPosts();     
 
         //set up objective
         currentIndex = 0;
         currentPost = Posts[currentIndex];
-        currentPost.GetComponent<CollisionDetect>().makeCurrent();
+        currentPost.GetComponent<Post>().makeCurrent();
     }
 
     public void reachedAGoal()
@@ -120,7 +74,7 @@ public class GoalPost : MonoBehaviour
             if (currentPost != null)
             {
                 //create new listener
-                currentPost.GetComponent<CollisionDetect>().makeCurrent();
+                currentPost.GetComponent<Post>().makeCurrent();
             }
         }
         else
@@ -129,5 +83,10 @@ public class GoalPost : MonoBehaviour
             objectiveScript.reachedGoal();
         }
     }
-
+    private void finished(int completionNumber)
+    {
+        //taken from old objectiveManager
+        Debug.Log("Finished");
+        NarrationManager.Instance.ReportCompletion();
+    }
 }

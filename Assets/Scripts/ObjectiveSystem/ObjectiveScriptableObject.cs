@@ -54,7 +54,7 @@ public class ObjectiveScriptableObject : ScriptableObject
         }
     }
 
-    //called inside of GoalPost script, inside OnTriggerEnter function
+    //called inside of goalPost script, inside OnTriggerEnter function
     public void reachedGoal()
     {
         reachGoal = 0;
