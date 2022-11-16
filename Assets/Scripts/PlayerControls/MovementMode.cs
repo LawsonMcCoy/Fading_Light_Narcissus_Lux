@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 //I will be breaking up the three movement modes up into different 
 //scripts. This is to avoid a bunch of switch statements, and 
@@ -36,6 +37,9 @@ public abstract class MovementMode : MonoBehaviour
     protected bool inputReady; //A variable value to prevent immediately transiting back to 
                                 //a mode that you just transition from when the button to transition
                                 //is the same
+
+    [SerializeField] protected Text movementModeText;
+    protected Color modeUIColor;
 
     protected virtual void Awake()
     {
@@ -78,6 +82,8 @@ public abstract class MovementMode : MonoBehaviour
             Debug.Log($"Transitioning to {transitionToMode}");
             movementModes[(int)transitionToMode].enabled = true;
 
+            movementModeText.text = transitionToMode.ToString();
+
             //disable current mode
             this.enabled = false;
         }
@@ -86,9 +92,9 @@ public abstract class MovementMode : MonoBehaviour
     //A simple raycast frunction to check if the player is on the ground
     //returns true if the player is one the ground and false if they are
     //in the air
-    protected bool IsGrounded()
+    protected bool IsGrounded(out RaycastHit groundedInfo)
     {
-        return Physics.Raycast(this.transform.position, Vector3.down, commonData.isGroundedCheckDistance + 0.1f);  //The last 0.1 is in case the raycast ends on the surface of the ground 
+        return Physics.Raycast(this.transform.position, Vector3.down, out groundedInfo, commonData.isGroundedCheckDistance + 0.1f);  //The last 0.1 is in case the raycast ends on the surface of the ground 
     }
 
     protected void AddForce(Vector3 force, ForceMode mode)

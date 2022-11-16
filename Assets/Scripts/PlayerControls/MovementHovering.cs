@@ -42,6 +42,9 @@ public class MovementHovering : MovementMode
 
         //stop all motion
         self.rigidbody.velocity = Vector3.zero;
+
+        modeUIColor = new Color(0f, 0.8f, 0f, 1f);
+        movementModeText.color = modeUIColor;
     }
 
     protected override void FixedUpdate()
