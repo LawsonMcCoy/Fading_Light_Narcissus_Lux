@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37cba4f1ea47146e9e803ac82ad5e35, type: 3}
   m_Name: ClimbTreeObjectiveSequence
   m_EditorClassIdentifier: 
-  objective: {fileID: 0}
+  objective: {fileID: 11400000, guid: cb4b9972b13bca082b6be3959a71bab5, type: 2}

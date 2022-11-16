@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37cba4f1ea47146e9e803ac82ad5e35, type: 3}
   m_Name: StopHoveringObjectiveSequence
   m_EditorClassIdentifier: 
-  objective: {fileID: 0}
+  objective: {fileID: 11400000, guid: d264c9c929a35aad18cd96afef9fd5fd, type: 2}
