@@ -8,10 +8,11 @@ public class Scenes : MonoBehaviour
     {
         MAIN_MENU,
         WELCOME_DIALOGUE,
-        WALKING_TUTORIAL,
+        PLAYGROUND_TUTORIAL
+        /*WALKING_TUTORIAL,
         JUMPING_TUTORIAL,
         HOVERING_TUTORIAL,
         FLYING_TUTORIAL,
-        TEST_SCENE
+        TEST_SCENE*/
     };
 }

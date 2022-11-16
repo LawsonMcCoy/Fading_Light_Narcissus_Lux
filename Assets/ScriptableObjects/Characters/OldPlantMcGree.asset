@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fa83ab55d0db3f48a398b9c6f499387, type: 3}
-  m_Name: The Voice
+  m_Name: OldPlantMcGree
   m_EditorClassIdentifier: 
-  fullName: ' '
+  fullName: Old Plant McGee

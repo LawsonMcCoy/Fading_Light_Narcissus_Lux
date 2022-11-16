@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61470bf509981514fb2f78cb92fda622, type: 3}
-  m_Name: WelcomeDialogue
+  m_Name: WakenDialogue
   m_EditorClassIdentifier: 
   sentences:
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: Young boy! What're you doing sleeping here?!
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: I brought you here to train on y're flying, not snoozing!
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: You even snuck away when I was telling my flying days. *grumble grumble*
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: '*Snooze* (Press ENTER to continue...)'
+    text: But Gramps! I don't want to fly!
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Ik-
+    text: Well, that's too dam bad! You have the gift and you will use it.
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Ika...
-  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: IKA!
-  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: Five more minutes...
-  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
-    text: '*SMACK*'
+    text: I won't let it go to waste on a youngster!
