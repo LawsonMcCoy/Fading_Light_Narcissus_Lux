@@ -137,6 +137,24 @@ public class NarrationManager : MonoBehaviour
         StartCoroutine(NarrationDelay(sequence.delayTime));
     }
 
+    public void ProcessSave(SaveSequence sequence)
+    {
+        Debug.Log(sequence.saveData);
+        //set player to spawn point
+        //want to change player position to spawn point at death, but should not do it here
+        //will instead only change narration index and change player position in PlayerHealth script
+        //sequence.saveData.Player.transform.position = sequence.saveData.spawnPoint.position;
+
+        //make listener for when player dies in order to return to saveindex
+        sequence.saveData.playerDeath.AddListener(playerDeath);
+
+        //set saveindex to current index
+        savedNarrationSequenceIndex = currentNarrationSequenceIndex;
+    }
+    public void playerDeath()
+    {
+        currentNarrationSequenceIndex = savedNarrationSequenceIndex;
+    }
     private IEnumerator NarrationDelay(float delayTime)
     {
         yield return new WaitForSeconds(delayTime);
