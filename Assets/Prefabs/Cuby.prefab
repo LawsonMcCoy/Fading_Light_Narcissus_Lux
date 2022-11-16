@@ -337,7 +337,6 @@ MonoBehaviour:
   collider: {fileID: 7926698077186288317}
   playerInput: {fileID: 7926698077186288307}
   spawn: {fileID: 0}
-  playerSpawnPointTag: 
   yDeathDistance: -10
 --- !u!114 &7926698077186288308
 MonoBehaviour:
@@ -469,7 +468,7 @@ MonoBehaviour:
   turnSpeed: 5
   jumpForceVertical: 15
   jumpForceHonrizontal: 10
-  jumpForceStationary: 0
+  jumpForceStationary: 15
   staminaRegainRate: 5
 --- !u!114 &7926698077186288456
 MonoBehaviour:
