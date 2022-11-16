@@ -125,7 +125,7 @@ private void Update()
         //Start dialogue:
         updateDialogue = startDialogue;
         string currentSentence = updateDialogue.sentences[currSentenceIndex].text;
-        Debug.Log($"Starting dialogue {currSentenceIndex}: {currentSentence}");
+        //Debug.Log($"Starting dialogue {currSentenceIndex}: {currentSentence}");
         speakerName.text = updateDialogue.sentences[currSentenceIndex].character.fullName;
         showUI(); //activating the dialogue UI
         Instance.StartCoroutine(Type(currentSentence)); // type inserted text
