@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17942a21488c9d62d96891e964b6098a, type: 3}
   m_Name: MovingPlatformDialogueSequence
   m_EditorClassIdentifier: 
-  dialogueToStart: {fileID: 0}
+  dialogueToStart: {fileID: 11400000, guid: 6df96dd79b7a2c14194adf93267e2704, type: 2}
