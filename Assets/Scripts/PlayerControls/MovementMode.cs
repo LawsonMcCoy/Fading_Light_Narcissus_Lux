@@ -128,12 +128,10 @@ public abstract class MovementMode : MonoBehaviour
         //loop until the player is at their destination
         while (percentageTravel < 1.0f)
         {
-            Debug.Log($"Looping {dashDistance}");
             //go another distance step
             dashDistance += commonData.dashDistanceStep;
 
             //move the player to new place in the dash
-            Debug.Log(Vector3.Lerp(startingPosition, endingPosition, dashDistance));
             percentageTravel = dashDistance / dashVector.magnitude;
             self.rigidbody.MovePosition(Vector3.Lerp(startingPosition, endingPosition, percentageTravel));
 
@@ -154,37 +152,41 @@ public abstract class MovementMode : MonoBehaviour
 
     protected virtual void OnDash(InputValue input)
     {
-        Vector3 dashVector; //A vector that represents the path the player dash is taking
-        RaycastHit dashInfo; //The information for about the dash from the raycast
-
-        //colliderBufferDistance is the distance that must be maintain between the player and another collider to avoid
-        //collider clipping. This is because the player is at it's center of mass, which is the center of the player. If we
-        //stop to player that the contact point of the raycast, then that is where the center of mass will be and half the 
-        //player will still be in the other collider. Right I am setting the buffer distance from the center of mass to the 
-        //corners of the player (seeing the player as a rectanglular prism). 
-        float xDistance = self.transform.lossyScale.x / 2;
-        float yDistance = self.transform.lossyScale.y / 2;
-        float zDistance = self.transform.lossyScale.z / 2;
-        float colliderBufferDistance = Mathf.Sqrt((xDistance * xDistance) + (yDistance * yDistance) + (zDistance * zDistance));
-
-        //Get the dash direction from the moveVector
-        //we will dash in the direction we are moving in
-        dashVector = moveVector.normalized;
-        
-        //raycast to see if the dash path is clear
-        if (Physics.Raycast(self.rigidbody.position, dashVector, out dashInfo, commonData.dashDistance))
+        if (this.enabled)
         {
-            //if path is not clear use RaycastHit.distance and colliderBufferDistance to scale the direction vector
-            dashVector = (dashInfo.distance - colliderBufferDistance) * dashVector;
-        }
-        else
-        {
-            //if path is clear is use the dashDistance to scale the direcciton vector
-            dashVector = commonData.dashDistance * dashVector;
-        }
+            Debug.Log("Normal dash");
+            Vector3 dashVector; //A vector that represents the path the player dash is taking
+            RaycastHit dashInfo; //The information for about the dash from the raycast
 
-        //use rigidboby.MovePosition to preform dash (hopefully it will take care of interpolation)
-        //if rigidbody's interpolation doesn's work then use lerp to interpolate
-        StartCoroutine(PerformDash(dashVector));
+            //colliderBufferDistance is the distance that must be maintain between the player and another collider to avoid
+            //collider clipping. This is because the player is at it's center of mass, which is the center of the player. If we
+            //stop to player that the contact point of the raycast, then that is where the center of mass will be and half the 
+            //player will still be in the other collider. Right I am setting the buffer distance from the center of mass to the 
+            //corners of the player (seeing the player as a rectanglular prism). 
+            float xDistance = self.transform.lossyScale.x / 2;
+            float yDistance = self.transform.lossyScale.y / 2;
+            float zDistance = self.transform.lossyScale.z / 2;
+            float colliderBufferDistance = Mathf.Sqrt((xDistance * xDistance) + (yDistance * yDistance) + (zDistance * zDistance));
+
+            //Get the dash direction from the moveVector
+            //we will dash in the direction we are moving in
+            dashVector = moveVector.normalized;
+            
+            //raycast to see if the dash path is clear
+            if (Physics.Raycast(self.rigidbody.position, dashVector, out dashInfo, commonData.dashDistance))
+            {
+                //if path is not clear use RaycastHit.distance and colliderBufferDistance to scale the direction vector
+                dashVector = (dashInfo.distance - colliderBufferDistance) * dashVector;
+            }
+            else
+            {
+                //if path is clear is use the dashDistance to scale the direcciton vector
+                dashVector = commonData.dashDistance * dashVector;
+            }
+
+            //use rigidboby.MovePosition to preform dash (hopefully it will take care of interpolation)
+            //if rigidbody's interpolation doesn's work then use lerp to interpolate
+            StartCoroutine(PerformDash(dashVector));
+        }
     }
 }

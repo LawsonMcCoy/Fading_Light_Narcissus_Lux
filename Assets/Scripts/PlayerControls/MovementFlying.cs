@@ -169,7 +169,7 @@ public class MovementFlying : MovementMode
             if (tiltValue > 0)
             {
                 //Tilt up (negative direction)
-                Debug.Log("Tilt up");
+                // Debug.Log("Tilt up");
                 
                 // tiltValue =  currentTiltAngle - minTiltAngle;
                 tiltTorqueMagnitude = minTiltAngle - currentTiltAngle;
@@ -177,13 +177,13 @@ public class MovementFlying : MovementMode
             else if (tiltValue < 0)
             {
                 //Tilt down (positive direction)
-                Debug.Log("Tilt down");
+                // Debug.Log("Tilt down");
 
                 tiltTorqueMagnitude = maxTiltAngle - currentTiltAngle;
             }
             else
             {
-                Debug.Log("No tilt");
+                // Debug.Log("No tilt");
                 //not tilting, reset to 90
                 tiltTorqueMagnitude = 90 - currentTiltAngle;
 
@@ -203,26 +203,26 @@ public class MovementFlying : MovementMode
             currentTiltAngle = (currentTiltAngle + 90) % 360;
 
             //check if your tilt is withing bounds
-            Debug.Log($"Current tilt angle: {minTiltAngle}");
+            // Debug.Log($"Current tilt angle: {minTiltAngle}");
             if (currentTiltAngle < minTiltAngle)
             {
                 //tilted too high (facing sky)
-                Debug.Log($"Sky, angle: {currentTiltAngle}");
+                // Debug.Log($"Sky, angle: {currentTiltAngle}");
                 if (tiltValue > 0)
                 {
-                    Debug.Log("Allow");
+                    // Debug.Log("Allow");
                     tiltTorqueMagnitude = tiltValue * (tiltSpeed - currentTiltVelocity);
                 }
                 else
                 {
-                    Debug.Log("Stopping");
+                    // Debug.Log("Stopping");
                     tiltTorqueMagnitude = currentTiltVelocity;
                 }
             }
             else if (currentTiltAngle > maxTiltAngle)
             {
                 //tilted too low (facing ground)
-                Debug.Log($"ground, angle: {currentTiltAngle}");
+                // Debug.Log($"ground, angle: {currentTiltAngle}");
                 if (tiltValue < 0)
                 {
                     tiltTorqueMagnitude = tiltValue * (tiltSpeed - currentTiltVelocity);
@@ -235,7 +235,7 @@ public class MovementFlying : MovementMode
             else
             {
                 //in range
-                Debug.Log($"In range, angle: {currentTiltAngle}");
+                // Debug.Log($"In range, angle: {currentTiltAngle}");
                 tiltTorqueMagnitude = tiltValue * (tiltSpeed - currentTiltVelocity);
             }
         }
@@ -399,6 +399,48 @@ public class MovementFlying : MovementMode
         {
             // Debug.Log((int)Modes.HOVERING);
             Transition(Modes.WALKING);
+        }
+    }
+
+    //right click input
+    protected override void OnDash(InputValue input)
+    {
+        if (this.enabled)
+        {
+            Debug.Log("Fly Dash");
+            Vector3 dashVector; //A vector that represents the path the player dash is taking
+            RaycastHit dashInfo; //The information for about the dash from the raycast
+
+            //colliderBufferDistance is the distance that must be maintain between the player and another collider to avoid
+            //collider clipping. This is because the player is at it's center of mass, which is the center of the player. If we
+            //stop to player that the contact point of the raycast, then that is where the center of mass will be and half the 
+            //player will still be in the other collider. Right I am setting the buffer distance from the center of mass to the 
+            //corners of the player (seeing the player as a rectanglular prism). 
+            float xDistance = self.transform.lossyScale.x / 2;
+            float yDistance = self.transform.lossyScale.y / 2;
+            float zDistance = self.transform.lossyScale.z / 2;
+            float colliderBufferDistance = Mathf.Sqrt((xDistance * xDistance) + (yDistance * yDistance) + (zDistance * zDistance));
+
+            //Get the dash direction from the from the turn value
+            //we will dash in the direction the player is rolling
+            //always dash to the side
+            dashVector = (turnValue * (-transform.right)).normalized;
+            
+            //raycast to see if the dash path is clear
+            if (Physics.Raycast(self.rigidbody.position, dashVector, out dashInfo, commonData.dashDistance))
+            {
+                //if path is not clear use RaycastHit.distance and colliderBufferDistance to scale the direction vector
+                dashVector = (dashInfo.distance - colliderBufferDistance) * dashVector;
+            }
+            else
+            {
+                //if path is clear is use the dashDistance to scale the direcciton vector
+                dashVector = commonData.dashDistance * dashVector;
+            }
+
+            //use rigidboby.MovePosition to preform dash (hopefully it will take care of interpolation)
+            //if rigidbody's interpolation doesn's work then use lerp to interpolate
+            StartCoroutine(PerformDash(dashVector));
         }
     }
 
