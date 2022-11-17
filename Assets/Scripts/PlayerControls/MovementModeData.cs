@@ -20,6 +20,8 @@ public class MovementModeData : ScriptableObject
 
     public float inputDelayTime;
 
+    //Dashing data
+    public float dashStaminaCost; //The stamina cost of performing a dash
     public float dashDistance; //How far the player will dash when the button is pressed
     public float dashTimeStep; //The amount of time between each step of the dash
     public float dashDistanceStep = 0.1f; //The amount of distance covered in one time step of the dash
