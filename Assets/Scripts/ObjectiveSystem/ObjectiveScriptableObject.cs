@@ -11,6 +11,7 @@ public class ObjectiveScriptableObject : ScriptableObject
     public int enemiesToKill;//better to set this in editor
     public string Description;
     public bool resetCourse;
+    public bool disapear;
 
     /*subscribe to this event to listen for the completion of objective
     event takes an int. Decrease number of enemies to kill until 0

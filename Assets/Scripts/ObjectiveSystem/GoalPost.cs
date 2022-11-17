@@ -36,11 +36,10 @@ public class GoalPost : MonoBehaviour
             if(currentPostScript == null)
             {
                 Posts[i].AddComponent<Post>();
-                Posts[i].GetComponent<Post>().initializePost(gameObject.GetComponent<GoalPost>());
             }
-
+            Posts[i].GetComponent<Post>().initializePost(gameObject.GetComponent<GoalPost>());
         }
-        
+
     }
 
     public void Activate()
@@ -69,6 +68,10 @@ public class GoalPost : MonoBehaviour
         //reached the goal post
         if (Posts.Length - 1 > currentIndex)
         {
+            if (objectiveScript.disapear)
+            {
+                currentPost.SetActive(false);
+            }
             currentIndex += 1;
             currentPost = Posts[currentIndex];
 
