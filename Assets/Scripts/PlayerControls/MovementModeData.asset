@@ -16,6 +16,7 @@ MonoBehaviour:
   isGroundedCheckDistance: 1
   maxForce: 25
   inputDelayTime: 0.1
-  dashDistance: 0
-  dashTimeStep: 0
-  dashDistanceStep: 0.1
+  dashStaminaCost: 10
+  dashDistance: 10
+  dashTimeStep: 0.001
+  dashDistanceStep: 1
