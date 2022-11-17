@@ -31,6 +31,8 @@ public abstract class MovementMode : MonoBehaviour
 
     protected Player self; //a reference to yourself
 
+    protected bool dashing; //true when the player is dash and false otherwise
+
     protected Vector3 moveVector;
     protected float speed; //speed variable to be set by the child class
 
@@ -125,6 +127,9 @@ public abstract class MovementMode : MonoBehaviour
         float dashDistance = 0.0f; //the distance the dash as already covered
         float percentageTravel = 0.0f; //how far the play has travel in form of the percentage of total distance
 
+        //mark the player as dashing
+        dashing = true;
+
         //loop until the player is at their destination
         while (percentageTravel < 1.0f)
         {
@@ -138,6 +143,9 @@ public abstract class MovementMode : MonoBehaviour
             //wait for the next time step
             yield return new WaitForSeconds(commonData.dashTimeStep);
         }
+
+        //dash is completed, mark the player as not dashing
+        dashing = false;
     }
 
     //Most of the difference in computation for dashing between different
@@ -147,8 +155,8 @@ public abstract class MovementMode : MonoBehaviour
     //the computed magnitude, it will perform the dash action.
     protected void ComputeDashVector(Vector3 dashVector)
     {
-        //do nothing if you don't have enough stamina
-        if (stamina.ResourceAmount() >= commonData.dashStaminaCost)
+        //do nothing if you don't have enough stamina, or you are already dashing
+        if (stamina.ResourceAmount() >= commonData.dashStaminaCost && !dashing)
         {
             RaycastHit dashInfo; //The information for about the dash from the raycast
 
