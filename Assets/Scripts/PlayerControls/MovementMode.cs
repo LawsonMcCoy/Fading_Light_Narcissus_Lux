@@ -123,16 +123,19 @@ public abstract class MovementMode : MonoBehaviour
         Vector3 startingPosition = self.rigidbody.position; //the starting position of the dash
         Vector3 endingPosition = startingPosition + dashVector; //the ending position of the dash
         float dashDistance = 0.0f; //the distance the dash as already covered
+        float percentageTravel = 0.0f; //how far the play has travel in form of the percentage of total distance
 
         //loop until the player is at their destination
-        while (self.rigidbody.position != endingPosition)
+        while (percentageTravel < 1.0f)
         {
             Debug.Log($"Looping {dashDistance}");
             //go another distance step
             dashDistance += commonData.dashDistanceStep;
 
             //move the player to new place in the dash
-            self.rigidbody.MovePosition(Vector3.Lerp(startingPosition, endingPosition, dashDistance));
+            Debug.Log(Vector3.Lerp(startingPosition, endingPosition, dashDistance));
+            percentageTravel = dashDistance / dashVector.magnitude;
+            self.rigidbody.MovePosition(Vector3.Lerp(startingPosition, endingPosition, percentageTravel));
 
             //wait for the next time step
             yield return new WaitForSeconds(commonData.dashTimeStep);
