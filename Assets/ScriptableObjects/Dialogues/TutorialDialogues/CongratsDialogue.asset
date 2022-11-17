@@ -26,3 +26,5 @@ MonoBehaviour:
     text: Will do! Thanks again, Gramps.
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
     text: Aahhhh, get out of here! *grumble grumble*
+  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
+    text: You are now free to explore anywhere.
