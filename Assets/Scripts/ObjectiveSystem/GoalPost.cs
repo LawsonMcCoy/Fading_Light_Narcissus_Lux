@@ -22,6 +22,7 @@ public class GoalPost : MonoBehaviour
 
     private void resetPosts()
     {
+        Debug.Log("reset is called.");
         if (objectiveScript.resetCourse)
         {
             for (int i = 0; i < Posts.Length; i++)
