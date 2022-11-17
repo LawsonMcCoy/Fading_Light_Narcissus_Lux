@@ -19,4 +19,9 @@ public class MovementModeData : ScriptableObject
     public float maxForce;
 
     public float inputDelayTime;
+
+    public float dashDistance; //How far the player will dash when the button is pressed
+    public float dashTimeStep; //The amount of time between each step of the dash
+    public float dashDistanceStep = 0.1f; //The amount of distance covered in one time step of the dash
+                                          //note 0.0f will break the game
 }
