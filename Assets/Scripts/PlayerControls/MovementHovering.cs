@@ -69,6 +69,16 @@ public class MovementHovering : MovementMode
         }
     }
 
+    //zeroing out rotational motion during movement restricted events
+    public override void StartMovementRestrictedEvent()
+    {
+        //zero parent's motion
+        base.StartMovementRestrictedEvent();
+
+        //zero rotational motion
+        turnValue = 0;
+    }
+
     //************
     //player input
     //************

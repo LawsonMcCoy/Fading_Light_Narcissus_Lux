@@ -106,6 +106,16 @@ public class MovementWalking : MovementMode
         // stamina.Add(staminaRegainRate * Time.fixedDeltaTime);
     }
 
+    //zeroing out rotational motion during movement restricted events
+    public override void StartMovementRestrictedEvent()
+    {
+        //zero parent's motion
+        base.StartMovementRestrictedEvent();
+
+        //zero rotational motion
+        turnValue = 0;
+    }
+
     //************
     //player input
     //************
