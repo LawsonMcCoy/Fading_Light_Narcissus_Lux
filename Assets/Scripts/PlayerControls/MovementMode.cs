@@ -96,7 +96,23 @@ public abstract class MovementMode : MonoBehaviour
     //in the air
     protected bool IsGrounded(out RaycastHit groundedInfo)
     {
-        return Physics.Raycast(this.transform.position, Vector3.down, out groundedInfo, commonData.isGroundedCheckDistance + 0.1f);  //The last 0.1 is in case the raycast ends on the surface of the ground 
+        Debug.DrawLine(this.transform.position, (Vector3.down * (commonData.isGroundedCheckDistance + 0.1f)) + this.transform.position, Color.white);
+        if (Physics.Raycast(this.transform.position, Vector3.down, out groundedInfo, commonData.isGroundedCheckDistance + 0.1f))  //The last 0.1 is in case the raycast ends on the surface of the ground 
+        {
+            //if the raycast collides with the ground, check to make sure the slope is not too steep to stand on
+            
+            //compute slope angle
+            float slopeAngle = Vector3.Angle(Vector3.up, groundedInfo.normal);
+            Debug.Log($"slope angle: {slopeAngle}");
+
+            //The player is only grounded iff the slope is not too steep to stand on
+            return slopeAngle <= commonData.maxStandingSlopeAngle;
+        }
+        else
+        {
+            //didn't even detect the ground, definitely not grounded
+            return false;
+        }
     }
 
     protected void AddForce(Vector3 force, ForceMode mode)
