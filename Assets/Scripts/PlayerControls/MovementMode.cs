@@ -50,6 +50,9 @@ public abstract class MovementMode : MonoBehaviour
         moveVector = Vector3.zero;
 
         inputReady = true;
+
+        //Event subscriptions
+        EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_START, StartMovementRestrictedEvent);
     }
 
     private void Start()
@@ -107,6 +110,20 @@ public abstract class MovementMode : MonoBehaviour
 
         //apply force to rigidbody
         self.rigidbody.AddForce(force, mode);
+    }
+
+    //A function design to set all motion to zero
+    //The initially purpose of this function is to fix a bug
+    //where motion persists after player input is disabled.
+    public virtual void StartMovementRestrictedEvent()
+    {
+        moveVector = Vector3.zero;
+    } 
+
+    protected virtual void OnDestroy()
+    {
+        //Events unsubscriptions
+        EventManager.Instance.Unsubscribe(EventTypes.Events.DIALOGUE_START, StartMovementRestrictedEvent);
     }
 
     protected IEnumerator DelayInput()
