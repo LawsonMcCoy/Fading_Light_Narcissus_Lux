@@ -39,7 +39,7 @@ public class Post : MonoBehaviour
                 //reached the goal post
                 gameObject.SetActive(false);
                 isCurrent = false;
-                Debug.Log("Reached a goal");
+                Debug.Log(myGoalPostRef);
                 myGoalPostRef.reachedAGoal();
             }
         }

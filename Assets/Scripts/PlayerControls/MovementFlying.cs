@@ -413,7 +413,7 @@ public class MovementFlying : MovementMode
             //we will dash in the direction the player is rolling
             //always dash to the side
             dashVector = (turnValue * (-transform.right)).normalized;
-    
+                
             //compute the dash magnitude and perform dash
             ComputeDashVector(dashVector);
         }

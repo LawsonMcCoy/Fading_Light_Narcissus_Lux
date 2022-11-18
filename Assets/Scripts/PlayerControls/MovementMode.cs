@@ -171,8 +171,8 @@ public abstract class MovementMode : MonoBehaviour
     //the computed magnitude, it will perform the dash action.
     protected void ComputeDashVector(Vector3 dashVector)
     {
-        //do nothing if you don't have enough stamina, or you are already dashing
-        if (stamina.ResourceAmount() >= commonData.dashStaminaCost && !dashing)
+        //do nothing if dash vector is zero, you don't have enough stamina, or you are already dashing
+        if (dashVector != Vector3.zero && stamina.ResourceAmount() >= commonData.dashStaminaCost && !dashing)
         {
             RaycastHit dashInfo; //The information for about the dash from the raycast
 

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiesToKill: 0
   Description: Fly to the other island.
-  resetCourse: 0
+  resetCourse: 1
