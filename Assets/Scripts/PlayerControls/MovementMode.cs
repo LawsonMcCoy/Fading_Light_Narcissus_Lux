@@ -224,7 +224,7 @@ public abstract class MovementMode : MonoBehaviour
                 //You have enough space to dash
                 StartCoroutine(PerformDash(dashVector));
             }
-            else
+            else if (Utilities.ObjectInLayer(dashInfo.collider.gameObject, commonData.dashBounceMask)) //prevent bouncing on nonbouncable objects
             {
                 Debug.Log("Bouncing");
                 //dashing into an object you are standing next to

@@ -23,3 +23,6 @@ MonoBehaviour:
   dashDistanceStep: 1
   dashBounceHorizontal: 25
   dashBounceVertical: 30
+  dashBounceMask:
+    serializedVersion: 2
+    m_Bits: 55
