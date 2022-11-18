@@ -21,9 +21,9 @@ MonoBehaviour:
     text: Now, remember! You can't easily look around by moving the camera with the
       mouse anymore. The camera is set for you and moves along with you.
   - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
-    text: During flying, use WASD to angle/turn your character as it flies.
+    text: During flying, use WASD to tilt/roll your character as it flies.
   - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
     text: 'Try tilting up by W and tilting down by S.
 
-      Turn left with A and
+      Roll left with A and
       right with D.'
