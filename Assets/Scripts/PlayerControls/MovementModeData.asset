@@ -20,3 +20,5 @@ MonoBehaviour:
   dashDistance: 10
   dashTimeStep: 0.001
   dashDistanceStep: 1
+  dashBounceHorizontal: 25
+  dashBounceVertical: 30

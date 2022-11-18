@@ -187,7 +187,20 @@ public abstract class MovementMode : MonoBehaviour
 
             //use rigidboby.MovePosition to preform dash (hopefully it will take care of interpolation)
             //if rigidbody's interpolation doesn's work then use lerp to interpolate
-            StartCoroutine(PerformDash(dashVector));
+            if (dashVector.magnitude >= colliderBufferDistance)
+            {
+                //You have enough space to dash
+                StartCoroutine(PerformDash(dashVector));
+            }
+            else
+            {
+                Debug.Log("Bouncing");
+                //dashing into an object you are standing next to
+                //bounce off of it at 
+                Vector3 bounceForceHorizontal = commonData.dashBounceHorizontal * dashInfo.normal;
+                Vector3 bounceForceVertical = commonData.dashBounceVertical * Vector3.up;
+                self.rigidbody.AddForce(bounceForceHorizontal + bounceForceVertical, ForceMode.Impulse); 
+            }
         }
     }
 

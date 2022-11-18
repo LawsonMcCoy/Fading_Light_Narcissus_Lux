@@ -26,4 +26,6 @@ public class MovementModeData : ScriptableObject
     public float dashTimeStep; //The amount of time between each step of the dash
     public float dashDistanceStep = 0.1f; //The amount of distance covered in one time step of the dash
                                           //note 0.0f will break the game
+    public float dashBounceHorizontal; //the amount that the player bounces off the wall in the horizontal direction
+    public float dashBounceVertical;   //the amount that hte player bounces off the wall in the veritcal direction
 }
