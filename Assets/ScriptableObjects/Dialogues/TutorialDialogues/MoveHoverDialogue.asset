@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentences:
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Th're ya go. Now get over here by using WASD.
+    text: Th're ya go. Now get over here.

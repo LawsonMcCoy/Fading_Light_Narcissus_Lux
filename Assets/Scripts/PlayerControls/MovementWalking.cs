@@ -117,6 +117,16 @@ public class MovementWalking : MovementMode
         //perform the dash jump
         self.rigidbody.AddForce(dashJumpForce * Vector3.up, ForceMode.Impulse);
     }
+    
+    //zeroing out rotational motion during movement restricted events
+    public override void StartMovementRestrictedEvent()
+    {
+        //zero parent's motion
+        base.StartMovementRestrictedEvent();
+
+        //zero rotational motion
+        turnValue = 0;
+    }
 
     //************
     //player input

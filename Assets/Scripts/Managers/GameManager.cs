@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
 
         //set the singleton to not destroy on load
         DontDestroyOnLoad(this);
+
+        //Events subscription
+        EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_START, PauseGame);
+        EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_END, UnpauseGame);
     }
 
     public void StartGame()
@@ -26,10 +30,26 @@ public class GameManager : MonoBehaviour
 
     }
 
+    //A funciton to pause the game time
+    public void PauseGame()
+    {
+        Time.timeScale = 0; //pause game temp
+    }
+
+    //A function to resume normal game time
+    public void UnpauseGame()
+    {
+        Time.timeScale = 1;
+    }
+
     private void OnDestroy()
     {
         //reset singleton instance to null 
         //when object is destroyed
         Instance = null;
+
+        //Events unsubscription
+        EventManager.Instance.Unsubscribe(EventTypes.Events.DIALOGUE_START, PauseGame);
+        EventManager.Instance.Unsubscribe(EventTypes.Events.DIALOGUE_END, UnpauseGame);
     }
 }

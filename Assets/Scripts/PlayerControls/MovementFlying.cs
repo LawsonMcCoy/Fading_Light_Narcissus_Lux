@@ -314,6 +314,17 @@ public class MovementFlying : MovementMode
         }
     }
 
+    //zeroing out rotational motion during movement restricted events
+    public override void StartMovementRestrictedEvent()
+    {
+        //zero parent's motion
+        base.StartMovementRestrictedEvent();
+
+        //zero rotational motion
+        tiltValue = 0;
+        turnValue = 0;
+    }
+
     //************
     //Player input
     //************
