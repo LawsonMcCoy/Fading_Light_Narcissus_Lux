@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4540675662029977176}
   - component: {fileID: 2936960299566629757}
   - component: {fileID: 2936960299566629756}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Old Plant McGee
   m_TagString: Untagged
   m_Icon: {fileID: 0}

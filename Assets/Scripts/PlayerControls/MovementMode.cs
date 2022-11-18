@@ -31,6 +31,8 @@ public abstract class MovementMode : MonoBehaviour
 
     protected Player self; //a reference to yourself
 
+    protected bool dashing; //true when the player is dash and false otherwise
+
     protected Vector3 moveVector;
     protected float speed; //speed variable to be set by the child class
 
@@ -97,7 +99,22 @@ public abstract class MovementMode : MonoBehaviour
     //in the air
     protected bool IsGrounded(out RaycastHit groundedInfo)
     {
-        return Physics.Raycast(this.transform.position, Vector3.down, out groundedInfo, commonData.isGroundedCheckDistance + 0.1f);  //The last 0.1 is in case the raycast ends on the surface of the ground 
+        Debug.DrawLine(this.transform.position, (Vector3.down * (commonData.isGroundedCheckDistance + 0.1f)) + this.transform.position, Color.white);
+        if (Physics.Raycast(this.transform.position, Vector3.down, out groundedInfo, commonData.isGroundedCheckDistance + 0.1f))  //The last 0.1 is in case the raycast ends on the surface of the ground 
+        {
+            //if the raycast collides with the ground, check to make sure the slope is not too steep to stand on
+            
+            //compute slope angle
+            float slopeAngle = Vector3.Angle(Vector3.up, groundedInfo.normal);
+
+            //The player is only grounded iff the slope is not too steep to stand on
+            return slopeAngle <= commonData.maxStandingSlopeAngle;
+        }
+        else
+        {
+            //didn't even detect the ground, definitely not grounded
+            return false;
+        }
     }
 
     protected void AddForce(Vector3 force, ForceMode mode)
@@ -135,6 +152,90 @@ public abstract class MovementMode : MonoBehaviour
         inputReady = true;
     }
 
+    protected IEnumerator PerformDash(Vector3 dashVector)
+    {
+        Vector3 startingPosition = self.rigidbody.position; //the starting position of the dash
+        Vector3 endingPosition = startingPosition + dashVector; //the ending position of the dash
+        float dashDistance = 0.0f; //the distance the dash as already covered
+        float percentageTravel = 0.0f; //how far the play has travel in form of the percentage of total distance
+
+        //mark the player as dashing
+        dashing = true;
+
+        //loop until the player is at their destination
+        while (percentageTravel < 1.0f)
+        {
+            //go another distance step
+            dashDistance += commonData.dashDistanceStep;
+
+            //move the player to new place in the dash
+            percentageTravel = dashDistance / dashVector.magnitude;
+            self.rigidbody.MovePosition(Vector3.Lerp(startingPosition, endingPosition, percentageTravel));
+
+            //wait for the next time step
+            yield return new WaitForSeconds(commonData.dashTimeStep);
+        }
+
+        //dash is completed, mark the player as not dashing
+        dashing = false;
+    }
+
+    //Most of the difference in computation for dashing between different
+    //movement modes is how the direction of the dash is computed and animation.
+    //There this function will take a unit vector representing the dash direction
+    //and compute the magnitude of the dashVector. Once it scales the dashVector by
+    //the computed magnitude, it will perform the dash action.
+    protected void ComputeDashVector(Vector3 dashVector)
+    {
+        //do nothing if dash vector is zero, you don't have enough stamina, or you are already dashing
+        if (dashVector != Vector3.zero && stamina.ResourceAmount() >= commonData.dashStaminaCost && !dashing)
+        {
+            RaycastHit dashInfo; //The information for about the dash from the raycast
+
+            //colliderBufferDistance is the distance that must be maintain between the player and another collider to avoid
+            //collider clipping. This is because the player is at it's center of mass, which is the center of the player. If we
+            //stop to player that the contact point of the raycast, then that is where the center of mass will be and half the 
+            //player will still be in the other collider. Right I am setting the buffer distance from the center of mass to the 
+            //corners of the player (seeing the player as a rectanglular prism). 
+            float xDistance = self.transform.lossyScale.x / 2;
+            float yDistance = self.transform.lossyScale.y / 2;
+            float zDistance = self.transform.lossyScale.z / 2;
+            float colliderBufferDistance = Mathf.Sqrt((xDistance * xDistance) + (yDistance * yDistance) + (zDistance * zDistance));
+            
+            //raycast to see if the dash path is clear
+            if (Physics.Raycast(self.rigidbody.position, dashVector, out dashInfo, commonData.dashDistance))
+            {
+                //if path is not clear use RaycastHit.distance and colliderBufferDistance to scale the direction vector
+                dashVector = (dashInfo.distance - colliderBufferDistance) * dashVector;
+            }
+            else
+            {
+                //if path is clear is use the dashDistance to scale the direcciton vector
+                dashVector = commonData.dashDistance * dashVector;
+            }
+
+            //pay the stamina cost
+            stamina.Subtract(commonData.dashStaminaCost);
+
+            //use rigidboby.MovePosition to preform dash (hopefully it will take care of interpolation)
+            //if rigidbody's interpolation doesn's work then use lerp to interpolate
+            if (dashVector.magnitude >= colliderBufferDistance)
+            {
+                //You have enough space to dash
+                StartCoroutine(PerformDash(dashVector));
+            }
+            else if (Utilities.ObjectInLayer(dashInfo.collider.gameObject, commonData.dashBounceMask)) //prevent bouncing on nonbouncable objects
+            {
+                Debug.Log("Bouncing");
+                //dashing into an object you are standing next to
+                //bounce off of it at 
+                Vector3 bounceForceHorizontal = commonData.dashBounceHorizontal * dashInfo.normal;
+                Vector3 bounceForceVertical = commonData.dashBounceVertical * Vector3.up;
+                self.rigidbody.AddForce(bounceForceHorizontal + bounceForceVertical, ForceMode.Impulse); 
+            }
+        }
+    }
+
     //Player input
     protected virtual void OnMove(InputValue input)
     {
@@ -143,5 +244,20 @@ public abstract class MovementMode : MonoBehaviour
         
         //Note that when going from 2D vector to 3D vector, the y in 2D becomes the z in 3D, Thanks Unity
         moveVector = inputVector.x * speed * this.transform.right + inputVector.y * speed * this.transform.forward;
+    }
+
+    protected virtual void OnDash(InputValue input)
+    {
+        if (this.enabled)
+        {
+            Vector3 dashVector; //A vector that represents the path the player dash is taking
+
+            //Get the dash direction from the moveVector
+            //we will dash in the direction we are moving in
+            dashVector = moveVector.normalized;
+
+            //Compute the magnitude of dashVector, and perform the dash
+            ComputeDashVector(dashVector);
+        }
     }
 }

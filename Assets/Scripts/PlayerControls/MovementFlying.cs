@@ -169,7 +169,7 @@ public class MovementFlying : MovementMode
             if (tiltValue > 0)
             {
                 //Tilt up (negative direction)
-                Debug.Log("Tilt up");
+                // Debug.Log("Tilt up");
                 
                 // tiltValue =  currentTiltAngle - minTiltAngle;
                 tiltTorqueMagnitude = minTiltAngle - currentTiltAngle;
@@ -177,13 +177,13 @@ public class MovementFlying : MovementMode
             else if (tiltValue < 0)
             {
                 //Tilt down (positive direction)
-                Debug.Log("Tilt down");
+                // Debug.Log("Tilt down");
 
                 tiltTorqueMagnitude = maxTiltAngle - currentTiltAngle;
             }
             else
             {
-                Debug.Log("No tilt");
+                // Debug.Log("No tilt");
                 //not tilting, reset to 90
                 tiltTorqueMagnitude = 90 - currentTiltAngle;
 
@@ -203,26 +203,26 @@ public class MovementFlying : MovementMode
             currentTiltAngle = (currentTiltAngle + 90) % 360;
 
             //check if your tilt is withing bounds
-            Debug.Log($"Current tilt angle: {minTiltAngle}");
+            // Debug.Log($"Current tilt angle: {minTiltAngle}");
             if (currentTiltAngle < minTiltAngle)
             {
                 //tilted too high (facing sky)
-                Debug.Log($"Sky, angle: {currentTiltAngle}");
+                // Debug.Log($"Sky, angle: {currentTiltAngle}");
                 if (tiltValue > 0)
                 {
-                    Debug.Log("Allow");
+                    // Debug.Log("Allow");
                     tiltTorqueMagnitude = tiltValue * (tiltSpeed - currentTiltVelocity);
                 }
                 else
                 {
-                    Debug.Log("Stopping");
+                    // Debug.Log("Stopping");
                     tiltTorqueMagnitude = currentTiltVelocity;
                 }
             }
             else if (currentTiltAngle > maxTiltAngle)
             {
                 //tilted too low (facing ground)
-                Debug.Log($"ground, angle: {currentTiltAngle}");
+                // Debug.Log($"ground, angle: {currentTiltAngle}");
                 if (tiltValue < 0)
                 {
                     tiltTorqueMagnitude = tiltValue * (tiltSpeed - currentTiltVelocity);
@@ -235,7 +235,7 @@ public class MovementFlying : MovementMode
             else
             {
                 //in range
-                Debug.Log($"In range, angle: {currentTiltAngle}");
+                // Debug.Log($"In range, angle: {currentTiltAngle}");
                 tiltTorqueMagnitude = tiltValue * (tiltSpeed - currentTiltVelocity);
             }
         }
@@ -410,6 +410,23 @@ public class MovementFlying : MovementMode
         {
             // Debug.Log((int)Modes.HOVERING);
             Transition(Modes.WALKING);
+        }
+    }
+
+    //right click input
+    protected override void OnDash(InputValue input)
+    {
+        if (this.enabled)
+        {
+            Vector3 dashVector; //A vector that represents the path the player dash is taking
+
+            //Get the dash direction from the from the turn value
+            //we will dash in the direction the player is rolling
+            //always dash to the side
+            dashVector = (turnValue * (-transform.right)).normalized;
+                
+            //compute the dash magnitude and perform dash
+            ComputeDashVector(dashVector);
         }
     }
 

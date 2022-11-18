@@ -572,6 +572,7 @@ MonoBehaviour:
   jumpForceHonrizontal: 5
   jumpForceStationary: 15
   staminaRegainRate: 5
+  dashJumpForce: 30
 --- !u!114 &7204556638568947598
 MonoBehaviour:
   m_ObjectHideFlags: 0

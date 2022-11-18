@@ -14,5 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 1000
   isGroundedCheckDistance: 1
+  maxStandingSlopeAngle: 60
   maxForce: 25
   inputDelayTime: 0.1
+  dashStaminaCost: 10
+  dashDistance: 10
+  dashTimeStep: 0.001
+  dashDistanceStep: 1
+  dashBounceHorizontal: 25
+  dashBounceVertical: 30
+  dashBounceMask:
+    serializedVersion: 2
+    m_Bits: 55
