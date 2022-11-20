@@ -52,15 +52,15 @@ public abstract class MovementMode : MonoBehaviour
         moveVector = Vector3.zero;
 
         inputReady = true;
-
-        //Event subscriptions
-        EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_START, StartMovementRestrictedEvent);
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         //lock the curser when controlling the player
         Cursor.lockState = CursorLockMode.Locked;
+
+        //Event subscriptions
+        EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_START, StartMovementRestrictedEvent);
     }
 
     protected virtual void FixedUpdate()
