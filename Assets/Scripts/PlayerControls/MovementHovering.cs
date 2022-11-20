@@ -42,6 +42,9 @@ public class MovementHovering : MovementMode
 
         //stop all motion
         self.rigidbody.velocity = Vector3.zero;
+
+        modeUIColor = new Color(0f, 0.8f, 0f, 1f);
+        movementModeText.color = modeUIColor;
     }
 
     protected override void FixedUpdate()
@@ -64,6 +67,16 @@ public class MovementHovering : MovementMode
         {
             Transition(Modes.WALKING);
         }
+    }
+
+    //zeroing out rotational motion during movement restricted events
+    public override void StartMovementRestrictedEvent()
+    {
+        //zero parent's motion
+        base.StartMovementRestrictedEvent();
+
+        //zero rotational motion
+        turnValue = 0;
     }
 
     //************

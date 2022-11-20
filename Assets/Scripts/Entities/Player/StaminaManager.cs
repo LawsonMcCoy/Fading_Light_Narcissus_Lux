@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StaminaManager : ResourceManager
 {
+    [SerializeField] Slider staminaUI;
+
     public override void Subtract(float amountToSubtract)
     {
         base.Subtract(amountToSubtract);
@@ -14,7 +17,7 @@ public class StaminaManager : ResourceManager
             resource = 0;
         }
 
-        Debug.Log($"Stamina left: {resource}");
+        staminaUI.value = resource;
     }
 
     //temp function
@@ -22,6 +25,6 @@ public class StaminaManager : ResourceManager
     {
         base.Add(amountToAdd);
 
-        Debug.Log($"Stamina left: {resource}");
+        staminaUI.value = resource;
     }
 }

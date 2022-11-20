@@ -9,7 +9,9 @@ public class MovementWalking : MovementMode
     [SerializeField] private float turnSpeed;
     [SerializeField] private float jumpForceVertical; //How strong the player can jump upwards
     [SerializeField] private float jumpForceHonrizontal; //How strong the player can jump horizontally
+    [SerializeField] private float jumpForceStationary; //How strong the player can jump when not moving
     [SerializeField] private float staminaRegainRate; //The amount of stamina regain per second while walking
+    [SerializeField] private float dashJumpForce; //How strong the player can jump at the end of dash
 
 
     private float turnValue;
@@ -34,13 +36,17 @@ public class MovementWalking : MovementMode
 
         //Enable gravity when walking
         self.rigidbody.useGravity = true; 
+
+        modeUIColor = new Color(1f, 0.8f, 0f, 1f);
+        movementModeText.color = modeUIColor;
     }
 
     //a helper function to check if the player is on the ground
     //and update values accordingly
     private bool CheckGroundStatus()
     {
-        if (IsGrounded())
+        RaycastHit groundInfo;
+        if (IsGrounded(out groundInfo))
         {
             onGround = true;
 
@@ -48,6 +54,7 @@ public class MovementWalking : MovementMode
             self.rigidbody.freezeRotation = true;
 
             //reset the rotate transform.up is the same as Vector3.up
+            //self.rigidbody.rotation.SetLookRotation(this.transform.forward, groundInfo.normal);
             Vector3 currentEuler = self.rigidbody.rotation.eulerAngles; //get the Euler angles
             currentEuler.x = 0.0f; //set the rotation around x axis to 0
             currentEuler.z = 0.0f; //set the rotation around z axis to 0
@@ -100,6 +107,27 @@ public class MovementWalking : MovementMode
         // stamina.Add(staminaRegainRate * Time.fixedDeltaTime);
     }
 
+    private IEnumerator PerformDashJump()
+    {
+        Debug.Log("Dash Jump");
+        //wait until dashing is completed
+        yield return new WaitUntil(() => !dashing);
+
+        Debug.Log($"Perform Dash Jump {dashJumpForce * Vector3.up}");
+        //perform the dash jump
+        self.rigidbody.AddForce(dashJumpForce * Vector3.up, ForceMode.Impulse);
+    }
+    
+    //zeroing out rotational motion during movement restricted events
+    public override void StartMovementRestrictedEvent()
+    {
+        //zero parent's motion
+        base.StartMovementRestrictedEvent();
+
+        //zero rotational motion
+        turnValue = 0;
+    }
+
     //************
     //player input
     //************
@@ -118,36 +146,51 @@ public class MovementWalking : MovementMode
     {
         if (inputReady)
         {
-            //If on ground then jump otherwise transition to Hover
-            if (onGround)
+            if (dashing)
             {
-                //On Ground, jump into the air
-                if (!input.isPressed)
-                {
-                    Vector3 jumpForceVector; //A vector that will represent the force the player
-                                       //is jumping with
-
-                    //compute vertical component
-                    jumpForceVector = Vector3.up * jumpForceVertical;
-
-                    //add the horizontal component to allow the player to 
-                    //jump over a distance by doing a running jump
-                    jumpForceVector += moveVector.normalized * jumpForceHonrizontal;
-
-                    //jump with impulse
-                    self.rigidbody.AddForce(jumpForceVector, ForceMode.Impulse);
-                }
+                //perform a dash jump
+                StartCoroutine(PerformDashJump());
             }
             else
             {
-                //In midair, transition into Hovering
-                //note that you can only hover if you have stamina
-                if (input.isPressed && stamina.ResourceAmount() > 0)
+                //If on ground then jump otherwise transition to Hover
+                if (onGround)
                 {
-                    Transition(Modes.HOVERING);
-                }
-            }
-        }
+                    //On Ground, jump into the air
+                    if (input.isPressed)
+                    {
+                        Vector3 jumpForceVector; //A vector that will represent the force the player
+                                                //is jumping with
+
+                        //compute vertical component
+                        if (moveVector == Vector3.zero)
+                        {
+                            jumpForceVector = Vector3.up * jumpForceStationary;
+                        }
+                        else
+                        {
+                            jumpForceVector = Vector3.up * jumpForceVertical;
+                        }
+
+                        //add the horizontal component to allow the player to 
+                        //jump over a distance by doing a running jump
+                        jumpForceVector += moveVector.normalized * jumpForceHonrizontal;
+
+                        //jump with impulse
+                        self.rigidbody.AddForce(jumpForceVector, ForceMode.Impulse);
+                    } //end if (!input.isPressed)
+                }//end if (onGround)
+                else
+                {
+                    //In midair, transition into Hovering
+                    //note that you can only hover if you have stamina
+                    if (input.isPressed && stamina.ResourceAmount() > 0)
+                    {
+                        Transition(Modes.HOVERING);
+                    }
+                } //end else (if (onGround))
+            } //end else (if (dashing))
+        } //end if (inputReady)
     }
 
     //Shift key input

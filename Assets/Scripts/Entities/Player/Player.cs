@@ -18,9 +18,18 @@ public class Player : CombatEntity
             Destroy(gameObject.GetComponent<HealthManager>());
         }
     }
+    [SerializeField] private float yDeathDistance;
+
+    private void Awake()
+    {
+        //events subscriptions
+        EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_START, DisableInput);
+        EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_END, EnableInput);
+    }
+
     private void Update()
     {
-        if (this.transform.position.y <= spawnNumber && spawn != null)
+        if (this.transform.position.y <= yDeathDistance && spawn != null)
         {
             //this.transform.position = spawn.position;
             //kill player
@@ -28,9 +37,33 @@ public class Player : CombatEntity
         }
     }
 
+    //A simple function to enable player input for controlling the player
+    public void EnableInput()
+    {
+        playerInput.enabled = true;
+    }
+
+    //A simple function to diable player input for controlling the player
+    public void DisableInput()
+    {
+        playerInput.enabled = false;
+    }
+    
     private void OnQuit()
     {
         Debug.Log("QUITTING");
         Application.Quit();
+    }
+
+    public void UpdateSpawn(Transform newSpawn)
+    {
+        spawn = newSpawn;
+    }
+
+    private void OnDestroy()
+    {
+        //Events unsubscriptions
+        EventManager.Instance.Unsubscribe(EventTypes.Events.DIALOGUE_START, DisableInput);
+        EventManager.Instance.Unsubscribe(EventTypes.Events.DIALOGUE_END, EnableInput);
     }
 }
