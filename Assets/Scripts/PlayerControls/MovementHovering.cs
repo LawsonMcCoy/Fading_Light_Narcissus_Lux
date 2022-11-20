@@ -7,6 +7,7 @@ public class MovementHovering : MovementMode
 {
     [SerializeField] private float hoverSpeed;
     [SerializeField] private float turnSpeed;
+    [SerializeField] private float passiveStaminaLostRate; //The amount of stamina lost per second while hovering
 
     private float turnValue;
 
@@ -41,6 +42,9 @@ public class MovementHovering : MovementMode
 
         //stop all motion
         self.rigidbody.velocity = Vector3.zero;
+
+        modeUIColor = new Color(0f, 0.8f, 0f, 1f);
+        movementModeText.color = modeUIColor;
     }
 
     protected override void FixedUpdate()
@@ -54,6 +58,25 @@ public class MovementHovering : MovementMode
         //rotate the player
         Quaternion newRotation = self.rigidbody.rotation * Quaternion.Euler(0, turnValue * Time.fixedDeltaTime, 0);
         self.rigidbody.rotation = newRotation;
+
+        //consume stamina while in hovering mode
+        stamina.Subtract(passiveStaminaLostRate * Time.fixedDeltaTime); //lose stamina
+
+        //if all stamina has be lost transition to walking
+        if (stamina.ResourceAmount() == 0)
+        {
+            Transition(Modes.WALKING);
+        }
+    }
+
+    //zeroing out rotational motion during movement restricted events
+    public override void StartMovementRestrictedEvent()
+    {
+        //zero parent's motion
+        base.StartMovementRestrictedEvent();
+
+        //zero rotational motion
+        turnValue = 0;
     }
 
     //************

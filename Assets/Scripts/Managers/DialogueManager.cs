@@ -114,18 +114,20 @@ private void Update()
     //This function can be used to pass different dialogues and start them.
     public void StartDialogue(Dialogue startDialogue)
     {
+        //Notify the game that a dialogue has start
+        EventManager.Instance.Notify(EventTypes.Events.DIALOGUE_START);
         //Stop new input controls temporarily:
-        player = FindObjectOfType<Player>();
-        if (player != null)
-        {
-            player.playerInput.enabled = false;
-            Time.timeScale = 0; //pause game temp
-        }
+        // player = FindObjectOfType<Player>();
+        // if (player != null)
+        // {
+        //     player.playerInput.enabled = false;
+        //     Time.timeScale = 0; //pause game temp
+        // }
         
         //Start dialogue:
         updateDialogue = startDialogue;
         string currentSentence = updateDialogue.sentences[currSentenceIndex].text;
-        Debug.Log($"Starting dialogue {currSentenceIndex}: {currentSentence}");
+        //Debug.Log($"Starting dialogue {currSentenceIndex}: {currentSentence}");
         speakerName.text = updateDialogue.sentences[currSentenceIndex].character.fullName;
         showUI(); //activating the dialogue UI
         Instance.StartCoroutine(Type(currentSentence)); // type inserted text
@@ -159,11 +161,12 @@ private void Update()
                 {
                     hideUI(); //If we no longer have sentences, hide the UI
                     resetUI();
-                    if (player != null)
-                    { 
-                        player.playerInput.enabled = true; //give player back their control
-                        Time.timeScale = 1; //resume gameplay
-                    }
+                    EventManager.Instance.Notify(EventTypes.Events.DIALOGUE_END);
+                    // if (player != null)
+                    // { 
+                    //     player.playerInput.enabled = true; //give player back their control
+                    //     Time.timeScale = 1; //resume gameplay
+                    // }
                         
                     NarrationManager.Instance.ReportCompletion(); //report that the dialogue has ended (needs to be modified for independencies)
                 }
