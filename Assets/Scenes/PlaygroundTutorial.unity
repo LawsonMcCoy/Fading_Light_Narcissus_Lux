@@ -1636,6 +1636,7 @@ GameObject:
   m_Component:
   - component: {fileID: 450135337}
   - component: {fileID: 450135336}
+  - component: {fileID: 450135338}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -1720,6 +1721,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 67.081, y: -90, z: -90}
+--- !u!114 &450135338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450135335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &452119641
 GameObject:
   m_ObjectHideFlags: 0
@@ -6380,6 +6401,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1950294486349228935, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3b1a914319f8c6f4991adf7f92cff11e, type: 2}
     - target: {fileID: 1950294487060986414, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9848097
@@ -6416,6 +6441,10 @@ PrefabInstance:
       propertyPath: playerSpawnPointTag
       value: Respawn
       objectReference: {fileID: 0}
+    - target: {fileID: 8435698845610004583, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3b1a914319f8c6f4991adf7f92cff11e, type: 2}
     - target: {fileID: 8435698845848507069, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: m_RootOrder
       value: 1
