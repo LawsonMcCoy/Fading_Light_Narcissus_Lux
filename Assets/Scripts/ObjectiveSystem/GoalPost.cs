@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class GoalPost : MonoBehaviour
 {
     [SerializeField] private GameObject[] Posts;
-    [SerializeField] private ObjectiveScriptableObject objectiveScript;
+    [SerializeField] private ObjectiveSequence objective;
     private GameObject currentPost;
     private int currentIndex;
 
@@ -16,14 +16,14 @@ public class GoalPost : MonoBehaviour
     {
         Debug.Log("Goal Post Start");
         //add listener to the SO
-        objectiveScript.activateObjective.AddListener(Activate);
+        objective.activateObjective.AddListener(Activate);
     }
 
 
     private void resetPosts()
     {
         Debug.Log("reset is called.");
-        if (objectiveScript.resetCourse)
+        if (objective.resetCourse)
         {
             for (int i = 0; i < Posts.Length; i++)
             {
@@ -46,7 +46,7 @@ public class GoalPost : MonoBehaviour
     {
         //the activate func from old objectivemanager script
         //set the objective complete listener
-        objectiveScript.objectiveCompletion.AddListener(finished);
+        objective.objectiveCompletion.AddListener(finished);
 
         //activate the objective
         //Debug.Log(objective);
@@ -68,7 +68,7 @@ public class GoalPost : MonoBehaviour
         //reached the goal post
         if (Posts.Length - 1 > currentIndex)
         {
-            if (objectiveScript.disapear)
+            if (objective.disapear)
             {
                 currentPost.SetActive(false);
             }
@@ -83,8 +83,12 @@ public class GoalPost : MonoBehaviour
         }
         else
         {
+            if (objective.disapear)
+            {
+                currentPost.SetActive(false);
+            }
             Debug.Log("No more checkPoints");
-            objectiveScript.reachedGoal();
+            objective.reachedGoal();
         }
     }
     private void finished(int completionNumber)
