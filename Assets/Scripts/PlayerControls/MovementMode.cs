@@ -43,6 +43,12 @@ public abstract class MovementMode : MonoBehaviour
     [SerializeField] protected Text movementModeText;
     protected Color modeUIColor;
 
+    [SerializeField] protected Text[] controlHelperTexts = new Text[3]; // an array of text for control helper UI
+                                                                        // index 0 is space
+                                                                        // index 1 is shift
+                                                                        // index 2 is right-click mouse
+
+
     protected virtual void Awake()
     {
         //get the reference to yourself

@@ -39,6 +39,10 @@ public class MovementWalking : MovementMode
 
         modeUIColor = new Color(1f, 0.8f, 0f, 1f);
         movementModeText.color = modeUIColor;
+
+        controlHelperTexts[0].text = "Jump";
+        controlHelperTexts[1].text = "Sprint";
+        controlHelperTexts[2].text = "Dash";
     }
 
     //a helper function to check if the player is on the ground
@@ -73,6 +77,11 @@ public class MovementWalking : MovementMode
 
             return false;
         }
+    }
+
+    private void Update()
+    {
+        DisplayedControlUi();
     }
 
     protected override void FixedUpdate()
@@ -160,7 +169,7 @@ public class MovementWalking : MovementMode
                     if (input.isPressed)
                     {
                         Vector3 jumpForceVector; //A vector that will represent the force the player
-                                                //is jumping with
+                                                 //is jumping with
 
                         //compute vertical component
                         if (moveVector == Vector3.zero)
@@ -209,6 +218,22 @@ public class MovementWalking : MovementMode
                     Transition(Modes.FLYING);
                 }
             }
+        }
+    }
+
+    private void DisplayedControlUi()
+    {
+        if (onGround)
+        {
+            controlHelperTexts[0].text = "Jump";
+            controlHelperTexts[1].text = "Sprint";
+            controlHelperTexts[2].text = "Dash";
+        }
+        else
+        {
+            controlHelperTexts[0].text = "Hover";
+            controlHelperTexts[1].text = "Fly";
+            controlHelperTexts[2].text = "Dash";
         }
     }
 }

@@ -64,6 +64,10 @@ public class MovementFlying : MovementMode
 
         modeUIColor = new Color(0f, 0.8f, 1f, 1f);
         movementModeText.color = modeUIColor;
+
+        controlHelperTexts[0].text = "Walk";
+        controlHelperTexts[1].text = "---";
+        controlHelperTexts[2].text = "Dash";
     }
 
     protected override void FixedUpdate()
