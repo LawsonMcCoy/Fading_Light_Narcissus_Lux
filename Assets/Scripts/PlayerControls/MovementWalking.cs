@@ -39,10 +39,6 @@ public class MovementWalking : MovementMode
 
         modeUIColor = new Color(1f, 0.8f, 0f, 1f);
         movementModeText.color = modeUIColor;
-
-        controlHelperTexts[0].text = "Jump";
-        controlHelperTexts[1].text = "Sprint";
-        controlHelperTexts[2].text = "Dash";
     }
 
     //a helper function to check if the player is on the ground
@@ -58,12 +54,11 @@ public class MovementWalking : MovementMode
             self.rigidbody.freezeRotation = true;
 
             //reset the rotate transform.up is the same as Vector3.up
-            //self.rigidbody.rotation.SetLookRotation(this.transform.forward, groundInfo.normal);
             Vector3 currentEuler = self.rigidbody.rotation.eulerAngles; //get the Euler angles
             currentEuler.x = 0.0f; //set the rotation around x axis to 0
             currentEuler.z = 0.0f; //set the rotation around z axis to 0
+
             //Now we only have an rotation around the y axis, so up with this rotation is Vector3.up
-            // self.rigidbody.rotation = Quaternion.Euler(currentEuler);
             self.rigidbody.MoveRotation(Quaternion.Euler(currentEuler));
 
             return true;
@@ -79,18 +74,15 @@ public class MovementWalking : MovementMode
         }
     }
 
-    private void Update()
-    {
-        DisplayedControlUi();
-    }
-
     protected override void FixedUpdate()
     {
         //check to see if the player is on the ground or in midair
         //I will likely changed this later it doesn't have to check
         //every update loop
         // Debug.Log(CheckGroundStatus());
-        if(CheckGroundStatus())
+        //Debug.Log($"Test is onGround {onGround}");
+
+        if (CheckGroundStatus())
         {
             //On ground 
 
@@ -111,6 +103,8 @@ public class MovementWalking : MovementMode
         {
             //In Midair
         }
+
+        DisplayedControlUi();
 
         //Regain stamina whenever in walking mode whether on ground or falling
         // stamina.Add(staminaRegainRate * Time.fixedDeltaTime);
@@ -221,8 +215,15 @@ public class MovementWalking : MovementMode
         }
     }
 
+    //please remember to delete me!!!!!!!
+    bool something = true;
     private void DisplayedControlUi()
     {
+        if (onGround != something)
+        {
+            something = onGround;
+            Debug.Log($"Is on ground? {onGround}");
+        }
         if (onGround)
         {
             controlHelperTexts[0].text = "Jump";

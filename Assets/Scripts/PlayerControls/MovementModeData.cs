@@ -31,4 +31,6 @@ public class MovementModeData : ScriptableObject
     public float dashBounceHorizontal; //the amount that the player bounces off the wall in the horizontal direction
     public float dashBounceVertical;   //the amount that hte player bounces off the wall in the veritcal direction
     public LayerMask dashBounceMask; //The layer mask for all layers the player can bounce off of.
+
+    // put helper control ui here to remove repititive
 }

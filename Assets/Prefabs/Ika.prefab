@@ -440,6 +440,7 @@ MonoBehaviour:
   playerInput: {fileID: 7204556638568947317}
   spawn: {fileID: 0}
   yDeathDistance: -10
+  positionToCenterDistance: 1
 --- !u!114 &7204556638568947314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,6 +460,10 @@ MonoBehaviour:
   - {fileID: 7204556638568947314}
   stamina: {fileID: 2271143012148580341}
   movementModeText: {fileID: 8925406608850753112}
+  controlHelperTexts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   testForwardSpeed: 20
   forwardThrustMagnitude: 5
   liftPower: 3
@@ -544,6 +549,10 @@ MonoBehaviour:
   - {fileID: 7204556638568947314}
   stamina: {fileID: 2271143012148580341}
   movementModeText: {fileID: 8925406608850753112}
+  controlHelperTexts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   hoverSpeed: 18
   turnSpeed: 5
   passiveStaminaLostRate: 10
@@ -566,6 +575,10 @@ MonoBehaviour:
   - {fileID: 7204556638568947314}
   stamina: {fileID: 2271143012148580341}
   movementModeText: {fileID: 8925406608850753112}
+  controlHelperTexts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   walkSpeed: 50
   turnSpeed: 5
   jumpForceVertical: 10
