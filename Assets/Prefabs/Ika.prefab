@@ -286,6 +286,7 @@ GameObject:
   - component: {fileID: 7204556638568947312}
   - component: {fileID: 7204556638568947598}
   - component: {fileID: 2271143012148580341}
+  - component: {fileID: 2832632588534044553}
   m_Layer: 0
   m_Name: Ika
   m_TagString: Player
@@ -439,6 +440,7 @@ MonoBehaviour:
   collider: {fileID: 7204556638568947323}
   playerInput: {fileID: 7204556638568947317}
   spawn: {fileID: 0}
+  spawnNumber: 0
   yDeathDistance: -10
 --- !u!114 &7204556638568947314
 MonoBehaviour:
@@ -600,6 +602,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxResource: 100
   staminaUI: {fileID: 2848343188888564414}
+--- !u!114 &2832632588534044553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8435698845848507070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e923ae69c714c6f4aba0510e3995a87a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxResource: 100
+  saveData: {fileID: 0}
 --- !u!1001 &7852022201217180424
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -14,6 +14,9 @@ public class NarrationManager : MonoBehaviour
     //The narration of the game, broken down into sequences
     [SerializeField] private List<NarrationSequence> narration; 
 
+    [SerializeField] private float loadSceneDelay; //The amount of time the narration is delayed during
+                                                   //a load scene sequence to prevent race conditions
+
     private bool narrationPaused; //a boolean that says wheter or not the narration is currently paused
     private int currentNarrationSequenceIndex; //An integer representing the index of the current 
                                                //narration sequence
@@ -108,6 +111,14 @@ public class NarrationManager : MonoBehaviour
         //load the scene for the narration sequence
         currentScene = sequence.scene;
         SceneManager.LoadScene((int)sequence.scene);
+
+        //Post load processing, this is done in a coroutine
+        //so we can wait full the scene to be fully loaded 
+        //before the post load processing. Since it is done
+        //in a coroutine, the narration will be paused until
+        //the post load processing is completed
+        narrationPaused = true;
+        StartCoroutine(PostLoadSceneProcessing(sequence));
     }
 
     public void ProcessDialogue(DialogueSequence sequence)
@@ -131,10 +142,7 @@ public class NarrationManager : MonoBehaviour
 
     public void ProcessDelay(DelaySequence sequence)
     {
-        //pause the narration
-        narrationPaused = true;
-
-        //begin timer to unpause
+        //Delay the narration by the apporiate amount of time
         StartCoroutine(NarrationDelay(sequence.delayTime));
     }
 
@@ -156,20 +164,44 @@ public class NarrationManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("You're Saving in the Wrong Scene!");
+            Debug.LogError("You're Saving in the Wrong Scene!");
             sequence.saveData.saveSuccesful = false; //save unsuccseful
         }
 
     }
+
     public void playerDeath()
     {
         currentNarrationSequenceIndex = savedNarrationSequenceIndex;
     }
+
     private IEnumerator NarrationDelay(float delayTime)
     {
+        //pause the narration
+        narrationPaused = true;
+
         yield return new WaitForSeconds(delayTime);
 
         //unpause the narration after some amount of time
+        narrationPaused = false;
+    }
+
+    //A function to perform post load processing on a scene
+    //This function will be a seperate coroutine so that it can 
+    //wait until the scene is fully loaded 
+    private IEnumerator PostLoadSceneProcessing(LoadSceneSequence sequence)
+    {
+        //wait for scene to be fully loaded
+        yield return new WaitForSeconds(loadSceneDelay);
+
+        //if the scene is a game scene, make sure to save the game
+        if (sequence.isGameScene)
+        {
+            ProcessSave(sequence);
+        }
+
+        //Once the post load processing is completed
+        //unpause the narration
         narrationPaused = false;
     }
 

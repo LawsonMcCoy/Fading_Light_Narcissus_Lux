@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 829d73f1f82fb1cd395fcb0bf5e35461, type: 3}
-  m_Name: LoadPlaygroundSceneSequence
+  m_Script: {fileID: 11500000, guid: 5e1c914f7cafa684cb7e4b6aaad6e7d2, type: 3}
+  m_Name: YellowRockSaveSequence
   m_EditorClassIdentifier: 
-  saveData: {fileID: 11400000, guid: a1890264b9420d9bcb1e7d0efe2cc855, type: 2}
-  scene: 2
+  saveData: {fileID: 11400000, guid: 763af80a1b45f3316a4b44020f8bbd7d, type: 2}

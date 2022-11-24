@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 829d73f1f82fb1cd395fcb0bf5e35461, type: 3}
-  m_Name: LoadPlaygroundSceneSequence
+  m_Script: {fileID: 11500000, guid: 6812afc9ad14e6c49b77790b6902f987, type: 3}
+  m_Name: LoadSave
   m_EditorClassIdentifier: 
-  saveData: {fileID: 11400000, guid: a1890264b9420d9bcb1e7d0efe2cc855, type: 2}
-  scene: 2
+  spawnPoint: {x: 0, y: 0, z: 0}
+  saveScene: 0
+  playerDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  saveSuccesful: 0

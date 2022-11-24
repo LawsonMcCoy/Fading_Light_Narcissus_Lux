@@ -3165,6 +3165,51 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.024999995, y: 0.024999999, z: 0.004999999}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &963282782
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 963282784}
+  - component: {fileID: 963282783}
+  m_Layer: 0
+  m_Name: YellowRockSavePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &963282783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963282782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5cbb2b65ec75245a683f0a9911e103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  save: {fileID: 11400000, guid: 763af80a1b45f3316a4b44020f8bbd7d, type: 2}
+--- !u!4 &963282784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963282782}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -41.882435, y: 16.033667, z: 71.345055}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &970181863
 GameObject:
   m_ObjectHideFlags: 0
@@ -4759,7 +4804,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1582085413
 Transform:
   m_ObjectHideFlags: 0
@@ -5746,7 +5791,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2012477987}
   - component: {fileID: 2012477989}
-  - component: {fileID: 2012477988}
+  - component: {fileID: 2012477990}
   m_Layer: 0
   m_Name: SpawnPoint
   m_TagString: Respawn
@@ -5769,19 +5814,6 @@ Transform:
   m_Father: {fileID: 1462423746}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &2012477988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2012477986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26f4b86e003005d49a7c59f12ec8f8ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objTag: Player
 --- !u!65 &2012477989
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5795,6 +5827,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.2022476, y: 1, z: 4.9140015}
   m_Center: {x: -0.093063354, y: 0, z: 0.16049957}
+--- !u!114 &2012477990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012477986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5cbb2b65ec75245a683f0a9911e103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  save: {fileID: 11400000, guid: a1890264b9420d9bcb1e7d0efe2cc855, type: 2}
 --- !u!1001 &2043849598
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6392,6 +6437,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 19.999
       objectReference: {fileID: 0}
+    - target: {fileID: 2832632588534044553, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: saveData
+      value: 
+      objectReference: {fileID: 11400000, guid: a1890264b9420d9bcb1e7d0efe2cc855, type: 2}
     - target: {fileID: 2848343189466445978, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
