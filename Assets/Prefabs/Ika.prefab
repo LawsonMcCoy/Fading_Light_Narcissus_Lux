@@ -522,7 +522,7 @@ MonoBehaviour:
   collisionLayer:
     serializedVersion: 2
     m_Bits: 55
-  alternateTurning: 1
+  alternateTurning: 0
   alternateTilting: 0
   alternateTiltingError: 20
   alternateTiltDampingPower: 5
