@@ -17,9 +17,9 @@ public class MovementFlying : MovementMode
 
     [SerializeField] private float tiltSpeed;
     [SerializeField] private float turnSpeed;
-    [Tooltip("Limits how much the player can tilt torwards the sky, expected value from 0-180")]
+    [Tooltip("Limits how much the player can tilt torwards the sky, expected positive value from 0-90")]
     [SerializeField] private float maxTiltAngle; //expected value from 270-360
-    [Tooltip("Limits how much the player can tilt torwards the ground, expected value from 0-180")]
+    [Tooltip("Limits how much the player can tilt torwards the ground, expected negative value from 0-90")]
     [SerializeField] private float minTiltAngle; //expected value from 0-90
     [SerializeField] private float maxTurnAngle;
 
@@ -28,6 +28,10 @@ public class MovementFlying : MovementMode
     //Testing
     [SerializeField] private bool alternateTurning;
     [SerializeField] private bool alternateTilting;
+    [SerializeField] private float alternateTiltingError;
+    [SerializeField] private float alternateTiltDampingPower; //A fine toning constant to increase the damping power on the velocity
+    [SerializeField] private float alternateTurningError;
+    [SerializeField] private float alternateTurnDampingPower; //A fine toning constant to increase the damping power on the velocity
 
     //inputs
     private float tiltValue;
@@ -152,7 +156,7 @@ public class MovementFlying : MovementMode
     {
         float tiltTorqueMagnitude; //the magnitude of the tiltTorque
         Vector3 tiltTorque;
-        Vector3 turnTorque;
+        Vector3 turnTorque = Vector3.zero;
 
         //test the two ways of tilting
         if (alternateTilting)
@@ -160,10 +164,20 @@ public class MovementFlying : MovementMode
             //set the tilt value to the difference of current angle and max or min
         
             //get current angle
-            float currentTiltAngle = self.rigidbody.rotation.eulerAngles.x;
+            // float currentTiltAngle = self.rigidbody.rotation.eulerAngles.x;
+            Vector3 forwardInHorizontalPlane = Vector3.ProjectOnPlane(this.transform.forward, Vector3.up); //This projection is so we can find angle to horizontal plane
+            float currentTiltAngle;
+            if (Vector3.Dot(this.transform.up, Vector3.up) > 0)
+            {
+                currentTiltAngle = Vector3.SignedAngle(forwardInHorizontalPlane, this.transform.forward, this.transform.right);
+            }
+            else
+            {
+                currentTiltAngle = Vector3.SignedAngle(-forwardInHorizontalPlane, this.transform.forward, this.transform.right);
+            }
 
             //Change angle from 360-270 and 0-90, to 0-180
-            currentTiltAngle = (currentTiltAngle + 90) % 360;
+            // currentTiltAngle = (currentTiltAngle + 90) % 360;
 
             //compute the titlValue
             if (tiltValue > 0)
@@ -172,20 +186,47 @@ public class MovementFlying : MovementMode
                 // Debug.Log("Tilt up");
                 
                 // tiltValue =  currentTiltAngle - minTiltAngle;
-                tiltTorqueMagnitude = minTiltAngle - currentTiltAngle;
+                if (Mathf.Abs(minTiltAngle - currentTiltAngle) > alternateTiltingError)
+                {
+                    tiltTorqueMagnitude = minTiltAngle - currentTiltAngle;
+                }
+                else
+                {
+                    tiltTorqueMagnitude = 0;
+                    self.rigidbody.AddTorque(-self.rigidbody.angularVelocity.x * alternateTiltDampingPower * this.transform.right);
+                }
             }
             else if (tiltValue < 0)
             {
                 //Tilt down (positive direction)
                 // Debug.Log("Tilt down");
 
-                tiltTorqueMagnitude = maxTiltAngle - currentTiltAngle;
+                if (Mathf.Abs(maxTiltAngle - currentTiltAngle) > alternateTiltingError)
+                {
+                    tiltTorqueMagnitude = maxTiltAngle - currentTiltAngle;
+                }
+                else
+                {
+                    tiltTorqueMagnitude = 0;
+                    self.rigidbody.AddTorque(-self.rigidbody.angularVelocity.x * alternateTiltDampingPower * this.transform.right);
+                }
             }
             else
             {
                 // Debug.Log("No tilt");
-                //not tilting, reset to 90
-                tiltTorqueMagnitude = 90 - currentTiltAngle;
+                //not tilting, reset to 0
+                if (Mathf.Abs(currentTiltAngle) > alternateTiltingError)
+                {
+                    tiltTorqueMagnitude = -currentTiltAngle;
+                    Debug.Log($"Going to angle, distance: {Mathf.Abs(minTiltAngle - currentTiltAngle)}");
+                }
+                else
+                {
+                    tiltTorqueMagnitude = 0;
+                    Debug.Log($"At angle, stopping {self.rigidbody.angularVelocity.x}");
+                    self.rigidbody.AddTorque(-self.rigidbody.angularVelocity.x * alternateTiltDampingPower * this.transform.right);
+                    // self.rigidbody.angularVelocity.x = 0;
+                }
 
                 //not tilting, don't apply a torque
                 // tiltTorqueMagnitude = 0;
@@ -194,13 +235,25 @@ public class MovementFlying : MovementMode
         else
         {
             //get current angle
-            float currentTiltAngle = self.rigidbody.rotation.eulerAngles.x;
+            // float currentTiltAngle = self.rigidbody.rotation.eulerAngles.x;
+            Vector3 forwardInHorizontalPlane = Vector3.ProjectOnPlane(this.transform.forward, Vector3.up); //This projection is so we can find angle to horizontal plane
+            float currentTiltAngle;
+            if (Vector3.Dot(this.transform.up, Vector3.up) > 0)
+            {
+                currentTiltAngle = Vector3.SignedAngle(forwardInHorizontalPlane, this.transform.forward, this.transform.right);
+            }
+            else
+            {
+                currentTiltAngle = Vector3.SignedAngle(-forwardInHorizontalPlane, this.transform.forward, this.transform.right);
+            }
+            // Debug.Log($"current angle {currentTiltAngle}");
 
             //get angularVelocity
-            float currentTiltVelocity = Mathf.Abs(self.rigidbody.angularVelocity.x);
+            float currentTiltVelocity = self.rigidbody.angularVelocity.x;
+            // Debug.Log($"current velocity {currentTiltVelocity}");
 
             //Change angle from 360-270 and 0-90, to 0-180
-            currentTiltAngle = (currentTiltAngle + 90) % 360;
+            // currentTiltAngle = (currentTiltAngle + 90) % 360;
 
             //check if your tilt is withing bounds
             // Debug.Log($"Current tilt angle: {minTiltAngle}");
@@ -216,7 +269,8 @@ public class MovementFlying : MovementMode
                 else
                 {
                     // Debug.Log("Stopping");
-                    tiltTorqueMagnitude = currentTiltVelocity;
+                    // Debug.Log($"positive {currentTiltVelocity}");
+                    tiltTorqueMagnitude = -currentTiltVelocity;
                 }
             }
             else if (currentTiltAngle > maxTiltAngle)
@@ -229,6 +283,7 @@ public class MovementFlying : MovementMode
                 }
                 else
                 {
+                    // Debug.Log($"negative {currentTiltVelocity}");
                     tiltTorqueMagnitude = -currentTiltVelocity;
                 }
             }
@@ -245,14 +300,25 @@ public class MovementFlying : MovementMode
         if (alternateTurning)
         {
             //set the roll to 90 degrees in appropriate direction
-            float currentRollAngle = self.rigidbody.rotation.eulerAngles.z;
+            float currentRollAngle = Vector3.SignedAngle(Vector3.up, this.transform.up, this.transform.forward);
+            Debug.Log($"Current roll {currentRollAngle}, going to {80 * turnValue}");
 
-            float rollTorqueMagnitude = (80 * turnValue) - currentRollAngle;
+            float rollTorqueMagnitude = (70 * turnValue) - currentRollAngle;
 
-            self.rigidbody.AddTorque(transform.forward * rollTorqueMagnitude, ForceMode.Impulse);
+            if (Mathf.Abs(rollTorqueMagnitude) > alternateTurningError)
+            {
+                Debug.Log($"Not Damping {rollTorqueMagnitude}");
+                self.rigidbody.AddTorque(transform.forward * rollTorqueMagnitude, ForceMode.Impulse);
+            }
+            else
+            {
+                Debug.Log($"Damping {rollTorqueMagnitude}");
+                //damp the velocity
+                self.rigidbody.AddTorque(-self.rigidbody.angularVelocity.z * alternateTurnDampingPower * this.transform.forward);
+            }
 
             //add a tilt torque for turning
-            float turnTiltTorqueMagnitude = turnSpeed * turnValue;
+            float turnTiltTorqueMagnitude = -Mathf.Abs(turnSpeed * turnValue);
 
             Vector3 turnTiltTorque = transform.right * turnTiltTorqueMagnitude;
 
@@ -260,9 +326,8 @@ public class MovementFlying : MovementMode
         }
         else
         {
-
+            turnTorque = transform.forward * turnValue;
         }
-        turnTorque = transform.forward * turnValue;
 
         //apply the torque
         if (alternateTilting)
