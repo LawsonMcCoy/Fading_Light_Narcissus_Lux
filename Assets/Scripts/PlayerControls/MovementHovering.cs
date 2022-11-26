@@ -46,9 +46,9 @@ public class MovementHovering : MovementMode
         modeUIColor = new Color(0f, 0.8f, 0f, 1f);
         movementModeText.color = modeUIColor;
 
-        controlHelperTexts[0].text = "Walk";
-        controlHelperTexts[1].text = "Fly";
-        controlHelperTexts[2].text = "Dash";
+        controlUiTexts[0].text = stringControls[(int)Controls.WALKMODE];    //Space
+        controlUiTexts[1].text = stringControls[(int)Controls.FLYMODE];     //Shift
+        controlUiTexts[2].text = stringControls[(int)Controls.DASHMODE];    //Right-click
     }
 
     protected override void FixedUpdate()

@@ -26,3 +26,8 @@ MonoBehaviour:
   dashBounceMask:
     serializedVersion: 2
     m_Bits: 55
+  controlUiLabels:
+  - Space Text
+  - Shift Text
+  - Right-Mouse Text
+  controlUiParentName: Controls UI

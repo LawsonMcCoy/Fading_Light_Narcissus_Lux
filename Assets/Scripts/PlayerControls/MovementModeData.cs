@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //A scriptable object containing all the data for the abstract 
 //class MovementMode. The purpose of this scriptable object is
@@ -32,5 +33,7 @@ public class MovementModeData : ScriptableObject
     public float dashBounceVertical;   //the amount that hte player bounces off the wall in the veritcal direction
     public LayerMask dashBounceMask; //The layer mask for all layers the player can bounce off of.
 
-    // put helper control ui here to remove repititive
+    // Ui data
+    public string[] controlUiLabels;
+    public string controlUiParentName;
 }

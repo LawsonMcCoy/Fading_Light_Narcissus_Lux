@@ -37,17 +37,35 @@ public abstract class MovementMode : MonoBehaviour
     protected float speed; //speed variable to be set by the child class
 
     protected bool inputReady; //A variable value to prevent immediately transiting back to 
-                                //a mode that you just transition from when the button to transition
-                                //is the same
+                               //a mode that you just transition from when the button to transition
+                               //is the same
 
+    #region Ui Section
     [SerializeField] protected Text movementModeText;
     protected Color modeUIColor;
 
-    [SerializeField] protected Text[] controlHelperTexts = new Text[3]; // an array of text for control helper UI
-                                                                        // index 0 is space
-                                                                        // index 1 is shift
-                                                                        // index 2 is right-click mouse
+    private GameObject controlUiParent;
+    private int controlUiElements;
+    protected Text[] controlUiTexts;
 
+    protected string[] stringControls = new string[]
+        {"Walk", "Hover", "Fly", "Dash", "Jump", "Sprint", "Attack", "---"};
+
+    //an enum for the string version of each character mode 
+    //they are used as int values that matches the index of stringControls
+    //basically copying Lawson's tactics
+    public enum Controls
+    {
+        WALKMODE,
+        HOVERMODE,
+        FLYMODE,
+        DASHMODE,
+        JUMPMODE,
+        SPRINTMODE,
+        ATTACKMODE,
+        NOMODE
+    }
+    #endregion
 
     protected virtual void Awake()
     {
@@ -58,6 +76,17 @@ public abstract class MovementMode : MonoBehaviour
         moveVector = Vector3.zero;
 
         inputReady = true;
+
+        //initilize all control ui elements
+        //If error occurs, first check spelling. Then check if text object exists.
+        controlUiParent = GameObject.Find(commonData.controlUiParentName);
+        controlUiElements = commonData.controlUiLabels.Length;
+        controlUiTexts = new Text[controlUiElements];
+
+        for (int i = 0; i < controlUiElements; i++)
+        {
+            controlUiTexts[i] = controlUiParent.transform.Find(commonData.controlUiLabels[i]).gameObject.GetComponent<Text>();
+        }
     }
 
     protected virtual void Start()

@@ -215,26 +215,19 @@ public class MovementWalking : MovementMode
         }
     }
 
-    //please remember to delete me!!!!!!!
-    bool something = true;
     private void DisplayedControlUi()
     {
-        if (onGround != something)
-        {
-            something = onGround;
-            Debug.Log($"Is on ground? {onGround}");
-        }
         if (onGround)
         {
-            controlHelperTexts[0].text = "Jump";
-            controlHelperTexts[1].text = "Sprint";
-            controlHelperTexts[2].text = "Dash";
+            controlUiTexts[0].text = stringControls[(int)Controls.JUMPMODE];    //Space
+            controlUiTexts[1].text = stringControls[(int)Controls.SPRINTMODE];  //Shift
+            controlUiTexts[2].text = stringControls[(int)Controls.DASHMODE];    //Right-click
         }
         else
         {
-            controlHelperTexts[0].text = "Hover";
-            controlHelperTexts[1].text = "Fly";
-            controlHelperTexts[2].text = "Dash";
+            controlUiTexts[0].text = stringControls[(int)Controls.HOVERMODE];   //Space
+            controlUiTexts[1].text = stringControls[(int)Controls.FLYMODE];     //Shift
+            controlUiTexts[2].text = stringControls[(int)Controls.DASHMODE];    //Right-click
         }
     }
 }
