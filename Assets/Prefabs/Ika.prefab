@@ -522,11 +522,11 @@ MonoBehaviour:
   collisionLayer:
     serializedVersion: 2
     m_Bits: 55
-  alternateTurning: 0
+  alternateTurning: 1
   alternateTilting: 0
-  alternateTiltingError: 20
-  alternateTiltDampingPower: 5
-  alternateTurningError: 1
+  alternateTiltingError: 10
+  alternateTiltDampingPower: 10
+  alternateTurningError: 8
   alternateTurnDampingPower: 20
   speedBoostMagnitude: 50
 --- !u!114 &7204556638568947313
