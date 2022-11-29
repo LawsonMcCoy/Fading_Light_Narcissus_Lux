@@ -252,7 +252,7 @@ public class MovementFlying : MovementMode
             {
                 currentTiltAngle = Vector3.SignedAngle(-forwardInHorizontalPlane, this.transform.forward, this.transform.right);
             }
-            Debug.Log($"current angle {currentTiltAngle}");
+            // Debug.Log($"current angle {currentTiltAngle}");
 
             //get angularVelocity
             float currentTiltVelocity = Vector3.Dot(self.rigidbody.angularVelocity, this.transform.right);
@@ -306,7 +306,7 @@ public class MovementFlying : MovementMode
         if (alternateTurning)
         {
             //set the roll to 90 degrees in appropriate direction
-            Vector3 upInVerticalPlane = Vector3.ProjectOnPlane(this.transform.up, Vector3.right); //This projection is so we can find angle to horizontal plane
+            Vector3 upInVerticalPlane = Vector3.ProjectOnPlane(this.transform.up, Vector3.Cross(this.transform.forward, Vector3.up)); //This projection is so we can find angle to horizontal plane
             float currentRollAngle;
             if (Vector3.Dot(this.transform.up, Vector3.up) > 0)
             {
@@ -316,19 +316,23 @@ public class MovementFlying : MovementMode
             {
                 currentRollAngle = Vector3.SignedAngle(-upInVerticalPlane, this.transform.up, this.transform.forward);
             }
+            Debug.Log($"current roll angle {currentRollAngle}, upInPlane {upInVerticalPlane}, actually up (local) {this.transform.up}");
 
-            float changeInPostion = (90 * turnValue) - currentRollAngle;
-            float rollTorqueMagnitude = (changeInPostion) / (Time.fixedDeltaTime * Time.fixedDeltaTime); //change in position / (change in time)^2 = acceleration
-            // float rollTorque
+            float changeInPosition = (90 * turnValue) - currentRollAngle;
+            // float rollTorqueMagnitude = (changeInPosition) / (Time.fixedDeltaTime * Time.fixedDeltaTime); //change in position / (change in time)^2 = acceleration
+            float rollTorqueMagnitude = changeInPosition;
 
-            if (Mathf.Abs(changeInPostion) > alternateTurningError)
+            //compute the roll angular velocity
+            float curretnRollVelocity = Vector3.Dot(self.rigidbody.angularVelocity, this.transform.forward);
+
+            if (Mathf.Abs(changeInPosition) > alternateTurningError)
             {
-                Debug.Log($"Not Damping {changeInPostion}");
-                self.rigidbody.AddTorque(transform.forward * rollTorqueMagnitude, ForceMode.Force);
+                Debug.Log($"Not Damping {changeInPosition}");
+                self.rigidbody.AddTorque(transform.forward * rollTorqueMagnitude, ForceMode.Impulse);
             }
             else
             {
-                Debug.Log($"Damping {changeInPostion}");
+                Debug.Log($"Damping {changeInPosition}");
                 //damp the velocity
                 // if (Mathf.Abs(currentRollAngle) > alternateTurningError)
                 // {
@@ -338,11 +342,11 @@ public class MovementFlying : MovementMode
                 // {
                 //     self.rigidbody.AddTorque(-self.rigidbody.angularVelocity.z * 5 * alternateTurnDampingPower * this.transform.forward);
                 // }
-                self.rigidbody.AddTorque(-self.rigidbody.angularVelocity.z * alternateTurnDampingPower * this.transform.forward);
+                self.rigidbody.AddTorque(-curretnRollVelocity * alternateTurnDampingPower * this.transform.forward);
             }
 
             //add a tilt torque for turning
-            float turnTiltTorqueMagnitude = -Mathf.Abs(turnSpeed * turnValue);
+            float turnTiltTorqueMagnitude = -Mathf.Abs(turnSpeed * turnValue); //needs to be negative to tilt up for the turn
 
             Vector3 turnTiltTorque = transform.right * turnTiltTorqueMagnitude;
 
