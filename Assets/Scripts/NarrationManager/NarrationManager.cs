@@ -112,10 +112,12 @@ public class NarrationManager : MonoBehaviour
     {
         //Have dialogue manager start the dialogue
         Debug.Log(DialogueManager.Instance);
-        DialogueManager.Instance.StartDialogue(sequence.dialogueToStart);
-
+        
         //pause the dialogue until it finishes
         narrationPaused = true;
+
+        DialogueManager.Instance.StartDialogue(sequence.dialogueToStart);
+
     }
 
     public void ProcessObjective(ObjectiveSequence sequence)

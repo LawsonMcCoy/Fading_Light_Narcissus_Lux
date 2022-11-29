@@ -13,6 +13,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Text speakerName; //For the speaker name being displayed in the UI
     [SerializeField] private Text textField; //For the dialogue text being displayed in the UI
 
+    [SerializeField] private bool isTesting = false;
+
     //Reference to the lines of dialogue (ScriptableObject)
     ///
     /// Ideally, we want to have the objects within the scene to be "Interactable" that holds their own dialogues
@@ -61,27 +63,8 @@ public class DialogueManager : MonoBehaviour
 
 private void Update()
     {
-        /*
-        //TESTING PURPOSES: Clicking on an object such as the capsule in the middle to start the dialogue.
-        //Ideally, we want the Narration Manager to handle this, as certain Narration Sequences will have playing dialogue as a sequence.
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit) && Input.GetMouseButtonDown(0)) //If raycast hit and left clicked
-        {
-            Transform clickableObject = hit.transform;
-            if (clickableObject.CompareTag("Player")) //If the clickable object is a player (TESTING PURPOSES: the capsule is a player)
-            {
-                Debug.Log("Clicked on a clickable object!");
-                if (!isSpeaking()) //If the dialoguebox is already present (meaning that someone is already speaking)
-                {                  //Then don't re-do it.
-                    showUI();
-                    StartDialogue(insertedDialogue);
-                }
-            }
-        }
-        */
         //If the UI is showing (meaning isSpeaking is true), then that must mean that the dialogue is currently active.
-        //Pressing space (TESTING PURPOSES) advances the dialogue.
+        //Pressing enter (TESTING PURPOSES) advances the dialogue.
         if (Input.GetKeyDown("return") && isSpeaking())
         {
             ContinueDialogue();
@@ -114,23 +97,24 @@ private void Update()
     //This function can be used to pass different dialogues and start them.
     public void StartDialogue(Dialogue startDialogue)
     {
-        //Notify the game that a dialogue has start
-        EventManager.Instance.Notify(EventTypes.Events.DIALOGUE_START);
-        //Stop new input controls temporarily:
-        // player = FindObjectOfType<Player>();
-        // if (player != null)
-        // {
-        //     player.playerInput.enabled = false;
-        //     Time.timeScale = 0; //pause game temp
-        // }
-        
-        //Start dialogue:
-        updateDialogue = startDialogue;
-        string currentSentence = updateDialogue.sentences[currSentenceIndex].text;
-        //Debug.Log($"Starting dialogue {currSentenceIndex}: {currentSentence}");
-        speakerName.text = updateDialogue.sentences[currSentenceIndex].character.fullName;
-        showUI(); //activating the dialogue UI
-        Instance.StartCoroutine(Type(currentSentence)); // type inserted text
+        //Notify the game that a dialogue has started.
+        if (isTesting)
+        {
+            EventManager.Instance.Notify(EventTypes.Events.DIALOGUE_END);
+            NarrationManager.Instance.ReportCompletion();
+        }
+        else
+        {
+            EventManager.Instance.Notify(EventTypes.Events.DIALOGUE_START);
+            //Start dialogue:
+            updateDialogue = startDialogue;
+            string currentSentence = updateDialogue.sentences[currSentenceIndex].text;
+            //Debug.Log($"Starting dialogue {currSentenceIndex}: {currentSentence}");
+            speakerName.text = updateDialogue.sentences[currSentenceIndex].character.fullName;
+            showUI(); //activating the dialogue UI
+            Instance.StartCoroutine(Type(currentSentence)); // type inserted text
+        }
+            
     }
 
     //This functions returns true if the displayed text is equal to the entire sentence.
