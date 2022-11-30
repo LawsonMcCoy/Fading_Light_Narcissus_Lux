@@ -20,7 +20,7 @@ public class Player : CombatEntity
     }
     [SerializeField] private float yDeathDistance;
 
-    private void Awake()
+    private void Start()
     {
         //events subscriptions
         EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_START, DisableInput);

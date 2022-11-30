@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37cba4f1ea47146e9e803ac82ad5e35, type: 3}
   m_Name: RocksSequence
   m_EditorClassIdentifier: 
-  objective: {fileID: 11400000, guid: 05f3b3a10e50e3edca97eccccaae0e2c, type: 2}
+  enemiesToKill: 0
+  Description: 
+  resetCourse: 1
+  disapear: 1

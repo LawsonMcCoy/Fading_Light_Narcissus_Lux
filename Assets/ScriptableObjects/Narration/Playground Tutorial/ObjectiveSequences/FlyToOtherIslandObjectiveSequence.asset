@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37cba4f1ea47146e9e803ac82ad5e35, type: 3}
   m_Name: FlyToOtherIslandObjectiveSequence
   m_EditorClassIdentifier: 
-  objective: {fileID: 11400000, guid: 658e73985df30b6489e0341b3ed81d63, type: 2}
+  enemiesToKill: 0
+  Description: 
+  resetCourse: 1
+  disapear: 1
