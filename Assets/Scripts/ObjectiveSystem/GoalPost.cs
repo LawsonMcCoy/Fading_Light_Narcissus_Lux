@@ -17,8 +17,20 @@ public class GoalPost : MonoBehaviour
         Debug.Log("Goal Post Start");
         //add listener to the SO
         objective.activateObjective.AddListener(Activate);
+
+        objective.cancel.AddListener(Cancel);
     }
 
+    private void Cancel()
+    {
+        if (objective.disapear)
+        {
+            for (int i = 0; i < Posts.Length; i++)
+            {
+                Posts[i].SetActive(false);
+            }
+        }   
+    }
 
     private void resetPosts()
     {
@@ -96,5 +108,10 @@ public class GoalPost : MonoBehaviour
         //taken from old objectiveManager
         Debug.Log("Finished");
         NarrationManager.Instance.ReportCompletion();
+    }
+    private void OnDestroy()
+    {
+       // objective.activateObjective.RemoveListener(Activate);
+        //objective.cancel.RemoveListener(Cancel);
     }
 }

@@ -10,18 +10,16 @@ public class Player : CombatEntity
     [SerializeField] private Transform spawn;
     [SerializeField] private float spawnNumber;
     private PlayerHealth playerHealth;
-    protected override void Start()
-    {
-        playerHealth = gameObject.GetComponent<PlayerHealth>();
-        if(gameObject.GetComponent<HealthManager>() != null)
-        {
-            Destroy(gameObject.GetComponent<HealthManager>());
-        }
-    }
     [SerializeField] private float yDeathDistance;
 
     private void Start()
     {
+        playerHealth = gameObject.GetComponent<PlayerHealth>();
+        if (gameObject.GetComponent<HealthManager>() != null)
+        {
+            Destroy(gameObject.GetComponent<HealthManager>());
+        }
+
         //events subscriptions
         EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_START, DisableInput);
         EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_END, EnableInput);

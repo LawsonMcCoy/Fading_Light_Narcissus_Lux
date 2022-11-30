@@ -18,9 +18,9 @@ public class NarrationManager : MonoBehaviour
                                                    //a load scene sequence to prevent race conditions
 
     private bool narrationPaused; //a boolean that says wheter or not the narration is currently paused
-    private int currentNarrationSequenceIndex; //An integer representing the index of the current 
+    public int currentNarrationSequenceIndex; //An integer representing the index of the current 
                                                //narration sequence
-    private int savedNarrationSequenceIndex; //An integer representing the index of the narration 
+    public int savedNarrationSequenceIndex; //An integer representing the index of the narration 
                                              //sequence that was last saved, Note this value will
                                              //made to be persistent later
     private Scenes.ScenesList currentScene;   //the current scene
@@ -152,25 +152,27 @@ public class NarrationManager : MonoBehaviour
     {
         Debug.Log(sequence);
 
-        if(sequence.saveScene == currentScene)
-        {
-            sequence.saveSuccesful = true; //save was successful(in correct scene)
 
-            //set saveindex to current index
-            savedNarrationSequenceIndex = currentNarrationSequenceIndex;
-        }
-        else
-        {
-            Debug.LogError("You're Saving in the Wrong Scene!");
-            sequence.saveSuccesful = false; //save unsuccseful
-        }
+        sequence.saveSuccesful = true; //save was successful(in correct scene)
+
+        //set saveindex to current index
+        savedNarrationSequenceIndex = currentNarrationSequenceIndex;
 
     }
 
     public void playerDeath()
     {
-        currentNarrationSequenceIndex = savedNarrationSequenceIndex;
+        //cancel narrations past the last save
+        while(currentNarrationSequenceIndex > savedNarrationSequenceIndex)
+        {
+            narration[currentNarrationSequenceIndex].Cancel();
+            currentNarrationSequenceIndex--;    //make current index to previous one
+                                                //goes on until current = save
+        }
+
         narrationPaused = false;    //make sure narration can continue
+
+        
     }
 
     private IEnumerator NarrationDelay(float delayTime)
