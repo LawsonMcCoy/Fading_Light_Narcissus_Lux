@@ -6,6 +6,7 @@ public sealed class EventTypes
     public enum Events
     {
         DIALOGUE_START,
-        DIALOGUE_END
+        DIALOGUE_END,
+        PLAYER_DEATH
     }
 }

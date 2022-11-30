@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6812afc9ad14e6c49b77790b6902f987, type: 3}
-  m_Name: SavePoint
+  m_Script: {fileID: 11500000, guid: 5e1c914f7cafa684cb7e4b6aaad6e7d2, type: 3}
+  m_Name: SaveSequence
   m_EditorClassIdentifier: 
-  spawnPoint: {x: -16.33, y: -8.05, z: 15.96}
   saveScene: 2
-  playerDeath:
-    m_PersistentCalls:
-      m_Calls: []
-  saveSuccesful: 0
+  saveSuccesful: 1

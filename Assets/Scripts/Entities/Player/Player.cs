@@ -25,6 +25,7 @@ public class Player : CombatEntity
         //events subscriptions
         EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_START, DisableInput);
         EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_END, EnableInput);
+        EventManager.Instance.Subscribe(EventTypes.Events.PLAYER_DEATH, Respawn);
     }
 
     private void Update()
@@ -59,11 +60,17 @@ public class Player : CombatEntity
     {
         spawn = newSpawn;
     }
+    private void Respawn()
+    {
+        playerHealth.Add(1000f);    //restore health
+        gameObject.transform.position = spawn.position;  //reset player position;
+    }
 
     private void OnDestroy()
     {
         //Events unsubscriptions
         EventManager.Instance.Unsubscribe(EventTypes.Events.DIALOGUE_START, DisableInput);
         EventManager.Instance.Unsubscribe(EventTypes.Events.DIALOGUE_END, EnableInput);
+        EventManager.Instance.Unsubscribe(EventTypes.Events.PLAYER_DEATH, Respawn);
     }
 }

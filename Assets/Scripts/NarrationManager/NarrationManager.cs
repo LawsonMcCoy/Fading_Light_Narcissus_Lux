@@ -44,6 +44,9 @@ public class NarrationManager : MonoBehaviour
         narrationPaused = true; //The narration start paused and remain so until play game is pressed
         currentNarrationSequenceIndex = 0; //start at the begining of the narration
         savedNarrationSequenceIndex = 0; //The first save is the being of the narration
+
+        //set listener for player's death
+        EventManager.Instance.Subscribe(EventTypes.Events.PLAYER_DEATH, playerDeath);
     }
 
     //The primary function that will play the narration of the game
@@ -148,24 +151,19 @@ public class NarrationManager : MonoBehaviour
 
     public void ProcessSave(SaveSequence sequence)
     {
-        Debug.Log(sequence.saveData);
+        Debug.Log(sequence);
 
-        if(sequence.saveData.saveScene == currentScene)
+        if(sequence.saveScene == currentScene)
         {
-            //make listener for when player dies in order to return to saveindex
-            sequence.saveData.playerDeath.AddListener(playerDeath);
-
-            sequence.saveData.saveSuccesful = true; //save was successful(in correct scene)
+            sequence.saveSuccesful = true; //save was successful(in correct scene)
 
             //set saveindex to current index
             savedNarrationSequenceIndex = currentNarrationSequenceIndex;
-
-           
         }
         else
         {
             Debug.LogError("You're Saving in the Wrong Scene!");
-            sequence.saveData.saveSuccesful = false; //save unsuccseful
+            sequence.saveSuccesful = false; //save unsuccseful
         }
 
     }
@@ -173,6 +171,7 @@ public class NarrationManager : MonoBehaviour
     public void playerDeath()
     {
         currentNarrationSequenceIndex = savedNarrationSequenceIndex;
+        narrationPaused = false;    //make sure narration can continue
     }
 
     private IEnumerator NarrationDelay(float delayTime)
@@ -210,5 +209,8 @@ public class NarrationManager : MonoBehaviour
         //reset singleton instance to null 
         //when object is destroyed
         Instance = null;
+
+        //unsubscribe from listener
+        EventManager.Instance.Unsubscribe(EventTypes.Events.PLAYER_DEATH, playerDeath);
     }
 }

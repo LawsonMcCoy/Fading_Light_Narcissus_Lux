@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571328, b: 0.3069218, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1886,8 +1886,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 58c59d18a2f695e4bbb7e7cae7ccc547, type: 2}
   - {fileID: 11400000, guid: 4cf270f9e59bf054facc7cf92692448c, type: 2}
   - {fileID: 11400000, guid: cc3e17856614a9e4ea3e887a1df52340, type: 2}
+  - {fileID: 11400000, guid: ad2239cf82788d149a0a47c5c6014f4a, type: 2}
   - {fileID: 11400000, guid: f2d293a792d91de42aa6c24a15e8a3e5, type: 2}
-  - {fileID: 11400000, guid: 56dfdb977bce5b04eaff87264184302a, type: 2}
   - {fileID: 11400000, guid: 53344445007dc1f7c99d9c1e012950fa, type: 2}
   - {fileID: 11400000, guid: ecd480f6aa3bf354c8ffed1848c46b4f, type: 2}
   - {fileID: 11400000, guid: daafb5fbe97216220aa6a260679c4f31, type: 2}
@@ -1909,6 +1909,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 66a6fddfea9b1064490e2305fc79d316, type: 2}
   - {fileID: 11400000, guid: b5e4d3a4fd11c1c429b0ed00c06d9f42, type: 2}
   - {fileID: 11400000, guid: 13e6017a16c2614439d38dd27255959f, type: 2}
+  loadSceneDelay: 0
+  currentNarrationSequenceIndex: 0
+  savedNarrationSequenceIndex: 0
 --- !u!4 &1624294489
 Transform:
   m_ObjectHideFlags: 0
