@@ -219,15 +219,17 @@ public class MovementWalking : MovementMode
     {
         if (onGround)
         {
-            controlUiTexts[0].text = stringControls[(int)Controls.JUMPMODE];    //Space
+            /*controlUiTexts[0].text = stringControls[(int)Controls.JUMPMODE];    //Space
             controlUiTexts[1].text = stringControls[(int)Controls.SPRINTMODE];  //Shift
-            controlUiTexts[2].text = stringControls[(int)Controls.DASHMODE];    //Right-click
+            controlUiTexts[2].text = stringControls[(int)Controls.DASHMODE];    //Right-click*/
+            controlUi.TransitionWalkUI();
         }
         else
         {
-            controlUiTexts[0].text = stringControls[(int)Controls.HOVERMODE];   //Space
+            /*controlUiTexts[0].text = stringControls[(int)Controls.HOVERMODE];   //Space
             controlUiTexts[1].text = stringControls[(int)Controls.FLYMODE];     //Shift
-            controlUiTexts[2].text = stringControls[(int)Controls.DASHMODE];    //Right-click
+            controlUiTexts[2].text = stringControls[(int)Controls.DASHMODE];    //Right-click*/
+            controlUi.TransitionMidairUI();
         }
     }
 }

@@ -65,9 +65,10 @@ public class MovementFlying : MovementMode
         modeUIColor = new Color(0f, 0.8f, 1f, 1f);
         movementModeText.color = modeUIColor;
 
-        controlUiTexts[0].text = stringControls[(int)Controls.WALKMODE];    //Space
+        /*controlUiTexts[0].text = stringControls[(int)Controls.WALKMODE];    //Space
         controlUiTexts[1].text = stringControls[(int)Controls.NOMODE];      //Shift
-        controlUiTexts[2].text = stringControls[(int)Controls.DASHMODE];    //right-click
+        controlUiTexts[2].text = stringControls[(int)Controls.DASHMODE];    //right-click*/
+        controlUi.TransitionFlyUI();
     }
 
     protected override void FixedUpdate()

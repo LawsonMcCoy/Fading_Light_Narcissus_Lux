@@ -34,6 +34,5 @@ public class MovementModeData : ScriptableObject
     public LayerMask dashBounceMask; //The layer mask for all layers the player can bounce off of.
 
     // Ui data
-    public string[] controlUiLabels;
     public string controlUiParentName;
 }
