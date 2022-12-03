@@ -45,26 +45,6 @@ public abstract class MovementMode : MonoBehaviour
     protected Color modeUIColor;
 
     protected ControlUi controlUi;
-    /*private int controlUiElements;
-    protected Text[] controlUiTexts;
-
-    protected string[] stringControls = new string[]
-        {"Walk", "Hover", "Fly", "Dash", "Jump", "Sprint", "Attack", "---"};
-
-    //an enum for the string version of each character mode 
-    //they are used as int values that matches the index of stringControls
-    //basically copying Lawson's tactics
-    public enum Controls
-    {
-        WALKMODE,
-        HOVERMODE,
-        FLYMODE,
-        DASHMODE,
-        JUMPMODE,
-        SPRINTMODE,
-        ATTACKMODE,
-        NOMODE
-    }*/
     #endregion
 
     protected virtual void Awake()
@@ -77,17 +57,7 @@ public abstract class MovementMode : MonoBehaviour
 
         inputReady = true;
 
-        //initilize all control ui elements
-        //If error occurs, first check spelling. Then check if text object exists.
         controlUi = GameObject.Find(commonData.controlUiParentName).GetComponent<ControlUi>();
-
-        /*controlUiElements = commonData.controlUiLabels.Length;
-        controlUiTexts = new Text[controlUiElements];
-
-        for (int i = 0; i < controlUiElements; i++)
-        {
-            controlUiTexts[i] = controlUiParent.transform.Find(commonData.controlUiLabels[i]).gameObject.GetComponent<Text>();
-        }*/
     }
 
     protected virtual void Start()
@@ -142,7 +112,7 @@ public abstract class MovementMode : MonoBehaviour
             
             //compute slope angle
             float slopeAngle = Vector3.Angle(Vector3.up, groundedInfo.normal);
-            Debug.Log($"Slope Angle: {slopeAngle}");
+            //Debug.Log($"Slope Angle: {slopeAngle}");
             //The player is only grounded iff the slope is not too steep to stand on
             return slopeAngle <= commonData.maxStandingSlopeAngle;
         }

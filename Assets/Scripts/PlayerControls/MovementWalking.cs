@@ -18,6 +18,10 @@ public class MovementWalking : MovementMode
     private bool onGround; //A bool value that is true when on the ground and false otherwise
                            //updated in the CheckGroundStatus function
 
+    private bool uiLoaded;
+    private bool midairTransition;
+    private bool previousBoolean;
+
     private void Awake()
     {
         base.Awake();
@@ -26,6 +30,8 @@ public class MovementWalking : MovementMode
         speed = walkSpeed;
 
         turnValue = 0;
+        uiLoaded = true;
+        midairTransition = false;
     }
 
     private void OnEnable()
@@ -39,6 +45,10 @@ public class MovementWalking : MovementMode
 
         modeUIColor = new Color(1f, 0.8f, 0f, 1f);
         movementModeText.color = modeUIColor;
+
+
+        CheckForTransitions();      //recalibrate transition after hovering/flying
+        previousBoolean = !midairTransition;
     }
 
     //a helper function to check if the player is on the ground
@@ -103,9 +113,9 @@ public class MovementWalking : MovementMode
         {
             //In Midair
         }
-
-        DisplayedControlUi();
-
+        
+        CheckForTransitions();
+        DisplayUiControls();
         //Regain stamina whenever in walking mode whether on ground or falling
         // stamina.Add(staminaRegainRate * Time.fixedDeltaTime);
     }
@@ -189,6 +199,7 @@ public class MovementWalking : MovementMode
                     //note that you can only hover if you have stamina
                     if (input.isPressed && stamina.ResourceAmount() > 0)
                     {
+                        //previousBoolean = !midairTransition;
                         Transition(Modes.HOVERING);
                     }
                 } //end else (if (onGround))
@@ -209,27 +220,43 @@ public class MovementWalking : MovementMode
             {
                 if (input.isPressed)
                 {
+                    //previousBoolean = !midairTransition;
                     Transition(Modes.FLYING);
                 }
             }
         }
     }
 
-    private void DisplayedControlUi()
+    private void CheckForTransitions()
     {
         if (onGround)
         {
-            /*controlUiTexts[0].text = stringControls[(int)Controls.JUMPMODE];    //Space
-            controlUiTexts[1].text = stringControls[(int)Controls.SPRINTMODE];  //Shift
-            controlUiTexts[2].text = stringControls[(int)Controls.DASHMODE];    //Right-click*/
-            controlUi.TransitionWalkUI();
+            if (midairTransition)    // if midairTransition is true while on ground
+                midairTransition = false;
         }
         else
         {
-            /*controlUiTexts[0].text = stringControls[(int)Controls.HOVERMODE];   //Space
-            controlUiTexts[1].text = stringControls[(int)Controls.FLYMODE];     //Shift
-            controlUiTexts[2].text = stringControls[(int)Controls.DASHMODE];    //Right-click*/
+            if (!midairTransition)  // if midairTransition is false while in midair
+                midairTransition = true;
+        }
+    }
+
+    private void DisplayUiControls()
+    {
+        // A way to know if a transition occured between midair and walk once:
+        if (midairTransition == true && previousBoolean == false)  // MIDAIR TRANSITION
+        {
+            previousBoolean = midairTransition;
             controlUi.TransitionMidairUI();
+            controlUi.IndicateModeChange();
+            Debug.Log("Now jumping");
+        }
+        else if (midairTransition == false && previousBoolean == true) // WALK TRANSITION
+        {
+            previousBoolean = midairTransition;
+            controlUi.TransitionWalkUI();
+            controlUi.IndicateModeChange();
+            Debug.Log("Now walking");
         }
     }
 }
