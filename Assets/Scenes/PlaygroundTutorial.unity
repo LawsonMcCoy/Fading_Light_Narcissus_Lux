@@ -6380,42 +6380,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1950294487060986414, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9848097
-      objectReference: {fileID: 0}
-    - target: {fileID: 1950294487060986414, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.17363748
-      objectReference: {fileID: 0}
-    - target: {fileID: 1950294487060986414, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 19.999
-      objectReference: {fileID: 0}
-    - target: {fileID: 2848343189466445978, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2848343189466445978, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947312, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: staminaRegainRate
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: speedBoostMagnitude
-      value: 10
+    - target: {fileID: 7025023586765228990, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: steps
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 7204556638568947316, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: spawn
       value: 
       objectReference: {fileID: 2012477987}
-    - target: {fileID: 7204556638568947316, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: playerSpawnPointTag
-      value: Respawn
-      objectReference: {fileID: 0}
     - target: {fileID: 8435698845848507069, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -6464,21 +6436,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ika
       objectReference: {fileID: 0}
-    - target: {fileID: 8925406608850753112, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: m_Text
-      value: WALKING
-      objectReference: {fileID: 0}
-    - target: {fileID: 8925406608850753112, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: m_Color.b
+    - target: {fileID: 8954304910802842469, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8925406608850753112, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: m_Color.g
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8925406608850753112, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: m_Color.r
-      value: 1
+    - target: {fileID: 8954304910802842469, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec0818a79a32c5142a50aee692950d76, type: 3}

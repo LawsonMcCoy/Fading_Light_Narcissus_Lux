@@ -64,6 +64,9 @@ public class MovementFlying : MovementMode
 
         modeUIColor = new Color(0f, 0.8f, 1f, 1f);
         movementModeText.color = modeUIColor;
+
+        controlUi.TransitionFlyUI();
+        controlUi.IndicateModeChange();
     }
 
     protected override void FixedUpdate()

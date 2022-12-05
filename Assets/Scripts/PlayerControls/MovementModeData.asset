@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 1000
   isGroundedCheckDistance: 1
-  maxStandingSlopeAngle: 60
+  maxStandingSlopeAngle: 90
   maxForce: 25
   inputDelayTime: 0.1
   dashStaminaCost: 10
@@ -26,3 +26,4 @@ MonoBehaviour:
   dashBounceMask:
     serializedVersion: 2
     m_Bits: 55
+  controlUiParentName: Controls UI
