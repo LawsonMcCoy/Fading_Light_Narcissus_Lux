@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dedabe918f7e5e34ea3b3753fac36e20, type: 3}
-  m_Name: ReachTreeTopObjective
+  m_Script: {fileID: 11500000, guid: c37cba4f1ea47146e9e803ac82ad5e35, type: 3}
+  m_Name: FlyToHillObjectiveSequence
   m_EditorClassIdentifier: 
   enemiesToKill: 0
   Description: 
-  resetCourse: 0
+  resetCourse: 1
+  disapear: 1

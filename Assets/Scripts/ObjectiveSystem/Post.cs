@@ -37,7 +37,7 @@ public class Post : MonoBehaviour
             if (other.CompareTag("Player"))
             {
                 //reached the goal post
-                gameObject.SetActive(false);
+                //gameObject.SetActive(false);
                 isCurrent = false;
                 Debug.Log(myGoalPostRef);
                 myGoalPostRef.reachedAGoal();

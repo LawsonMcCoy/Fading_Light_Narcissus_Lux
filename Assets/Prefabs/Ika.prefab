@@ -550,14 +550,16 @@ MonoBehaviour:
     m_RotationOrder: 4
   tiltSpeed: 0.5
   turnSpeed: 0.5
-  maxTiltAngle: 160
-  minTiltAngle: 20
+  maxTiltAngle: 60
+  minTiltAngle: -60
   maxTurnAngle: 0
   collisionLayer:
     serializedVersion: 2
     m_Bits: 55
-  alternateTurning: 0
-  alternateTilting: 0
+  alternateTurning: 1
+  alternateTiltDampingPower: 10
+  alternateTurnDampingPower: 10
+  alternateTurnSpringConstant: 5
   speedBoostMagnitude: 50
 --- !u!114 &7204556638568947313
 MonoBehaviour:

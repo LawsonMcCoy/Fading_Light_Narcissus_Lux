@@ -121,8 +121,7 @@ public class NarrationManager : MonoBehaviour
     public void ProcessObjective(ObjectiveSequence sequence)
     {
         //Have the objective system activate the objective
-        Debug.Log(sequence.objective);
-        sequence.objective.activateObjective.Invoke();
+        sequence.activateObjective.Invoke();
         //pause the narration until the objective system reports completion
         narrationPaused = true;
     }
