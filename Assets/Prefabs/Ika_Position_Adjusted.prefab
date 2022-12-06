@@ -39,6 +39,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4394648252337059671}
     m_Modifications:
+    - target: {fileID: 1950294486349228935, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3b1a914319f8c6f4991adf7f92cff11e, type: 2}
     - target: {fileID: 2848343189466445978, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -47,6 +51,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8435698845610004583, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3b1a914319f8c6f4991adf7f92cff11e, type: 2}
     - target: {fileID: 8435698845848507069, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: m_RootOrder
       value: 0
