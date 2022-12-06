@@ -729,8 +729,12 @@ PrefabInstance:
       value: UpdatedPlayerHUDCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 8781320507308467856, guid: 1c9d2b6c0fa640f49a94ddb4c7ae6d36, type: 3}
+      propertyPath: steps
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8781320507308467856, guid: 1c9d2b6c0fa640f49a94ddb4c7ae6d36, type: 3}
       propertyPath: waitSeconds
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c9d2b6c0fa640f49a94ddb4c7ae6d36, type: 3}
