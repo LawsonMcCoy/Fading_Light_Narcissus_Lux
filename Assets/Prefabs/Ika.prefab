@@ -635,7 +635,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxResource: 100
-  staminaUI: {fileID: 2848343188888564414}
+  staminaUI: {fileID: 1098352053598332953}
 --- !u!1001 &7852022201217180424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -643,6 +643,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8435698845848507069}
     m_Modifications:
+    - target: {fileID: 3684763196592912741, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5436026844986832134, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -739,11 +743,35 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7479547485397883181, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479547485397883181, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479547485397883181, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618553977325553170, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517549819181695604, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9130727989790221860, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
---- !u!114 &2848343188888564414 stripped
+--- !u!114 &1098352053598332953 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5436026844436287926, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7190522133301906193, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
   m_PrefabInstance: {fileID: 7852022201217180424}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
