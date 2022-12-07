@@ -9,11 +9,16 @@ public class Player : CombatEntity
     [SerializeField] private Transform spawn;
     [SerializeField] private float yDeathDistance;
 
+    private Vector3 defaultScale;
+    
     private void Start()
     {
         //events subscriptions
         EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_START, DisableInput);
         EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_END, EnableInput);
+
+        defaultScale = this.transform.localScale;
+        Debug.Log($"Player's scale: {defaultScale}");
     }
 
     private void Update()
@@ -52,5 +57,12 @@ public class Player : CombatEntity
         //Events unsubscriptions
         EventManager.Instance.Unsubscribe(EventTypes.Events.DIALOGUE_START, DisableInput);
         EventManager.Instance.Unsubscribe(EventTypes.Events.DIALOGUE_END, EnableInput);
+    }
+
+    //Helper functions:
+    public Vector3 GetPlayerScale
+    {
+        get { return defaultScale; }
+        private set { }
     }
 }

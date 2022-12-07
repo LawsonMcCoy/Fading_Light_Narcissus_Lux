@@ -14,6 +14,12 @@ public class MoveDirection : MonoBehaviour
     private bool moveForwardList = true;
     private int currentPointIndex = 0;
     private Transform targetObj;
+    private Rigidbody rb;
+
+    private void Start()
+    {
+        rb = this.transform.GetComponent<Rigidbody>();
+    }
 
     private void FixedUpdate()
     {
@@ -30,9 +36,10 @@ public class MoveDirection : MonoBehaviour
          
             // if object is not on target, move towards target
             if (this.transform.position != targetObj.position)
-            { 
+            {
                 isMoving = true;
                 StartCoroutine(MoveObj(targetObj));
+                //MoveRigidObj(targetObj);
             }
         }
     }
@@ -74,6 +81,7 @@ public class MoveDirection : MonoBehaviour
         while (this.transform.position != targetPos.position)
         {
             this.transform.position = Vector3.MoveTowards(this.transform.position, targetPos.position, moveSpeed * Time.deltaTime);
+            //rb.MovePosition(Vector3.Lerp(this.transform.position, targetPos.position, moveSpeed * Time.fixedDeltaTime));
             yield return null;
         }
         
@@ -81,18 +89,8 @@ public class MoveDirection : MonoBehaviour
         isMoving = false;
     }
 
-   /*private IEnumerator MoveHorizontal(float units)
+    private void MoveRigidObj(Transform targetPos)
     {
-        yield return new WaitForSeconds(waitTime);
-        float totalTime = 0;
-        float originX = transform.position.x;
-        while (totalTime < waitTime)
-        {
-            float x = Mathf.Lerp(0, units, totalTime / moveSpeed);
-            transform.position = new Vector3(originX, transform.position.y + x, transform.position.z);
-            totalTime += Time.deltaTime;
-            yield return null;
-        }
-        isMoving = false;*/
-    //}
+        rb.MovePosition(Vector3.Lerp(this.transform.position, targetPos.position, moveSpeed * Time.fixedDeltaTime));
+    }
 }
