@@ -9,15 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61470bf509981514fb2f78cb92fda622, type: 3}
-  m_Name: OnIslandDialogue
+  m_Script: {fileID: 11500000, guid: 17942a21488c9d62d96891e964b6098a, type: 3}
+  m_Name: JumpingDialogueSequence
   m_EditorClassIdentifier: 
   sentences:
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: That wasn't so hard.
-  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: ' It was for me. I''m tired...'
+    text: "Come now. We must get to the cliff to get on the highest tree.\r"
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Shush boy! Walk it off and get on top of that big tree.
-  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Those rings should lead the *obvious* way.
+    text: "Jump on th're rocks by pressing SPACE. I'll wait for you by the small
+      tree.\r"
+  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
+    text: " *You remember that you can jump forward by moving forward.*\r"

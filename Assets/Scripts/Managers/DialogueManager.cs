@@ -21,7 +21,7 @@ public class DialogueManager : MonoBehaviour
     
     //[SerializeField] private Dialogue insertedDialogue;
     [SerializeField] private float typeSpeed; //Float that sets the speed in which the letters in the dialogue gets typed out.
-    private Dialogue updateDialogue; //Holder of current dialogue sentence
+    private DialogueSequence currDialogue; //Holder of current dialogue sentence
     private int currSentenceIndex = 0; //Integer index that corresponds to the current sentence(s) in the dialogue.
     private Player player;
     #endregion
@@ -112,7 +112,7 @@ private void Update()
     //This functions starts a certain dialogue passed as a parameter.
     //For now, dialogue only contains one ScriptableObject set in the inspector.
     //This function can be used to pass different dialogues and start them.
-    public void StartDialogue(Dialogue startDialogue)
+    public void StartDialogue(DialogueSequence startDialogue)
     {
         //Notify the game that a dialogue has start
         EventManager.Instance.Notify(EventTypes.Events.DIALOGUE_START);
@@ -125,10 +125,10 @@ private void Update()
         // }
         
         //Start dialogue:
-        updateDialogue = startDialogue;
-        string currentSentence = updateDialogue.sentences[currSentenceIndex].text;
+        currDialogue = startDialogue;
+        string currentSentence = currDialogue.sentences[currSentenceIndex].text;
         //Debug.Log($"Starting dialogue {currSentenceIndex}: {currentSentence}");
-        speakerName.text = updateDialogue.sentences[currSentenceIndex].character.fullName;
+        speakerName.text = currDialogue.sentences[currSentenceIndex].character.fullName;
         showUI(); //activating the dialogue UI
         Instance.StartCoroutine(Type(currentSentence)); // type inserted text
     }
@@ -136,26 +136,26 @@ private void Update()
     //This functions returns true if the displayed text is equal to the entire sentence.
     private bool isTypedOut()
     {
-        return textField.text == updateDialogue.sentences[currSentenceIndex].text;
+        return textField.text == currDialogue.sentences[currSentenceIndex].text;
     }
 
     private void ContinueDialogue()
     {
-        if (updateDialogue != null)
+        if (currDialogue != null)
         {
             //If the entire sentence is already typed out, then advance to the next dialogue.
             if (isTypedOut())
             {
                 //If our index is still in range with how many sentences we have...
-                if (currSentenceIndex < updateDialogue.sentences.Length - 1)
+                if (currSentenceIndex < currDialogue.sentences.Length - 1)
                 {
                     StopAllCoroutines(); //Failsafe
                 
                     //Increment it to go to the next sentence
                     currSentenceIndex++;
                     textField.text = ""; //Update the text field so that it's blank again (since it's a new sentence)
-                    speakerName.text = updateDialogue.sentences[currSentenceIndex].character.fullName; //Update the speaker
-                    StartCoroutine(Type(updateDialogue.sentences[currSentenceIndex].text)); //Start the Coroutine of typing out the next sentence
+                    speakerName.text = currDialogue.sentences[currSentenceIndex].character.fullName; //Update the speaker
+                    StartCoroutine(Type(currDialogue.sentences[currSentenceIndex].text)); //Start the Coroutine of typing out the next sentence
                 }
                 else 
                 {
@@ -174,7 +174,7 @@ private void Update()
             else //If not, stop the typing and set the displayed text equal to the entire dialogue (to skip the typing)
             {
                 StopAllCoroutines();
-                textField.text = updateDialogue.sentences[currSentenceIndex].text;
+                textField.text = currDialogue.sentences[currSentenceIndex].text;
             } 
         }            
     }

@@ -10,6 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17942a21488c9d62d96891e964b6098a, type: 3}
-  m_Name: MovingPlatformDialogueSequence
+  m_Name: MoveHoverDialogueSequence
   m_EditorClassIdentifier: 
-  dialogueToStart: {fileID: 11400000, guid: 6df96dd79b7a2c14194adf93267e2704, type: 2}
+  sentences:
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: "Th're ya go. Now get over here.\r"
