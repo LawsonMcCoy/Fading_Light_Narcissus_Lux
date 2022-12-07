@@ -18,9 +18,9 @@ public class NarrationManager : MonoBehaviour
                                                    //a load scene sequence to prevent race conditions
 
     private bool narrationPaused; //a boolean that says wheter or not the narration is currently paused
-    public int currentNarrationSequenceIndex; //An integer representing the index of the current 
+    [SerializeField] private int currentNarrationSequenceIndex; //An integer representing the index of the current 
                                                //narration sequence
-    public int savedNarrationSequenceIndex; //An integer representing the index of the narration 
+    [SerializeField] private int savedNarrationSequenceIndex; //An integer representing the index of the narration 
                                              //sequence that was last saved, Note this value will
                                              //made to be persistent later
     private Scenes.ScenesList currentScene;   //the current scene

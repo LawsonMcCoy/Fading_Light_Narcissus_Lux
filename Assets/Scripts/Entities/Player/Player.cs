@@ -7,7 +7,7 @@ using UnityEngine;
 public class Player : CombatEntity
 {
     [SerializeField] public PlayerInput playerInput;
-    [SerializeField] private Transform spawn;
+    [SerializeField] private Vector3 spawn;
     [SerializeField] private float spawnNumber;
     private PlayerHealth playerHealth;
     [SerializeField] private float yDeathDistance;
@@ -54,14 +54,14 @@ public class Player : CombatEntity
         Application.Quit();
     }
 
-    public void UpdateSpawn(Transform newSpawn)
+    public void UpdateSpawn(Vector3 newSpawn)
     {
         spawn = newSpawn;
     }
     private void Respawn()
     {
         playerHealth.Add(1000f);    //restore health
-        gameObject.transform.position = spawn.position;  //reset player position;
+        gameObject.transform.position = spawn;  //reset player position;
     }
 
     private void OnDestroy()

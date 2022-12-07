@@ -14,7 +14,7 @@ public class TriggerSpawnPoint : MonoBehaviour
         if (other.gameObject.tag == objTag)
         {
             Player player = other.gameObject.GetComponent<Player>();
-            player.UpdateSpawn(this.transform);
+            player.UpdateSpawn(this.transform.position);
         }
     }
 }
