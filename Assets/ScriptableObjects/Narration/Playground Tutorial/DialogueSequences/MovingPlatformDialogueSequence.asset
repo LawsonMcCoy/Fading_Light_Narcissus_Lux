@@ -9,17 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61470bf509981514fb2f78cb92fda622, type: 3}
-  m_Name: TreetopDialogue
+  m_Script: {fileID: 11500000, guid: 17942a21488c9d62d96891e964b6098a, type: 3}
+  m_Name: MovingPlatformDialogueSequence
   m_EditorClassIdentifier: 
   sentences:
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: WAIT.
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: Look around your surroundings before jumping at nothing.
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: Timing is everything. Now, hurry up and get up here.
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: I don't think I can do this. I will fall to my death!
-  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Poppycock. I am much older than you and I can easily fly.
-  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: "All you have to do is press shift while midair.\r"
-  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: But I-
-  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: '- will do it. Whether you like it or not!'
+    text: ...
