@@ -3,24 +3,37 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerHealth))]
 public class Player : CombatEntity
 {
     [SerializeField] public PlayerInput playerInput;
-    [SerializeField] private Transform spawn;
+    [SerializeField] private Vector3 spawn;
+    [SerializeField] private float spawnNumber;
+    private PlayerHealth playerHealth;
     [SerializeField] private float yDeathDistance;
 
     private void Start()
     {
+        playerHealth = gameObject.GetComponent<PlayerHealth>();
+        if (gameObject.GetComponent<HealthManager>() != null)
+        {
+            Destroy(gameObject.GetComponent<HealthManager>());
+        }
+
         //events subscriptions
         EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_START, DisableInput);
         EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_END, EnableInput);
+        EventManager.Instance.Subscribe(EventTypes.Events.PLAYER_DEATH, Respawn);
+        EventManager.Instance.Subscribe(EventTypes.Events.SAVE, UpdateSpawn);
     }
 
     private void Update()
     {
         if (this.transform.position.y <= yDeathDistance && spawn != null)
         {
-            this.transform.position = spawn.position;
+            //this.transform.position = spawn.position;
+            //kill player
+            playerHealth.Subtract(1000.0f);
         }
     }
 
@@ -42,9 +55,14 @@ public class Player : CombatEntity
         Application.Quit();
     }
 
-    public void UpdateSpawn(Transform newSpawn)
+    public void UpdateSpawn()
     {
-        spawn = newSpawn;
+        spawn = NarrationManager.Instance.getSpawn();
+    }
+    private void Respawn()
+    {
+        playerHealth.Add(1000f);    //restore health
+        gameObject.transform.position = spawn;  //reset player position;
     }
 
     private void OnDestroy()
@@ -52,5 +70,7 @@ public class Player : CombatEntity
         //Events unsubscriptions
         EventManager.Instance.Unsubscribe(EventTypes.Events.DIALOGUE_START, DisableInput);
         EventManager.Instance.Unsubscribe(EventTypes.Events.DIALOGUE_END, EnableInput);
+        EventManager.Instance.Unsubscribe(EventTypes.Events.PLAYER_DEATH, Respawn);
+        EventManager.Instance.Unsubscribe(EventTypes.Events.SAVE, UpdateSpawn);
     }
 }

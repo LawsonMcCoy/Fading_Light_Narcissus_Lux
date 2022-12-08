@@ -12,6 +12,11 @@ public class ObjectiveSequence : NarrationSequence
     {
         NarrationManager.Instance.ProcessObjective(this);
     }
+    //cancel function for when a player dies before the objective is finished
+    public override void Cancel()
+    {
+        cancel.Invoke();
+    }
     private int reachGoal;
     public int enemiesToKill;//better to set this in editor
     public string Description;
@@ -29,7 +34,8 @@ public class ObjectiveSequence : NarrationSequence
     [System.NonSerialized]
     public UnityEvent activateObjective;
 
-
+    [System.NonSerialized]
+    public UnityEvent cancel;
     private void OnEnable()
     {
         if (resetCourse)
@@ -47,6 +53,10 @@ public class ObjectiveSequence : NarrationSequence
         if (activateObjective == null)
         {
             activateObjective = new UnityEvent();
+        }
+        if(cancel == null)
+        {
+            cancel = new UnityEvent();
         }
     }
 
