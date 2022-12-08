@@ -21,6 +21,8 @@ public class EventManager : MonoBehaviour
 
     private void Awake()
     {      
+
+        Debug.Log("HI IM AWAKE");
         Instance = this;
         subscriberDict = new Dictionary<EventTypes.Events, Action>();
 
@@ -32,6 +34,7 @@ public class EventManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        Debug.Log("I HAVE DIED");
         //Instance = null;
     }
 

@@ -11,6 +11,13 @@ public class GameManager : MonoBehaviour
         private set;
     }
 
+
+    private void Start() 
+    {
+        //On Start
+        EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_START, PauseGame);
+        EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_END, UnpauseGame);
+    }
     private void Awake()
     {
         //set the singleton instance
@@ -21,8 +28,6 @@ public class GameManager : MonoBehaviour
 
         //Events subscription
         Debug.Log(EventManager.Instance);
-        EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_START, PauseGame);
-        EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_END, UnpauseGame);
     }
 
     public void StartGame()
