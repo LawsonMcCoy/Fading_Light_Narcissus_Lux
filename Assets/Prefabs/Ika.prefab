@@ -473,7 +473,7 @@ MonoBehaviour:
   rigidbody: {fileID: 7204556638568947315}
   collider: {fileID: 7204556638568947323}
   playerInput: {fileID: 7204556638568947317}
-  spawn: {fileID: 0}
+  spawn: {x: 0, y: 0, z: 0}
   spawnNumber: 0
   yDeathDistance: -10
 --- !u!114 &7204556638568947314
@@ -637,7 +637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxResource: 100
-  staminaUI: {fileID: 2848343188888564414}
+  staminaUI: {fileID: 1098352053598332953}
 --- !u!114 &2832632588534044553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,7 +651,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxResource: 100
-  saveData: {fileID: 0}
 --- !u!1001 &7852022201217180424
 PrefabInstance:
   m_ObjectHideFlags: 0
