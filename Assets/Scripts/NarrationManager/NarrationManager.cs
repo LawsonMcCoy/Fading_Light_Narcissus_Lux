@@ -23,6 +23,8 @@ public class NarrationManager : MonoBehaviour
     [SerializeField] private int savedNarrationSequenceIndex; //An integer representing the index of the narration 
                                              //sequence that was last saved, Note this value will
                                              //made to be persistent later
+    [SerializeField] private SceneSpawnContainer spawnPoints;
+    private int currentSpawnPoint;
     private Scenes.ScenesList currentScene;   //the current scene
 
     //Narration Manager is a singleton
@@ -115,6 +117,8 @@ public class NarrationManager : MonoBehaviour
         currentScene = sequence.scene;
         SceneManager.LoadScene((int)sequence.scene);
 
+       
+
         //Post load processing, this is done in a coroutine
         //so we can wait full the scene to be fully loaded 
         //before the post load processing. Since it is done
@@ -152,12 +156,13 @@ public class NarrationManager : MonoBehaviour
     {
         Debug.Log(sequence);
 
-
         sequence.saveSuccesful = true; //save was successful(in correct scene)
+        currentSpawnPoint = sequence.spawnIndex;
+        spawnPoints = GameObject.FindGameObjectWithTag("Respawn").GetComponent<SceneSpawnContainer>();
+        EventManager.Instance.Notify(EventTypes.Events.SAVE);
 
         //set saveindex to current index
-        savedNarrationSequenceIndex = currentNarrationSequenceIndex;
-
+        savedNarrationSequenceIndex = currentNarrationSequenceIndex + 1;
     }
 
     public void playerDeath()
@@ -203,6 +208,15 @@ public class NarrationManager : MonoBehaviour
         //Once the post load processing is completed
         //unpause the narration
         narrationPaused = false;
+    }
+    public Vector3 getSpawn()
+    {
+        //returns the position of current spawn point
+        if (spawnPoints != null)
+        {
+            return spawnPoints.getSpawn(currentSpawnPoint);
+        }
+        return Vector3.zero;
     }
 
     private void OnDestroy()

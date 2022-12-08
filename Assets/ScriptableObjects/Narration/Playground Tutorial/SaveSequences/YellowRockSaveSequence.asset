@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1c914f7cafa684cb7e4b6aaad6e7d2, type: 3}
   m_Name: YellowRockSaveSequence
   m_EditorClassIdentifier: 
-  spawnPoint: {x: 0, y: 0, z: 0}
   saveScene: 2
-  saveSuccesful: 0
+  saveSuccesful: 1
+  newCoordinates: {x: -16.33, y: -4.81, z: 15.96}

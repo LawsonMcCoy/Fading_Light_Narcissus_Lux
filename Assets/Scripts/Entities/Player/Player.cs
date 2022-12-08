@@ -24,6 +24,7 @@ public class Player : CombatEntity
         EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_START, DisableInput);
         EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_END, EnableInput);
         EventManager.Instance.Subscribe(EventTypes.Events.PLAYER_DEATH, Respawn);
+        EventManager.Instance.Subscribe(EventTypes.Events.SAVE, UpdateSpawn);
     }
 
     private void Update()
@@ -54,9 +55,9 @@ public class Player : CombatEntity
         Application.Quit();
     }
 
-    public void UpdateSpawn(Vector3 newSpawn)
+    public void UpdateSpawn()
     {
-        spawn = newSpawn;
+        spawn = NarrationManager.Instance.getSpawn();
     }
     private void Respawn()
     {
@@ -70,5 +71,6 @@ public class Player : CombatEntity
         EventManager.Instance.Unsubscribe(EventTypes.Events.DIALOGUE_START, DisableInput);
         EventManager.Instance.Unsubscribe(EventTypes.Events.DIALOGUE_END, EnableInput);
         EventManager.Instance.Unsubscribe(EventTypes.Events.PLAYER_DEATH, Respawn);
+        EventManager.Instance.Unsubscribe(EventTypes.Events.SAVE, UpdateSpawn);
     }
 }

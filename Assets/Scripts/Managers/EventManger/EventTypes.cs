@@ -8,6 +8,7 @@ public sealed class EventTypes
         DIALOGUE_START,
         DIALOGUE_END,
         PLAYER_DEATH,
-        CANCEL_OBJECTIVE
+        CANCEL_OBJECTIVE,
+        SAVE
     }
 }
