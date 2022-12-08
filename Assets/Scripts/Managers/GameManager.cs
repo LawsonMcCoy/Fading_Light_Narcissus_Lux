@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
 
         //Events subscription
+        Debug.Log(EventManager.Instance);
         EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_START, PauseGame);
         EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_END, UnpauseGame);
     }

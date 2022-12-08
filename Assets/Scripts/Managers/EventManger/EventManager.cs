@@ -20,22 +20,19 @@ public class EventManager : MonoBehaviour
 
 
     private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            subscriberDict = new Dictionary<EventTypes.Events, Action>();
+    {      
+        Instance = this;
+        subscriberDict = new Dictionary<EventTypes.Events, Action>();
 
-            DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);
 
-            ID = gameObject.GetInstanceID();
-        }
+        ID = gameObject.GetInstanceID();
     }
 
 
     private void OnDestroy()
     {
-        // Instance = null;
+        //Instance = null;
     }
 
 
