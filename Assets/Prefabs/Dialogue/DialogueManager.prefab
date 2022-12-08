@@ -47,5 +47,4 @@ MonoBehaviour:
   dialogueUI: {fileID: 0}
   speakerName: {fileID: 0}
   textField: {fileID: 0}
-  dialogue: {fileID: 11400000, guid: 763ec4480f768fc4ca7656aee995caa9, type: 2}
   typeSpeed: 0.02

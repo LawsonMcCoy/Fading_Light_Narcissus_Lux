@@ -16,7 +16,7 @@ public abstract class Entity : MonoBehaviour
     private HealthManager health;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
             health = GetComponent<HealthManager>();
     }

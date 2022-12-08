@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fa83ab55d0db3f48a398b9c6f499387, type: 3}
   m_Name: The Voice
   m_EditorClassIdentifier: 
-  fullName: ' '
+  fullName: The Voice
