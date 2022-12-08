@@ -14,12 +14,6 @@ public class MoveDirection : MonoBehaviour
     private bool moveForwardList = true;
     private int currentPointIndex = 0;
     private Transform targetObj;
-    private Rigidbody rb;
-
-    private void Start()
-    {
-        rb = this.transform.GetComponent<Rigidbody>();
-    }
 
     private void FixedUpdate()
     {
@@ -81,16 +75,10 @@ public class MoveDirection : MonoBehaviour
         while (this.transform.position != targetPos.position)
         {
             this.transform.position = Vector3.MoveTowards(this.transform.position, targetPos.position, moveSpeed * Time.deltaTime);
-            //rb.MovePosition(Vector3.Lerp(this.transform.position, targetPos.position, moveSpeed * Time.fixedDeltaTime));
             yield return null;
         }
         
         yield return new WaitForSeconds(waitTime);
         isMoving = false;
-    }
-
-    private void MoveRigidObj(Transform targetPos)
-    {
-        rb.MovePosition(Vector3.Lerp(this.transform.position, targetPos.position, moveSpeed * Time.fixedDeltaTime));
     }
 }

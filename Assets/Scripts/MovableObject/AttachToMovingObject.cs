@@ -6,8 +6,8 @@ using UnityEngine;
 public class AttachToMovingObject : MonoBehaviour
 {
     [SerializeField] private string objTag;
-    [SerializeField] private Transform attachBase;
 
+    private Transform attachBase;
     private GameObject player;
     // https://forum.unity.com/threads/object-is-changing-size-when-becoming-a-child-in-game.711854/
     // The link i used to solve the scaling issue
@@ -16,8 +16,7 @@ public class AttachToMovingObject : MonoBehaviour
     /* When you want to attach an object to a moving platform, you must set have an empty object with the scale of (1,1,1) first.
      * Attach the moving script in this empty object. Then place your platform as a child of this empty object.
      * Be mindful that the platform scale will change so you would need to replace the old values again.
-     * Attach trigger to platform object and attach this script.
-     * Attachbase should be the parent empty object, NOT THE PLATFORM. It should work properly afterwards.
+     * Attach trigger and attach this script to platform object.
      * Ex)
      * Parent empty object (scale 1,1,1) 
      *      Moving platform (scale whatever)
@@ -26,6 +25,12 @@ public class AttachToMovingObject : MonoBehaviour
 
     // When gameobject is on moving object, attach to it by making them
     // a child when triggered.
+
+    private void Start()
+    {
+        attachBase = this.transform.parent; //get platform's parent (1,1,1)
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == objTag)
