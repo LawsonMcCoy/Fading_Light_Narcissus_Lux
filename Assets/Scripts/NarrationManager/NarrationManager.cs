@@ -108,11 +108,11 @@ public class NarrationManager : MonoBehaviour
         SceneManager.LoadScene((int)sequence.scene);
     }
 
-    public void ProcessDialogue(DialogueSequence sequence)
+    public void ProcessDialogue(DialogueSequence dialogueSequence)
     {
         //Have dialogue manager start the dialogue
         Debug.Log(DialogueManager.Instance);
-        DialogueManager.Instance.StartDialogue(sequence.dialogueToStart);
+        DialogueManager.Instance.StartDialogue(dialogueSequence);
 
         //pause the dialogue until it finishes
         narrationPaused = true;
@@ -121,8 +121,7 @@ public class NarrationManager : MonoBehaviour
     public void ProcessObjective(ObjectiveSequence sequence)
     {
         //Have the objective system activate the objective
-        Debug.Log(sequence.objective);
-        sequence.objective.activateObjective.Invoke();
+        sequence.activateObjective.Invoke();
         //pause the narration until the objective system reports completion
         narrationPaused = true;
     }
