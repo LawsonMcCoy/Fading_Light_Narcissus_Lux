@@ -5302,7 +5302,7 @@ MonoBehaviour:
   - {fileID: 1474288944}
   - {fileID: 240361606}
   - {fileID: 1363241626}
-  objective: {fileID: 0}
+  objective: {fileID: 11400000, guid: 3805a18ac595648e1a1973980a1646cb, type: 2}
 --- !u!1 &1191607066
 GameObject:
   m_ObjectHideFlags: 0
