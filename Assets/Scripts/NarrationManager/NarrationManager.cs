@@ -128,11 +128,11 @@ public class NarrationManager : MonoBehaviour
         StartCoroutine(PostLoadSceneProcessing(sequence));
     }
 
-    public void ProcessDialogue(DialogueSequence sequence)
+    public void ProcessDialogue(DialogueSequence dialogueSequence)
     {
         //Have dialogue manager start the dialogue
         Debug.Log(DialogueManager.Instance);
-        DialogueManager.Instance.StartDialogue(sequence.dialogueToStart);
+        DialogueManager.Instance.StartDialogue(dialogueSequence);
 
         //pause the dialogue until it finishes
         narrationPaused = true;

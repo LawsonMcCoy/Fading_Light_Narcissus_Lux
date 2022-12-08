@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3b1a914319f8c6f4991adf7f92cff11e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 1950294487060986409}
   - component: {fileID: 1950294487060986408}
   - component: {fileID: 8153729624524261552}
+  - component: {fileID: 4342522532477307269}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -183,6 +184,39 @@ MonoBehaviour:
   player: {fileID: 7204556638568947316}
   lookAheadDistance: 0
   lookUpDistance: 0
+--- !u!114 &4342522532477307269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950294487060986411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &8435698845610004576
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +278,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3b1a914319f8c6f4991adf7f92cff11e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -518,14 +552,16 @@ MonoBehaviour:
     m_RotationOrder: 4
   tiltSpeed: 0.5
   turnSpeed: 0.5
-  maxTiltAngle: 160
-  minTiltAngle: 20
+  maxTiltAngle: 60
+  minTiltAngle: -60
   maxTurnAngle: 0
   collisionLayer:
     serializedVersion: 2
     m_Bits: 55
-  alternateTurning: 0
-  alternateTilting: 0
+  alternateTurning: 1
+  alternateTiltDampingPower: 10
+  alternateTurnDampingPower: 10
+  alternateTurnSpringConstant: 5
   speedBoostMagnitude: 50
 --- !u!114 &7204556638568947313
 MonoBehaviour:
@@ -623,6 +659,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8435698845848507069}
     m_Modifications:
+    - target: {fileID: 3684763196592912741, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5436026844986832134, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -719,11 +759,35 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7479547485397883181, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479547485397883181, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479547485397883181, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618553977325553170, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517549819181695604, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9130727989790221860, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
---- !u!114 &2848343188888564414 stripped
+--- !u!114 &1098352053598332953 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5436026844436287926, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7190522133301906193, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
   m_PrefabInstance: {fileID: 7852022201217180424}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
