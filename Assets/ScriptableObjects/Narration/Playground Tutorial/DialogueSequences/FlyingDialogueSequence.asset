@@ -23,7 +23,7 @@ MonoBehaviour:
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
     text: The camera is set for you and moves along with you.
   - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
-    text: During flying, use WASD to tilt/roll your character as it flies.
+    text: During flying, use WASD to tilt/turn your character as it flies.
   - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
-    text: Try tilting up by W and tilting down by S. Roll left with A and right with
+    text: Try tilting up by W and tilting down by S. Turn left with A and right with
       D.
