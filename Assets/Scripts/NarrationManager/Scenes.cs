@@ -8,7 +8,8 @@ public class Scenes : MonoBehaviour
     {
         MAIN_MENU,
         WELCOME_DIALOGUE,
-        PLAYGROUND_TUTORIAL
+        REVISEDPLAYGROUNDTUTORIAL,
+        PLAYGROUNDTUTORIAL
         /*WALKING_TUTORIAL,
         JUMPING_TUTORIAL,
         HOVERING_TUTORIAL,

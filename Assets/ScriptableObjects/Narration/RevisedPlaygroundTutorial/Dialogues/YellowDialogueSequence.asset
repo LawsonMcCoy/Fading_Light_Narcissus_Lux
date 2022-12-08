@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17942a21488c9d62d96891e964b6098a, type: 3}
-  m_Name: WalkingDialogueSequence
+  m_Name: YellowDialogueSequence
   m_EditorClassIdentifier: 
   sentences:
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: "What're you looking at? Walk yourself to that playground, young boy!\r"
+    text: About time you got here! Did you use your dash ability to get here quicker.
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: We have a long way to go since we need to go to the cave entrance.
-  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: You think you can handle jumping through those moving island?
+    text: It would be a joke if you DIDN'T use it. Hahaha!
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Why jump when you can fly? That's why you need to learn how to do it yourself.
-      Kids these days.
+    text: Anyways, land y'er self on that yellow rock. Just in case you fall to your
+      doom.
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: '*Sigh*'
+    text: What?
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: Nothin'.

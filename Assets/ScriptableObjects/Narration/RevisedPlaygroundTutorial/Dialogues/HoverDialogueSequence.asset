@@ -10,17 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17942a21488c9d62d96891e964b6098a, type: 3}
-  m_Name: WalkingDialogueSequence
+  m_Name: HoverDialogueSequence
   m_EditorClassIdentifier: 
   sentences:
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: "What're you looking at? Walk yourself to that playground, young boy!\r"
+    text: Aw. Gotta love that Narcissus Lux light!
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: We have a long way to go since we need to go to the cave entrance.
-  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: You think you can handle jumping through those moving island?
+    text: Looks like we gotta hover over yonder.
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Why jump when you can fly? That's why you need to learn how to do it yourself.
-      Kids these days.
-  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: '*Sigh*'
+    text: You do know how to hover, right?
+  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
+    text: You remember you can hover by pressing SPACE midair. You can also cancel
+      it by pressing SPACE again.

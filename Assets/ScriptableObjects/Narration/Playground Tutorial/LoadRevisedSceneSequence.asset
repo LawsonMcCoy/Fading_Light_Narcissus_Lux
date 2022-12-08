@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e1c914f7cafa684cb7e4b6aaad6e7d2, type: 3}
-  m_Name: SaveSequence
+  m_Script: {fileID: 11500000, guid: 829d73f1f82fb1cd395fcb0bf5e35461, type: 3}
+  m_Name: LoadRevisedSceneSequence
   m_EditorClassIdentifier: 
-  saveScene: 3
-  saveSuccesful: 1
+  saveScene: 2
+  saveSuccesful: 0
   spawnIndex: 0
+  scene: 2
+  isGameScene: 0

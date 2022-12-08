@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/WelcomeDialogueScene.unity
     guid: 2467c64460f6c8f7cadd66f1f3180791
   - enabled: 1
-    path: Assets/Scenes/PlaygroundTutorial.unity
-    guid: 5a8e1bc6b9a7e8b49a2c445900a0331f
+    path: Assets/Scenes/RevisedPlaygroundTutorial.unity
+    guid: 9acf6edf9c9915149884fa8a87cc4492
   m_configObjects: {}

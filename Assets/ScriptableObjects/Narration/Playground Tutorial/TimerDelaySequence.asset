@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5465e091b6db5b99ec2dd1c7bd9839, type: 3}
   m_Name: TimerDelaySequence
   m_EditorClassIdentifier: 
-  delayTime: 5
+  delayTime: 3
