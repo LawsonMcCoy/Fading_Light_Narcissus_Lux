@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37cba4f1ea47146e9e803ac82ad5e35, type: 3}
   m_Name: HoveringObjectiveSequence
   m_EditorClassIdentifier: 
-  objective: {fileID: 11400000, guid: c4fc93c33dd4a7d578fb355793e8e2a6, type: 2}
+  enemiesToKill: 0
+  Description: 
+  resetCourse: 0
+  disapear: 0

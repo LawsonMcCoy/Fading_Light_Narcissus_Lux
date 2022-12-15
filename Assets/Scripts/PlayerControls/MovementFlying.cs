@@ -17,9 +17,9 @@ public class MovementFlying : MovementMode
 
     [SerializeField] private float tiltSpeed;
     [SerializeField] private float turnSpeed;
-    [Tooltip("Limits how much the player can tilt torwards the sky, expected value from 0-180")]
+    [Tooltip("Limits how much the player can tilt torwards the sky, expected positive value from 0-90")]
     [SerializeField] private float maxTiltAngle; //expected value from 270-360
-    [Tooltip("Limits how much the player can tilt torwards the ground, expected value from 0-180")]
+    [Tooltip("Limits how much the player can tilt torwards the ground, expected negative value from 0-90")]
     [SerializeField] private float minTiltAngle; //expected value from 0-90
     [SerializeField] private float maxTurnAngle;
 
@@ -27,7 +27,10 @@ public class MovementFlying : MovementMode
 
     //Testing
     [SerializeField] private bool alternateTurning;
-    [SerializeField] private bool alternateTilting;
+    [SerializeField] private float alternateTiltDampingPower; //A fine toning constant to increase the damping power on the velocity
+    [SerializeField] private float alternateTurnDampingPower; //A fine toning constant to increase the damping power on the velocity
+    [SerializeField] private float alternateTurnSpringConstant; //A fine toning constant that acts as the spring constant for the
+                                                                //virtual spring holding the roll angle at equilibrium
 
     //inputs
     private float tiltValue;
@@ -153,129 +156,214 @@ public class MovementFlying : MovementMode
 
     private void AddTorque()
     {
-        float tiltTorqueMagnitude; //the magnitude of the tiltTorque
+        float totalTorqueMagnitude; //the magnitude of the total torque being applied
+        Vector3 totalTorque;
+
+        //tilting the player
+        float tiltTorqueMagnitude;
         Vector3 tiltTorque;
-        Vector3 turnTorque;
 
-        //test the two ways of tilting
-        if (alternateTilting)
+        //turning the player
+        float rollTorqueMagnitude;
+        Vector3 rollTorque; //The roll torque from turning
+        float turnTiltTorqueMagnitude; 
+        Vector3 turnTiltTorque; //The tilt torque from turning
+
+        /**************
+        *
+        *Tilt the Player
+        *
+        **************/
+
+        /****************************************************************************
+        The first step to computing the torque needed for tilting the player is to
+        measure the player's current pitch angle and pitch angular velocity. To measure
+        the player's pitch angle we measure the angle between the player's forward vector and
+        a plane that the forward vector would be in if the player had a pitch angle of 0. This
+        plane will have be orientated horizontally (contain the vector Vector3.forward) and 
+        slice through the player along the x-axis (contain the vector this.transform.right).
+        We can then compute the normal of the plane with a cross product. Knowing this we
+        can project the player's forward vector into the plane to produce a vector with the same
+        angle with this.transform.forward as the plane would have. This angle can then be computed
+        using Vector3.SignedAngle. (Note using euler angles do not work as they do not have 
+        a unique representation. The player cannot alter their yaw, so we want the roll with
+        0 yaw, but the eular angle that Unity gives us may not be this.) Measuring the player's 
+        pitch angular velocity is much easier as rigidbody keep tracks of the player's
+        total angular velocity. We can then dot the total angular velocity with the player's
+        right vector to get their pitch angular velocity.
+        *****************************************************************************/
+
+        //compute the zero pitch plane normal 
+        Vector3 zeroPitchPlaneNormal = Vector3.Cross(this.transform.right, Vector3.forward);
+
+        //project forward vector in the horizontal plane
+        Vector3 forwardInHorizontalPlane = Vector3.ProjectOnPlane(this.transform.forward, Vector3.up); //This projection is so we can find angle to horizontal plane
+       
+        //Measure the pitch angle, note that if the angle is greater than 90 then the projected vector
+        //will flipped 180 degrees. In that case we need to flip it back by multiplying by -1. We can 
+        //check if this is the case by checking if the dot product between both world and local ups is 
+        //negative
+        float currentPitchAngle = Vector3.SignedAngle(forwardInHorizontalPlane, this.transform.forward, this.transform.right);
+
+        //measure the pitch angularVelocity
+        float currentPitchVelocity = Vector3.Dot(self.rigidbody.angularVelocity, this.transform.right);
+
+        /***********************************************************
+        The next step is compute the magnitude of the tilt torque. Note that there are 
+        three different cases the player can be in here. First is that
+        the player is above the upper limit. In this case the player cannot
+        continue to tilt up, but may still tilt down to go back in bounds.
+        The second case is that the player is below the lower limit. Here the
+        player cannot continue to tilt down, but may tilt up to go back in bounds.
+        Lastly the player can be in bounds in which case they can tilt up or down.
+        To tilt the play we will set the ptich angular velocity to the apporiate
+        value. This is done by setting the magnitude to the difference of the 
+        target velocity and the actually velocity that was measured. The we the 
+        player is and allow to tilt then their angular velocity is set to the 
+        tiltSpeed that is set in the inspector. Otherwise the angular velocity is
+        set to 0.
+        ************************************************************/
+        //check if your tilt is withing bounds
+        if (currentPitchAngle < minTiltAngle)
         {
-            //set the tilt value to the difference of current angle and max or min
-        
-            //get current angle
-            float currentTiltAngle = self.rigidbody.rotation.eulerAngles.x;
-
-            //Change angle from 360-270 and 0-90, to 0-180
-            currentTiltAngle = (currentTiltAngle + 90) % 360;
-
-            //compute the titlValue
+            //tilted too high (facing sky)
             if (tiltValue > 0)
             {
-                //Tilt up (negative direction)
-                // Debug.Log("Tilt up");
-                
-                // tiltValue =  currentTiltAngle - minTiltAngle;
-                tiltTorqueMagnitude = minTiltAngle - currentTiltAngle;
-            }
-            else if (tiltValue < 0)
-            {
-                //Tilt down (positive direction)
-                // Debug.Log("Tilt down");
-
-                tiltTorqueMagnitude = maxTiltAngle - currentTiltAngle;
+                tiltTorqueMagnitude = tiltValue * (tiltSpeed - currentPitchVelocity);
             }
             else
             {
-                // Debug.Log("No tilt");
-                //not tilting, reset to 90
-                tiltTorqueMagnitude = 90 - currentTiltAngle;
-
-                //not tilting, don't apply a torque
-                // tiltTorqueMagnitude = 0;
+                tiltTorqueMagnitude = -currentPitchVelocity;
+            }
+        }
+        else if (currentPitchAngle > maxTiltAngle)
+        {
+            //tilted too low (facing ground)
+            if (tiltValue < 0)
+            {
+                tiltTorqueMagnitude = tiltValue * (tiltSpeed - currentPitchVelocity);
+            }
+            else
+            {
+                tiltTorqueMagnitude = -currentPitchVelocity;
             }
         }
         else
         {
-            //get current angle
-            float currentTiltAngle = self.rigidbody.rotation.eulerAngles.x;
-
-            //get angularVelocity
-            float currentTiltVelocity = Mathf.Abs(self.rigidbody.angularVelocity.x);
-
-            //Change angle from 360-270 and 0-90, to 0-180
-            currentTiltAngle = (currentTiltAngle + 90) % 360;
-
-            //check if your tilt is withing bounds
-            // Debug.Log($"Current tilt angle: {minTiltAngle}");
-            if (currentTiltAngle < minTiltAngle)
-            {
-                //tilted too high (facing sky)
-                // Debug.Log($"Sky, angle: {currentTiltAngle}");
-                if (tiltValue > 0)
-                {
-                    // Debug.Log("Allow");
-                    tiltTorqueMagnitude = tiltValue * (tiltSpeed - currentTiltVelocity);
-                }
-                else
-                {
-                    // Debug.Log("Stopping");
-                    tiltTorqueMagnitude = currentTiltVelocity;
-                }
-            }
-            else if (currentTiltAngle > maxTiltAngle)
-            {
-                //tilted too low (facing ground)
-                // Debug.Log($"ground, angle: {currentTiltAngle}");
-                if (tiltValue < 0)
-                {
-                    tiltTorqueMagnitude = tiltValue * (tiltSpeed - currentTiltVelocity);
-                }
-                else
-                {
-                    tiltTorqueMagnitude = -currentTiltVelocity;
-                }
-            }
-            else
-            {
-                //in range
-                // Debug.Log($"In range, angle: {currentTiltAngle}");
-                tiltTorqueMagnitude = tiltValue * (tiltSpeed - currentTiltVelocity);
-            }
+            //in range
+            tiltTorqueMagnitude = tiltValue * (tiltSpeed - Mathf.Abs(currentPitchVelocity));
         }
-        tiltTorque = transform.right * tiltTorqueMagnitude;
 
-        //turn the palyer
+        /********************************************************************************
+        Once we computed the magnitude of the tiltTorque, and can compute the tilt torque
+        and set it equal the total torque (since this is the first torque we computed)
+        *********************************************************************************/
+        totalTorque = transform.right * tiltTorqueMagnitude;
+
+        /**************
+        *
+        *Turn the Player
+        *
+        **************/
         if (alternateTurning)
         {
-            //set the roll to 90 degrees in appropriate direction
-            float currentRollAngle = self.rigidbody.rotation.eulerAngles.z;
+            /****************************************************************************
+            The first step to computing the torque needed for turning the player is to
+            measure the player's current roll angle and roll angular velocity. To measure
+            the player's roll angle we measure the angle between the player's up vector and
+            a plane that the up vector would be in if the player had a roll angle of 0. This
+            plane will have be orientated vertically (contain the vector Vector3.up) and 
+            slice through the player along the z-axis (contain the vector this.transform.forward).
+            We can then compute the normal of the plane with a cross product. Knowing this we
+            can project the player's up vector into the plane to produce a vector with the same
+            angle with this.transform.up as the plane would have. This angle can then be computed
+            using Vector3.SignedAngle. (Note using euler angles do not work as they do not have 
+            a unique representation. The player cannot alter their yaw, so we want the roll with
+            0 yaw, but the eular angle that Unity gives us may not be this.) Measuring the player's 
+            roll angular velocity is much easier as rigidbody keep tracks of the player's
+            total angular velocity. We can then dot the total angular velocity with the player's
+            forward vector to get their roll angular velocity.
+            *****************************************************************************/
 
-            float rollTorqueMagnitude = (80 * turnValue) - currentRollAngle;
+            //compute zero roll plane normal
+            Vector3 zeroRollPlaneNormal = Vector3.Cross(this.transform.forward, Vector3.up);
 
-            self.rigidbody.AddTorque(transform.forward * rollTorqueMagnitude, ForceMode.Impulse);
+            //project up into zero roll plane
+            Vector3 upInVerticalPlane = Vector3.ProjectOnPlane(this.transform.up, zeroRollPlaneNormal); 
+
+            //Measure the roll angle, note that if the angle is greater than 90 then the projected vector
+            //will flipped 180 degrees. In that case we need to flip it back by multiplying by -1. We can 
+            //check if this is the case by checking if the dot product between both world and local ups is 
+            //negative
+            float currentRollAngle;
+            if (Vector3.Dot(this.transform.up, Vector3.up) > 0)
+            {
+                currentRollAngle = Vector3.SignedAngle(upInVerticalPlane, this.transform.up, this.transform.forward);
+            }
+            else
+            {
+                currentRollAngle = Vector3.SignedAngle(-upInVerticalPlane, this.transform.up, this.transform.forward);
+            }
+
+            //measure the roll angular velocity
+            float currentRollVelocity = Vector3.Dot(self.rigidbody.angularVelocity, this.transform.forward);
+
+            /****************************************************************************
+            With both the roll angle and angular velocity, the next step is to compute the 
+            torque to apply. Turing requires a combination of both roll and pitch torque, so
+            this computation will be done over two steps. Let us first compute the roll torque.
+            For that we want to set the roll to a specfic value determined by using input.
+            We can imagine creating virtual spring that pulls the roll angle to some equilibrium.
+            If we set this equilibrium to be the desire roll angle then the spring will pull the angle
+            to our desire angle. If we also add damping to the spring then with the right spring constant
+            and damping coefficient (fine toning constants set in the inspector), the virtual will
+            pull and hold the roll angle at the desire value. We will then compute the roll torque
+            using the apporiate spring and damping torques.
+            *****************************************************************************/
+
+            //We want to hold the roll angle at some equilibrium determined by player input
+            //To do that we will use a virtual spring with the correct equilibrium point for
+            //this frame. This equilibrium point is between -90 and 90 and is computed using
+            //(90 * turnValue), where turnValue is a value from -1 to 1 set by user input
+            float distanceFromEquilibrium = (90 * turnValue) - currentRollAngle; 
+
+            //Use a harmonic osciallator torque to pull and hold the angle at an equilibrium (either -90, 0, or 90 base on player input) 
+            rollTorqueMagnitude = (alternateTurnSpringConstant * distanceFromEquilibrium) - (alternateTurnDampingPower * currentRollVelocity);
+            rollTorque = rollTorqueMagnitude * transform.forward;
+
+            /********************************************************************************
+            The next step is to compute the pitch or tilt torque for turning. With a roll angle of
+            90 (or -90) degrees, the player's up vector is pointing in the direction we want to turn.
+            Since a negative pitch/tilt angle rotates the player towards their up vector we will apply
+            a negative torque. We will set the magnitude of this torque to a fine toning constant that
+            determine the speed the player will turn at.
+            *********************************************************************************/
 
             //add a tilt torque for turning
-            float turnTiltTorqueMagnitude = turnSpeed * turnValue;
+            turnTiltTorqueMagnitude = -Mathf.Abs(turnSpeed * turnValue); //needs to be negative to tilt up for the turn
+            // Debug.Log($"turn tilt magnitude {turnTiltTorqueMagnitude}, speed {turnSpeed}, turn value {turnValue}");
 
-            Vector3 turnTiltTorque = transform.right * turnTiltTorqueMagnitude;
+            turnTiltTorque = transform.right * turnTiltTorqueMagnitude;
 
-            tiltTorque += turnTiltTorque;
+            /***********************************************************************************
+            With both components of the turn torque computed, we can compute the full turn torque
+            by computing their sum. We will also add this to the pitch torque from tilting the player
+            to get the total torque being applied this frame.
+            ***********************************************************************************/
+            
+            //Add the full turn torque to the total torque
+            totalTorque += turnTiltTorque + rollTorque;
         }
         else
         {
-
+            //When the player have full control of their roll angle then
+            //just apply the torque from use input. There is no set values
+            //or constraints
+            totalTorque += transform.forward * turnValue;
         }
-        turnTorque = transform.forward * turnValue;
 
         //apply the torque
-        if (alternateTilting)
-        {
-            self.rigidbody.AddTorque(tiltTorque, ForceMode.Impulse);
-        }
-        else
-        {
-            self.rigidbody.AddTorque(tiltTorque + turnTorque);
-        }
+        self.rigidbody.AddTorque(totalTorque);
     }
 
     private void rotatePlayer()
