@@ -52,7 +52,6 @@ public class MovementFlying : MovementMode
 
     private void OnEnable()
     {
-        Debug.Log("Now Flying");
         //enable gravity
         self.rigidbody.useGravity = true;
 
@@ -89,33 +88,34 @@ public class MovementFlying : MovementMode
         //test function to add forward speed
         if (speedBoost)
         {
-            // AddForce(transform.forward * speedBoostMagnitude);
             AddForce(transform.forward * speedBoostMagnitude, ForceMode.Force);
-
         }
 
         base.FixedUpdate();
-
-        // Debug.Log($"tilt angle: {self.rigidbody.rotation.eulerAngles.x}");
     }
 
     private void AddLift()
     {
         //variables for calculating lift
-        Vector3 horizontalVelocity;
+        Vector3 relativeWind; //the wind for Ika's frame of reference
+        Vector3 forwardWind;  //The component of relative wind that flows over Ika's wings in the correct direction
         float coefficientOfLift;
         float liftMagnitude;
         Vector3 lift;
         float inducedDragMagnitude;
         Vector3 inducedDrag;
+
+        //calculate the relative wind, for now just the opposite of velocity
+        //later add in the absolute wind vector
+        relativeWind = self.rigidbody.velocity;
         
         //calculate lift
 
         //Calculate the magnitude of the horizontal velocity
         // Debug.Log($"velocity: {self.rigidbody.velocity}");
-        horizontalVelocity = Vector3.ProjectOnPlane(self.rigidbody.velocity, this.transform.right);
-        // Debug.Log($"horizontal velocity: {horizontalVelocity}");
-        // Debug.Log($"squared velocity: {horizontalVelocity.sqrMagnitude}");
+        forwardWind = Vector3.Project(relativeWind, this.transform.forward);
+        // Debug.Log($"horizontal velocity: {forwardWind}");
+        // Debug.Log($"squared velocity: {forwardWind.sqrMagnitude}");
 
         //Calculate the coefficient of lift using animation curves
         coefficientOfLift = coefficientOfLiftCurve.Evaluate(angleOfAttack);
@@ -126,29 +126,31 @@ public class MovementFlying : MovementMode
         // Debug.Log($"coefficient of lift: {coefficientOfLift}");
 
         //compute lift Magnitude 
-        liftMagnitude = coefficientOfLift * liftPower * horizontalVelocity.sqrMagnitude;
+        liftMagnitude = coefficientOfLift * liftPower * forwardWind.sqrMagnitude;
         // Debug.Log($"lift magnitude: {liftMagnitude}");
 
         //apply lift in the perpendicular to air flow and right side
-        lift = Vector3.Cross(horizontalVelocity.normalized, transform.right) * liftMagnitude;
+        lift = Vector3.Cross(forwardWind.normalized, transform.right) * liftMagnitude;
 
         // Debug.Log($"adding lift {lift}");
-        Vector3 horizontalLift = Vector3.ProjectOnPlane(lift, Vector3.up);
-        float horizontalLiftBoost = 10.0f;
-        horizontalLift = horizontalLift * horizontalLiftBoost;
+        // Vector3 horizontalLift = Vector3.ProjectOnPlane(lift, Vector3.up);
+        // float horizontalLiftBoost = 10.0f;
+        // horizontalLift = horizontalLift * horizontalLiftBoost;
         // Debug.Log($"horizonatal lift magnitude {horizontalLift.magnitude}");
+        Debug.Log($"Lift dot velocity {Vector3.Dot(lift, forwardWind)}");
         Debug.DrawLine(transform.position, transform.position + lift, Color.red);
         AddForce(lift, ForceMode.Force);
         // Vector3 forceApplicationOffset = transform.up * 0.5f;
         // AddForceAtPosition(lift, transform.position + forceApplicationOffset);
 
         //calculate the induce drag
-        inducedDragMagnitude = coefficientOfLift * coefficientOfLift * coefficientOfInducedDrag * horizontalVelocity.sqrMagnitude;
-        inducedDrag = -horizontalVelocity.normalized * inducedDragMagnitude;
+        inducedDragMagnitude = coefficientOfLift * coefficientOfLift * coefficientOfInducedDrag * forwardWind.sqrMagnitude;
+        inducedDrag = forwardWind.normalized * inducedDragMagnitude;
         
         // Debug.Log(inducedDragMagnitude);
-        Debug.DrawLine(transform.position, transform.position + inducedDrag, Color.green);
-        AddForce(inducedDrag, ForceMode.Force);
+        // Debug.Log($"Induced drag cross velocity {Vector3.Cross(inducedDrag, self.rigidbody.velocity)}");
+        // Debug.DrawLine(transform.position, transform.position + inducedDrag, Color.green);
+        // AddForce(inducedDrag, ForceMode.Force);
     }
 
     private void AddTorque()

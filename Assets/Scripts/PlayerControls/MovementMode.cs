@@ -126,6 +126,7 @@ public abstract class MovementMode : MonoBehaviour
         }
 
         //apply force to rigidbody
+        Debug.DrawLine(transform.position, transform.position + force, Color.red);
         self.rigidbody.AddForce(force, mode);
     }
 
