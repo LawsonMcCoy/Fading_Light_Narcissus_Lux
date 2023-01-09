@@ -88,10 +88,12 @@ public class MovementFlying : MovementMode
         //test function to add forward speed
         if (speedBoost)
         {
-            AddForce(transform.forward * speedBoostMagnitude, ForceMode.Force);
+            // AddForce(transform.forward * speedBoostMagnitude, ForceMode.Force);
         }
 
         base.FixedUpdate();
+
+        Debug.Log($"Current Velocity {self.rigidbody.velocity.magnitude}");
     }
 
     private void AddLift()
@@ -107,13 +109,14 @@ public class MovementFlying : MovementMode
 
         //calculate the relative wind, for now just the opposite of velocity
         //later add in the absolute wind vector
-        relativeWind = self.rigidbody.velocity;
+        relativeWind = -self.rigidbody.velocity;
         
         //calculate lift
 
         //Calculate the magnitude of the horizontal velocity
         // Debug.Log($"velocity: {self.rigidbody.velocity}");
         forwardWind = Vector3.Project(relativeWind, this.transform.forward);
+        // forwardWind = Vector3.ProjectOnPlane(relativeWind, this.transform.right);
         // Debug.Log($"horizontal velocity: {forwardWind}");
         // Debug.Log($"squared velocity: {forwardWind.sqrMagnitude}");
 
@@ -126,18 +129,18 @@ public class MovementFlying : MovementMode
         // Debug.Log($"coefficient of lift: {coefficientOfLift}");
 
         //compute lift Magnitude 
-        liftMagnitude = coefficientOfLift * liftPower * forwardWind.sqrMagnitude;
+        liftMagnitude = /*coefficientOfLift **/ liftPower * forwardWind.sqrMagnitude;
         // Debug.Log($"lift magnitude: {liftMagnitude}");
 
         //apply lift in the perpendicular to air flow and right side
-        lift = Vector3.Cross(forwardWind.normalized, transform.right) * liftMagnitude;
+        lift = Vector3.Cross(transform.right, forwardWind.normalized) * liftMagnitude;
 
         // Debug.Log($"adding lift {lift}");
         // Vector3 horizontalLift = Vector3.ProjectOnPlane(lift, Vector3.up);
         // float horizontalLiftBoost = 10.0f;
         // horizontalLift = horizontalLift * horizontalLiftBoost;
         // Debug.Log($"horizonatal lift magnitude {horizontalLift.magnitude}");
-        Debug.Log($"Lift dot velocity {Vector3.Dot(lift, forwardWind)}");
+        // Debug.Log($"Lift dot velocity {Vector3.Dot(lift, forwardWind)}");
         Debug.DrawLine(transform.position, transform.position + lift, Color.red);
         AddForce(lift, ForceMode.Force);
         // Vector3 forceApplicationOffset = transform.up * 0.5f;

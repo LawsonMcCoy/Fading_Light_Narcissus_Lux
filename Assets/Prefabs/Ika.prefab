@@ -493,7 +493,7 @@ MonoBehaviour:
   - {fileID: 7204556638568947314}
   stamina: {fileID: 2271143012148580341}
   movementModeText: {fileID: 8925406608850753112}
-  testForwardSpeed: 20
+  testForwardSpeed: 0
   forwardThrustMagnitude: 5
   liftPower: 3
   coefficientOfInducedDrag: 3
