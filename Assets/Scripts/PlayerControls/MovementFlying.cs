@@ -9,6 +9,8 @@ public class MovementFlying : MovementMode
     [SerializeField] private float forwardThrustMagnitude;
     [SerializeField] private float liftPower; //A fine toning value for the magnitude of lift
     [SerializeField] private float coefficientOfInducedDrag; //a fine toning value for the magnitude of induce drag
+    [SerializeField] private float coefficientOfDrag; //a fine toning value for regular drag
+    [SerializeField] private Vector3 dragScalingValues; //A scaling vector to allow drag to unevenly applied in different directions
     [SerializeField] private AnimationCurve coefficientOfLiftCurve; //an animation curve used to compute the coefficient 
                                                                     //of lift from the angle of attack
 
@@ -88,12 +90,12 @@ public class MovementFlying : MovementMode
         //test function to add forward speed
         if (speedBoost)
         {
-            // AddForce(transform.forward * speedBoostMagnitude, ForceMode.Force);
+            AddForce(transform.forward * speedBoostMagnitude, ForceMode.Force);
         }
 
         base.FixedUpdate();
 
-        Debug.Log($"Current Velocity {self.rigidbody.velocity.magnitude}");
+        // Debug.Log($"Current Velocity {self.rigidbody.velocity.magnitude}");
     }
 
     private void AddLift()
@@ -104,6 +106,8 @@ public class MovementFlying : MovementMode
         float coefficientOfLift;
         float liftMagnitude;
         Vector3 lift;
+        Vector3 localDragScaleValues; //drage scale values after rotating them to local space
+        Vector3 drag;
         float inducedDragMagnitude;
         Vector3 inducedDrag;
 
@@ -114,11 +118,7 @@ public class MovementFlying : MovementMode
         //calculate lift
 
         //Calculate the magnitude of the horizontal velocity
-        // Debug.Log($"velocity: {self.rigidbody.velocity}");
         forwardWind = Vector3.Project(relativeWind, this.transform.forward);
-        // forwardWind = Vector3.ProjectOnPlane(relativeWind, this.transform.right);
-        // Debug.Log($"horizontal velocity: {forwardWind}");
-        // Debug.Log($"squared velocity: {forwardWind.sqrMagnitude}");
 
         //Calculate the coefficient of lift using animation curves
         coefficientOfLift = coefficientOfLiftCurve.Evaluate(angleOfAttack);
@@ -126,34 +126,29 @@ public class MovementFlying : MovementMode
         {
             coefficientOfLift = 0.0f;
         }
-        // Debug.Log($"coefficient of lift: {coefficientOfLift}");
 
         //compute lift Magnitude 
-        liftMagnitude = /*coefficientOfLift **/ liftPower * forwardWind.sqrMagnitude;
-        // Debug.Log($"lift magnitude: {liftMagnitude}");
+        liftMagnitude = coefficientOfLift * liftPower * forwardWind.sqrMagnitude;
+        Debug.Log($"lift magnitude: {liftMagnitude}, coefficient of lift {coefficientOfLift}, angle of attack {angleOfAttack}");
 
         //apply lift in the perpendicular to air flow and right side
         lift = Vector3.Cross(transform.right, forwardWind.normalized) * liftMagnitude;
 
-        // Debug.Log($"adding lift {lift}");
-        // Vector3 horizontalLift = Vector3.ProjectOnPlane(lift, Vector3.up);
-        // float horizontalLiftBoost = 10.0f;
-        // horizontalLift = horizontalLift * horizontalLiftBoost;
-        // Debug.Log($"horizonatal lift magnitude {horizontalLift.magnitude}");
-        // Debug.Log($"Lift dot velocity {Vector3.Dot(lift, forwardWind)}");
         Debug.DrawLine(transform.position, transform.position + lift, Color.red);
         AddForce(lift, ForceMode.Force);
-        // Vector3 forceApplicationOffset = transform.up * 0.5f;
-        // AddForceAtPosition(lift, transform.position + forceApplicationOffset);
+
+        //calculate the regular drag
+        localDragScaleValues = Quaternion.Inverse(self.rigidbody.rotation) * dragScalingValues;
+        drag = coefficientOfDrag * Vector3.Scale(relativeWind, dragScalingValues);
+
+        //apply the drag force
+        AddForce(drag, ForceMode.Force);
 
         //calculate the induce drag
         inducedDragMagnitude = coefficientOfLift * coefficientOfLift * coefficientOfInducedDrag * forwardWind.sqrMagnitude;
         inducedDrag = forwardWind.normalized * inducedDragMagnitude;
         
-        // Debug.Log(inducedDragMagnitude);
-        // Debug.Log($"Induced drag cross velocity {Vector3.Cross(inducedDrag, self.rigidbody.velocity)}");
-        // Debug.DrawLine(transform.position, transform.position + inducedDrag, Color.green);
-        // AddForce(inducedDrag, ForceMode.Force);
+        AddForce(inducedDrag, ForceMode.Force);
     }
 
     private void AddTorque()
@@ -427,70 +422,6 @@ public class MovementFlying : MovementMode
     {
         //x component is turning, y component is tilting
         Vector2 moveVector = input.Get<Vector2>();
-
-        // //test the two ways of tilting
-        // if (alternateTilting)
-        // {
-        //     //set the tilt value to the difference of current angle and max or min
-            
-        //     //get current angle
-        //     float currentTiltAngle = self.rigidbody.rotation.eulerAngles.x;
-
-        //     //Change angle from 360-270 and 0-90, to 0-180
-        //     currentTiltAngle = (currentTiltAngle + 90) % 360;
-
-        //     //compute the titlValue
-        //     if (moveVector.y > 0)
-        //     {
-        //         //Tilt up (negative direction)
-        //         Debug.Log("Tilt up");
-                
-        //         // tiltValue =  currentTiltAngle - minTiltAngle;
-        //         tiltValue = minTiltAngle - currentTiltAngle;
-        //     }
-        //     else if (moveVector.y < 0)
-        //     {
-        //         //Tilt down (positive direction)
-        //         Debug.Log("Tilt down");
-
-        //         tiltValue = maxTiltAngle - currentTiltAngle;
-        //     }
-        //     else
-        //     {
-        //         Debug.Log("No tilt");
-        //         //not tilting, reset to 0
-        //         tiltValue = -currentTiltAngle;
-        //     }
-        // }
-        // else
-        // {
-        //     //get current angle
-        //     float currentTiltAngle = self.rigidbody.rotation.eulerAngles.x;
-
-        //     //Change angle from 360-270 and 0-90, to 0-180
-        //     currentTiltAngle = (currentTiltAngle + 90) % 360;
-
-        //     //check if your tilt is withing bounds
-        //     Debug.Log($"Current tilt angle: {currentTiltAngle}");
-        //     if (currentTiltAngle < 0)
-        //     {
-        //         //tilted too high (facing sky)
-        //         Debug.Log("Sky");
-        //         tiltValue = 0;
-        //     }
-        //     else if (currentTiltAngle > 180)
-        //     {
-        //         //tilted too low (facing ground)
-        //         Debug.Log("ground");
-        //         tiltValue = 0;
-        //     }
-        //     else
-        //     {
-        //         //in range
-        //         Debug.Log("In range");
-        //         tiltValue = -moveVector.y;
-        //     }
-        // }
 
         tiltValue = -moveVector.y;
         turnValue = -moveVector.x;

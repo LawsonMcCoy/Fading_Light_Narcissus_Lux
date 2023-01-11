@@ -1342,6 +1342,62 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ika
       objectReference: {fileID: 0}
+    - target: {fileID: 7500087056224878709, guid: 3e9ab670be1e0daf7a1d64d3cb696b00, type: 3}
+      propertyPath: m_Size.x
+      value: 0.419
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500087056224878716, guid: 3e9ab670be1e0daf7a1d64d3cb696b00, type: 3}
+      propertyPath: liftPower
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500087056224878716, guid: 3e9ab670be1e0daf7a1d64d3cb696b00, type: 3}
+      propertyPath: forwardThrustMagnitude
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500087056224878716, guid: 3e9ab670be1e0daf7a1d64d3cb696b00, type: 3}
+      propertyPath: coefficientOfInducedDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500087056224878716, guid: 3e9ab670be1e0daf7a1d64d3cb696b00, type: 3}
+      propertyPath: alternateTurnDampingPower
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500087056224878716, guid: 3e9ab670be1e0daf7a1d64d3cb696b00, type: 3}
+      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[2].time
+      value: -9.9795685
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500087056224878716, guid: 3e9ab670be1e0daf7a1d64d3cb696b00, type: 3}
+      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[2].value
+      value: 0.0008639358
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500087056224878716, guid: 3e9ab670be1e0daf7a1d64d3cb696b00, type: 3}
+      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[1].inSlope
+      value: 0.016649365
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500087056224878716, guid: 3e9ab670be1e0daf7a1d64d3cb696b00, type: 3}
+      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[2].inSlope
+      value: 0.03752734
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500087056224878716, guid: 3e9ab670be1e0daf7a1d64d3cb696b00, type: 3}
+      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[3].inSlope
+      value: 0.004277286
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500087056224878716, guid: 3e9ab670be1e0daf7a1d64d3cb696b00, type: 3}
+      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[1].outSlope
+      value: 0.016649365
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500087056224878716, guid: 3e9ab670be1e0daf7a1d64d3cb696b00, type: 3}
+      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[2].outSlope
+      value: 0.03752734
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500087056224878716, guid: 3e9ab670be1e0daf7a1d64d3cb696b00, type: 3}
+      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[3].outSlope
+      value: 0.004277286
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500087056224878717, guid: 3e9ab670be1e0daf7a1d64d3cb696b00, type: 3}
+      propertyPath: m_Mass
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 8975377035556011077, guid: 3e9ab670be1e0daf7a1d64d3cb696b00, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

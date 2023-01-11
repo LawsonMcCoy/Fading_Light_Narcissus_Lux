@@ -25,7 +25,7 @@
                 },
                 {
                     "name": "SpeedBoost",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "76d9abbc-b234-4944-8eaa-3cdeab5d0c6a",
                     "expectedControlType": "Button",
                     "processors": "",
