@@ -5,19 +5,34 @@ using UnityEngine.InputSystem;
 
 public class MovementFlying : MovementMode
 {
+    //movement force values
     [SerializeField] private float testForwardSpeed;
     [SerializeField] private float forwardThrustMagnitude;
+    [Tooltip("A fine toning value for the magnitude of lift")]
     [SerializeField] private float liftPower; //A fine toning value for the magnitude of lift
+    [Tooltip("a fine toning value for the magnitude of induce drag (This is a side effect of lift an always points parrallel to air flow over wings)")]
     [SerializeField] private float coefficientOfInducedDrag; //a fine toning value for the magnitude of induce drag
+    [Tooltip("a fine toning value for regular drag (this is combination of all forms of drag expect for induced drag, it is also scaled by drageScalingValues)")]
     [SerializeField] private float coefficientOfDrag; //a fine toning value for regular drag
+    [Tooltip("A scaling vector to allow drag to unevenly applied in different directions")]
     [SerializeField] private Vector3 dragScalingValues; //A scaling vector to allow drag to unevenly applied in different directions
+    [Tooltip("an animation curve used to compute the coefficient of lift from the angle of attack")]
     [SerializeField] private AnimationCurve coefficientOfLiftCurve; //an animation curve used to compute the coefficient 
                                                                     //of lift from the angle of attack
 
+    //values used in calculation of the flight forces, some are properties to allow UI to read the values
     private float angleOfAttack; //the angle between the velocity and the horizontal plane
     private Vector3 localVelocity;
+    public Vector3 relativeWind 
+    {
+        get;
+        private set;
+    } //the wind for Ika's frame of reference
 
+    //turning torques values
+    [Tooltip("The speed that Ika changes his pitch at when W or S is pressed")]
     [SerializeField] private float tiltSpeed;
+    [Tooltip("A value that affect how sharpely Ika is able to turn")]
     [SerializeField] private float turnSpeed;
     [Tooltip("Limits how much the player can tilt torwards the sky, expected positive value from 0-90")]
     [SerializeField] private float maxTiltAngle; //expected value from 270-360
@@ -25,7 +40,13 @@ public class MovementFlying : MovementMode
     [SerializeField] private float minTiltAngle; //expected value from 0-90
     [SerializeField] private float maxTurnAngle;
 
+    //other values
+    [Tooltip("A layermask for that include all layer that causes Ika to fall out of flight when collided with")]
     [SerializeField] private LayerMask collisionLayer;
+    [Tooltip("The particle system used for to visual the relative wind")]
+    [SerializeField] private ParticleSystem windParticles;
+
+
 
     //Testing
     [SerializeField] private bool alternateTurning;
@@ -41,6 +62,7 @@ public class MovementFlying : MovementMode
     //testing variables
     private bool speedBoost; //a variable that will add forward speed when it is true
     [SerializeField] float speedBoostMagnitude;
+    [SerializeField] float speedBoostStaminaCost;
 
     protected override void Awake()
     {
@@ -68,6 +90,15 @@ public class MovementFlying : MovementMode
 
         modeUIColor = new Color(0f, 0.8f, 1f, 1f);
         movementModeText.color = modeUIColor;
+
+        //Play the wind particles, so the player sees wind when in flight
+        windParticles.Play();
+    }
+
+    private void OnDisable()
+    {
+        //stop the wind particles, so the player doesn't see wind in other movement modes
+        windParticles.Stop();
     }
 
     protected override void FixedUpdate()
@@ -91,17 +122,22 @@ public class MovementFlying : MovementMode
         if (speedBoost)
         {
             AddForce(transform.forward * speedBoostMagnitude, ForceMode.Force);
+
+            //This may no longer be a test feature only, making it cost stamina is an option we could give players
+            stamina.Subtract(speedBoostStaminaCost * Time.fixedDeltaTime);
         }
+
+        //update the wind particle system
+        UpdateWindVisulation();
 
         base.FixedUpdate();
 
-        // Debug.Log($"Current Velocity {self.rigidbody.velocity.magnitude}");
+        Debug.DrawLine(transform.position, transform.position + self.rigidbody.velocity, Color.green);
     }
 
     private void AddLift()
     {
         //variables for calculating lift
-        Vector3 relativeWind; //the wind for Ika's frame of reference
         Vector3 forwardWind;  //The component of relative wind that flows over Ika's wings in the correct direction
         float coefficientOfLift;
         float liftMagnitude;
@@ -129,7 +165,7 @@ public class MovementFlying : MovementMode
 
         //compute lift Magnitude 
         liftMagnitude = coefficientOfLift * liftPower * forwardWind.sqrMagnitude;
-        Debug.Log($"lift magnitude: {liftMagnitude}, coefficient of lift {coefficientOfLift}, angle of attack {angleOfAttack}");
+        // Debug.Log($"lift magnitude: {liftMagnitude}, coefficient of lift {coefficientOfLift}, angle of attack {angleOfAttack}");
 
         //apply lift in the perpendicular to air flow and right side
         lift = Vector3.Cross(transform.right, forwardWind.normalized) * liftMagnitude;
@@ -153,12 +189,10 @@ public class MovementFlying : MovementMode
 
     private void AddTorque()
     {
-        float totalTorqueMagnitude; //the magnitude of the total torque being applied
-        Vector3 totalTorque;
+        Vector3 totalTorque; //The net torque to apply, sum of all indvivdual torques
 
         //tilting the player
         float tiltTorqueMagnitude;
-        Vector3 tiltTorque;
 
         //turning the player
         float rollTorqueMagnitude;
@@ -361,6 +395,19 @@ public class MovementFlying : MovementMode
 
         //apply the torque
         self.rigidbody.AddTorque(totalTorque);
+    }
+
+    //A function to update the appear of the particle system
+    //that create the visulation of relative wind for the player
+    private void UpdateWindVisulation()
+    {
+        //update direction, wind particles should move in the direction of relative wind
+        ParticleSystem.ShapeModule windShape = windParticles.shape;
+        Quaternion windDirection = Quaternion.Inverse(transform.rotation) * Quaternion.LookRotation(relativeWind); //create a rotation to point in the wind direction 
+                                                                                                                   //then convert it to local coordinates
+        windShape.rotation = windDirection.eulerAngles;
+
+        //update speed
     }
 
     private void rotatePlayer()

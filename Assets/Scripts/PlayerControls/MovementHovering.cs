@@ -8,10 +8,18 @@ public class MovementHovering : MovementMode
     [SerializeField] private float hoverSpeed;
     [SerializeField] private float turnSpeed;
     [SerializeField] private float passiveStaminaLostRate; //The amount of stamina lost per second while hovering
+    [SerializeField] private float hoveringDampingCoefficient; //The damping coefficient to the stop the player
+
 
     private float turnValue;
 
-    private void Awake()
+    //testing variables
+    [SerializeField] private bool alternateHover;
+    [SerializeField] private float hoverFallBase;
+    [SerializeField] private float hoverFallExponent;
+    private float hoverTime; //The amount of time Ika as been hovering, used to calculate hover fall rate
+
+    protected override void Awake()
     {
         base.Awake();
 
@@ -43,29 +51,58 @@ public class MovementHovering : MovementMode
         //stop all motion
         self.rigidbody.velocity = Vector3.zero;
 
+        //just started hovering, so set hoverTime to zero
+        hoverTime = 0f;
+
         modeUIColor = new Color(0f, 0.8f, 0f, 1f);
         movementModeText.color = modeUIColor;
     }
 
     protected override void FixedUpdate()
     {
+        //update the hover time
+        hoverTime += Time.fixedDeltaTime;
+
         //move the player 
         // self.rigidbody.position += moveVector * Time.fixedDeltaTime;
         Vector3 horizontalVelocity = self.rigidbody.velocity;
-        horizontalVelocity.y = 0.0f; //set vertical component to zero
-        self.rigidbody.AddForce(moveVector - self.rigidbody.velocity, ForceMode.Force);
+        // horizontalVelocity.y = 0.0f; //set vertical component to zero
+        if (alternateHover)
+        {
+            moveVector.y = -Mathf.Pow(hoverFallBase, hoverFallExponent * hoverTime); 
+        }
+        self.rigidbody.AddForce(moveVector - (hoveringDampingCoefficient * self.rigidbody.velocity), ForceMode.Force);
 
         //rotate the player
         Quaternion newRotation = self.rigidbody.rotation * Quaternion.Euler(0, turnValue * Time.fixedDeltaTime, 0);
         self.rigidbody.rotation = newRotation;
 
-        //consume stamina while in hovering mode
-        stamina.Subtract(passiveStaminaLostRate * Time.fixedDeltaTime); //lose stamina
-
-        //if all stamina has be lost transition to walking
-        if (stamina.ResourceAmount() == 0)
+        if (!alternateHover)
         {
-            Transition(Modes.WALKING);
+            //consume stamina while in hovering mode
+            stamina.Subtract(passiveStaminaLostRate * Time.fixedDeltaTime); //lose stamina
+        }
+        else
+        {
+            //slowing falls in hover mode
+            // AddForce(hoverFallRate * Time.fixedDeltaTime * Vector3.down, ForceMode.Force);
+        }
+
+        if (!alternateHover)
+        {
+            //if all stamina has be lost transition to walking
+            if (stamina.ResourceAmount() == 0)
+            {
+                Transition(Modes.WALKING);
+            }
+        }
+        else
+        {
+            //if you land on the ground then transition to walking
+            if (IsGrounded())
+            {
+                Transition(Modes.WALKING);
+            }
         }
     }
 

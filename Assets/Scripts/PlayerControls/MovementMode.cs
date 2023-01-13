@@ -117,6 +117,13 @@ public abstract class MovementMode : MonoBehaviour
         }
     }
 
+    //overload of IsGrounded so it can be called without returning the RaycastHit
+    protected bool IsGrounded()
+    {
+        RaycastHit unsedGroundedInfo;
+        return IsGrounded(out unsedGroundedInfo);
+    }
+
     protected void AddForce(Vector3 force, ForceMode mode)
     {
         //limit the force to max force

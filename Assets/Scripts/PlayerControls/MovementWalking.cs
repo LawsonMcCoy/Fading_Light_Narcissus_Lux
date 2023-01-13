@@ -12,13 +12,14 @@ public class MovementWalking : MovementMode
     [SerializeField] private float jumpForceStationary; //How strong the player can jump when not moving
     [SerializeField] private float staminaRegainRate; //The amount of stamina regain per second while walking
     [SerializeField] private float dashJumpForce; //How strong the player can jump at the end of dash
+    [SerializeField] private float walkingDampingCoefficient; //The damping coefficient to the stop the player
 
 
     private float turnValue;
     private bool onGround; //A bool value that is true when on the ground and false otherwise
                            //updated in the CheckGroundStatus function
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
 
@@ -89,7 +90,7 @@ public class MovementWalking : MovementMode
             // self.rigidbody.MovePosition(self.rigidbody.position + (moveVector * Time.fixedDeltaTime));
             Vector3 horizontalVelocity = self.rigidbody.velocity;
             horizontalVelocity.y = 0.0f; //set vertical component to zero
-            self.rigidbody.AddForce(moveVector - self.rigidbody.velocity, ForceMode.Force);
+            self.rigidbody.AddForce(moveVector - (walkingDampingCoefficient * self.rigidbody.velocity), ForceMode.Force);
 
             //rotate the player
             Quaternion newRotation = self.rigidbody.rotation * Quaternion.Euler(0, turnValue * Time.fixedDeltaTime, 0);
