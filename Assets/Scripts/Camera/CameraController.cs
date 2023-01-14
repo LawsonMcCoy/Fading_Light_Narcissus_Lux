@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
               "camera, and an angle of phi=0 always places the camera directly above the player. This vector only affects camera position, not it's " +
               "orientation.")]
     [SerializeField] Vector3 sphericalPosition = new Vector3(10, 0, 0); //will change default value later
+    private Vector3 lookDirection = Vector3.forward; //A unit vector representing where the camera is looking
 
     private void LateUpdate()
     {
@@ -93,6 +94,20 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
             //nothing blocking the camera's view, we are good to place it at the desired distance
             transform.position = player.transform.position + (sphericalPosition.x * cameraDirection);
         }
+    }
+
+    //This is a simple function that rotates the camera so it looks in the direction of its look vector
+    private void RotateCamera()
+    {
+        //make sure lookDirection is nonzero
+        if (lookDirection == Vector3.zero)
+        {
+            Debug.LogError("The Camera's looking direction vector is zero");
+        }
+
+        //make the camera look in the correct direction, note the camera should not be upside down so we 
+        //are good to use Vector3.up as the camera's reference for up
+        transform.rotation = Quaternion.LookRotation(lookDirection);
     }
 
     /*****************************************
@@ -193,6 +208,14 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
 
         //move the camera to the correct position for this frame
         MoveCamera();
+
+        //Compute the camera's new look direction unit vector
+
+        //for now just have the camera look at the player, may change later
+        lookDirection = Vector3.Normalize(player.transform.position - transform.position);
+
+        //rotate the camera to its look direction
+        RotateCamera();
     }
 
     public void HoverUpdate(MovementHovering movement)
@@ -202,6 +225,14 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
 
         //move the camera to the correct position for this frame
         MoveCamera();
+
+        //Compute the camera's new look direction unit vector
+
+        //for now just have the camera look at the player, may change later
+        lookDirection = Vector3.Normalize(player.transform.position - transform.position);
+
+        //rotate the camera to its look direction
+        RotateCamera();
     }
 
     public void WalkingUpdate(MovementWalking movement)
@@ -216,5 +247,13 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
 
         //move the camera to the correct position for this frame
         MoveCamera();
+
+        //Compute the camera's new look direction unit vector
+
+        //for now just have the camera look at the player, may change later
+        lookDirection = Vector3.Normalize(player.transform.position - transform.position);
+
+        //rotate the camera to its look direction
+        RotateCamera();
     }
 }
