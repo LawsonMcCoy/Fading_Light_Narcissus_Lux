@@ -29,8 +29,10 @@ public class MovementHovering : MovementMode
         speed = hoverSpeed;
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         StartCoroutine(DelayInput());
 
         Debug.Log("Now hovering");
@@ -106,6 +108,12 @@ public class MovementHovering : MovementMode
         }
     }
 
+    //A visitor function to determine which type of movement mode this script is
+    public override void GetMovementUpdate(MovementUpdateReciever updateReciever)
+    {
+        updateReciever.HoverUpdate(this);
+    }
+
     //zeroing out rotational motion during movement restricted events
     public override void StartMovementRestrictedEvent()
     {
@@ -121,12 +129,12 @@ public class MovementHovering : MovementMode
     //************
 
     //mouse input
-    private void OnTurn(InputValue input)
+    protected override void OnLook(InputValue input)
     {
-        Vector2 inputVector = input.Get<Vector2>();
+        base.OnLook(input);
 
         //the x component will rotate the player
-        turnValue = inputVector.x * turnSpeed;
+        turnValue = mouseInput.x * turnSpeed;
     }
 
     //Shift key input

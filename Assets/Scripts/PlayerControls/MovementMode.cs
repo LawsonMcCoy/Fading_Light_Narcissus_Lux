@@ -43,6 +43,13 @@ public abstract class MovementMode : MonoBehaviour
     [SerializeField] protected Text movementModeText;
     protected Color modeUIColor;
 
+    //Input data
+    public Vector2 mouseInput
+    {
+        get;
+        private set;
+    }
+
     protected virtual void Awake()
     {
         //get the reference to yourself
@@ -52,6 +59,13 @@ public abstract class MovementMode : MonoBehaviour
         moveVector = Vector3.zero;
 
         inputReady = true;
+    }
+
+    protected virtual void OnEnable()
+    {
+        //inform the player class that the active movement mode has changed
+        //pass in reference to new active movement mode (this)
+        self.activeMovementMode = this;
     }
 
     protected virtual void Start()
@@ -71,6 +85,9 @@ public abstract class MovementMode : MonoBehaviour
             self.rigidbody.velocity = self.rigidbody.velocity.normalized * commonData.maxSpeed;
         }
     }
+
+    //A visitor function to determine which type of movement mode this script is
+    public abstract void GetMovementUpdate(MovementUpdateReciever updateReciever);
 
     //A function to transition from one movement mode to another.
     //It will enable the script being transitioned to and disable its
@@ -268,4 +285,15 @@ public abstract class MovementMode : MonoBehaviour
             ComputeDashVector(dashVector);
         }
     }
+
+    protected virtual void OnLook(InputValue input)
+    {
+        mouseInput = input.Get<Vector2>();
+    }
+
+    // private void OnTestNotUsedForGameplay(InputValue input)
+    // {
+    //     // Vector2 value = input.Get<Vector2>;
+    //     Debug.Log($"Test input value {input.Get<Vector2>()}");
+    // }
 }

@@ -9,6 +9,13 @@ public class Player : CombatEntity
     [SerializeField] private Transform spawn;
     [SerializeField] private float yDeathDistance;
 
+    //A property with the most updated active movement mode
+    public MovementMode activeMovementMode
+    {
+        get;
+        set;
+    }
+
     private void Start()
     {
         //events subscriptions

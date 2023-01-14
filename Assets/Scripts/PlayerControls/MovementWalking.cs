@@ -16,8 +16,15 @@ public class MovementWalking : MovementMode
 
 
     private float turnValue;
-    private bool onGround; //A bool value that is true when on the ground and false otherwise
-                           //updated in the CheckGroundStatus function
+
+    //readable data
+
+    //A bool value that is true when on the ground and false otherwise updated in the CheckGroundStatus function
+    public bool onGround
+    {
+        get;
+        private set;
+    }
 
     protected override void Awake()
     {
@@ -29,8 +36,10 @@ public class MovementWalking : MovementMode
         turnValue = 0;
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+        
         StartCoroutine(DelayInput());
 
         CheckGroundStatus();
@@ -108,6 +117,12 @@ public class MovementWalking : MovementMode
         // stamina.Add(staminaRegainRate * Time.fixedDeltaTime);
     }
 
+    //A visitor function to determine which type of movement mode this script is
+    public override void GetMovementUpdate(MovementUpdateReciever updateReciever)
+    {
+        updateReciever.WalkingUpdate(this);
+    }
+
     private IEnumerator PerformDashJump()
     {
         Debug.Log("Dash Jump");
@@ -134,12 +149,12 @@ public class MovementWalking : MovementMode
     //************
 
     //mouse input
-    private void OnTurn(InputValue input)
+    protected override void OnLook(InputValue input)
     {
-        Vector2 inputVector = input.Get<Vector2>();
+        base.OnLook(input);
 
         //the x component will rotate the player
-        turnValue = inputVector.x * turnSpeed;
+        turnValue = mouseInput.x * turnSpeed;
     }
 
     //space key input

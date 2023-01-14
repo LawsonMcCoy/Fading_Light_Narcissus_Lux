@@ -74,8 +74,10 @@ public class MovementFlying : MovementMode
         speedBoost = false;
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+        
         //enable gravity
         self.rigidbody.useGravity = true;
 
@@ -408,6 +410,12 @@ public class MovementFlying : MovementMode
         windShape.rotation = windDirection.eulerAngles;
 
         //update speed
+    }
+
+    //A visitor function to determine which type of movement mode this script is
+    public override void GetMovementUpdate(MovementUpdateReciever updateReciever)
+    {
+        updateReciever.FlyingUpdate(this);
     }
 
     private void rotatePlayer()

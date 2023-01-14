@@ -15,7 +15,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Turn",
+                    "name": "Look",
                     "type": "PassThrough",
                     "id": "9b330404-9ea2-4a38-ad0d-3f61c08a1249",
                     "expectedControlType": "Vector2",
@@ -64,6 +64,15 @@
                     "type": "Button",
                     "id": "f19e728c-968b-4207-aa8b-13b1b031bef6",
                     "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Test/NotUsedForGameplay",
+                    "type": "PassThrough",
+                    "id": "186488f9-4f8a-4181-9884-b18170851f41",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -154,7 +163,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Turn",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -199,6 +208,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "13545ce5-b2a6-4c52-964c-bdf92119a000",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Test/NotUsedForGameplay",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
