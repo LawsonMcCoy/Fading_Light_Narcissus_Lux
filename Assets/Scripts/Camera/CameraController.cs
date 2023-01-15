@@ -34,6 +34,8 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
         sphericalPosition.z = AdjustPhi(sphericalPosition.z, movement.mouseInput.y);
     }
 
+
+
     /*****************************************
     Camera movement and rotation functions
     ******************************************/
@@ -61,8 +63,9 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
         //start with Vector3.up
         Vector3 cameraDirection = Vector3.up;
 
-        //create the first rotation, -phi degrees around the player's right axis
-        Quaternion cameraDirectionRotation = Quaternion.AngleAxis(-sphericalPosition.z, player.transform.right);
+        //create the first rotation, -phi degrees around the player's right axis projected into the xz plane
+        Vector3 projectedRight = Vector3.ProjectOnPlane(player.transform.right, Vector3.up);
+        Quaternion cameraDirectionRotation = Quaternion.AngleAxis(-sphericalPosition.z, projectedRight);
 
         //create the second rotation, theta degrees around Vector3.up, combine it with first rotations to create a single complete rotation
         cameraDirectionRotation = Quaternion.AngleAxis(sphericalPosition.y, Vector3.up) * cameraDirectionRotation;

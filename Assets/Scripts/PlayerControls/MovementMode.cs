@@ -80,10 +80,10 @@ public abstract class MovementMode : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         //cap the speed
-        if (self.rigidbody.velocity.magnitude > commonData.maxSpeed)
-        {
-            self.rigidbody.velocity = self.rigidbody.velocity.normalized * commonData.maxSpeed;
-        }
+        // if (self.rigidbody.velocity.magnitude > commonData.maxSpeed)
+        // {
+        //     self.rigidbody.velocity = self.rigidbody.velocity.normalized * commonData.maxSpeed;
+        // }
     }
 
     //A visitor function to determine which type of movement mode this script is

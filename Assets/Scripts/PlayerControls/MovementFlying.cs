@@ -38,7 +38,8 @@ public class MovementFlying : MovementMode
     [SerializeField] private float maxTiltAngle; //expected value from 270-360
     [Tooltip("Limits how much the player can tilt torwards the ground, expected negative value from 0-90")]
     [SerializeField] private float minTiltAngle; //expected value from 0-90
-    [SerializeField] private float maxTurnAngle;
+    [Tooltip("The Angle to which the player will roll to when turning during flight")]
+    [SerializeField] private float maxTurnAngle = 90;
 
     //other values
     [Tooltip("A layermask for that include all layer that causes Ika to fall out of flight when collided with")]
@@ -357,8 +358,8 @@ public class MovementFlying : MovementMode
             //We want to hold the roll angle at some equilibrium determined by player input
             //To do that we will use a virtual spring with the correct equilibrium point for
             //this frame. This equilibrium point is between -90 and 90 and is computed using
-            //(90 * turnValue), where turnValue is a value from -1 to 1 set by user input
-            float distanceFromEquilibrium = (90 * turnValue) - currentRollAngle; 
+            //(maxTurnAngle * turnValue), where turnValue is a value from -1 to 1 set by user input
+            float distanceFromEquilibrium = (maxTurnAngle * turnValue) - currentRollAngle; 
 
             //Use a harmonic osciallator torque to pull and hold the angle at an equilibrium (either -90, 0, or 90 base on player input) 
             rollTorqueMagnitude = (alternateTurnSpringConstant * distanceFromEquilibrium) - (alternateTurnDampingPower * currentRollVelocity);
@@ -416,28 +417,6 @@ public class MovementFlying : MovementMode
     public override void GetMovementUpdate(MovementUpdateReciever updateReciever)
     {
         updateReciever.FlyingUpdate(this);
-    }
-
-    private void rotatePlayer()
-    {
-        float tiltRotation; //about the x axis
-        float turnRotation; //about the z axis
-        Quaternion rotationMatrix;
-
-        //get the tilt rotation angle
-        tiltRotation = tiltValue * maxTiltAngle;
-
-        //get the turn rotation angle
-        turnRotation = turnValue * maxTurnAngle;
-
-        //Construct the Quaternion
-        //rotate tiltRotation degrees about x axis
-        //no rotation about the y axis
-        //rotate turnRotation degrees about the z axis
-        rotationMatrix = Quaternion.Euler(tiltRotation, 0.0f, turnRotation); 
-
-        //rotate the player
-        self.rigidbody.MoveRotation(rotationMatrix);
     }
 
     //Exit flying on collision
