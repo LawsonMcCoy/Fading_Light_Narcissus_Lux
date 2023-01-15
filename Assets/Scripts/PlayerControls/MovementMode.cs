@@ -37,11 +37,14 @@ public abstract class MovementMode : MonoBehaviour
     protected float speed; //speed variable to be set by the child class
 
     protected bool inputReady; //A variable value to prevent immediately transiting back to 
-                                //a mode that you just transition from when the button to transition
-                                //is the same
+                               //a mode that you just transition from when the button to transition
+                               //is the same
 
+    #region Ui Section
     [SerializeField] protected Text movementModeText;
     protected Color modeUIColor;
+    protected ControlUi controlUi;
+    #endregion
 
     //Input data
     public Vector2 mouseInput
@@ -59,6 +62,8 @@ public abstract class MovementMode : MonoBehaviour
         moveVector = Vector3.zero;
 
         inputReady = true;
+
+        controlUi = GameObject.Find(commonData.controlUiParentName).GetComponent<ControlUi>();
     }
 
     protected virtual void OnEnable()
@@ -116,14 +121,14 @@ public abstract class MovementMode : MonoBehaviour
     //in the air
     protected bool IsGrounded(out RaycastHit groundedInfo)
     {
-        Debug.DrawLine(this.transform.position, (Vector3.down * (commonData.isGroundedCheckDistance + 0.1f)) + this.transform.position, Color.white);
-        if (Physics.Raycast(this.transform.position, Vector3.down, out groundedInfo, commonData.isGroundedCheckDistance + 0.1f))  //The last 0.1 is in case the raycast ends on the surface of the ground 
+        Debug.DrawLine(self.center, (Vector3.down * (commonData.isGroundedCheckDistance + 0.1f)) + this.transform.position, Color.blue);
+        if (Physics.Raycast(self.center, Vector3.down, out groundedInfo, commonData.isGroundedCheckDistance + 0.1f))  //The last 0.1 is in case the raycast ends on the surface of the ground 
         {
             //if the raycast collides with the ground, check to make sure the slope is not too steep to stand on
             
             //compute slope angle
             float slopeAngle = Vector3.Angle(Vector3.up, groundedInfo.normal);
-
+            //Debug.Log($"Slope Angle: {slopeAngle}");
             //The player is only grounded iff the slope is not too steep to stand on
             return slopeAngle <= commonData.maxStandingSlopeAngle;
         }
@@ -228,7 +233,7 @@ public abstract class MovementMode : MonoBehaviour
             float colliderBufferDistance = Mathf.Sqrt((xDistance * xDistance) + (yDistance * yDistance) + (zDistance * zDistance));
             
             //raycast to see if the dash path is clear
-            if (Physics.Raycast(self.rigidbody.position, dashVector, out dashInfo, commonData.dashDistance))
+            if (Physics.Raycast(self.center, dashVector, out dashInfo, commonData.dashDistance))
             {
                 //if path is not clear use RaycastHit.distance and colliderBufferDistance to scale the direction vector
                 dashVector = (dashInfo.distance - colliderBufferDistance) * dashVector;

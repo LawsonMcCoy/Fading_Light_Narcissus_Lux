@@ -25,6 +25,11 @@ public class MovementWalking : MovementMode
         get;
         private set;
     }
+    
+    //Helper UI
+    private bool uiLoaded;
+    private bool midairTransition;
+    private bool previousBoolean;
 
     protected override void Awake()
     {
@@ -34,6 +39,8 @@ public class MovementWalking : MovementMode
         speed = walkSpeed;
 
         turnValue = 0;
+        uiLoaded = true;
+        midairTransition = false;
     }
 
     protected override void OnEnable()
@@ -49,6 +56,10 @@ public class MovementWalking : MovementMode
 
         modeUIColor = new Color(1f, 0.8f, 0f, 1f);
         movementModeText.color = modeUIColor;
+
+
+        CheckForTransitions();      //recalibrate transition after hovering/flying
+        previousBoolean = !midairTransition;
     }
 
     //a helper function to check if the player is on the ground
@@ -64,12 +75,11 @@ public class MovementWalking : MovementMode
             self.rigidbody.freezeRotation = true;
 
             //reset the rotate transform.up is the same as Vector3.up
-            //self.rigidbody.rotation.SetLookRotation(this.transform.forward, groundInfo.normal);
             Vector3 currentEuler = self.rigidbody.rotation.eulerAngles; //get the Euler angles
             currentEuler.x = 0.0f; //set the rotation around x axis to 0
             currentEuler.z = 0.0f; //set the rotation around z axis to 0
+
             //Now we only have an rotation around the y axis, so up with this rotation is Vector3.up
-            // self.rigidbody.rotation = Quaternion.Euler(currentEuler);
             self.rigidbody.MoveRotation(Quaternion.Euler(currentEuler));
 
             return true;
@@ -91,7 +101,9 @@ public class MovementWalking : MovementMode
         //I will likely changed this later it doesn't have to check
         //every update loop
         // Debug.Log(CheckGroundStatus());
-        if(CheckGroundStatus())
+        //Debug.Log($"Test is onGround {onGround}");
+
+        if (CheckGroundStatus())
         {
             //On ground 
 
@@ -112,7 +124,9 @@ public class MovementWalking : MovementMode
         {
             //In Midair
         }
-
+        
+        CheckForTransitions();
+        DisplayUiControls();
         //Regain stamina whenever in walking mode whether on ground or falling
         // stamina.Add(staminaRegainRate * Time.fixedDeltaTime);
     }
@@ -176,7 +190,7 @@ public class MovementWalking : MovementMode
                     if (input.isPressed)
                     {
                         Vector3 jumpForceVector; //A vector that will represent the force the player
-                                                //is jumping with
+                                                 //is jumping with
 
                         //compute vertical component
                         if (moveVector == Vector3.zero)
@@ -202,6 +216,7 @@ public class MovementWalking : MovementMode
                     //note that you can only hover if you have stamina
                     if (input.isPressed && stamina.ResourceAmount() > 0)
                     {
+                        //previousBoolean = !midairTransition;
                         Transition(Modes.HOVERING);
                     }
                 } //end else (if (onGround))
@@ -222,9 +237,43 @@ public class MovementWalking : MovementMode
             {
                 if (input.isPressed)
                 {
+                    //previousBoolean = !midairTransition;
                     Transition(Modes.FLYING);
                 }
             }
+        }
+    }
+
+    private void CheckForTransitions()
+    {
+        if (onGround)
+        {
+            if (midairTransition)    // if midairTransition is true while on ground
+                midairTransition = false;
+        }
+        else
+        {
+            if (!midairTransition)  // if midairTransition is false while in midair
+                midairTransition = true;
+        }
+    }
+
+    private void DisplayUiControls()
+    {
+        // A way to know if a transition occured between midair and walk once:
+        if (midairTransition == true && previousBoolean == false)  // MIDAIR TRANSITION
+        {
+            previousBoolean = midairTransition;
+            controlUi.TransitionMidairUI();
+            controlUi.IndicateModeChange();
+            Debug.Log("Now jumping");
+        }
+        else if (midairTransition == false && previousBoolean == true) // WALK TRANSITION
+        {
+            previousBoolean = midairTransition;
+            controlUi.TransitionWalkUI();
+            controlUi.IndicateModeChange();
+            Debug.Log("Now walking");
         }
     }
 }

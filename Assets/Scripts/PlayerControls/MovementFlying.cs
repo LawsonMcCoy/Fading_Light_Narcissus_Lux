@@ -94,6 +94,11 @@ public class MovementFlying : MovementMode
         modeUIColor = new Color(0f, 0.8f, 1f, 1f);
         movementModeText.color = modeUIColor;
 
+        //I feel that this could be done better using either
+        //the event system or MovementUpdateReciever interface
+        controlUi.TransitionFlyUI();
+        controlUi.IndicateModeChange();
+
         //Play the wind particles, so the player sees wind when in flight
         windParticles.Play();
     }
