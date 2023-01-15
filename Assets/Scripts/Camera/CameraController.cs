@@ -13,6 +13,19 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
     [SerializeField] Vector3 sphericalPosition = new Vector3(10, 0, 0); //will change default value later
     private Vector3 lookDirection = Vector3.forward; //A unit vector representing where the camera is looking
 
+    [Tooltip("How quickly theta returns to a value of 0 with no player input")]
+    [SerializeField] private float thetaRestorationSpeed = 1;
+    [Tooltip("How quickly phi returns to its starting value with no player input")]
+    [SerializeField] private float phiRestorationSpeed = 1;
+    private float phiStartingValue;
+
+    private void Awake()
+    {
+        //save phi starting value
+        phiStartingValue = sphericalPosition.z;
+    }
+
+
     private void LateUpdate()
     {
         //Use the visitor pattern to get an update of player input from the active movement script
@@ -23,15 +36,48 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
     Camera behavior functions
     ********************************************/
 
-    //A function to update the camera spherical position in order
-    //to follow the player duing walking or hovering
+    //The camera stays beind the player and the mouse can be used to look up and down
     private void WalkHoverFollow(MovementMode movement)
     {
-        //place camera behind the player, theta = 0
-        sphericalPosition.y = 0;
+        //place camera behind the player, 
+        MoveBehindPlayer();
 
         //use vertical mouse input to adjust phi
         sphericalPosition.z = AdjustPhi(sphericalPosition.z, movement.mouseInput.y);
+    }
+
+    //Freely rotate the camera around the player using the mouse
+    private void FreeRotation(MovementMode movement)
+    {
+        //Use the mouse horizontal motion to change theta
+        sphericalPosition.y = AdjustTheta(sphericalPosition.y, movement.mouseInput.x);
+
+        //Use the mouse y vertical motion to change phi
+        sphericalPosition.z = AdjustPhi(sphericalPosition.z, movement.mouseInput.y);
+    }
+
+    //A function to smothly restore the camera to a natural state, theta=0, and phi=its starting value
+    //
+    //Natural State:
+    //  distance unaffected
+    //  theta is restore to be behind the player (theta=0)
+    //  phi=its starting value
+    //  lookDirection unaffected
+    private void RestoreNaturalState()
+    {
+        Debug.Log($"check theta restore speed: {thetaRestorationSpeed}, phi restore speed: {phiRestorationSpeed}, old theta {sphericalPosition.y} ,movetowards theta {Mathf.MoveTowards(sphericalPosition.y, 0, thetaRestorationSpeed * Time.deltaTime)}");
+        //restore camera's position to be behind the player
+        MoveBehindPlayer();
+
+        //restore phi to its starting position
+        sphericalPosition.z = Mathf.MoveTowards(sphericalPosition.z, phiStartingValue, phiRestorationSpeed * Time.deltaTime);
+    }
+
+    //A function to move the camera behind the player in a smooth fashion,
+    //this is done by slowly moving theta to a value of zero
+    private void MoveBehindPlayer()
+    {
+        sphericalPosition.y = Mathf.MoveTowards(sphericalPosition.y, 0, thetaRestorationSpeed * Time.deltaTime);
     }
 
 
@@ -49,23 +95,23 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
         will start with Vector3.up. We want any rotation of the player that modified the player's up vector
         to change the position of the camera. Doing so causes disorientation and it is clear from playtesting
         that making these rotations of the player is displeasing to the players. Therefore we will use Vector3.up
-        here instead. Next we will rotate this unit vector -phi degrees around the player right axis. Unlike rotations
-        that modify the player's up vector, rotations around the player's up vector is something we want to mimic. 
-        Doing so will make it easy for us to position the camera directly behind the player. The use of the player's
-        right axis instead of Vector3.right here ensure that a theta value of 0 will always place the camera behind the
-        player. As for the negative sign on phi, that is because normal rotations are clockwise in Unity. This means 
-        that this rotation will move the camera in front of the player with theta=0. To recover the ability to have the 
-        camera behind the player by setting theta to 0 we are introducing a negative sign on phi. Next will apply a second
-        rotation to the unit vector, this time negative theta degrees around Vector3.up. After both rotations we will
-        have successfully obtained a unit vector pointing from player to the desire camera location. 
+        here instead. Next we will find an axis that when the camera above the player is rotated by phi (note domain 
+        of 0 to pi) degrees, it will be behind the player. To be behind the player we need two things. First we have
+        to rotate away from the player's forward vector, which implies that the plane of rotation contains the player's
+        forward vector. The second thing we need is for the plane of to contain Vector3.up, so the camera doesn't move
+        to the side. With these two conditions we can compute the desire axis of rotation as player.transform.forward
+        crossed into Vector3.up. With the axis of rotation we can now start by rotating the camer direction vector phi
+        degrees around this axis of rotation. Now we will apply a second rotation to the unit vector, this time theta 
+        degrees around Vector3.up. After both rotations we will have successfully obtained a unit vector pointing from 
+        player to the desire camera location. 
         */
 
         //start with Vector3.up
         Vector3 cameraDirection = Vector3.up;
 
-        //create the first rotation, -phi degrees around the player's right axis projected into the xz plane
-        Vector3 projectedRight = Vector3.ProjectOnPlane(player.transform.right, Vector3.up);
-        Quaternion cameraDirectionRotation = Quaternion.AngleAxis(-sphericalPosition.z, projectedRight);
+        //create the first rotation, phi degrees around an axis perpendicular to player.transform.forward and Vector3.up
+        Vector3 phiRotationAxis = Vector3.Cross(player.transform.forward, Vector3.up);
+        Quaternion cameraDirectionRotation = Quaternion.AngleAxis(sphericalPosition.z, phiRotationAxis);
 
         //create the second rotation, theta degrees around Vector3.up, combine it with first rotations to create a single complete rotation
         cameraDirectionRotation = Quaternion.AngleAxis(sphericalPosition.y, Vector3.up) * cameraDirectionRotation;
@@ -86,7 +132,7 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
         RaycastHit playerToCameraInfo;
         
         //Perform the raycast
-        if (Physics.Raycast(player.transform.position, cameraDirection, out playerToCameraInfo, sphericalPosition.x))
+        if (Physics.Raycast(player.rigidbody.position, cameraDirection, out playerToCameraInfo, sphericalPosition.x))
         {
             //There is an object blocking the view of the camera, place the camera at the collision point, so its
             //view is not blocked
@@ -95,7 +141,7 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
         else
         {
             //nothing blocking the camera's view, we are good to place it at the desired distance
-            transform.position = player.transform.position + (sphericalPosition.x * cameraDirection);
+            transform.position = player.rigidbody.position + (sphericalPosition.x * cameraDirection);
         }
     }
 
@@ -130,14 +176,12 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
     private float AdjustAngleWithinRange(float currentValue, float adjustmentValue, float minAngle, float maxAngle, bool loopValues=false)
     {
         float newValue = currentValue + (adjustmentValue * Time.deltaTime);
-        Debug.Log($"currentValue {currentValue}, adjustmentValue {adjustmentValue}, newValue {newValue}, min {minAngle}, max {maxAngle}");
 
         if (newValue < minAngle)
         {
             //new value is too small
             if (loopValues)
             {
-                Debug.Log("too small loop");
                 //need to loop the value into the range
 
                 //start by subtracting newValue and maxAngle by minAngle, so the min of the range is zero
@@ -152,7 +196,6 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
             }
             else
             {
-                Debug.Log("too small no loop");
                 //no need to loop, just return the minAngle
                 return minAngle;
             }
@@ -162,7 +205,6 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
             //new value is too big
             if (loopValues)
             {
-                Debug.Log("too big loop");
                 //need to loop the value into the range
 
                 //start by subtracting newValue and maxAngle by minAngle, so the min of the range is zero
@@ -174,14 +216,12 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
             }
             else
             {
-                Debug.Log("too big no loop");
                 //no need to loop, just return the maxAngle
                 return maxAngle;
             }
         }
         else
         {
-            Debug.Log("In Range");
             //newValue is in range, simply return it
             return newValue;
         }
@@ -208,6 +248,17 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
     public void FlyingUpdate(MovementFlying movement)
     {
         //Compute the camera's new angles
+
+        //if the mouse is being used let the camera move freely
+        //otherwise restore the natural state of the camera
+        if (movement.mouseInput != Vector2.zero)
+        {
+            FreeRotation(movement);
+        } 
+        else
+        {
+            RestoreNaturalState();
+        }
 
         //move the camera to the correct position for this frame
         MoveCamera();

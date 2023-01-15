@@ -426,7 +426,7 @@ Rigidbody:
   m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!114 &7204556638568947317
@@ -476,6 +476,7 @@ MonoBehaviour:
   playerInput: {fileID: 7204556638568947317}
   spawn: {fileID: 0}
   yDeathDistance: -10
+  positionToCenterDistance: 0
 --- !u!114 &7204556638568947314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,7 +557,7 @@ MonoBehaviour:
   turnSpeed: 0.5
   maxTiltAngle: 60
   minTiltAngle: -60
-  maxTurnAngle: 0
+  maxTurnAngle: 90
   collisionLayer:
     serializedVersion: 2
     m_Bits: 55

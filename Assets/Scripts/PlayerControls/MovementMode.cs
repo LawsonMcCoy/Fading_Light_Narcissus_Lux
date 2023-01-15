@@ -63,7 +63,7 @@ public abstract class MovementMode : MonoBehaviour
 
         inputReady = true;
 
-        controlUi = GameObject.Find(commonData.controlUiParentName).GetComponent<ControlUi>();
+        // controlUi = GameObject.Find(commonData.controlUiParentName).GetComponent<ControlUi>();
     }
 
     protected virtual void OnEnable()
