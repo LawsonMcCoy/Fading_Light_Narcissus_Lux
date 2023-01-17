@@ -141,7 +141,7 @@ public class MovementWalking : MovementMode
     {
         Debug.Log("Dash Jump");
         //wait until dashing is completed
-        yield return new WaitUntil(() => !dashing);
+        yield return new WaitUntil(() => !isDashing);
 
         Debug.Log($"Perform Dash Jump {dashJumpForce * Vector3.up}");
         //perform the dash jump
@@ -176,7 +176,7 @@ public class MovementWalking : MovementMode
     {
         if (inputReady)
         {
-            if (dashing)
+            if (isDashing)
             {
                 //perform a dash jump
                 StartCoroutine(PerformDashJump());

@@ -41,6 +41,8 @@ public class Player : CombatEntity
         //This results in issues with other parts of the code. This line is meant 
         //to calculate the actually center of the model by translating the position 
         //up (locally) by half of the model y world scale.
+        //NOTE: Update is before Coroutines, center will be a frame behind the player's 
+        //position during dashing and other couroutine movements
         center = this.transform.position + (positionToCenterDistance * this.transform.up);
     }
 

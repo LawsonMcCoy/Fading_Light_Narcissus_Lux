@@ -19,10 +19,16 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
     [SerializeField] private float phiRestorationSpeed = 1;
     private float phiStartingValue;
 
+    [Tooltip("Debug boolean to toggle on or off the spring like motion of the camera")]
+    [SerializeField] private bool useSpringLikeMotion = false;
+
     private void Awake()
     {
         //save phi starting value
         phiStartingValue = sphericalPosition.z;
+
+        //Move camera to starting location instantially 
+        // MoveCamera();
     }
 
 
@@ -87,7 +93,7 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
     ******************************************/
 
     //The actual function that will move the camera to its current spherical position
-    private void MoveCamera()
+    private void MoveCamera(MovementMode movement, bool springLikeMotion = false) //No please don't pass in the MovementMode you don't no
     {
         /*
         The first step to finding the camera position for current spherical position around the player
@@ -130,18 +136,37 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
 
         //Declare RaycastHit object
         RaycastHit playerToCameraInfo;
+
+        //Declare a variable to store the desire position
+        Vector3 desiredPosition;
         
         //Perform the raycast
-        if (Physics.Raycast(player.rigidbody.position, cameraDirection, out playerToCameraInfo, sphericalPosition.x))
+        if (Physics.Raycast(player.transform.position, cameraDirection, out playerToCameraInfo, sphericalPosition.x) && !movement.isDashing) //why?, so the camera can be behind objects while dashing??
         {
             //There is an object blocking the view of the camera, place the camera at the collision point, so its
             //view is not blocked
-            transform.position = playerToCameraInfo.point;
+            desiredPosition = playerToCameraInfo.point;
         }
         else
         {
             //nothing blocking the camera's view, we are good to place it at the desired distance
-            transform.position = player.rigidbody.position + (sphericalPosition.x * cameraDirection);
+            desiredPosition = player.transform.position + (sphericalPosition.x * cameraDirection);
+        }
+
+        if (!springLikeMotion)
+        {
+            transform.position = desiredPosition; //comment when not using the spring like motion
+        }
+        else
+        {
+            //attempt to move the camera to the desire position in a spring like motion
+            Vector3 displacement = desiredPosition - transform.position;
+            float totalDistance = displacement.magnitude;
+            float distanceTravel = totalDistance * Time.deltaTime * Time.deltaTime;
+            Vector3 cameraMoveVector = distanceTravel * displacement.normalized;
+
+            //move the camera
+            transform.position += cameraMoveVector;
         }
     }
 
@@ -241,6 +266,14 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
         return AdjustAngleWithinRange(currentValue, adjustmentValue, 0, 180, false);
     }
 
+    //This is a experiment funciton, I do not know if it will work
+    //I am going to test it out and see what happens
+    // private float SpringDistplacement()
+    // {
+    //     Vector3 displacementFromPlayer = player.transform.position - transform.position;
+    //     float distanceTo
+    // }
+
     /****************************************
     Interface functions
     *****************************************/
@@ -261,7 +294,7 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
         }
 
         //move the camera to the correct position for this frame
-        MoveCamera();
+        MoveCamera(movement, useSpringLikeMotion);
 
         //Compute the camera's new look direction unit vector
 
@@ -278,7 +311,7 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
         WalkHoverFollow(movement);
 
         //move the camera to the correct position for this frame
-        MoveCamera();
+        MoveCamera(movement, useSpringLikeMotion);
 
         //Compute the camera's new look direction unit vector
 
@@ -300,7 +333,11 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
         }
 
         //move the camera to the correct position for this frame
-        MoveCamera();
+        if (movement.isDashing)
+        {
+            Debug.Log($"Moving Camera with respect to player's position {player.transform.position}");
+        }
+        MoveCamera(movement, useSpringLikeMotion);
 
         //Compute the camera's new look direction unit vector
 

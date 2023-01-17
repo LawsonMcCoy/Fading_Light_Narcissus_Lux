@@ -31,7 +31,12 @@ public abstract class MovementMode : MonoBehaviour
 
     protected Player self; //a reference to yourself
 
-    protected bool dashing; //true when the player is dash and false otherwise
+    //true when the player is dash and false otherwise
+    public bool isDashing
+    {
+        get;
+        private set;
+    }
 
     protected Vector3 moveVector;
     protected float speed; //speed variable to be set by the child class
@@ -190,7 +195,7 @@ public abstract class MovementMode : MonoBehaviour
         float percentageTravel = 0.0f; //how far the play has travel in form of the percentage of total distance
 
         //mark the player as dashing
-        dashing = true;
+        isDashing = true;
 
         //loop until the player is at their destination
         while (percentageTravel < 1.0f)
@@ -200,14 +205,16 @@ public abstract class MovementMode : MonoBehaviour
 
             //move the player to new place in the dash
             percentageTravel = dashDistance / dashVector.magnitude;
-            self.rigidbody.MovePosition(Vector3.Lerp(startingPosition, endingPosition, percentageTravel));
+            Debug.Log($"Updating position during dash, {Vector3.Lerp(startingPosition, endingPosition, percentageTravel)}");
+            // self.rigidbody.MovePosition(Vector3.Lerp(startingPosition, endingPosition, percentageTravel));
+            self.transform.position = Vector3.Lerp(startingPosition, endingPosition, percentageTravel);
 
             //wait for the next time step
             yield return new WaitForSeconds(commonData.dashTimeStep);
         }
 
         //dash is completed, mark the player as not dashing
-        dashing = false;
+        isDashing = false;
     }
 
     //Most of the difference in computation for dashing between different
@@ -218,7 +225,7 @@ public abstract class MovementMode : MonoBehaviour
     protected void ComputeDashVector(Vector3 dashVector)
     {
         //do nothing if dash vector is zero, you don't have enough stamina, or you are already dashing
-        if (dashVector != Vector3.zero && stamina.ResourceAmount() >= commonData.dashStaminaCost && !dashing)
+        if (dashVector != Vector3.zero && stamina.ResourceAmount() >= commonData.dashStaminaCost && !isDashing)
         {
             RaycastHit dashInfo; //The information for about the dash from the raycast
 
