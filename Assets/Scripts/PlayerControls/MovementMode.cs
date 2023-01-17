@@ -126,7 +126,6 @@ public abstract class MovementMode : MonoBehaviour
     //in the air
     protected bool IsGrounded(out RaycastHit groundedInfo)
     {
-        Debug.DrawLine(self.center, (Vector3.down * (commonData.isGroundedCheckDistance + 0.1f)) + this.transform.position, Color.blue);
         if (Physics.Raycast(self.center, Vector3.down, out groundedInfo, commonData.isGroundedCheckDistance + 0.1f))  //The last 0.1 is in case the raycast ends on the surface of the ground 
         {
             //if the raycast collides with the ground, check to make sure the slope is not too steep to stand on
@@ -206,8 +205,8 @@ public abstract class MovementMode : MonoBehaviour
             //move the player to new place in the dash
             percentageTravel = dashDistance / dashVector.magnitude;
             Debug.Log($"Updating position during dash, {Vector3.Lerp(startingPosition, endingPosition, percentageTravel)}");
-            // self.rigidbody.MovePosition(Vector3.Lerp(startingPosition, endingPosition, percentageTravel));
-            self.transform.position = Vector3.Lerp(startingPosition, endingPosition, percentageTravel);
+            self.rigidbody.MovePosition(Vector3.Lerp(startingPosition, endingPosition, percentageTravel));
+            // self.transform.position = Vector3.Lerp(startingPosition, endingPosition, percentageTravel);
 
             //wait for the next time step
             yield return new WaitForSeconds(commonData.dashTimeStep);

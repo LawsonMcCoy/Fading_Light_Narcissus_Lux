@@ -19,6 +19,9 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
     [SerializeField] private float phiRestorationSpeed = 1;
     private float phiStartingValue;
 
+    [Tooltip("The layers that won't cause the camera to move when between it and the player")]
+    private LayerMask cameraIgnoreMask;
+
     [Tooltip("Debug boolean to toggle on or off the spring like motion of the camera")]
     [SerializeField] private bool useSpringLikeMotion = false;
 
@@ -28,7 +31,7 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
         phiStartingValue = sphericalPosition.z;
 
         //Move camera to starting location instantially 
-        // MoveCamera();
+        MoveCamera();
     }
 
 
@@ -93,7 +96,7 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
     ******************************************/
 
     //The actual function that will move the camera to its current spherical position
-    private void MoveCamera(MovementMode movement, bool springLikeMotion = false) //No please don't pass in the MovementMode you don't no
+    private void MoveCamera(bool springLikeMotion = false)
     {
         /*
         The first step to finding the camera position for current spherical position around the player
@@ -124,6 +127,7 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
 
         //apply total rotation to the unit vector
         cameraDirection = cameraDirectionRotation * cameraDirection;
+        Debug.DrawLine(player.rigidbody.position, player.rigidbody.position + (10*cameraDirection), Color.blue);
 
         /*
         With the camera direction vector all that is left to do is to scale it by the distance the camera should be from the player and 
@@ -141,11 +145,12 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
         Vector3 desiredPosition;
         
         //Perform the raycast
-        if (Physics.Raycast(player.transform.position, cameraDirection, out playerToCameraInfo, sphericalPosition.x) && !movement.isDashing) //why?, so the camera can be behind objects while dashing??
+        if (Physics.Raycast(player.transform.position, cameraDirection, out playerToCameraInfo, sphericalPosition.x, cameraIgnoreMask))
         {
             //There is an object blocking the view of the camera, place the camera at the collision point, so its
             //view is not blocked
             desiredPosition = playerToCameraInfo.point;
+            Debug.Break();
         }
         else
         {
@@ -294,7 +299,7 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
         }
 
         //move the camera to the correct position for this frame
-        MoveCamera(movement, useSpringLikeMotion);
+        MoveCamera(useSpringLikeMotion);
 
         //Compute the camera's new look direction unit vector
 
@@ -311,7 +316,7 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
         WalkHoverFollow(movement);
 
         //move the camera to the correct position for this frame
-        MoveCamera(movement, useSpringLikeMotion);
+        MoveCamera(useSpringLikeMotion);
 
         //Compute the camera's new look direction unit vector
 
@@ -337,7 +342,7 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
         {
             Debug.Log($"Moving Camera with respect to player's position {player.transform.position}");
         }
-        MoveCamera(movement, useSpringLikeMotion);
+        MoveCamera(useSpringLikeMotion);
 
         //Compute the camera's new look direction unit vector
 
