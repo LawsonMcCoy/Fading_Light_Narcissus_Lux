@@ -202,54 +202,6 @@ PrefabInstance:
       propertyPath: speedBoostStaminaCost
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[1].inSlope
-      value: -0.0013940586
-      objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[2].inSlope
-      value: 0.096104346
-      objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[3].inSlope
-      value: -0.0015531743
-      objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[1].outSlope
-      value: -0.0013940586
-      objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[2].outSlope
-      value: 0.096104346
-      objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[3].outSlope
-      value: -0.0015531743
-      objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[1].outWeight
-      value: 0.17503917
-      objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[2].outWeight
-      value: 0.044544682
-      objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[3].outWeight
-      value: 0.10155824
-      objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[1].tangentMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[2].tangentMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[3].tangentMode
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7500428396809265927, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: m_Layer
       value: 3
