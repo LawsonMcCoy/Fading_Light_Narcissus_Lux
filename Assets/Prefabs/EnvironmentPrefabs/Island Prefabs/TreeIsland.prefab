@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3674168383538851643}
   - component: {fileID: 2683249329412469693}
   m_Layer: 0
-  m_Name: GrassIsland
+  m_Name: TreeIsland
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
