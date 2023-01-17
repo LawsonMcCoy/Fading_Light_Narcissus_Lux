@@ -1107,6 +1107,9 @@ MonoBehaviour:
   sphericalPosition: {x: 10, y: 0, z: 45}
   thetaRestorationSpeed: 20
   phiRestorationSpeed: 20
+  cameraIgnoreMask:
+    serializedVersion: 2
+    m_Bits: 119
   useSpringLikeMotion: 0
 --- !u!114 &1546099040
 MonoBehaviour:

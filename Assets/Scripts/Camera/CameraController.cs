@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
     private float phiStartingValue;
 
     [Tooltip("The layers that won't cause the camera to move when between it and the player")]
-    private LayerMask cameraIgnoreMask;
+    [SerializeField] private LayerMask cameraIgnoreMask;
 
     [Tooltip("Debug boolean to toggle on or off the spring like motion of the camera")]
     [SerializeField] private bool useSpringLikeMotion = false;
