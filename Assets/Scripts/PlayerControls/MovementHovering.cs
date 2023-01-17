@@ -76,7 +76,7 @@ public class MovementHovering : MovementMode
         {
             moveVector.y = -Mathf.Pow(hoverFallBase, hoverFallExponent * hoverTime); 
         }
-        self.rigidbody.AddForce(moveVector - (hoveringDampingCoefficient * self.rigidbody.velocity), ForceMode.Force);
+        self.rigidbody.AddForce(hoveringDampingCoefficient * (moveVector - self.rigidbody.velocity), ForceMode.Force);
 
         //rotate the player
         Quaternion newRotation = self.rigidbody.rotation * Quaternion.Euler(0, turnValue * Time.fixedDeltaTime, 0);

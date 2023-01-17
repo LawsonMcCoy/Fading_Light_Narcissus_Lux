@@ -204,7 +204,6 @@ public abstract class MovementMode : MonoBehaviour
 
             //move the player to new place in the dash
             percentageTravel = dashDistance / dashVector.magnitude;
-            Debug.Log($"Updating position during dash, {Vector3.Lerp(startingPosition, endingPosition, percentageTravel)}");
             self.rigidbody.MovePosition(Vector3.Lerp(startingPosition, endingPosition, percentageTravel));
             // self.transform.position = Vector3.Lerp(startingPosition, endingPosition, percentageTravel);
 

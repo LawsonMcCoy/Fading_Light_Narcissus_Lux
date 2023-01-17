@@ -74,7 +74,6 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
     //  lookDirection unaffected
     private void RestoreNaturalState()
     {
-        Debug.Log($"check theta restore speed: {thetaRestorationSpeed}, phi restore speed: {phiRestorationSpeed}, old theta {sphericalPosition.y} ,movetowards theta {Mathf.MoveTowards(sphericalPosition.y, 0, thetaRestorationSpeed * Time.deltaTime)}");
         //restore camera's position to be behind the player
         MoveBehindPlayer();
 
@@ -127,7 +126,6 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
 
         //apply total rotation to the unit vector
         cameraDirection = cameraDirectionRotation * cameraDirection;
-        Debug.DrawLine(player.rigidbody.position, player.rigidbody.position + (10*cameraDirection), Color.blue);
 
         /*
         With the camera direction vector all that is left to do is to scale it by the distance the camera should be from the player and 
@@ -150,7 +148,6 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
             //There is an object blocking the view of the camera, place the camera at the collision point, so its
             //view is not blocked
             desiredPosition = playerToCameraInfo.point;
-            Debug.Break();
         }
         else
         {
@@ -338,10 +335,6 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
         }
 
         //move the camera to the correct position for this frame
-        if (movement.isDashing)
-        {
-            Debug.Log($"Moving Camera with respect to player's position {player.transform.position}");
-        }
         MoveCamera(useSpringLikeMotion);
 
         //Compute the camera's new look direction unit vector

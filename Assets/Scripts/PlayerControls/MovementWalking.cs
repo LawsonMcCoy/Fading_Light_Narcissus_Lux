@@ -111,7 +111,7 @@ public class MovementWalking : MovementMode
             // self.rigidbody.MovePosition(self.rigidbody.position + (moveVector * Time.fixedDeltaTime));
             Vector3 horizontalVelocity = self.rigidbody.velocity;
             horizontalVelocity.y = 0.0f; //set vertical component to zero
-            self.rigidbody.AddForce(moveVector - (walkingDampingCoefficient * self.rigidbody.velocity), ForceMode.Force);
+            self.rigidbody.AddForce(walkingDampingCoefficient * (moveVector - self.rigidbody.velocity), ForceMode.Force);
 
             //rotate the player
             Quaternion newRotation = self.rigidbody.rotation * Quaternion.Euler(0, turnValue * Time.fixedDeltaTime, 0);

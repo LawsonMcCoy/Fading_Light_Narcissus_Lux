@@ -517,30 +517,30 @@ MonoBehaviour:
     - serializedVersion: 3
       time: -30.012686
       value: -1.0010325
-      inSlope: 0.008233466
-      outSlope: 0.008233466
-      tangentMode: 34
+      inSlope: -0.0013940586
+      outSlope: -0.0013940586
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.17503917
     - serializedVersion: 3
       time: 0.00033332407
       value: -0.005194247
-      inSlope: 0.03337759
-      outSlope: 0.03337759
-      tangentMode: 34
+      inSlope: 0.096104346
+      outSlope: 0.096104346
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.044544682
     - serializedVersion: 3
       time: 30.00182
       value: 1.0021049
-      inSlope: 0.0085434355
-      outSlope: 0.0085434355
-      tangentMode: 34
+      inSlope: -0.0015531743
+      outSlope: -0.0015531743
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.10155824
     - serializedVersion: 3
       time: 90.022255
       value: 0.012481689
@@ -590,7 +590,7 @@ MonoBehaviour:
   hoverSpeed: 18
   turnSpeed: 5
   passiveStaminaLostRate: 10
-  hoveringDampingCoefficient: 3
+  hoveringDampingCoefficient: 10
   alternateHover: 1
   hoverFallBase: 2
   hoverFallExponent: 0.01
@@ -613,14 +613,14 @@ MonoBehaviour:
   - {fileID: 7204556638568947314}
   stamina: {fileID: 2271143012148580341}
   movementModeText: {fileID: 8925406608850753112}
-  walkSpeed: 50
+  walkSpeed: 15
   turnSpeed: 5
   jumpForceVertical: 10
   jumpForceHonrizontal: 5
   jumpForceStationary: 15
   staminaRegainRate: 5
   dashJumpForce: 30
-  walkingDampingCoefficient: 3
+  walkingDampingCoefficient: 10
 --- !u!114 &7204556638568947598
 MonoBehaviour:
   m_ObjectHideFlags: 0
