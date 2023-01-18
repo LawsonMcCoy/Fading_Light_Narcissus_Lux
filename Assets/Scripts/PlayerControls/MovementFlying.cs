@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class MovementFlying : MovementMode
 {
     //movement force values
-    [SerializeField] private float testForwardSpeed;
     [SerializeField] private float forwardThrustMagnitude;
     [Tooltip("A fine toning value for the magnitude of lift")]
     [SerializeField] private float liftPower; //A fine toning value for the magnitude of lift
@@ -84,12 +83,6 @@ public class MovementFlying : MovementMode
 
         //enable rotation
         self.rigidbody.freezeRotation = false;
-
-        // Debug.Log("enabling movement mode: flying");
-        //apply a forward force with this script is enabled
-        //Give a starting push everytime the player start flying
-        AddForce(transform.forward * testForwardSpeed, ForceMode.Impulse);
-        // self.rigidbody.velocity = transform.forward * testForwardSpeed;
 
         modeUIColor = new Color(0f, 0.8f, 1f, 1f);
         movementModeText.color = modeUIColor;
