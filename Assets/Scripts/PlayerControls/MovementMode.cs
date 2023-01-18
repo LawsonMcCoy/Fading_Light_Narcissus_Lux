@@ -153,10 +153,10 @@ public abstract class MovementMode : MonoBehaviour
     protected void AddForce(Vector3 force, ForceMode mode)
     {
         //limit the force to max force
-        if (force.magnitude > commonData.maxForce)
-        {
-            force = force.normalized * commonData.maxForce;
-        }
+        // if (force.magnitude > commonData.maxForce)
+        // {
+        //     force = force.normalized * commonData.maxForce;
+        // }
 
         //apply force to rigidbody
         Debug.DrawLine(transform.position, transform.position + force, Color.red);

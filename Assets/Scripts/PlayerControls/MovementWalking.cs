@@ -108,10 +108,9 @@ public class MovementWalking : MovementMode
             //On ground 
 
             //move the player 
-            // self.rigidbody.MovePosition(self.rigidbody.position + (moveVector * Time.fixedDeltaTime));
             Vector3 horizontalVelocity = self.rigidbody.velocity;
             horizontalVelocity.y = 0.0f; //set vertical component to zero
-            self.rigidbody.AddForce(walkingDampingCoefficient * (moveVector - self.rigidbody.velocity), ForceMode.Force);
+            AddForce(walkingDampingCoefficient * (moveVector - horizontalVelocity), ForceMode.Force);
 
             //rotate the player
             Quaternion newRotation = self.rigidbody.rotation * Quaternion.Euler(0, turnValue * Time.fixedDeltaTime, 0);
@@ -145,7 +144,7 @@ public class MovementWalking : MovementMode
 
         Debug.Log($"Perform Dash Jump {dashJumpForce * Vector3.up}");
         //perform the dash jump
-        self.rigidbody.AddForce(dashJumpForce * Vector3.up, ForceMode.Impulse);
+        AddForce(dashJumpForce * Vector3.up, ForceMode.Impulse);
     }
     
     //zeroing out rotational motion during movement restricted events
@@ -207,7 +206,7 @@ public class MovementWalking : MovementMode
                         jumpForceVector += moveVector.normalized * jumpForceHonrizontal;
 
                         //jump with impulse
-                        self.rigidbody.AddForce(jumpForceVector, ForceMode.Impulse);
+                        AddForce(jumpForceVector, ForceMode.Impulse);
                     } //end if (!input.isPressed)
                 }//end if (onGround)
                 else
