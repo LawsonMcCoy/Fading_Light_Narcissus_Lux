@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.20621209, g: 0.30538738, b: 0.30684066, a: 1}
+  m_IndirectSpecularColor: {r: 0.20611256, g: 0.30532512, b: 0.3065017, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2133784447}
     m_Modifications:
+    - target: {fileID: 4654647234880282225, guid: abe2ac15706febd4097e9190b3339b50, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4678103022854122823, guid: abe2ac15706febd4097e9190b3339b50, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -177,6 +181,10 @@ PrefabInstance:
     - target: {fileID: 5449396529437014013, guid: abe2ac15706febd4097e9190b3339b50, type: 3}
       propertyPath: m_Name
       value: GrassIsland2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449396529437014013, guid: abe2ac15706febd4097e9190b3339b50, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abe2ac15706febd4097e9190b3339b50, type: 3}
@@ -275,6 +283,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tree_plateau_dark
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e668953b88a049b4998153bde18fa288, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e668953b88a049b4998153bde18fa288, type: 3}
 --- !u!4 &26821590 stripped
@@ -360,6 +372,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_Name
       value: ringRocks2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_IsActive
@@ -457,6 +473,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tree_detailed
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3f5c8c8ec03853443a225550b7bb11f7, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f5c8c8ec03853443a225550b7bb11f7, type: 3}
 --- !u!1 &79422248 stripped
@@ -518,7 +538,7 @@ GameObject:
   - component: {fileID: 128646939}
   - component: {fileID: 128646938}
   - component: {fileID: 128646937}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PlatformTree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -670,6 +690,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ringBeginFlying
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
 --- !u!1 &136371802 stripped
@@ -749,6 +773,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_Name
       value: ringRocks1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_IsActive
@@ -851,6 +879,10 @@ PrefabInstance:
       value: FlyingFourthRing
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -865,7 +897,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 174533832}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: attachBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -902,6 +934,10 @@ PrefabInstance:
     - target: {fileID: 2594992599452440461, guid: a0d883965b4d31d41bf17755e92ab8fe, type: 3}
       propertyPath: m_Name
       value: Old Plant McGee (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2594992599452440461, guid: a0d883965b4d31d41bf17755e92ab8fe, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3407136574621682999, guid: a0d883965b4d31d41bf17755e92ab8fe, type: 3}
       propertyPath: m_RootOrder
@@ -1033,6 +1069,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stone_largeD
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a95dd963262f42d41a0eb335046850f2, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a95dd963262f42d41a0eb335046850f2, type: 3}
 --- !u!1 &266931936 stripped
@@ -1068,7 +1108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 282914654}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Float Island Stairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1168,6 +1208,10 @@ PrefabInstance:
       value: FlyingSecondRing
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -1183,7 +1227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 307209885}
   - component: {fileID: 307209884}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: JumpOnFirstIslandBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1274,6 +1318,10 @@ PrefabInstance:
       value: ringClimbTree2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -1356,6 +1404,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_Name
       value: ringRocks5
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_IsActive
@@ -1484,6 +1536,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: smallerIsland (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4386406023664034311, guid: 58b430b65e5b0e34baa0f3ec3328702a, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58b430b65e5b0e34baa0f3ec3328702a, type: 3}
 --- !u!4 &422983217 stripped
@@ -1595,6 +1651,22 @@ PrefabInstance:
     - target: {fileID: 3025777786529926894, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
       propertyPath: m_Name
       value: GrassIsland (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3025777786529926894, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244978256006737418, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994159746271779827, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8143608768317757379, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
@@ -1751,7 +1823,7 @@ GameObject:
   m_Component:
   - component: {fileID: 452119643}
   - component: {fileID: 452119642}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: JumpOnFirstIslandObjective
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1798,7 +1870,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 453634131}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Objectives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1829,7 +1901,7 @@ Transform:
   - {fileID: 755241736}
   - {fileID: 1502806159}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &475637189
 PrefabInstance:
@@ -1887,6 +1959,10 @@ PrefabInstance:
       value: ringRocks4
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -1924,7 +2000,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 504034987}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MovingPlatformPractice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1947,7 +2023,7 @@ Transform:
   - {fileID: 1807397039}
   - {fileID: 866151047}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &524795800
 GameObject:
@@ -1959,7 +2035,7 @@ GameObject:
   m_Component:
   - component: {fileID: 524795801}
   - component: {fileID: 524795803}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HoverObjectiveWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2061,6 +2137,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cliff_blockHalf_rock
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a009b6ef2f890d64cafce92676ede7e9, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a009b6ef2f890d64cafce92676ede7e9, type: 3}
 --- !u!4 &524970462 stripped
@@ -2124,6 +2204,10 @@ PrefabInstance:
       value: ringClimbTree7
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -2180,7 +2264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 664294594}
   - component: {fileID: 664294593}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ReachTopOfTreeObjective
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2251,7 +2335,7 @@ Transform:
   - {fileID: 711024651}
   - {fileID: 1269778263}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &696054820
 PrefabInstance:
@@ -2320,6 +2404,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: flower_yellowC
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9ed0ca662a2d1984a9b2fe969f046039, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ed0ca662a2d1984a9b2fe969f046039, type: 3}
 --- !u!1 &696054821 stripped
@@ -2354,7 +2442,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 711024651}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Playground-Upper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2392,7 +2480,7 @@ GameObject:
   m_Component:
   - component: {fileID: 711054766}
   - component: {fileID: 711054767}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HoveringObjective
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2486,6 +2574,10 @@ PrefabInstance:
       value: ringClimbTree1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -2570,6 +2662,10 @@ PrefabInstance:
       value: ringClimbTree4
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -2608,7 +2704,7 @@ GameObject:
   m_Component:
   - component: {fileID: 755241736}
   - component: {fileID: 755241735}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FlyToHillIslandObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2725,6 +2821,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: The Hill
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a7d8f1e46f5fca8458f0a497f148c90d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7d8f1e46f5fca8458f0a497f148c90d, type: 3}
 --- !u!4 &784417257 stripped
@@ -2826,6 +2926,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cliff_blockQuarter_rock (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a1dc04f4bea33c240aa5b7c79c8062e5, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1dc04f4bea33c240aa5b7c79c8062e5, type: 3}
 --- !u!4 &828929656 stripped
@@ -2866,6 +2970,10 @@ PrefabInstance:
     - target: {fileID: 2594992599452440461, guid: a0d883965b4d31d41bf17755e92ab8fe, type: 3}
       propertyPath: m_Name
       value: Old Plant McGee (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2594992599452440461, guid: a0d883965b4d31d41bf17755e92ab8fe, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3407136574621682999, guid: a0d883965b4d31d41bf17755e92ab8fe, type: 3}
       propertyPath: m_RootOrder
@@ -3002,6 +3110,10 @@ PrefabInstance:
       value: FlyingSeventhRing
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -3048,7 +3160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 874555855}
   - component: {fileID: 874555854}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StopHoveringObjective
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3140,6 +3252,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_Name
       value: ringClimbTree3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_IsActive
@@ -3247,7 +3363,7 @@ GameObject:
   m_Component:
   - component: {fileID: 970181865}
   - component: {fileID: 970181864}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BeginFlyingObjective
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3364,6 +3480,10 @@ PrefabInstance:
       value: ringClimbTree6
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -3404,7 +3524,7 @@ GameObject:
   - component: {fileID: 1109198320}
   - component: {fileID: 1109198319}
   - component: {fileID: 1109198318}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3546,6 +3666,10 @@ PrefabInstance:
       value: ringClimbTree8
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -3641,6 +3765,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stone_tallJ
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1eef160618c5088498ab11fccb54292e, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1eef160618c5088498ab11fccb54292e, type: 3}
 --- !u!4 &1135743307 stripped
@@ -3722,6 +3850,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: GrassIsland (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3025777786529926894, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244978256006737418, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994159746271779827, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8143608768317757379, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
 --- !u!4 &1137309610 stripped
@@ -3801,6 +3945,10 @@ PrefabInstance:
       value: FlyingFifthRing
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -3816,7 +3964,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1147967744}
   - component: {fileID: 1147967745}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InvisibleGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3851,6 +3999,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 58.484867, y: 2.939126, z: 60.118977}
   m_Center: {x: 17.457567, y: -6.9354367, z: -0.4460926}
+--- !u!114 &1185346840 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7204556638568947316, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+  m_PrefabInstance: {fileID: 1590919698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9795ea4e00e7c454bac7a7148c33a109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1191607066
 GameObject:
   m_ObjectHideFlags: 0
@@ -3861,7 +4020,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1191607068}
   - component: {fileID: 1191607067}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ClimbTreeObjective
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3980,6 +4139,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cliff_blockQuarter_rock (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a1dc04f4bea33c240aa5b7c79c8062e5, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1dc04f4bea33c240aa5b7c79c8062e5, type: 3}
 --- !u!4 &1221162758 stripped
@@ -4015,6 +4178,10 @@ PrefabInstance:
     - target: {fileID: 1443594761045214905, guid: 566177aa861db9748b2534640c41431c, type: 3}
       propertyPath: m_Name
       value: HexIsland
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443594761045214905, guid: 566177aa861db9748b2534640c41431c, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2252782115538557955, guid: 566177aa861db9748b2534640c41431c, type: 3}
       propertyPath: m_RootOrder
@@ -4117,6 +4284,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: smallerIsland (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4386406023664034311, guid: 58b430b65e5b0e34baa0f3ec3328702a, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58b430b65e5b0e34baa0f3ec3328702a, type: 3}
 --- !u!1 &1269778262
@@ -4128,7 +4299,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1269778263}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Nest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4162,7 +4333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1314469830}
   - component: {fileID: 1314469829}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StopHoveringWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4269,6 +4440,10 @@ PrefabInstance:
       value: FlyingSixthRing
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -4329,6 +4504,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: GrassIsland
       objectReference: {fileID: 0}
+    - target: {fileID: 3025777786529926894, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244978256006737418, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994159746271779827, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8143608768317757379, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
 --- !u!4 &1425829657 stripped
@@ -4346,7 +4537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1434754851}
   - component: {fileID: 1434754850}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: JumpOnYellowRockBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4390,7 +4581,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1462423746}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: The Waking Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4478,6 +4669,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: GrassIsland (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3025777786529926894, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244978256006737418, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994159746271779827, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8143608768317757379, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bae42c35fc09f51498a7cebcc875d670, type: 3}
 --- !u!4 &1485094687 stripped
@@ -4495,7 +4702,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1502806159}
   - component: {fileID: 1502806160}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LandOnHillObjective
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4543,7 +4750,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1503414778}
   - component: {fileID: 1503414777}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RocksObjective
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4666,6 +4873,10 @@ PrefabInstance:
       value: FlyingFirstRing
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -4681,6 +4892,10 @@ PrefabInstance:
     - target: {fileID: 2594992599452440461, guid: a0d883965b4d31d41bf17755e92ab8fe, type: 3}
       propertyPath: m_Name
       value: Old Plant McGee (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2594992599452440461, guid: a0d883965b4d31d41bf17755e92ab8fe, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3407136574621682999, guid: a0d883965b4d31d41bf17755e92ab8fe, type: 3}
       propertyPath: m_RootOrder
@@ -4812,6 +5027,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: stone_smallD
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 18ead42fcbbc27c4bb8e0689a8ea0c4d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18ead42fcbbc27c4bb8e0689a8ea0c4d, type: 3}
 --- !u!1 &1582085412
@@ -4825,7 +5044,7 @@ GameObject:
   - component: {fileID: 1582085413}
   - component: {fileID: 1582085415}
   - component: {fileID: 1582085414}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpawnPointRock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4873,6 +5092,99 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objTag: Player
+--- !u!1001 &1590919698
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 809324500423899685, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 809324500423899685, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[3].time
+      value: 50.13557
+      objectReference: {fileID: 0}
+    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[3].value
+      value: 1.000033
+      objectReference: {fileID: 0}
+    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[3].inSlope
+      value: -0.00013871057
+      objectReference: {fileID: 0}
+    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[4].inSlope
+      value: -0.024758922
+      objectReference: {fileID: 0}
+    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[3].inWeight
+      value: 0.19202289
+      objectReference: {fileID: 0}
+    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[3].outSlope
+      value: -0.00013871057
+      objectReference: {fileID: 0}
+    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: coefficientOfLiftCurve.m_Curve.Array.data[4].outSlope
+      value: -0.024758922
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435698845848507069, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435698845848507069, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435698845848507069, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435698845848507069, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435698845848507069, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435698845848507069, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435698845848507069, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435698845848507069, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435698845848507069, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435698845848507069, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435698845848507069, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435698845848507070, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_Name
+      value: Ika
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
 --- !u!1 &1599922536
 GameObject:
   m_ObjectHideFlags: 0
@@ -4883,7 +5195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1599922538}
   - component: {fileID: 1599922537}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ReachYellowFlower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4930,7 +5242,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1722297000}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Playground-Lower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4990,7 +5302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1744195473}
   - component: {fileID: 1744195472}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ReachTopOfTreeWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5036,7 +5348,7 @@ GameObject:
   - component: {fileID: 1777118376}
   - component: {fileID: 1777118377}
   - component: {fileID: 1777118378}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpawnPointTree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5156,6 +5468,10 @@ PrefabInstance:
       value: FlyingThirdRing
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -5260,6 +5576,10 @@ PrefabInstance:
       value: bridge_woodRoundNarrow
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 127c339efe681c0499b4a2aa5eb7ca23, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 127c339efe681c0499b4a2aa5eb7ca23, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -5289,6 +5609,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 127c339efe681c0499b4a2aa5eb7ca23, type: 3}
   m_PrefabInstance: {fileID: 1808304623}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1886292433
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6290574449995079445, guid: 09500ab51af225743a9d8609c42d75ed, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6290574449995079445, guid: 09500ab51af225743a9d8609c42d75ed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -70.16767
+      objectReference: {fileID: 0}
+    - target: {fileID: 6290574449995079445, guid: 09500ab51af225743a9d8609c42d75ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 438
+      objectReference: {fileID: 0}
+    - target: {fileID: 6290574449995079445, guid: 09500ab51af225743a9d8609c42d75ed, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.8383932
+      objectReference: {fileID: 0}
+    - target: {fileID: 6290574449995079445, guid: 09500ab51af225743a9d8609c42d75ed, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6290574449995079445, guid: 09500ab51af225743a9d8609c42d75ed, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6290574449995079445, guid: 09500ab51af225743a9d8609c42d75ed, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6290574449995079445, guid: 09500ab51af225743a9d8609c42d75ed, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6290574449995079445, guid: 09500ab51af225743a9d8609c42d75ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6290574449995079445, guid: 09500ab51af225743a9d8609c42d75ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6290574449995079445, guid: 09500ab51af225743a9d8609c42d75ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6290574449995079464, guid: 09500ab51af225743a9d8609c42d75ed, type: 3}
+      propertyPath: m_Name
+      value: MainCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 6290574449995079465, guid: 09500ab51af225743a9d8609c42d75ed, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1185346840}
+    - target: {fileID: 6290574449995079465, guid: 09500ab51af225743a9d8609c42d75ed, type: 3}
+      propertyPath: cameraIgnoreMask.m_Bits
+      value: 513
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 09500ab51af225743a9d8609c42d75ed, type: 3}
 --- !u!1001 &1888024747
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5360,6 +5745,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: rock_smallFlatC
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 07a58702eedb607458e1728fa08fbbb4, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07a58702eedb607458e1728fa08fbbb4, type: 3}
 --- !u!4 &1910140345 stripped
@@ -5377,6 +5766,10 @@ PrefabInstance:
     - target: {fileID: 1443594761045214905, guid: 566177aa861db9748b2534640c41431c, type: 3}
       propertyPath: m_Name
       value: HexIsland (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443594761045214905, guid: 566177aa861db9748b2534640c41431c, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2252782115538557955, guid: 566177aa861db9748b2534640c41431c, type: 3}
       propertyPath: m_RootOrder
@@ -5434,6 +5827,10 @@ PrefabInstance:
     - target: {fileID: 1443594761045214905, guid: 566177aa861db9748b2534640c41431c, type: 3}
       propertyPath: m_Name
       value: HexIsland (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443594761045214905, guid: 566177aa861db9748b2534640c41431c, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2252782115538557955, guid: 566177aa861db9748b2534640c41431c, type: 3}
       propertyPath: m_RootOrder
@@ -5512,6 +5909,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2133784447}
     m_Modifications:
+    - target: {fileID: 4654647234880282225, guid: abe2ac15706febd4097e9190b3339b50, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4678103022854122823, guid: abe2ac15706febd4097e9190b3339b50, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -5559,6 +5960,10 @@ PrefabInstance:
     - target: {fileID: 5449396529437014013, guid: abe2ac15706febd4097e9190b3339b50, type: 3}
       propertyPath: m_Name
       value: GrassIsland2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449396529437014013, guid: abe2ac15706febd4097e9190b3339b50, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abe2ac15706febd4097e9190b3339b50, type: 3}
@@ -5638,6 +6043,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cliff_blockQuarter_rock
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a1dc04f4bea33c240aa5b7c79c8062e5, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1dc04f4bea33c240aa5b7c79c8062e5, type: 3}
 --- !u!4 &1978148142 stripped
@@ -5673,6 +6082,10 @@ PrefabInstance:
     - target: {fileID: 2594992599452440461, guid: a0d883965b4d31d41bf17755e92ab8fe, type: 3}
       propertyPath: m_Name
       value: Old Plant McGee (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2594992599452440461, guid: a0d883965b4d31d41bf17755e92ab8fe, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3407136574621682999, guid: a0d883965b4d31d41bf17755e92ab8fe, type: 3}
       propertyPath: m_RootOrder
@@ -5749,7 +6162,7 @@ GameObject:
   - component: {fileID: 2012477989}
   - component: {fileID: 2012477990}
   - component: {fileID: 2012477991}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpawnPoint
   m_TagString: Respawn
   m_Icon: {fileID: 0}
@@ -5882,6 +6295,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cliff_blockQuarter_rock
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a1dc04f4bea33c240aa5b7c79c8062e5, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1dc04f4bea33c240aa5b7c79c8062e5, type: 3}
 --- !u!4 &2043849599 stripped
@@ -5963,6 +6380,10 @@ PrefabInstance:
       value: ringRocks3
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -6001,7 +6422,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2083175680}
   - component: {fileID: 2083175679}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: JumpOnYellowRockObjective
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6051,7 +6472,7 @@ GameObject:
   - component: {fileID: 2091171475}
   - component: {fileID: 2091171474}
   - component: {fileID: 2091171473}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6193,6 +6614,10 @@ PrefabInstance:
       value: ringClimbTree5
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8113d6a8c8e74fe46b21b34fc6309cbf, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -6230,7 +6655,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2133784447}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: IslandDeco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6256,7 +6681,7 @@ Transform:
   - {fileID: 1137309610}
   - {fileID: 433502403}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &543450653396269072 stripped
 Transform:
@@ -6273,6 +6698,10 @@ PrefabInstance:
     - target: {fileID: 2594992599452440461, guid: a0d883965b4d31d41bf17755e92ab8fe, type: 3}
       propertyPath: m_Name
       value: Old Plant McGee
+      objectReference: {fileID: 0}
+    - target: {fileID: 2594992599452440461, guid: a0d883965b4d31d41bf17755e92ab8fe, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3407136574621682999, guid: a0d883965b4d31d41bf17755e92ab8fe, type: 3}
       propertyPath: m_RootOrder
@@ -6300,7 +6729,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3407136574621682999, guid: a0d883965b4d31d41bf17755e92ab8fe, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.13
+      value: -7.07
       objectReference: {fileID: 0}
     - target: {fileID: 3407136574621682999, guid: a0d883965b4d31d41bf17755e92ab8fe, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6386,6 +6815,10 @@ PrefabInstance:
     - target: {fileID: 4386406023664034311, guid: 58b430b65e5b0e34baa0f3ec3328702a, type: 3}
       propertyPath: m_Name
       value: smallerIsland
+      objectReference: {fileID: 0}
+    - target: {fileID: 4386406023664034311, guid: 58b430b65e5b0e34baa0f3ec3328702a, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58b430b65e5b0e34baa0f3ec3328702a, type: 3}

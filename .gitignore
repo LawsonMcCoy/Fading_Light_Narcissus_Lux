@@ -27,6 +27,7 @@
 UserSettings/
 UserSettings/EditorUserSettings.asset
 
+#I am not sure what this is but I am ignoring it
 ProjectSettings/BurstAotSettings_StandaloneLinux64.json
 
 # Gradle cache directory

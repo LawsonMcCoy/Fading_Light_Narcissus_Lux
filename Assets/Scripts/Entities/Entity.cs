@@ -10,8 +10,8 @@ using UnityEngine;
 public abstract class Entity : MonoBehaviour
 {
     //references to required components
-    [SerializeField] public Rigidbody rigidbody;
-    [SerializeField] public Collider collider;
+    [SerializeField] public new Rigidbody rigidbody;
+    [SerializeField] public new Collider collider;
 
     private HealthManager health;
 
