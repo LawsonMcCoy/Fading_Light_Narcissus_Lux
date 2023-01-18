@@ -240,7 +240,7 @@ public class MovementWalking : MovementMode
                 if (input.isPressed)
                 {
                     //previousBoolean = !midairTransition;
-                    Transition(Modes.FLYING);
+                    Transition(Modes.GLIDING);
                 }
             }
         }
@@ -266,16 +266,16 @@ public class MovementWalking : MovementMode
         if (midairTransition == true && previousBoolean == false)  // MIDAIR TRANSITION
         {
             previousBoolean = midairTransition;
-            // controlUi.TransitionMidairUI();
-            // controlUi.IndicateModeChange();
-            // Debug.Log("Now jumping");
+            controlUi.TransitionMidairUI();
+            controlUi.IndicateModeChange();
+            Debug.Log("Now jumping");
         }
         else if (midairTransition == false && previousBoolean == true) // WALK TRANSITION
         {
             previousBoolean = midairTransition;
-            // controlUi.TransitionWalkUI();
-            // controlUi.IndicateModeChange();
-            // Debug.Log("Now walking");
+            controlUi.TransitionWalkUI();
+            controlUi.IndicateModeChange();
+            Debug.Log("Now walking");
         }
     }
 }

@@ -26,7 +26,7 @@ public abstract class MovementMode : MonoBehaviour
     {
         WALKING,
         HOVERING,
-        FLYING
+        GLIDING
     }
 
     protected Player self; //a reference to yourself
@@ -69,7 +69,7 @@ public abstract class MovementMode : MonoBehaviour
 
         inputReady = true;
 
-        // controlUi = GameObject.Find(commonData.controlUiParentName).GetComponent<ControlUi>();
+        controlUi = GameObject.Find(commonData.controlUiParentName).GetComponent<ControlUi>();
     }
 
     protected virtual void OnEnable()
@@ -90,7 +90,7 @@ public abstract class MovementMode : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        //upadate the moveVector
+        //update the moveVector
         moveVector = wasdInput.x * speed * this.transform.right + wasdInput.y * speed * this.transform.forward;
     }
 

@@ -59,8 +59,8 @@ public class MovementHovering : MovementMode
         modeUIColor = new Color(0f, 0.8f, 0f, 1f);
         movementModeText.color = modeUIColor;
 
-        // controlUi.TransitionHoverUI();
-        // controlUi.IndicateModeChange();
+        controlUi.TransitionHoverUI();
+        controlUi.IndicateModeChange();
     }
 
     protected override void FixedUpdate()
@@ -150,7 +150,7 @@ public class MovementHovering : MovementMode
 
         if (input.isPressed)
         {
-            Transition(Modes.FLYING);
+            Transition(Modes.GLIDING);
         }
     }
 

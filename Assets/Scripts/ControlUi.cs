@@ -17,7 +17,7 @@ public class ControlUi : MonoBehaviour
     private int controlUiLength;
     private Text[] controlUiTexts;
     private string[] stringControls = new string[]
-        {"Walk", "Hover", "Fly", "Dash", "Jump", "Sprint", "Attack", "---"};
+        {"Walk", "Hover", "Glide", "Dash", "Jump", "Sprint", "Attack", "Boost", "---"};
 
     // Image UI
     private int controlImagesLength;
@@ -26,16 +26,17 @@ public class ControlUi : MonoBehaviour
 
     //an enum for the string version of each character mode 
     //they are used as int values that matches the index of stringControls
-    //basically copying Lawson's tactics
+    //basically copying Lawson's and Marc's tactics
     private enum Controls
     {
         WALKMODE,
         HOVERMODE,
-        FLYMODE,
+        GLIDEMODE,
         DASHMODE,
         JUMPMODE,
         SPRINTMODE,
         ATTACKMODE,
+        BOOSTMODE,
         NOMODE
     }
 
@@ -68,29 +69,29 @@ public class ControlUi : MonoBehaviour
     public void TransitionWalkUI()
     {
         controlUiTexts[0].text = stringControls[(int)Controls.JUMPMODE];    //Space
-        controlUiTexts[1].text = stringControls[(int)Controls.SPRINTMODE];  //Shift
+        controlUiTexts[1].text = stringControls[(int)Controls.NOMODE];      //Shift
         controlUiTexts[2].text = stringControls[(int)Controls.DASHMODE];    //Right-click
     }
 
     public void TransitionMidairUI()
     {
         controlUiTexts[0].text = stringControls[(int)Controls.HOVERMODE];   //Space
-        controlUiTexts[1].text = stringControls[(int)Controls.FLYMODE];     //Shift
+        controlUiTexts[1].text = stringControls[(int)Controls.GLIDEMODE];   //Shift
         controlUiTexts[2].text = stringControls[(int)Controls.DASHMODE];    //Right-click
     }
 
     public void TransitionHoverUI()
     {
         controlUiTexts[0].text = stringControls[(int)Controls.WALKMODE];    //Space
-        controlUiTexts[1].text = stringControls[(int)Controls.FLYMODE];     //Shift
+        controlUiTexts[1].text = stringControls[(int)Controls.GLIDEMODE];   //Shift
         controlUiTexts[2].text = stringControls[(int)Controls.DASHMODE];    //Right-click
     }
 
-    public void TransitionFlyUI()
+    public void TransitionGlideUI()
     {
         controlUiTexts[0].text = stringControls[(int)Controls.WALKMODE];    //Space
-        controlUiTexts[1].text = stringControls[(int)Controls.NOMODE];      //Shift
-        controlUiTexts[2].text = stringControls[(int)Controls.DASHMODE];    //right-click
+        controlUiTexts[1].text = stringControls[(int)Controls.BOOSTMODE];   //Shift
+        controlUiTexts[2].text = stringControls[(int)Controls.NOMODE];      //right-click
     }
 
     public void IndicateModeChange()
