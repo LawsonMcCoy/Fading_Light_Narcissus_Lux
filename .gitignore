@@ -27,6 +27,8 @@
 UserSettings/
 UserSettings/EditorUserSettings.asset
 
+ProjectSettings/BurstAotSettings_StandaloneLinux64.json
+
 # Gradle cache directory
 .gradle/
 
