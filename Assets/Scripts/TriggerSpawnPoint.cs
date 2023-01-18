@@ -33,8 +33,8 @@ public class TriggerSpawnPoint : MonoBehaviour
         // if player
         if (other.gameObject.tag == objTag)
         {
-            Player player = other.gameObject.GetComponent<Player>();
-            player.UpdateSpawn(this.transform);
+            // Player player = other.gameObject.GetComponent<Player>();
+            // player.UpdateSpawn(this.transform);
 
             main.startColor = newColor;
             main.simulationSpeed = newSimulationSpeed;

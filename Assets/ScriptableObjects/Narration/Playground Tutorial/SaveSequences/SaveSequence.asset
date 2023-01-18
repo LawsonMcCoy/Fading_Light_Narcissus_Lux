@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c37cba4f1ea47146e9e803ac82ad5e35, type: 3}
-  m_Name: FlowerObjectiveSequence
+  m_Script: {fileID: 11500000, guid: 5e1c914f7cafa684cb7e4b6aaad6e7d2, type: 3}
+  m_Name: SaveSequence
   m_EditorClassIdentifier: 
-  enemiesToKill: 0
-  Description: 
-  resetCourse: 1
-  disapear: 0
+  saveScene: 2
+  saveSuccesful: 1
+  newCoordinates: {x: -0.8000001, y: 10, z: -10.6}
