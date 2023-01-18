@@ -38,6 +38,7 @@ public abstract class MovementMode : MonoBehaviour
         private set;
     }
 
+    private Vector2 wasdInput;
     protected Vector3 moveVector;
     protected float speed; //speed variable to be set by the child class
 
@@ -89,11 +90,8 @@ public abstract class MovementMode : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        //cap the speed
-        // if (self.rigidbody.velocity.magnitude > commonData.maxSpeed)
-        // {
-        //     self.rigidbody.velocity = self.rigidbody.velocity.normalized * commonData.maxSpeed;
-        // }
+        //upadate the moveVector
+        moveVector = wasdInput.x * speed * this.transform.right + wasdInput.y * speed * this.transform.forward;
     }
 
     //A visitor function to determine which type of movement mode this script is
@@ -275,10 +273,7 @@ public abstract class MovementMode : MonoBehaviour
     protected virtual void OnMove(InputValue input)
     {
         //x component is turning, y component is tilting
-        Vector2 inputVector = input.Get<Vector2>();
-        
-        //Note that when going from 2D vector to 3D vector, the y in 2D becomes the z in 3D, Thanks Unity
-        moveVector = inputVector.x * speed * this.transform.right + inputVector.y * speed * this.transform.forward;
+        wasdInput = input.Get<Vector2>();
     }
 
     protected virtual void OnDash(InputValue input)

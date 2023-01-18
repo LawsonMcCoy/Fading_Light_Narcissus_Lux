@@ -104,6 +104,9 @@ public class MovementFlying : MovementMode
 
     protected override void FixedUpdate()
     {
+        //make sure that MovementMode fixed update is called first
+        base.FixedUpdate();
+
         //get local velocity
         localVelocity = Quaternion.Inverse(self.rigidbody.rotation) * self.rigidbody.velocity;
 
@@ -130,8 +133,6 @@ public class MovementFlying : MovementMode
 
         //update the wind particle system
         UpdateWindVisulation();
-
-        base.FixedUpdate();
 
         Debug.DrawLine(transform.position, transform.position + self.rigidbody.velocity, Color.green);
     }

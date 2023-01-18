@@ -97,6 +97,9 @@ public class MovementWalking : MovementMode
 
     protected override void FixedUpdate()
     {
+        //make sure that MovementMode fixed update is called first
+        base.FixedUpdate();
+
         //check to see if the player is on the ground or in midair
         //I will likely changed this later it doesn't have to check
         //every update loop

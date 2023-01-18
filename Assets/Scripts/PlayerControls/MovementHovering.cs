@@ -65,6 +65,9 @@ public class MovementHovering : MovementMode
 
     protected override void FixedUpdate()
     {
+        //make sure that MovementMode fixed update is called first
+        base.FixedUpdate();
+
         //update the hover time
         hoverTime += Time.fixedDeltaTime;
 
