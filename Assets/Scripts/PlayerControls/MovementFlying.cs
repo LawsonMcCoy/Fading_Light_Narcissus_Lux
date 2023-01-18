@@ -480,7 +480,7 @@ public class MovementFlying : MovementMode
             //Get the dash direction from the from the turn value
             //we will dash in the direction the player is rolling
             //always dash to the side
-            dashVector = (turnValue * (-transform.right)).normalized;
+            dashVector = (turnValue * (Vector3.Cross(transform.forward, Vector3.up))).normalized;
                 
             //compute the dash magnitude and perform dash
             ComputeDashVector(dashVector);
