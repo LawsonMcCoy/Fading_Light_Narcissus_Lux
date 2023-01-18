@@ -127,7 +127,7 @@ public class MovementFlying : MovementMode
         AddTorque();
 
         //test function to add forward speed
-        if (speedBoost)
+        if (speedBoost && stamina.ResourceAmount() > 0)
         {
             AddForce(transform.forward * speedBoostMagnitude, ForceMode.Force);
 
