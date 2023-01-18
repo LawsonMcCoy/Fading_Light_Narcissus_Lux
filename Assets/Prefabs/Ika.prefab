@@ -496,7 +496,6 @@ MonoBehaviour:
   - {fileID: 7204556638568947314}
   stamina: {fileID: 2271143012148580341}
   movementModeText: {fileID: 8925406608850753112}
-  testForwardSpeed: 20
   forwardThrustMagnitude: 5
   liftPower: 1
   coefficientOfInducedDrag: 0.5
@@ -553,11 +552,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  tiltSpeed: 0.5
+  tiltSpeed: 1
   turnSpeed: 0.5
   maxTiltAngle: 60
   minTiltAngle: -60
-  maxTurnAngle: 90
+  maxTurnAngle: 89
   collisionLayer:
     serializedVersion: 2
     m_Bits: 55
