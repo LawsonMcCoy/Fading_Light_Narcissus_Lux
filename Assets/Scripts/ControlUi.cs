@@ -91,7 +91,7 @@ public class ControlUi : MonoBehaviour
     {
         controlUiTexts[0].text = stringControls[(int)Controls.WALKMODE];    //Space
         controlUiTexts[1].text = stringControls[(int)Controls.BOOSTMODE];   //Shift
-        controlUiTexts[2].text = stringControls[(int)Controls.NOMODE];      //right-click
+        controlUiTexts[2].text = stringControls[(int)Controls.DASHMODE];    //right-click
     }
 
     public void IndicateModeChange()

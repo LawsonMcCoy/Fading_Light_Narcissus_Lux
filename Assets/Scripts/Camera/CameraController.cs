@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
     [Tooltip("The camera's spherical position around the player. x component is the distance the camera wants to be from the player. " +
               "The y component is the angle theta rotated around the Vector3 up axis NOT player's (-180 to 180). The z component is the angle phi " +
               "rotated from Vector3 up around the player's right axis (0 to 180). Note that an angle of theta=0 always places the camera directly behind the " +
-              "camera, and an angle of phi=0 always places the camera directly above the player. This vector only affects camera position, not it's " +
+              "player, and an angle of phi=0 always places the camera directly above the player. This vector only affects camera position, not it's " +
               "orientation.")]
     [SerializeField] Vector3 sphericalPosition = new Vector3(10, 0, 0); //will change default value later
     private Vector3 lookDirection = Vector3.forward; //A unit vector representing where the camera is looking

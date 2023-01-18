@@ -21,9 +21,9 @@ MonoBehaviour:
   dashDistance: 10
   dashTimeStep: 0.001
   dashDistanceStep: 1
-  dashBounceHorizontal: 25
-  dashBounceVertical: 30
+  dashBounceHorizontal: 15
+  dashBounceVertical: 10
   dashBounceMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 513
   controlUiParentName: Controls UI
