@@ -12,13 +12,26 @@ public class MovementWalking : MovementMode
     [SerializeField] private float jumpForceStationary; //How strong the player can jump when not moving
     [SerializeField] private float staminaRegainRate; //The amount of stamina regain per second while walking
     [SerializeField] private float dashJumpForce; //How strong the player can jump at the end of dash
+    [SerializeField] private float walkingDampingCoefficient; //The damping coefficient to the stop the player
 
 
     private float turnValue;
-    private bool onGround; //A bool value that is true when on the ground and false otherwise
-                           //updated in the CheckGroundStatus function
 
-    private void Awake()
+    //readable data
+
+    //A bool value that is true when on the ground and false otherwise updated in the CheckGroundStatus function
+    public bool onGround
+    {
+        get;
+        private set;
+    }
+    
+    //Helper UI
+    private bool uiLoaded;
+    private bool midairTransition;
+    private bool previousBoolean;
+
+    protected override void Awake()
     {
         base.Awake();
 
@@ -26,10 +39,14 @@ public class MovementWalking : MovementMode
         speed = walkSpeed;
 
         turnValue = 0;
+        uiLoaded = true;
+        midairTransition = false;
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+        
         StartCoroutine(DelayInput());
 
         CheckGroundStatus();
@@ -39,6 +56,10 @@ public class MovementWalking : MovementMode
 
         modeUIColor = new Color(1f, 0.8f, 0f, 1f);
         movementModeText.color = modeUIColor;
+
+
+        CheckForTransitions();      //recalibrate transition after hovering/flying
+        previousBoolean = !midairTransition;
     }
 
     //a helper function to check if the player is on the ground
@@ -54,12 +75,11 @@ public class MovementWalking : MovementMode
             self.rigidbody.freezeRotation = true;
 
             //reset the rotate transform.up is the same as Vector3.up
-            //self.rigidbody.rotation.SetLookRotation(this.transform.forward, groundInfo.normal);
             Vector3 currentEuler = self.rigidbody.rotation.eulerAngles; //get the Euler angles
             currentEuler.x = 0.0f; //set the rotation around x axis to 0
             currentEuler.z = 0.0f; //set the rotation around z axis to 0
+
             //Now we only have an rotation around the y axis, so up with this rotation is Vector3.up
-            // self.rigidbody.rotation = Quaternion.Euler(currentEuler);
             self.rigidbody.MoveRotation(Quaternion.Euler(currentEuler));
 
             return true;
@@ -77,19 +97,23 @@ public class MovementWalking : MovementMode
 
     protected override void FixedUpdate()
     {
+        //make sure that MovementMode fixed update is called first
+        base.FixedUpdate();
+
         //check to see if the player is on the ground or in midair
         //I will likely changed this later it doesn't have to check
         //every update loop
         // Debug.Log(CheckGroundStatus());
-        if(CheckGroundStatus())
+        //Debug.Log($"Test is onGround {onGround}");
+
+        if (CheckGroundStatus())
         {
             //On ground 
 
             //move the player 
-            // self.rigidbody.MovePosition(self.rigidbody.position + (moveVector * Time.fixedDeltaTime));
             Vector3 horizontalVelocity = self.rigidbody.velocity;
             horizontalVelocity.y = 0.0f; //set vertical component to zero
-            self.rigidbody.AddForce(moveVector - self.rigidbody.velocity, ForceMode.Force);
+            AddForce(walkingDampingCoefficient * (moveVector - horizontalVelocity), ForceMode.Force);
 
             //rotate the player
             Quaternion newRotation = self.rigidbody.rotation * Quaternion.Euler(0, turnValue * Time.fixedDeltaTime, 0);
@@ -102,20 +126,28 @@ public class MovementWalking : MovementMode
         {
             //In Midair
         }
-
+        
+        CheckForTransitions();
+        DisplayUiControls();
         //Regain stamina whenever in walking mode whether on ground or falling
         // stamina.Add(staminaRegainRate * Time.fixedDeltaTime);
+    }
+
+    //A visitor function to determine which type of movement mode this script is
+    public override void GetMovementUpdate(MovementUpdateReciever updateReciever)
+    {
+        updateReciever.WalkingUpdate(this);
     }
 
     private IEnumerator PerformDashJump()
     {
         Debug.Log("Dash Jump");
         //wait until dashing is completed
-        yield return new WaitUntil(() => !dashing);
+        yield return new WaitUntil(() => !isDashing);
 
         Debug.Log($"Perform Dash Jump {dashJumpForce * Vector3.up}");
         //perform the dash jump
-        self.rigidbody.AddForce(dashJumpForce * Vector3.up, ForceMode.Impulse);
+        AddForce(dashJumpForce * Vector3.up, ForceMode.Impulse);
     }
     
     //zeroing out rotational motion during movement restricted events
@@ -133,12 +165,12 @@ public class MovementWalking : MovementMode
     //************
 
     //mouse input
-    private void OnTurn(InputValue input)
+    protected override void OnLook(InputValue input)
     {
-        Vector2 inputVector = input.Get<Vector2>();
+        base.OnLook(input);
 
         //the x component will rotate the player
-        turnValue = inputVector.x * turnSpeed;
+        turnValue = mouseInput.x * turnSpeed;
     }
 
     //space key input
@@ -146,7 +178,7 @@ public class MovementWalking : MovementMode
     {
         if (inputReady)
         {
-            if (dashing)
+            if (isDashing)
             {
                 //perform a dash jump
                 StartCoroutine(PerformDashJump());
@@ -160,7 +192,7 @@ public class MovementWalking : MovementMode
                     if (input.isPressed)
                     {
                         Vector3 jumpForceVector; //A vector that will represent the force the player
-                                                //is jumping with
+                                                 //is jumping with
 
                         //compute vertical component
                         if (moveVector == Vector3.zero)
@@ -177,7 +209,7 @@ public class MovementWalking : MovementMode
                         jumpForceVector += moveVector.normalized * jumpForceHonrizontal;
 
                         //jump with impulse
-                        self.rigidbody.AddForce(jumpForceVector, ForceMode.Impulse);
+                        AddForce(jumpForceVector, ForceMode.Impulse);
                     } //end if (!input.isPressed)
                 }//end if (onGround)
                 else
@@ -186,6 +218,7 @@ public class MovementWalking : MovementMode
                     //note that you can only hover if you have stamina
                     if (input.isPressed && stamina.ResourceAmount() > 0)
                     {
+                        //previousBoolean = !midairTransition;
                         Transition(Modes.HOVERING);
                     }
                 } //end else (if (onGround))
@@ -206,9 +239,43 @@ public class MovementWalking : MovementMode
             {
                 if (input.isPressed)
                 {
-                    Transition(Modes.FLYING);
+                    //previousBoolean = !midairTransition;
+                    Transition(Modes.GLIDING);
                 }
             }
+        }
+    }
+
+    private void CheckForTransitions()
+    {
+        if (onGround)
+        {
+            if (midairTransition)    // if midairTransition is true while on ground
+                midairTransition = false;
+        }
+        else
+        {
+            if (!midairTransition)  // if midairTransition is false while in midair
+                midairTransition = true;
+        }
+    }
+
+    private void DisplayUiControls()
+    {
+        // A way to know if a transition occured between midair and walk once:
+        if (midairTransition == true && previousBoolean == false)  // MIDAIR TRANSITION
+        {
+            previousBoolean = midairTransition;
+            controlUi.TransitionMidairUI();
+            controlUi.IndicateModeChange();
+            Debug.Log("Now jumping");
+        }
+        else if (midairTransition == false && previousBoolean == true) // WALK TRANSITION
+        {
+            previousBoolean = midairTransition;
+            controlUi.TransitionWalkUI();
+            controlUi.IndicateModeChange();
+            Debug.Log("Now walking");
         }
     }
 }

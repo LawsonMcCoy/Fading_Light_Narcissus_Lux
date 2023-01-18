@@ -26,22 +26,38 @@ public abstract class MovementMode : MonoBehaviour
     {
         WALKING,
         HOVERING,
-        FLYING
+        GLIDING
     }
 
     protected Player self; //a reference to yourself
 
-    protected bool dashing; //true when the player is dash and false otherwise
+    //true when the player is dash and false otherwise
+    public bool isDashing
+    {
+        get;
+        private set;
+    }
 
+    private Vector2 wasdInput;
     protected Vector3 moveVector;
     protected float speed; //speed variable to be set by the child class
 
     protected bool inputReady; //A variable value to prevent immediately transiting back to 
-                                //a mode that you just transition from when the button to transition
-                                //is the same
+                               //a mode that you just transition from when the button to transition
+                               //is the same
 
+    #region Ui Section
     [SerializeField] protected Text movementModeText;
     protected Color modeUIColor;
+    protected ControlUi controlUi;
+    #endregion
+
+    //Input data
+    public Vector2 mouseInput
+    {
+        get;
+        private set;
+    }
 
     protected virtual void Awake()
     {
@@ -52,6 +68,15 @@ public abstract class MovementMode : MonoBehaviour
         moveVector = Vector3.zero;
 
         inputReady = true;
+
+        controlUi = GameObject.Find(commonData.controlUiParentName).GetComponent<ControlUi>();
+    }
+
+    protected virtual void OnEnable()
+    {
+        //inform the player class that the active movement mode has changed
+        //pass in reference to new active movement mode (this)
+        self.activeMovementMode = this;
     }
 
     protected virtual void Start()
@@ -65,12 +90,12 @@ public abstract class MovementMode : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        //cap the speed
-        if (self.rigidbody.velocity.magnitude > commonData.maxSpeed)
-        {
-            self.rigidbody.velocity = self.rigidbody.velocity.normalized * commonData.maxSpeed;
-        }
+        //update the moveVector
+        moveVector = wasdInput.x * speed * this.transform.right + wasdInput.y * speed * this.transform.forward;
     }
+
+    //A visitor function to determine which type of movement mode this script is
+    public abstract void GetMovementUpdate(MovementUpdateReciever updateReciever);
 
     //A function to transition from one movement mode to another.
     //It will enable the script being transitioned to and disable its
@@ -99,14 +124,13 @@ public abstract class MovementMode : MonoBehaviour
     //in the air
     protected bool IsGrounded(out RaycastHit groundedInfo)
     {
-        Debug.DrawLine(this.transform.position, (Vector3.down * (commonData.isGroundedCheckDistance + 0.1f)) + this.transform.position, Color.white);
-        if (Physics.Raycast(this.transform.position, Vector3.down, out groundedInfo, commonData.isGroundedCheckDistance + 0.1f))  //The last 0.1 is in case the raycast ends on the surface of the ground 
+        if (Physics.Raycast(self.center, Vector3.down, out groundedInfo, commonData.isGroundedCheckDistance + 0.1f))  //The last 0.1 is in case the raycast ends on the surface of the ground 
         {
             //if the raycast collides with the ground, check to make sure the slope is not too steep to stand on
             
             //compute slope angle
             float slopeAngle = Vector3.Angle(Vector3.up, groundedInfo.normal);
-
+            //Debug.Log($"Slope Angle: {slopeAngle}");
             //The player is only grounded iff the slope is not too steep to stand on
             return slopeAngle <= commonData.maxStandingSlopeAngle;
         }
@@ -117,15 +141,23 @@ public abstract class MovementMode : MonoBehaviour
         }
     }
 
+    //overload of IsGrounded so it can be called without returning the RaycastHit
+    protected bool IsGrounded()
+    {
+        RaycastHit unsedGroundedInfo;
+        return IsGrounded(out unsedGroundedInfo);
+    }
+
     protected void AddForce(Vector3 force, ForceMode mode)
     {
         //limit the force to max force
-        if (force.magnitude > commonData.maxForce)
-        {
-            force = force.normalized * commonData.maxForce;
-        }
+        // if (force.magnitude > commonData.maxForce)
+        // {
+        //     force = force.normalized * commonData.maxForce;
+        // }
 
         //apply force to rigidbody
+        Debug.DrawLine(transform.position, transform.position + force, Color.red);
         self.rigidbody.AddForce(force, mode);
     }
 
@@ -160,7 +192,7 @@ public abstract class MovementMode : MonoBehaviour
         float percentageTravel = 0.0f; //how far the play has travel in form of the percentage of total distance
 
         //mark the player as dashing
-        dashing = true;
+        isDashing = true;
 
         //loop until the player is at their destination
         while (percentageTravel < 1.0f)
@@ -171,13 +203,14 @@ public abstract class MovementMode : MonoBehaviour
             //move the player to new place in the dash
             percentageTravel = dashDistance / dashVector.magnitude;
             self.rigidbody.MovePosition(Vector3.Lerp(startingPosition, endingPosition, percentageTravel));
+            // self.transform.position = Vector3.Lerp(startingPosition, endingPosition, percentageTravel);
 
             //wait for the next time step
             yield return new WaitForSeconds(commonData.dashTimeStep);
         }
 
         //dash is completed, mark the player as not dashing
-        dashing = false;
+        isDashing = false;
     }
 
     //Most of the difference in computation for dashing between different
@@ -188,7 +221,7 @@ public abstract class MovementMode : MonoBehaviour
     protected void ComputeDashVector(Vector3 dashVector)
     {
         //do nothing if dash vector is zero, you don't have enough stamina, or you are already dashing
-        if (dashVector != Vector3.zero && stamina.ResourceAmount() >= commonData.dashStaminaCost && !dashing)
+        if (dashVector != Vector3.zero && stamina.ResourceAmount() >= commonData.dashStaminaCost && !isDashing)
         {
             RaycastHit dashInfo; //The information for about the dash from the raycast
 
@@ -203,7 +236,7 @@ public abstract class MovementMode : MonoBehaviour
             float colliderBufferDistance = Mathf.Sqrt((xDistance * xDistance) + (yDistance * yDistance) + (zDistance * zDistance));
             
             //raycast to see if the dash path is clear
-            if (Physics.Raycast(self.rigidbody.position, dashVector, out dashInfo, commonData.dashDistance))
+            if (Physics.Raycast(self.center, dashVector, out dashInfo, commonData.dashDistance))
             {
                 //if path is not clear use RaycastHit.distance and colliderBufferDistance to scale the direction vector
                 dashVector = (dashInfo.distance - colliderBufferDistance) * dashVector;
@@ -240,10 +273,7 @@ public abstract class MovementMode : MonoBehaviour
     protected virtual void OnMove(InputValue input)
     {
         //x component is turning, y component is tilting
-        Vector2 inputVector = input.Get<Vector2>();
-        
-        //Note that when going from 2D vector to 3D vector, the y in 2D becomes the z in 3D, Thanks Unity
-        moveVector = inputVector.x * speed * this.transform.right + inputVector.y * speed * this.transform.forward;
+        wasdInput = input.Get<Vector2>();
     }
 
     protected virtual void OnDash(InputValue input)
@@ -260,4 +290,15 @@ public abstract class MovementMode : MonoBehaviour
             ComputeDashVector(dashVector);
         }
     }
+
+    protected virtual void OnLook(InputValue input)
+    {
+        mouseInput = input.Get<Vector2>();
+    }
+
+    // private void OnTestNotUsedForGameplay(InputValue input)
+    // {
+    //     // Vector2 value = input.Get<Vector2>;
+    //     Debug.Log($"Test input value {input.Get<Vector2>()}");
+    // }
 }
