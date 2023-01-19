@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BeginFlyingObjectiveSequence
   m_EditorClassIdentifier: 
   enemiesToKill: 0
-  Description: 
+  Description: Press shift midair to start gliding
   resetCourse: 1
   disapear: 1
