@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: FlowerObjectiveSequence
   m_EditorClassIdentifier: 
   enemiesToKill: 0
-  Description: 
+  Description: Reach the yellow flower
   resetCourse: 1
   disapear: 0
