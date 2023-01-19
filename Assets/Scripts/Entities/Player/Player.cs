@@ -37,8 +37,6 @@ public class Player : CombatEntity
         }
 
         //events subscriptions
-        EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_START, DisableInput);
-        EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_END, EnableInput);
         EventManager.Instance.Subscribe(EventTypes.Events.PLAYER_DEATH, Respawn);
         EventManager.Instance.Subscribe(EventTypes.Events.SAVE, UpdateSpawn);
 
@@ -62,18 +60,6 @@ public class Player : CombatEntity
         //position during dashing and other couroutine movements
         center = this.transform.position + (positionToCenterDistance * this.transform.up);
     }
-
-    //A simple function to enable player input for controlling the player
-    public void EnableInput()
-    {
-        playerInput.enabled = true;
-    }
-
-    //A simple function to diable player input for controlling the player
-    public void DisableInput()
-    {
-        playerInput.enabled = false;
-    }
     
     private void OnQuit()
     {
@@ -94,8 +80,6 @@ public class Player : CombatEntity
     private void OnDestroy()
     {
         //Events unsubscriptions
-        EventManager.Instance.Unsubscribe(EventTypes.Events.DIALOGUE_START, DisableInput);
-        EventManager.Instance.Unsubscribe(EventTypes.Events.DIALOGUE_END, EnableInput);
         EventManager.Instance.Unsubscribe(EventTypes.Events.PLAYER_DEATH, Respawn);
         EventManager.Instance.Unsubscribe(EventTypes.Events.SAVE, UpdateSpawn);
     }

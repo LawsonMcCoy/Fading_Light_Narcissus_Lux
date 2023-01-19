@@ -42,6 +42,7 @@ public abstract class MovementMode : MonoBehaviour
     protected Vector3 moveVector;
     protected float speed; //speed variable to be set by the child class
 
+    protected bool inputEnabled = true; //A boolean value to determine player control should be enabled
     protected bool inputReady; //A variable value to prevent immediately transiting back to 
                                //a mode that you just transition from when the button to transition
                                //is the same
@@ -86,6 +87,8 @@ public abstract class MovementMode : MonoBehaviour
 
         //Event subscriptions
         EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_START, StartMovementRestrictedEvent);
+        EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_START, DisableInput);
+        EventManager.Instance.Subscribe(EventTypes.Events.DIALOGUE_END, EnableInput);
     }
 
     protected virtual void FixedUpdate()
@@ -169,10 +172,24 @@ public abstract class MovementMode : MonoBehaviour
         moveVector = Vector3.zero;
     } 
 
+    //A simple function to enable player input for controlling the player
+    public void EnableInput()
+    {
+        inputEnabled = true;
+    }
+
+    //A simple function to diable player input for controlling the player
+    public void DisableInput()
+    {
+        inputEnabled = false;
+    }
+
     protected virtual void OnDestroy()
     {
         //Events unsubscriptions
         EventManager.Instance.Unsubscribe(EventTypes.Events.DIALOGUE_START, StartMovementRestrictedEvent);
+        EventManager.Instance.Unsubscribe(EventTypes.Events.DIALOGUE_START, DisableInput);
+        EventManager.Instance.Unsubscribe(EventTypes.Events.DIALOGUE_END, EnableInput);
     }
 
     protected IEnumerator DelayInput()

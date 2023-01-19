@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 829d73f1f82fb1cd395fcb0bf5e35461, type: 3}
   m_Name: LoadStartScene
   m_EditorClassIdentifier: 
+  saveScene: 1
+  saveSuccesful: 0
+  spawnIndex: 0
   scene: 1
+  isGameScene: 0

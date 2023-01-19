@@ -61,7 +61,10 @@ public class NarrationManager : MonoBehaviour
         narrationPaused = true; //The narration start paused and remain so until play game is pressed
         currentNarrationSequenceIndex = 0; //start at the begining of the narration
         savedNarrationSequenceIndex = 0; //The first save is the being of the narration
+    }
 
+    private void start()
+    {
         //set listener for player's death
         EventManager.Instance.Subscribe(EventTypes.Events.PLAYER_DEATH, playerDeath);
     }
