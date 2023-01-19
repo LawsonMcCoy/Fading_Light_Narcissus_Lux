@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: JumpOnYellowRockObjectiveSequence
   m_EditorClassIdentifier: 
   enemiesToKill: 0
-  Description: Jump on the yellow rock
+  Description: Jump on top of the blue flower.
   resetCourse: 0
   disapear: 0

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: LandOnHillObjectiveSequence
   m_EditorClassIdentifier: 
   enemiesToKill: 0
-  Description: Press space while gliding to land
+  Description: Press space while gliding to land. Hold shift to boost.
   resetCourse: 0
   disapear: 0

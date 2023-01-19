@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ReachTreeTopObjectiveSequence
   m_EditorClassIdentifier: 
   enemiesToKill: 0
-  Description: Follow the rings to reach the top of the tree
+  Description: Use the dash bounce to get on top of the tree
   resetCourse: 0
   disapear: 0

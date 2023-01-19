@@ -16,14 +16,14 @@ MonoBehaviour:
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
     text: Holy Smokes. I'm....FLYING!!!
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: ATTA BOY!
-  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Now, remember! You can't easily look around by moving the camera with the
-      mouse anymore.
-  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: The camera is set for you and moves along with you.
+    text: NOT FLYING, GLIDING!
   - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
-    text: During flying, use WASD to tilt/roll your character as it flies.
+    text: During gliding mode, use WASD to tilt/roll your character as it flies.
+  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
+    text: You can stop gliding by pressing space again.
   - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
     text: Try tilting up by W and tilting down by S. Roll left with A and right with
       D.
+  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
+    text: If you began to fall, use your booster to gain some speed in exchange of
+      stamina. Hold shift to boost.

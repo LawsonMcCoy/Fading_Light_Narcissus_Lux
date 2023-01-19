@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: FlyToHillObjectiveSequence
   m_EditorClassIdentifier: 
   enemiesToKill: 0
-  Description: Glide through the rings to the hill (w/s to tilt and a/d to turn)
+  Description: Glide to the hill (w/s to tilt and a/d to turn)
   resetCourse: 1
   disapear: 1

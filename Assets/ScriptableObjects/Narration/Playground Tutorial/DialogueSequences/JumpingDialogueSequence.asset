@@ -16,7 +16,7 @@ MonoBehaviour:
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
     text: "Come now. We must get to the cliff to get on the highest tree.\r"
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: "Jump on th're rocks by pressing SPACE. I'll wait for you by the small
-      tree.\r"
+    text: If jumping on th're rocks doesn't work, try hovering by pressing space
+      while midair.
   - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
-    text: " *You remember that you can jump forward by moving forward.*\r"
+    text: " *Jump and press space to start hovering.*\r"

@@ -14,11 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentences:
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: "Gramps, how did you get there?\r"
+    text: "Whoa, why do I slowly descend?\r"
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: "You forgot?! I can hover too just like you.\r"
+    text: Well y're not light enough to stay on the air forever.
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: "I may be old but I still can use wind magic to float across the air.\r"
-  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
-    text: "*You remember that you can hover by pressing SPACE during midair and move
-      with WASD.*\r"
+    text: Before we continue, check yourself on that blue flower to save y're behind!
