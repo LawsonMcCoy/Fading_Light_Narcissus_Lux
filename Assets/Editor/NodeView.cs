@@ -13,7 +13,14 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
     public NodeView(Node node)
     {
         this.node = node;
-        this.title = node.name;
+        if(node.NodeName != "")
+        {
+            this.title = node.NodeName;
+        }
+        else
+        {
+            this.title = node.name;
+        }
         this.viewDataKey = node.guid;
 
         style.left = node.position.x;
@@ -87,9 +94,17 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
     {
         base.OnSelected();
 
-        if(OnNodeSelected != null)
+        if (OnNodeSelected != null)
         {
             OnNodeSelected.Invoke(this);
+        }
+    }
+    public override void OnUnselected()
+    {
+        base.OnUnselected();
+        if (node.NodeName != "")
+        {
+            this.title = node.NodeName;
         }
     }
 }

@@ -10,13 +10,13 @@ using UnityEngine;
 public abstract class Entity : MonoBehaviour
 {
     //references to required components
-    [SerializeField] public Rigidbody rigidbody;
-    [SerializeField] public Collider collider;
+    [SerializeField] public new Rigidbody rigidbody;
+    [SerializeField] public new Collider collider;
 
     private HealthManager health;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
             health = GetComponent<HealthManager>();
     }
