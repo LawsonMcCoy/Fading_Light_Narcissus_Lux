@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8180805718403125792}
   - component: {fileID: 8180805718403125795}
   - component: {fileID: 8180805718403125794}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FlowerSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 8180805719059053554}
   - component: {fileID: 8180805719059053564}
   - component: {fileID: 8180805719059053565}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4946,6 +4946,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1155acc7f50fc0d4a95f0e4d01322f74, type: 3}
       propertyPath: m_Name
       value: plant_bushLargeTriangle
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1155acc7f50fc0d4a95f0e4d01322f74, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1155acc7f50fc0d4a95f0e4d01322f74, type: 3}

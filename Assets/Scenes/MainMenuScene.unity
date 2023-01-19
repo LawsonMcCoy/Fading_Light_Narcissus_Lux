@@ -2008,6 +2008,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cc3e17856614a9e4ea3e887a1df52340, type: 2}
   - {fileID: 11400000, guid: ad2239cf82788d149a0a47c5c6014f4a, type: 2}
   - {fileID: 11400000, guid: f2d293a792d91de42aa6c24a15e8a3e5, type: 2}
+  - {fileID: 11400000, guid: 56dfdb977bce5b04eaff87264184302a, type: 2}
   - {fileID: 11400000, guid: 53344445007dc1f7c99d9c1e012950fa, type: 2}
   - {fileID: 11400000, guid: ecd480f6aa3bf354c8ffed1848c46b4f, type: 2}
   - {fileID: 11400000, guid: daafb5fbe97216220aa6a260679c4f31, type: 2}
@@ -2022,6 +2023,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7f75d03581b9706039b7ea812ff85358, type: 2}
   - {fileID: 11400000, guid: 1af3f2ab03042054582efcefc65d3e07, type: 2}
   - {fileID: 11400000, guid: 5651aa2c7a2059173880cf72332c96c6, type: 2}
+  - {fileID: 11400000, guid: 26ed5680f8bf20c408c0ade94013c1e0, type: 2}
   - {fileID: 11400000, guid: c7d04612a592b49448b98374e156cb69, type: 2}
   - {fileID: 11400000, guid: 844143a41c652e55fb296bb412b1f6dc, type: 2}
   - {fileID: 11400000, guid: 1331f8a164cd7cc4e91a35f104b9fba6, type: 2}
@@ -2032,6 +2034,7 @@ MonoBehaviour:
   loadSceneDelay: 0
   currentNarrationSequenceIndex: 0
   savedNarrationSequenceIndex: 0
+  spawnPoints: {fileID: 0}
 --- !u!4 &1624294489
 Transform:
   m_ObjectHideFlags: 0
