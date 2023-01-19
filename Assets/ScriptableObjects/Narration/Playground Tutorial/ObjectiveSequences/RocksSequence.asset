@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RocksSequence
   m_EditorClassIdentifier: 
   enemiesToKill: 0
-  Description: 
+  Description: '- Jump on the rocks'
   resetCourse: 1
   disapear: 1

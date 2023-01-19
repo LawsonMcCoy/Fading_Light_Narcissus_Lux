@@ -21,6 +21,21 @@ public class NarrationManager : MonoBehaviour
                                              //sequence that was last saved, Note this value will
                                              //made to be persistent later
 
+    private ObjectiveSequence currentObjectiveActive; //Member field that holds the Current Objective Sequence active.
+
+    //Property that is able to return the Current Objective Sequence active, or set it.
+    public ObjectiveSequence CurrentObjectiveActive
+    {
+        get
+        {
+            return currentObjectiveActive;
+        }
+        set
+        {
+            currentObjectiveActive = value;
+        }
+    }
+
     //Narration Manager is a singleton
     public static NarrationManager Instance
     {
@@ -122,6 +137,9 @@ public class NarrationManager : MonoBehaviour
     {
         //Have the objective system activate the objective
         sequence.activateObjective.Invoke();
+        //Set the Current Objective Active property to be the Objective Sequence to be processed.
+        //This is for the Quest UI.
+        CurrentObjectiveActive = sequence;
         //pause the narration until the objective system reports completion
         narrationPaused = true;
     }

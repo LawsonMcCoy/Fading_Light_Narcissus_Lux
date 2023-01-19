@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: FlowerObjectiveSequence
   m_EditorClassIdentifier: 
   enemiesToKill: 0
-  Description: Reach the yellow flower up ahead.
+  Description: '- Reach the yellow flower up ahead.'
   resetCourse: 0
   disapear: 0
