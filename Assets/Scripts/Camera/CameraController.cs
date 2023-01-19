@@ -148,6 +148,7 @@ public class CameraController : MonoBehaviour, MovementUpdateReciever
             //There is an object blocking the view of the camera, place the camera at the collision point, so its
             //view is not blocked
             desiredPosition = playerToCameraInfo.point;
+            Debug.Log("moving camera closer");
         }
         else
         {

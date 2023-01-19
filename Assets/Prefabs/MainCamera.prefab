@@ -137,5 +137,5 @@ MonoBehaviour:
   phiRestorationSpeed: 20
   cameraIgnoreMask:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 513
   useSpringLikeMotion: 0

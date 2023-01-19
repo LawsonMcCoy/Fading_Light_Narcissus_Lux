@@ -5552,10 +5552,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1185346840}
-    - target: {fileID: 6290574449995079465, guid: 09500ab51af225743a9d8609c42d75ed, type: 3}
-      propertyPath: cameraIgnoreMask.m_Bits
-      value: 513
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09500ab51af225743a9d8609c42d75ed, type: 3}
 --- !u!1001 &1888024747
