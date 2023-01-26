@@ -16,14 +16,3 @@ MonoBehaviour:
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
     text: "See that island ahead? We are going to keep going up to reach that high
       point.\r"
-  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: 'It looks too far away! I don''t think I can jump on it.
-
-'
-  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: '*Smacks Ika with his cane.*
-
-'
-  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Boy, you just learned how to hover! Stay still and you can reach higher
-      places.
