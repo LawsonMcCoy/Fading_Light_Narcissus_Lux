@@ -4675,6 +4675,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 31.6129
       objectReference: {fileID: 0}
+    - target: {fileID: 8925406608850753112, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_Text
+      value: 'WALKING
+
+'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
 --- !u!114 &1590919699 stripped
