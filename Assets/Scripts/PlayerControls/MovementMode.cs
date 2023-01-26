@@ -38,6 +38,8 @@ public abstract class MovementMode : MonoBehaviour
         private set;
     }
 
+    protected  bool forceNoMovement = false; //when true the player cannot walk or move while hovering
+
     private Vector2 wasdInput;
     protected Vector3 moveVector;
     protected float speed; //speed variable to be set by the child class
@@ -130,7 +132,7 @@ public abstract class MovementMode : MonoBehaviour
         if (Physics.Raycast(self.center, Vector3.down, out groundedInfo, commonData.isGroundedCheckDistance + 0.1f))  //The last 0.1 is in case the raycast ends on the surface of the ground 
         {
             //if the raycast collides with the ground, check to make sure the slope is not too steep to stand on
-            
+
             //compute slope angle
             float slopeAngle = Vector3.Angle(Vector3.up, groundedInfo.normal);
             //Debug.Log($"Slope Angle: {slopeAngle}");
@@ -170,7 +172,7 @@ public abstract class MovementMode : MonoBehaviour
     public virtual void StartMovementRestrictedEvent()
     {
         moveVector = Vector3.zero;
-    } 
+    }
 
     //A simple function to enable player input for controlling the player
     public void EnableInput()
@@ -203,6 +205,11 @@ public abstract class MovementMode : MonoBehaviour
 
     protected IEnumerator PerformDash(Vector3 dashVector)
     {
+        yield return PerformDash(dashVector, Vector3.zero);
+    }
+
+    protected IEnumerator PerformDash(Vector3 dashVector, Vector3 bounceForce)
+    {
         Vector3 startingPosition = self.rigidbody.position; //the starting position of the dash
         Vector3 endingPosition = startingPosition + dashVector; //the ending position of the dash
         float dashDistance = 0.0f; //the distance the dash as already covered
@@ -224,6 +231,13 @@ public abstract class MovementMode : MonoBehaviour
 
             //wait for the next time step
             yield return new WaitForSeconds(commonData.dashTimeStep);
+        }
+
+        //Add the bounce force and disable movement to prevent overwriting the bounce force
+        if (bounceForce != Vector3.zero)
+        {
+            AddForce(bounceForce, ForceMode.Impulse);
+            StartCoroutine(DisableControlForTime(1.0f)); //To do change to inspector variable
         }
 
         //dash is completed, mark the player as not dashing
@@ -251,7 +265,7 @@ public abstract class MovementMode : MonoBehaviour
             float yDistance = self.transform.lossyScale.y / 2;
             float zDistance = self.transform.lossyScale.z / 2;
             float colliderBufferDistance = Mathf.Sqrt((xDistance * xDistance) + (yDistance * yDistance) + (zDistance * zDistance));
-            
+
             //raycast to see if the dash path is clear
             if (Physics.Raycast(self.center, dashVector, out dashInfo, commonData.dashDistance))
             {
@@ -276,14 +290,23 @@ public abstract class MovementMode : MonoBehaviour
             }
             else if (Utilities.ObjectInLayer(dashInfo.collider.gameObject, commonData.dashBounceMask)) //prevent bouncing on nonbouncable objects
             {
-                Debug.Log("Bouncing");
+                Vector3 cancelForce = Vector3.Project(self.rigidbody.velocity, dashInfo.normal); //cancel out the current velocity in the normal direction
                 //dashing into an object you are standing next to
                 //bounce off of it at 
                 Vector3 bounceForceHorizontal = commonData.dashBounceHorizontal * dashInfo.normal;
                 Vector3 bounceForceVertical = commonData.dashBounceVertical * Vector3.up;
-                self.rigidbody.AddForce(bounceForceHorizontal + bounceForceVertical, ForceMode.Impulse); 
+                StartCoroutine(PerformDash(dashVector, bounceForceHorizontal + bounceForceVertical - cancelForce));
             }
         }
+    }
+
+    protected IEnumerator DisableControlForTime(float disableTime)
+    {
+        forceNoMovement = true;
+
+        yield return new WaitForSeconds(disableTime);
+
+        forceNoMovement = false;
     }
 
     //Player input

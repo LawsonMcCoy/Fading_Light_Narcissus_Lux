@@ -75,11 +75,14 @@ public class MovementHovering : MovementMode
         // self.rigidbody.position += moveVector * Time.fixedDeltaTime;
         Vector3 horizontalVelocity = self.rigidbody.velocity;
         // horizontalVelocity.y = 0.0f; //set vertical component to zero
-        if (alternateHover)
+        if (!forceNoMovement)
         {
-            moveVector.y = -Mathf.Pow(hoverFallBase, hoverFallExponent * hoverTime); 
+            if (alternateHover)
+            {
+                moveVector.y = -Mathf.Pow(hoverFallBase, hoverFallExponent * hoverTime);
+            }
+            self.rigidbody.AddForce(hoveringDampingCoefficient * (moveVector - self.rigidbody.velocity), ForceMode.Force);
         }
-        self.rigidbody.AddForce(hoveringDampingCoefficient * (moveVector - self.rigidbody.velocity), ForceMode.Force);
 
         //rotate the player
         Quaternion newRotation = self.rigidbody.rotation * Quaternion.Euler(0, turnValue * Time.fixedDeltaTime, 0);
