@@ -30,9 +30,10 @@ public class MoveDirection : MonoBehaviour
          
             // if object is not on target, move towards target
             if (this.transform.position != targetObj.position)
-            { 
+            {
                 isMoving = true;
                 StartCoroutine(MoveObj(targetObj));
+                //MoveRigidObj(targetObj);
             }
         }
     }
@@ -80,19 +81,4 @@ public class MoveDirection : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         isMoving = false;
     }
-
-   /*private IEnumerator MoveHorizontal(float units)
-    {
-        yield return new WaitForSeconds(waitTime);
-        float totalTime = 0;
-        float originX = transform.position.x;
-        while (totalTime < waitTime)
-        {
-            float x = Mathf.Lerp(0, units, totalTime / moveSpeed);
-            transform.position = new Vector3(originX, transform.position.y + x, transform.position.z);
-            totalTime += Time.deltaTime;
-            yield return null;
-        }
-        isMoving = false;*/
-    //}
 }

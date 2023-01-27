@@ -14,12 +14,33 @@ public class NarrationManager : MonoBehaviour
     //The narration of the game, broken down into sequences
     [SerializeField] private List<NarrationSequence> narration; 
 
+    [SerializeField] private float loadSceneDelay; //The amount of time the narration is delayed during
+                                                   //a load scene sequence to prevent race conditions
+
     private bool narrationPaused; //a boolean that says wheter or not the narration is currently paused
-    private int currentNarrationSequenceIndex; //An integer representing the index of the current 
+    [SerializeField] private int currentNarrationSequenceIndex; //An integer representing the index of the current 
                                                //narration sequence
-    private int savedNarrationSequenceIndex; //An integer representing the index of the narration 
+    [SerializeField] private int savedNarrationSequenceIndex; //An integer representing the index of the narration 
                                              //sequence that was last saved, Note this value will
                                              //made to be persistent later
+    [SerializeField] private SceneSpawnContainer spawnPoints;
+    private int currentSpawnPoint;
+    private Scenes.ScenesList currentScene;   //the current scene
+
+    private ObjectiveSequence currentObjectiveActive; //Member field that holds the Current Objective Sequence active.
+
+    //Property that is able to return the Current Objective Sequence active, or set it.
+    public ObjectiveSequence CurrentObjectiveActive
+    {
+        get
+        {
+            return currentObjectiveActive;
+        }
+        set
+        {
+            currentObjectiveActive = value;
+        }
+    }
 
     //Narration Manager is a singleton
     public static NarrationManager Instance
@@ -40,6 +61,12 @@ public class NarrationManager : MonoBehaviour
         narrationPaused = true; //The narration start paused and remain so until play game is pressed
         currentNarrationSequenceIndex = 0; //start at the begining of the narration
         savedNarrationSequenceIndex = 0; //The first save is the being of the narration
+    }
+
+    private void start()
+    {
+        //set listener for player's death
+        EventManager.Instance.Subscribe(EventTypes.Events.PLAYER_DEATH, playerDeath);
     }
 
     //The primary function that will play the narration of the game
@@ -105,7 +132,18 @@ public class NarrationManager : MonoBehaviour
     public void ProcessLoadScene(LoadSceneSequence sequence)
     {
         //load the scene for the narration sequence
+        currentScene = sequence.scene;
         SceneManager.LoadScene((int)sequence.scene);
+
+       
+
+        //Post load processing, this is done in a coroutine
+        //so we can wait full the scene to be fully loaded 
+        //before the post load processing. Since it is done
+        //in a coroutine, the narration will be paused until
+        //the post load processing is completed
+        narrationPaused = true;
+        StartCoroutine(PostLoadSceneProcessing(sequence));
     }
 
     public void ProcessDialogue(DialogueSequence dialogueSequence)
@@ -122,25 +160,84 @@ public class NarrationManager : MonoBehaviour
     {
         //Have the objective system activate the objective
         sequence.activateObjective.Invoke();
+        //Set the Current Objective Active property to be the Objective Sequence to be processed.
+        //This is for the Quest UI.
+        CurrentObjectiveActive = sequence;
         //pause the narration until the objective system reports completion
         narrationPaused = true;
     }
 
     public void ProcessDelay(DelaySequence sequence)
     {
-        //pause the narration
-        narrationPaused = true;
-
-        //begin timer to unpause
+        //Delay the narration by the apporiate amount of time
         StartCoroutine(NarrationDelay(sequence.delayTime));
+    }
+
+    public void ProcessSave(SaveSequence sequence)
+    {
+        Debug.Log(sequence);
+
+        sequence.saveSuccesful = true; //save was successful(in correct scene)
+        currentSpawnPoint = sequence.spawnIndex;
+        spawnPoints = GameObject.FindGameObjectWithTag("Respawn").GetComponent<SceneSpawnContainer>();
+        EventManager.Instance.Notify(EventTypes.Events.SAVE);
+
+        //set saveindex to current index
+        savedNarrationSequenceIndex = currentNarrationSequenceIndex + 1;
+    }
+
+    public void playerDeath()
+    {
+        //cancel narrations past the last save
+        while(currentNarrationSequenceIndex > savedNarrationSequenceIndex)
+        {
+            narration[currentNarrationSequenceIndex].Cancel();
+            currentNarrationSequenceIndex--;    //make current index to previous one
+                                                //goes on until current = save
+        }
+
+        narrationPaused = false;    //make sure narration can continue
+
+        
     }
 
     private IEnumerator NarrationDelay(float delayTime)
     {
+        //pause the narration
+        narrationPaused = true;
+
         yield return new WaitForSeconds(delayTime);
 
         //unpause the narration after some amount of time
         narrationPaused = false;
+    }
+
+    //A function to perform post load processing on a scene
+    //This function will be a seperate coroutine so that it can 
+    //wait until the scene is fully loaded 
+    private IEnumerator PostLoadSceneProcessing(LoadSceneSequence sequence)
+    {
+        //wait for scene to be fully loaded
+        yield return new WaitForSeconds(loadSceneDelay);
+
+        //if the scene is a game scene, make sure to save the game
+        if (sequence.isGameScene)
+        {
+            ProcessSave(sequence);
+        }
+
+        //Once the post load processing is completed
+        //unpause the narration
+        narrationPaused = false;
+    }
+    public Vector3 getSpawn()
+    {
+        //returns the position of current spawn point
+        if (spawnPoints != null)
+        {
+            return spawnPoints.getSpawn(currentSpawnPoint);
+        }
+        return Vector3.zero;
     }
 
     private void OnDestroy()
@@ -148,5 +245,8 @@ public class NarrationManager : MonoBehaviour
         //reset singleton instance to null 
         //when object is destroyed
         Instance = null;
+
+        //unsubscribe from listener
+        EventManager.Instance.Unsubscribe(EventTypes.Events.PLAYER_DEATH, playerDeath);
     }
 }

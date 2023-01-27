@@ -14,4 +14,8 @@ public abstract class NarrationSequence : ScriptableObject
     //NarrationManager is the visitor and it is 
     //already a singleton
     abstract public void Accept();
+    virtual public void Cancel()
+    {
+
+    }
 }

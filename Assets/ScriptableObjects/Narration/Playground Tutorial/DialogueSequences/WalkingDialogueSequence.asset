@@ -20,4 +20,8 @@ MonoBehaviour:
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
     text: "Don't you mean legs?\r"
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: "Don't be smart with me, boy! Now get on top of that yellow flower.\r"
+    text: "Don't be smart with me, boy! Now get across and touch that yellow flower.\r"
+  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
+    text: But I can't walk on air.
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: But you can jump can't you. Just press space.

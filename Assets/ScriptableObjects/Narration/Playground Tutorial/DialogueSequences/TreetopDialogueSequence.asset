@@ -16,7 +16,7 @@ MonoBehaviour:
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
     text: I don't think I can do this. I will fall to my death!
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Poppycock. I am much older than you and I can easily fly.
+    text: Poppycock. I am much older than you and I can easily glide.
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
     text: All you have to do is press SHIFT while midair.
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}

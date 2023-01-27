@@ -16,11 +16,11 @@ MonoBehaviour:
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
     text: Young boy! What're you doing sleeping here?!
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: I brought you here to train on y're flying, not snoozing!
+    text: I brought you here to train on y're gliding, not snoozing!
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: "You even snuck away when I was telling my flying days. *grumble grumble*\r"
+    text: "You even snuck away when I was telling my gliding days. *grumble grumble*\r"
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: "But Gramps! I don't want to fly!\r"
+    text: "But Gramps! I don't want to glide!\r"
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
     text: "Well, that's too damn bad! You have the gift and you will use it.\r"
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}

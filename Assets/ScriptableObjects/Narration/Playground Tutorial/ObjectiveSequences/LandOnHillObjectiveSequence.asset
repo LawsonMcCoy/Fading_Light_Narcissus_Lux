@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37cba4f1ea47146e9e803ac82ad5e35, type: 3}
   m_Name: LandOnHillObjectiveSequence
   m_EditorClassIdentifier: 
-  objective: {fileID: 11400000, guid: 4f4ae68968099d243b099d508a497da0, type: 2}
+  enemiesToKill: 0
+  Description: Press space while gliding to land. Hold shift to boost.
+  resetCourse: 0
+  disapear: 0

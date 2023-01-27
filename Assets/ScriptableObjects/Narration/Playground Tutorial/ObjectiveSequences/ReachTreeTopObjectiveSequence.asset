@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37cba4f1ea47146e9e803ac82ad5e35, type: 3}
   m_Name: ReachTreeTopObjectiveSequence
   m_EditorClassIdentifier: 
-  objective: {fileID: 11400000, guid: b636b8f9246768b06b67750cb180e97e, type: 2}
+  enemiesToKill: 0
+  Description: Use the dash bounce to get on top of the tree
+  resetCourse: 0
+  disapear: 0

@@ -20,11 +20,7 @@ MonoBehaviour:
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
     text: Told you that you would love it.
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: We are pretty much done here. You can fly back to the island and practice
-      more on your techniques.
-  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: We are pretty much done here. You can fly back to the island and practice
-      more on your techniques.
+    text: We are pretty much done here. Go ahead and do whatever you want now.
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
     text: Will do! Thanks again, Gramps.
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}

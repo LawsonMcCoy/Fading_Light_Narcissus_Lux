@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ClimbTreeObjectiveSequence
   m_EditorClassIdentifier: 
   enemiesToKill: 0
-  Description: 
+  Description: Follow the rings to the top of the tree
   resetCourse: 1
   disapear: 1

@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentences:
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: That wasn't so hard.
+    text: Follow the rings to the top of the tree!
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: "It was for me. I'm tired\u2026"
+    text: It's too high! I don't think I can reach it!
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Shush boy! Walk it off and get on top of that big tree.
+    text: '*Smacks Ika with his cane.*'
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: "Those rings should lead the *obvious* way.\r"
+    text: Boy, you just learned how to hover! Stay still and you can reach higher
+      places.
