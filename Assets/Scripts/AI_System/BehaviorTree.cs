@@ -10,6 +10,7 @@ public class BehaviorTree : ScriptableObject
     public Node.State treeState = Node.State.RUNNING;
 
     public List<Node> nodes = new List<Node>();
+    private GameObject thisAI;
 
     public Node.State Update()
     {
@@ -25,19 +26,28 @@ public class BehaviorTree : ScriptableObject
     {
         Node node = ScriptableObject.CreateInstance(type) as Node;
         node.name = type.Name;
-        node.guid = GUID.Generate().ToString();
-        nodes.Add(node);
 
+        #if (UNITY_EDITOR)
+        node.guid = GUID.Generate().ToString();
+        #endif
+        node.myTree = this;
+
+        nodes.Add(node);
+        #if (UNITY_EDITOR)
         AssetDatabase.AddObjectToAsset(node, this);
         AssetDatabase.SaveAssets();
+        #endif
+
         return node;
     }
 
     public void DeleteNode(Node node)
     {
         nodes.Remove(node);
+        #if (UNITY_EDITOR)
         AssetDatabase.RemoveObjectFromAsset(node);
         AssetDatabase.SaveAssets();
+        #endif
     }
 
     public void AddChild(Node parent, Node child)
@@ -110,5 +120,13 @@ public class BehaviorTree : ScriptableObject
         BehaviorTree tree = Instantiate(this);
         tree.rootNode = tree.rootNode.Clone();
         return tree;
+    }
+    public void setAI(GameObject ai)
+    {
+        thisAI = ai;
+    }
+    public GameObject getAI()
+    {
+        return thisAI;
     }
 }

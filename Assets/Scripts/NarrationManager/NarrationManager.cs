@@ -106,6 +106,7 @@ public class NarrationManager : MonoBehaviour
     {
         //load the scene for the narration sequence
         SceneManager.LoadScene((int)sequence.scene);
+
     }
 
     public void ProcessDialogue(DialogueSequence dialogueSequence)
@@ -123,6 +124,7 @@ public class NarrationManager : MonoBehaviour
         //Have the objective system activate the objective
         sequence.activateObjective.Invoke();
         //pause the narration until the objective system reports completion
+
         narrationPaused = true;
     }
 
@@ -138,7 +140,8 @@ public class NarrationManager : MonoBehaviour
     private IEnumerator NarrationDelay(float delayTime)
     {
         yield return new WaitForSeconds(delayTime);
-
+        EventManager.Instance.Notify(EventTypes.Events.LOAD_SCENE);
+        Debug.Log("scene loaded");
         //unpause the narration after some amount of time
         narrationPaused = false;
     }

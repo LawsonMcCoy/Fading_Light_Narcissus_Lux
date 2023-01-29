@@ -13,12 +13,12 @@ public abstract class Node : ScriptableObject
 
     //public variables
     [HideInInspector] public State state = State.RUNNING;
-    [HideInInspector] public bool started = false;
+    public bool started = false;
 
     [HideInInspector] public string guid;
     [HideInInspector] public Vector2 position;
-    public string NodeName;
-
+    public string NodeName = "";
+    [HideInInspector] public BehaviorTree myTree;
     public State Update()
     {
         if (!started)
@@ -35,7 +35,6 @@ public abstract class Node : ScriptableObject
         }
         return state;
     }
-
     public virtual Node Clone()
     {
         return Instantiate(this);
