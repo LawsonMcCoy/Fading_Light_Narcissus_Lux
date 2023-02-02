@@ -456,7 +456,7 @@ public class MovementFlying : MovementMode
         //x component is turning, y component is tilting
         Vector2 moveVector = input.Get<Vector2>();
 
-        tiltValue = -moveVector.y;
+        tiltValue = moveVector.y;
         turnValue = -moveVector.x;
     }
 
