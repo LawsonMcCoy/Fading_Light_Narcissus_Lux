@@ -459,7 +459,7 @@ MonoBehaviour:
   hoveringDampingCoefficient: 5
   alternateHover: 1
   hoverFallBase: 2
-  hoverFallExponent: 0.01
+  hoverFallExponent: 1
 --- !u!114 &7204556638568947312
 MonoBehaviour:
   m_ObjectHideFlags: 0
