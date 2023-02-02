@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17942a21488c9d62d96891e964b6098a, type: 3}
-  m_Name: DashingInstruction
+  m_Name: VerticalTunnelInstruction
   m_EditorClassIdentifier: 
   sentences:
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Climbing the cliff using dashing. Right click to dash.
+    text: More you angle down the more speed you gain, then you can use that speed
+      to regain some of you altitiude.
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: There are a few ways to do this. First dashing into an object will bounce
-      you off of it. Second jumping while dashing causes you to jump extra high.
+    text: On the other side of the vertical tunnel, is an Island. Use your glide
+      to swoop under the roof that tunnel and land on the island on the other side
