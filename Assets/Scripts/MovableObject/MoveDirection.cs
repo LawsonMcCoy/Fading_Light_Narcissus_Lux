@@ -7,19 +7,33 @@ public class MoveDirection : MonoBehaviour
     [SerializeField] private List<Transform> allMovingPoints;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float waitTime = 1f;
-    [Tooltip("Make the object move back and forth?")]
+    [Tooltip("Make the object move forward and backward?")]
     [SerializeField] private bool loopPath;
+    [Tooltip("Make the object move in a cycle (not go backwards)? You cannot have loopPath as true if you want a cycle movement!")]
+    [SerializeField] private bool loopCycle;
 
-    private bool isMoving = false;
-    private bool moveForwardList = true;
-    private int currentPointIndex = 0;
+    private bool isMoving;
+    private bool moveForwardList;
+    private bool stopLoop;
+    private int currentPointIndex;
     private Transform targetObj;
+    
+    private void Awake()
+    {
+        if (loopPath && loopCycle) // if both were true, only set loopPath as true
+            loopCycle = false;
+        
+        currentPointIndex = 0;
+        isMoving = false;
+        moveForwardList = true;
+        stopLoop = false;
+    }
 
     private void FixedUpdate()
     {
         if (!isMoving && !allMovingPoints.Count.Equals(0)) // if there's no movement and the list is not empty
         {
-            if (moveForwardList)
+            if (moveForwardList)  // move to the next forward element?
             {
                 MoveNextTargetForward();
             }
@@ -33,7 +47,6 @@ public class MoveDirection : MonoBehaviour
             {
                 isMoving = true;
                 StartCoroutine(MoveObj(targetObj));
-                //MoveRigidObj(targetObj);
             }
         }
     }
@@ -41,31 +54,52 @@ public class MoveDirection : MonoBehaviour
     private void MoveNextTargetForward()
     {
         // Move object along the list forward:
-        if (currentPointIndex < allMovingPoints.Count - 1)
+        if (loopCycle || loopPath)
         {
-            targetObj = allMovingPoints[currentPointIndex + 1];
-            currentPointIndex++;
+            // if either loops are triggered but stopLoop is set true during runtime
+            stopLoop = false;
         }
-        else 
+
+        if (currentPointIndex == allMovingPoints.Count - 1) // if we are in the last index
         {
-            // on last element
-            if(loopPath)
+            if (loopPath)   // if loopPath is true, began to move backward
+            {
                 moveForwardList = false;
+            }
+            else if (!loopCycle)  // if loopPath is false and loopCycle is false
+            {
+                stopLoop = true; 
+                targetObj = allMovingPoints[currentPointIndex];
+            }
+        }
+
+        if (!stopLoop && moveForwardList)
+        {
+            currentPointIndex = currentPointIndex % allMovingPoints.Count;
+            targetObj = allMovingPoints[currentPointIndex];
+            currentPointIndex++;
         }
     }
 
     private void MoveNextTargetBackward()
     {
         // Move object along the list backward:
-        if(currentPointIndex > 0)
+        if (loopPath && (currentPointIndex == 0)) // if loopPath is true and we are in the first index, move forward!
         {
-            targetObj = allMovingPoints[currentPointIndex - 1];
-            currentPointIndex--;
+            moveForwardList = true;
+        }
+        else if (loopCycle || !loopPath)
+        {
+            // if loopCycle was set true/loopPath was set false when moving backwards, reset the process:
+            currentPointIndex = 0;
+            targetObj = allMovingPoints[currentPointIndex];
+            moveForwardList = true;
         }
         else
         {
-            if (loopPath)
-                moveForwardList = true;
+            currentPointIndex = currentPointIndex % allMovingPoints.Count;
+            targetObj = allMovingPoints[currentPointIndex];
+            currentPointIndex--;
         }
     }
 
