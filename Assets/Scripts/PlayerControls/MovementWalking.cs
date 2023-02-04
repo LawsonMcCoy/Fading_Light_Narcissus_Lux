@@ -10,6 +10,7 @@ public class MovementWalking : MovementMode
     [SerializeField] private float jumpForceVertical; //How strong the player can jump upwards
     [SerializeField] private float jumpForceHonrizontal; //How strong the player can jump horizontally
     [SerializeField] private float jumpForceStationary; //How strong the player can jump when not moving
+    [SerializeField] private float jumpControlsLockTime; //How long is movement controls lock right after jumping
     [SerializeField] private float staminaRegainRate; //The amount of stamina regain per second while walking
     [SerializeField] private float dashJumpForce; //How strong the player can jump at the end of dash
     [SerializeField] private float walkingDampingCoefficient; //The damping coefficient to the stop the player
@@ -52,7 +53,7 @@ public class MovementWalking : MovementMode
         CheckGroundStatus();
 
         //Enable gravity when walking
-        self.rigidbody.useGravity = true; 
+        // self.rigidbody.useGravity = true; 
 
         modeUIColor = new Color(1f, 0.8f, 0f, 1f);
         movementModeText.color = modeUIColor;
@@ -128,6 +129,25 @@ public class MovementWalking : MovementMode
         else
         {
             //In Midair
+            
+            //we will automatically transition to either hovering or gliding
+
+            //First so that we can jump properly the transition will only occur 
+            //if we are falling
+            if (self.rigidbody.velocity.y < 0)
+            {
+                //next we will check if we are sprinting
+                if (sprinting)
+                {
+                    //if yes then go into a hover
+                    Transition(Modes.HOVERING);
+                }
+                else
+                {
+                    //if no then go into a glide
+                    Transition(Modes.GLIDING);
+                }
+            }
         }
         
         CheckForTransitions();
@@ -151,6 +171,7 @@ public class MovementWalking : MovementMode
         Debug.Log($"Perform Dash Jump {dashJumpForce * Vector3.up}");
         //perform the dash jump
         AddForce(dashJumpForce * Vector3.up, ForceMode.Impulse);
+        // DisableControlForTime(jumpControlsLockTime); //disable movement briefly after jump
     }
     
     //zeroing out rotational motion during movement restricted events
@@ -213,18 +234,9 @@ public class MovementWalking : MovementMode
 
                         //jump with impulse
                         AddForce(jumpForceVector, ForceMode.Impulse);
+                        // DisableControlForTime(jumpControlsLockTime); //disable movement briefly after a jump
                     } //end if (!input.isPressed)
                 }//end if (onGround)
-                else
-                {
-                    //In midair, transition into Hovering
-                    //note that you can only hover if you have stamina
-                    if (input.isPressed && stamina.ResourceAmount() > 0)
-                    {
-                        //previousBoolean = !midairTransition;
-                        Transition(Modes.HOVERING);
-                    }
-                } //end else (if (onGround))
             } //end else (if (dashing))
         } //end if (inputReady)
     }
@@ -243,7 +255,7 @@ public class MovementWalking : MovementMode
                 if (input.isPressed)
                 {
                     //previousBoolean = !midairTransition;
-                    Transition(Modes.GLIDING);
+                    // Transition(Modes.GLIDING);
                 }
             }
         }

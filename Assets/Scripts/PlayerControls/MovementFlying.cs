@@ -79,7 +79,7 @@ public class MovementFlying : MovementMode
         base.OnEnable();
         
         //enable gravity
-        self.rigidbody.useGravity = true;
+        // self.rigidbody.useGravity = true;
 
         //enable rotation
         self.rigidbody.freezeRotation = false;

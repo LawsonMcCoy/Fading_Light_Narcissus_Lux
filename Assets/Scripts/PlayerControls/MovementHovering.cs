@@ -36,9 +36,7 @@ public class MovementHovering : MovementMode
         StartCoroutine(DelayInput());
 
         Debug.Log("Now hovering");
-        //disable gravity
-        self.rigidbody.useGravity = false;
-
+        
         //disable rotation
         self.rigidbody.freezeRotation = true;
 
@@ -51,7 +49,7 @@ public class MovementHovering : MovementMode
         self.rigidbody.MoveRotation(Quaternion.Euler(currentEuler));
 
         //stop all motion
-        self.rigidbody.velocity = Vector3.zero;
+        // self.rigidbody.velocity = Vector3.zero;
 
         //just started hovering, so set hoverTime to zero
         hoverTime = 0f;
@@ -77,43 +75,19 @@ public class MovementHovering : MovementMode
         // horizontalVelocity.y = 0.0f; //set vertical component to zero
         if (!forceNoMovement)
         {
-            if (alternateHover)
-            {
-                moveVector.y = -Mathf.Pow(hoverFallBase, hoverFallExponent * hoverTime);
-            }
-            self.rigidbody.AddForce(hoveringDampingCoefficient * (moveVector - self.rigidbody.velocity), ForceMode.Force);
+            Vector3 moveForce = hoveringDampingCoefficient * (moveVector - self.rigidbody.velocity); //use controls to determine the horizontal components
+            moveForce.y = -Physics.gravity.y * Mathf.Pow(hoverFallBase, -hoverFallExponent * hoverTime); //overwrite the vertical component with apporiate val
+            AddForce(moveForce, ForceMode.Force); //apply the force
         }
 
         //rotate the player
         Quaternion newRotation = self.rigidbody.rotation * Quaternion.Euler(0, turnValue * Time.fixedDeltaTime, 0);
         self.rigidbody.rotation = newRotation;
 
-        if (!alternateHover)
+        //if you land on the ground then transition to walking
+        if (IsGrounded())
         {
-            //consume stamina while in hovering mode
-            stamina.Subtract(passiveStaminaLostRate * Time.fixedDeltaTime); //lose stamina
-        }
-        else
-        {
-            //slowing falls in hover mode
-            // AddForce(hoverFallRate * Time.fixedDeltaTime * Vector3.down, ForceMode.Force);
-        }
-
-        if (!alternateHover)
-        {
-            //if all stamina has be lost transition to walking
-            if (stamina.ResourceAmount() == 0)
-            {
-                Transition(Modes.WALKING);
-            }
-        }
-        else
-        {
-            //if you land on the ground then transition to walking
-            if (IsGrounded())
-            {
-                Transition(Modes.WALKING);
-            }
+            Transition(Modes.WALKING);
         }
     }
 
