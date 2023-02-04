@@ -14,9 +14,11 @@ public class MovementWalking : MovementMode
     [SerializeField] private float staminaRegainRate; //The amount of stamina regain per second while walking
     [SerializeField] private float dashJumpForce; //How strong the player can jump at the end of dash
     [SerializeField] private float walkingDampingCoefficient; //The damping coefficient to the stop the player
-
+    [SerializeField] private float staminaSprintLostRate; //The amount of stamina lost per second whening sprinting
+    [SerializeField] private float sprintModifier; //The multiplier to the speed when you are sprinting
 
     private float turnValue;
+    private bool sprinting; //A boolean to check if the player is sprinting
 
     //readable data
 
@@ -116,15 +118,35 @@ public class MovementWalking : MovementMode
             {
                 Vector3 horizontalVelocity = self.rigidbody.velocity;
                 horizontalVelocity.y = 0.0f; //set vertical component to zero
-                AddForce(walkingDampingCoefficient * (moveVector - horizontalVelocity), ForceMode.Force);
+                if (!sprinting)
+                {
+                    AddForce(walkingDampingCoefficient * (moveVector - horizontalVelocity), ForceMode.Force);
+                }
+                else
+                {
+                    AddForce(walkingDampingCoefficient * ((sprintModifier * moveVector) - horizontalVelocity), ForceMode.Force);
+                }
             }
 
             //rotate the player
             Quaternion newRotation = self.rigidbody.rotation * Quaternion.Euler(0, turnValue * Time.fixedDeltaTime, 0);
             self.rigidbody.rotation = newRotation;
 
-            //Regain stamina when on ground only
-            stamina.Add(staminaRegainRate * Time.fixedDeltaTime);
+            if (!sprinting)
+            {
+                //Regain stamina when on ground only
+                stamina.Add(staminaRegainRate * Time.fixedDeltaTime);
+            }
+            else
+            {
+                //when sprinting lose stamina
+                stamina.Subtract(staminaSprintLostRate * Time.fixedDeltaTime);
+
+                if (stamina.ResourceAmount() == 0)
+                {
+                    sprinting = false;
+                }
+            }
         }
         else
         {
@@ -139,13 +161,13 @@ public class MovementWalking : MovementMode
                 //next we will check if we are sprinting
                 if (sprinting)
                 {
-                    //if yes then go into a hover
-                    Transition(Modes.HOVERING);
+                    //if yes then go into a glide
+                    Transition(Modes.GLIDING);
                 }
                 else
                 {
-                    //if no then go into a glide
-                    Transition(Modes.GLIDING);
+                    //if no then go into a hover
+                    Transition(Modes.HOVERING);
                 }
             }
         }
@@ -246,9 +268,11 @@ public class MovementWalking : MovementMode
     {
         if (inputReady)
         {
-            if (onGround)
+            if (onGround && stamina.ResourceAmount() > 0)
             {
-                //TODO implement sprinting
+                //If space is held down on the ground then
+                //the player is sprinting
+                sprinting = input.isPressed;
             }
             else
             {
