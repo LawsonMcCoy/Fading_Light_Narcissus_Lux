@@ -10,7 +10,6 @@ public class MovementWalking : MovementMode
     [SerializeField] private float jumpForceVertical; //How strong the player can jump upwards
     [SerializeField] private float jumpForceHonrizontal; //How strong the player can jump horizontally
     [SerializeField] private float jumpForceStationary; //How strong the player can jump when not moving
-    [SerializeField] private float jumpControlsLockTime; //How long is movement controls lock right after jumping
     [SerializeField] private float staminaRegainRate; //The amount of stamina regain per second while walking
     [SerializeField] private float dashJumpForce; //How strong the player can jump at the end of dash
     [SerializeField] private float walkingDampingCoefficient; //The damping coefficient to the stop the player
@@ -156,7 +155,7 @@ public class MovementWalking : MovementMode
 
             //First so that we can jump properly the transition will only occur 
             //if we are falling
-            if (self.rigidbody.velocity.y < 0)
+            if (/*self.rigidbody.velocity.y < 0) ||*/ (!forceNoMovement && moveVector != Vector3.zero))
             {
                 //next we will check if we are sprinting
                 if (sprinting)
@@ -193,7 +192,7 @@ public class MovementWalking : MovementMode
         Debug.Log($"Perform Dash Jump {dashJumpForce * Vector3.up}");
         //perform the dash jump
         AddForce(dashJumpForce * Vector3.up, ForceMode.Impulse);
-        // DisableControlForTime(jumpControlsLockTime); //disable movement briefly after jump
+        DisableControlForTime(commonData.transitionMovementLockTime); //disable movement briefly after jump
     }
     
     //zeroing out rotational motion during movement restricted events
@@ -256,7 +255,7 @@ public class MovementWalking : MovementMode
 
                         //jump with impulse
                         AddForce(jumpForceVector, ForceMode.Impulse);
-                        // DisableControlForTime(jumpControlsLockTime); //disable movement briefly after a jump
+                        DisableControlForTime(commonData.transitionMovementLockTime); //disable movement briefly after a jump
                     } //end if (!input.isPressed)
                 }//end if (onGround)
             } //end else (if (dashing))
@@ -268,7 +267,7 @@ public class MovementWalking : MovementMode
     {
         if (inputReady)
         {
-            if (onGround && stamina.ResourceAmount() > 0)
+            if (stamina.ResourceAmount() > 0)
             {
                 //If space is held down on the ground then
                 //the player is sprinting

@@ -69,16 +69,18 @@ public class MovementHovering : MovementMode
         //update the hover time
         hoverTime += Time.fixedDeltaTime;
 
+        //Calculate the hover force to keep the player in the air
+        Vector3 hoverForce = -Physics.gravity * Mathf.Pow(hoverFallBase, -hoverFallExponent * hoverTime);
+
         //move the player 
-        // self.rigidbody.position += moveVector * Time.fixedDeltaTime;
-        Vector3 horizontalVelocity = self.rigidbody.velocity;
-        // horizontalVelocity.y = 0.0f; //set vertical component to zero
+        Vector3 moveForce = Vector3.zero;
         if (!forceNoMovement)
         {
-            Vector3 moveForce = hoveringDampingCoefficient * (moveVector - self.rigidbody.velocity); //use controls to determine the horizontal components
-            moveForce.y = -Physics.gravity.y * Mathf.Pow(hoverFallBase, -hoverFallExponent * hoverTime); //overwrite the vertical component with apporiate val
-            AddForce(moveForce, ForceMode.Force); //apply the force
+            moveForce = hoveringDampingCoefficient * (moveVector - self.rigidbody.velocity); //use controls to determine the horizontal components
         }
+
+        //apply the forces
+        AddForce(moveForce + hoverForce, ForceMode.Force);
 
         //rotate the player
         Quaternion newRotation = self.rigidbody.rotation * Quaternion.Euler(0, turnValue * Time.fixedDeltaTime, 0);
@@ -137,6 +139,7 @@ public class MovementHovering : MovementMode
         if (input.isPressed && inputReady)
         {
             Transition(Modes.WALKING);
+            StartCoroutine(DisableControlForTime(commonData.transitionMovementLockTime));
         }
     }
 }

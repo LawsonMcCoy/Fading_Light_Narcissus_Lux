@@ -12,14 +12,12 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "MovementModeData", menuName = "MovementModeData")]
 public class MovementModeData : ScriptableObject
 {
-    public float maxSpeed; //a value for a max speed to prevent the game from breaking
+    public float transitionMovementLockTime; //The amount of time movement is locked for after jumping or exiting an air mode
     public float isGroundedCheckDistance; //the distance that the player needs to be 
                                           //off the ground in order to be considered in
                                           //the air
     public float maxStandingSlopeAngle; //The max angle a slope can be for player to still
                                         //be able to stand on it
-
-    public float maxForce;
 
     public float inputDelayTime;
 

@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b54c1485b01318bd98ec544d25b8b5b, type: 3}
   m_Name: MovementModeData
   m_EditorClassIdentifier: 
-  maxSpeed: 1000
+  transitionMovementLockTime: 0.1
   isGroundedCheckDistance: 1
   maxStandingSlopeAngle: 90
-  maxForce: 25
   inputDelayTime: 0.1
   dashStaminaCost: 10
   dashDistance: 10
