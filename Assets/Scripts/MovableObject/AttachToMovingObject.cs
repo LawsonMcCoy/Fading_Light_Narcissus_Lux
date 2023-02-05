@@ -48,10 +48,10 @@ public class AttachToMovingObject : MonoBehaviour
         {
             Debug.LogWarning("Dettached");
             player = other.gameObject;
-            Vector3 playerDefaultScale = player.GetComponent<Player>().GetPlayerScale;
+            //Vector3 playerDefaultScale = player.GetComponent<Player>().GetPlayerScale;
 
             player.transform.SetParent(null, true);
-            player.transform.localScale = playerDefaultScale;
+            //player.transform.localScale = playerDefaultScale;
         }
     }
 }
