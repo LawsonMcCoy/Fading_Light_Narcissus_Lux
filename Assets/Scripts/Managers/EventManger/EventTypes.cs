@@ -10,6 +10,8 @@ public sealed class EventTypes
         PLAYER_DEATH,
         CANCEL_OBJECTIVE,
         SAVE,
-        LOAD_SCENE
+        LOAD_SCENE,
+        OBJECTIVE_TOO_FAR,
+        OBJECCTIVE_WITHIN_DISTANCE
     }
 }
