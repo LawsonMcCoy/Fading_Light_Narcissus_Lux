@@ -362,12 +362,15 @@ MonoBehaviour:
   - {fileID: 7204556638568947313}
   - {fileID: 7204556638568947314}
   stamina: {fileID: 2271143012148580341}
+  coefficientOfDrag: 0.1
+  dragScalingValues: {x: 1, y: 2, z: 1}
+  windTunnelMask:
+    serializedVersion: 2
+    m_Bits: 1024
   movementModeText: {fileID: 8925406608850753112}
   forwardThrustMagnitude: 5
   liftPower: 1
   coefficientOfInducedDrag: 0.5
-  coefficientOfDrag: 0.1
-  dragScalingValues: {x: 1, y: 2, z: 1}
   coefficientOfLiftCurve:
     serializedVersion: 2
     m_Curve:
@@ -452,6 +455,11 @@ MonoBehaviour:
   - {fileID: 7204556638568947313}
   - {fileID: 7204556638568947314}
   stamina: {fileID: 2271143012148580341}
+  coefficientOfDrag: 0.5
+  dragScalingValues: {x: 0.5, y: 3, z: 0.5}
+  windTunnelMask:
+    serializedVersion: 2
+    m_Bits: 1024
   movementModeText: {fileID: 8925406608850753112}
   hoverSpeed: 18
   turnSpeed: 5
@@ -459,7 +467,7 @@ MonoBehaviour:
   hoveringDampingCoefficient: 5
   alternateHover: 1
   hoverFallBase: 2
-  hoverFallExponent: 1
+  hoverFallExponent: 0.1
 --- !u!114 &7204556638568947312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,6 +486,11 @@ MonoBehaviour:
   - {fileID: 7204556638568947313}
   - {fileID: 7204556638568947314}
   stamina: {fileID: 2271143012148580341}
+  coefficientOfDrag: 0
+  dragScalingValues: {x: 0, y: 0, z: 0}
+  windTunnelMask:
+    serializedVersion: 2
+    m_Bits: 1024
   movementModeText: {fileID: 8925406608850753112}
   walkSpeed: 15
   turnSpeed: 5

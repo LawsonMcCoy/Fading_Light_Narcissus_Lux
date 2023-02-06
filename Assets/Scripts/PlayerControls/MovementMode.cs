@@ -49,6 +49,21 @@ public abstract class MovementMode : MonoBehaviour
                                //a mode that you just transition from when the button to transition
                                //is the same
 
+    //drag
+    [Tooltip("a fine toning value for regular drag (this is combination of all forms of drag expect for induced drag, it is also scaled by drageScalingValues)")]
+    [SerializeField] private float coefficientOfDrag; //a fine toning value for regular drag
+    [Tooltip("A scaling vector to allow drag to unevenly applied in different directions")]
+    [SerializeField] private Vector3 dragScalingValues; //A scaling vector to allow drag to unevenly applied in different directions
+
+    //Wind
+    private Vector3 absoluteWind = Vector3.zero;
+    public Vector3 relativeWind 
+    {
+        get;
+        protected set;
+    } //the wind for Ika's frame of reference
+    [SerializeField] private LayerMask windTunnelMask;
+
     #region Ui Section
     [SerializeField] protected Text movementModeText;
     protected Color modeUIColor;
@@ -97,6 +112,37 @@ public abstract class MovementMode : MonoBehaviour
     {
         //update the moveVector
         moveVector = wasdInput.x * speed * this.transform.right + wasdInput.y * speed * this.transform.forward;
+
+        //compute new relative wind value
+        relativeWind = absoluteWind - self.rigidbody.velocity;
+        // Debug.Log($"relative wind {relativeWind}, absolute wind {absoluteWind}"); 
+
+        //use the relativeWind to compute the regular drag force
+        Vector3 localDragScaleValues = Quaternion.Inverse(self.rigidbody.rotation) * dragScalingValues;
+        Vector3 drag = coefficientOfDrag * Vector3.Scale(relativeWind, localDragScaleValues);
+
+        //apply the drag force
+        AddForce(drag, ForceMode.Force);
+    }
+
+    private void OnTriggerEnter(Collider triggered)
+    {
+        Debug.Log("Trigger Enter");
+        if (Utilities.ObjectInLayer(triggered.gameObject, windTunnelMask))
+        {
+            Debug.Log("IN layer");
+            //entered a wind tunnel, add its wind to the absolute wind
+            absoluteWind += triggered.GetComponent<WindTunnel>().getWindValue();
+        }
+    }
+
+    private void OnTriggerExit(Collider triggered)
+    {
+        if (Utilities.ObjectInLayer(triggered.gameObject, windTunnelMask))
+        {
+            //exited a wind tunnel, subtract its wind to the absolute wind
+            absoluteWind -= triggered.GetComponent<WindTunnel>().getWindValue();
+        }
     }
 
     //A visitor function to determine which type of movement mode this script is

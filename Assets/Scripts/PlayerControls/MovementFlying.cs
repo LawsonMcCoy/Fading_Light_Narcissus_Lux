@@ -11,10 +11,6 @@ public class MovementFlying : MovementMode
     [SerializeField] private float liftPower; //A fine toning value for the magnitude of lift
     [Tooltip("a fine toning value for the magnitude of induce drag (This is a side effect of lift an always points parrallel to air flow over wings)")]
     [SerializeField] private float coefficientOfInducedDrag; //a fine toning value for the magnitude of induce drag
-    [Tooltip("a fine toning value for regular drag (this is combination of all forms of drag expect for induced drag, it is also scaled by drageScalingValues)")]
-    [SerializeField] private float coefficientOfDrag; //a fine toning value for regular drag
-    [Tooltip("A scaling vector to allow drag to unevenly applied in different directions")]
-    [SerializeField] private Vector3 dragScalingValues; //A scaling vector to allow drag to unevenly applied in different directions
     [Tooltip("an animation curve used to compute the coefficient of lift from the angle of attack")]
     [SerializeField] private AnimationCurve coefficientOfLiftCurve; //an animation curve used to compute the coefficient 
                                                                     //of lift from the angle of attack
@@ -22,11 +18,6 @@ public class MovementFlying : MovementMode
     //values used in calculation of the flight forces, some are properties to allow UI to read the values
     private float angleOfAttack; //the angle between the velocity and the horizontal plane
     private Vector3 localVelocity;
-    public Vector3 relativeWind 
-    {
-        get;
-        private set;
-    } //the wind for Ika's frame of reference
 
     //turning torques values
     [Tooltip("The speed that Ika changes his pitch at when W or S is pressed")]
@@ -151,7 +142,7 @@ public class MovementFlying : MovementMode
 
         //calculate the relative wind, for now just the opposite of velocity
         //later add in the absolute wind vector
-        relativeWind = -self.rigidbody.velocity;
+        // relativeWind = -self.rigidbody.velocity;
         
         //calculate lift
 
@@ -174,13 +165,6 @@ public class MovementFlying : MovementMode
 
         Debug.DrawLine(transform.position, transform.position + lift, Color.red);
         AddForce(lift, ForceMode.Force);
-
-        //calculate the regular drag
-        localDragScaleValues = Quaternion.Inverse(self.rigidbody.rotation) * dragScalingValues;
-        drag = coefficientOfDrag * Vector3.Scale(relativeWind, dragScalingValues);
-
-        //apply the drag force
-        AddForce(drag, ForceMode.Force);
 
         //calculate the induce drag
         inducedDragMagnitude = coefficientOfLift * coefficientOfLift * coefficientOfInducedDrag * forwardWind.sqrMagnitude;
@@ -403,6 +387,7 @@ public class MovementFlying : MovementMode
     //that create the visulation of relative wind for the player
     private void UpdateWindVisulation()
     {
+        Debug.Log($"Wind visulation value {relativeWind}");
         //update direction, wind particles should move in the direction of relative wind
         ParticleSystem.ShapeModule windShape = windParticles.shape;
         Quaternion windDirection = Quaternion.Inverse(transform.rotation) * Quaternion.LookRotation(relativeWind); //create a rotation to point in the wind direction 

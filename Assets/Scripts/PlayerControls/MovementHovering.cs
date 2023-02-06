@@ -70,13 +70,21 @@ public class MovementHovering : MovementMode
         hoverTime += Time.fixedDeltaTime;
 
         //Calculate the hover force to keep the player in the air
-        Vector3 hoverForce = -Physics.gravity * Mathf.Pow(hoverFallBase, -hoverFallExponent * hoverTime);
+        Vector3 hoverForce = -Physics.gravity - Mathf.Pow(hoverFallBase, hoverFallExponent * hoverTime) * Vector3.up;
+        if (Vector3.Dot(Physics.gravity, hoverForce) > 0)
+        {
+            hoverForce = Vector3.zero; //Don't apply hoverforce after it becomes a downward force
+        }
 
         //move the player 
         Vector3 moveForce = Vector3.zero;
         if (!forceNoMovement)
         {
             moveForce = hoveringDampingCoefficient * (moveVector - self.rigidbody.velocity); //use controls to determine the horizontal components
+            if (self.rigidbody.velocity.y <= 0)
+            {
+                moveForce.y = 0; //player input does not affect motion in the vertical direction
+            }
         }
 
         //apply the forces
