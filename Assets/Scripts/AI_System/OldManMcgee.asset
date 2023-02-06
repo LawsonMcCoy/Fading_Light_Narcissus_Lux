@@ -15,7 +15,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 4bcd3ab8f4bb6514fa730308930c65ce
-  position: {x: -16, y: 149}
+  position: {x: -65.44999, y: 99.99999}
   NodeName: 
   myTree: {fileID: 11400000}
   destination: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: da0f61e8fefcda1429c53bdba39eaaf2
-  position: {x: -545.52, y: 0}
+  position: {x: -559.80005, y: 100.05}
   NodeName: 
   myTree: {fileID: 0}
   child: {fileID: -4397391682966845609}
