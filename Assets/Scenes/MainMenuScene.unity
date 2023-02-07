@@ -2007,10 +2007,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4cf270f9e59bf054facc7cf92692448c, type: 2}
   - {fileID: 11400000, guid: cc3e17856614a9e4ea3e887a1df52340, type: 2}
   - {fileID: 11400000, guid: 2636bb8b25cc2ce4f9e814589703ffb9, type: 2}
+  - {fileID: 11400000, guid: dc35734e413c1919a81423d0808e3306, type: 2}
   - {fileID: 11400000, guid: 5b5921aae94809741888384d2405a48f, type: 2}
+  - {fileID: 11400000, guid: d645bb3d9e2c01c108f80dce9160d690, type: 2}
   - {fileID: 11400000, guid: 4725fbcc3e09e483c980794d95440cab, type: 2}
+  - {fileID: 11400000, guid: 9412457284079e1b0b3694983d425f40, type: 2}
   - {fileID: 11400000, guid: 77225a49436d6ac95a0c2e8489ae16bd, type: 2}
+  - {fileID: 11400000, guid: 74036ec76dc10b848a7cbbb7a785478a, type: 2}
   - {fileID: 11400000, guid: 7f3a836d3a266dd41bc5315aca286aa7, type: 2}
+  - {fileID: 11400000, guid: 5d89f1cf9ce2a09ccb45b4bc15fbf88f, type: 2}
   - {fileID: 11400000, guid: 13b2e914a6de51d7c8c1150710024dc5, type: 2}
   loadSceneDelay: 0
   currentNarrationSequenceIndex: 0

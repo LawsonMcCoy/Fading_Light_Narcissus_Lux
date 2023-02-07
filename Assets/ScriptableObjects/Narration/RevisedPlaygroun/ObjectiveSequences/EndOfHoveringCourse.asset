@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: EndOfHoveringCourse
   m_EditorClassIdentifier: 
   enemiesToKill: 0
-  Description: 
-  resetCourse: 0
-  disapear: 0
+  Description: Explore and exit the cave
+  resetCourse: 1
+  disapear: 1

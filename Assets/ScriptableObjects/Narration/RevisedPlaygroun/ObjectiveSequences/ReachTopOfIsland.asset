@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ReachTopOfIsland
   m_EditorClassIdentifier: 
   enemiesToKill: 0
-  Description: 
-  resetCourse: 0
+  Description: Head on top of the island and find the blue flower
+  resetCourse: 1
   disapear: 0

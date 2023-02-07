@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: CaveEntrance
   m_EditorClassIdentifier: 
   enemiesToKill: 0
-  Description: 
-  resetCourse: 0
-  disapear: 0
+  Description: Go through the floating islands and head to the cave entrance
+  resetCourse: 1
+  disapear: 1
