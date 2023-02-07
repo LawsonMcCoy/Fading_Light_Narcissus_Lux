@@ -115,11 +115,13 @@ public abstract class MovementMode : MonoBehaviour
 
         //compute new relative wind value
         relativeWind = absoluteWind - self.rigidbody.velocity;
-        // Debug.Log($"relative wind {relativeWind}, absolute wind {absoluteWind}"); 
+        Debug.Log($"relative wind {Quaternion.Inverse(self.rigidbody.rotation) * relativeWind}, absolute wind {Quaternion.Inverse(self.rigidbody.rotation) * absoluteWind}, velocity {Quaternion.Inverse(self.rigidbody.rotation) * self.rigidbody.velocity}"); 
 
         //use the relativeWind to compute the regular drag force
-        Vector3 localDragScaleValues = Quaternion.Inverse(self.rigidbody.rotation) * dragScalingValues;
-        Vector3 drag = coefficientOfDrag * Vector3.Scale(relativeWind, localDragScaleValues);
+        // Debug.Log($"inverse drag {Quaternion.Inverse(self.rigidbody.rotation) * dragScalingValues}, world drag {self.rigidbody.rotation * dragScalingValues}, local wind {Quaternion.Inverse(self.rigidbody.rotation) * relativeWind}");
+        Vector3 localRelativeWind = Quaternion.Inverse(self.rigidbody.rotation) * relativeWind;
+        Vector3 drag = coefficientOfDrag * Vector3.Scale(localRelativeWind, dragScalingValues);
+        drag = self.rigidbody.rotation * drag;
 
         //apply the drag force
         AddForce(drag, ForceMode.Force);
@@ -127,10 +129,8 @@ public abstract class MovementMode : MonoBehaviour
 
     private void OnTriggerEnter(Collider triggered)
     {
-        Debug.Log("Trigger Enter");
         if (Utilities.ObjectInLayer(triggered.gameObject, windTunnelMask))
         {
-            Debug.Log("IN layer");
             //entered a wind tunnel, add its wind to the absolute wind
             absoluteWind += triggered.GetComponent<WindTunnel>().getWindValue();
         }
@@ -160,7 +160,6 @@ public abstract class MovementMode : MonoBehaviour
         if (this.enabled)
         {
             //enable new movement mode
-            Debug.Log($"Transitioning to {transitionToMode}");
             movementModes[(int)transitionToMode].enabled = true;
 
             movementModeText.text = transitionToMode.ToString();

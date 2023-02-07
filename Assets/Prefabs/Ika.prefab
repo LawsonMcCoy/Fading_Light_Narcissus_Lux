@@ -363,7 +363,7 @@ MonoBehaviour:
   - {fileID: 7204556638568947314}
   stamina: {fileID: 2271143012148580341}
   coefficientOfDrag: 0.1
-  dragScalingValues: {x: 1, y: 2, z: 1}
+  dragScalingValues: {x: 5, y: 2, z: 1}
   windTunnelMask:
     serializedVersion: 2
     m_Bits: 1024

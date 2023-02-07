@@ -104,6 +104,17 @@ public class MovementFlying : MovementMode
         //calculate angle of attack
         angleOfAttack = Mathf.Atan2(-localVelocity.y, localVelocity.z) * Mathf.Rad2Deg;
 
+        // //get local velocity
+        // localVelocity = Quaternion.Inverse(self.rigidbody.rotation) * (-relativeWind);
+
+        // //calculate angle of attack
+        // angleOfAttack = Mathf.Atan2(-localVelocity.y, localVelocity.z) * Mathf.Rad2Deg;
+
+        //compute the angleOfAttack
+        // Vector3 windInYZPlane = Vector3.ProjectOnPlane(relativeWind, transform.right); //start by finding the wind in the players yz plane
+        // angleOfAttack = Vector3.SignedAngle(-windInYZPlane, transform.forward, transform.right); //find the angle between player's yz plane wind and forwards
+        // Debug.Log($"angle of attack {angleOfAttack}");
+
         //apply a thrust force
         // AddForce(transform.forward * forwardThrustMagnitude);
 
@@ -163,7 +174,7 @@ public class MovementFlying : MovementMode
         //apply lift in the perpendicular to air flow and right side
         lift = Vector3.Cross(transform.right, forwardWind.normalized) * liftMagnitude;
 
-        Debug.DrawLine(transform.position, transform.position + lift, Color.red);
+        // Debug.Log($"lift force {lift}, transform.up {transform.up}, cross product {Vector3.Cross(transform.right, forwardWind.normalized)}");
         AddForce(lift, ForceMode.Force);
 
         //calculate the induce drag
@@ -387,7 +398,7 @@ public class MovementFlying : MovementMode
     //that create the visulation of relative wind for the player
     private void UpdateWindVisulation()
     {
-        Debug.Log($"Wind visulation value {relativeWind}");
+        // Debug.Log($"Wind visulation value {relativeWind}");
         //update direction, wind particles should move in the direction of relative wind
         ParticleSystem.ShapeModule windShape = windParticles.shape;
         Quaternion windDirection = Quaternion.Inverse(transform.rotation) * Quaternion.LookRotation(relativeWind); //create a rotation to point in the wind direction 
