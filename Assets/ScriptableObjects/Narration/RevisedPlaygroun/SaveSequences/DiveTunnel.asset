@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e1c914f7cafa684cb7e4b6aaad6e7d2, type: 3}
-  m_Name: StartVerticalTunnel
+  m_Name: DiveTunnel
   m_EditorClassIdentifier: 
   saveScene: 2
-  saveSuccesful: 0
-  spawnIndex: 0
+  saveSuccesful: 1
+  spawnIndex: 3
