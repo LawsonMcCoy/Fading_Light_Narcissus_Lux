@@ -21,6 +21,7 @@ public class DialogueManager : MonoBehaviour
     
     //[SerializeField] private Dialogue insertedDialogue;
     [SerializeField] private float typeSpeed; //Float that sets the speed in which the letters in the dialogue gets typed out.
+    [SerializeField] private Animation pressEnterToContinueAnim; //Animation Clip that fades the "Press Enter To Continue" button in and out.
     private DialogueSequence currDialogue; //Holder of current dialogue sentence
     private int currSentenceIndex = 0; //Integer index that corresponds to the current sentence(s) in the dialogue.
     private Player player;
@@ -136,6 +137,9 @@ private void Update()
     //This functions returns true if the displayed text is equal to the entire sentence.
     private bool isTypedOut()
     {
+        Debug.Log("It is currently typed out.");
+        pressEnterToContinueAnim.Play("PressEnterToContinue"); //Play the animation
+        Debug.Log("Animation should have played.");
         return textField.text == currDialogue.sentences[currSentenceIndex].text;
     }
 
@@ -146,6 +150,7 @@ private void Update()
             //If the entire sentence is already typed out, then advance to the next dialogue.
             if (isTypedOut())
             {
+               
                 //If our index is still in range with how many sentences we have...
                 if (currSentenceIndex < currDialogue.sentences.Length - 1)
                 {
