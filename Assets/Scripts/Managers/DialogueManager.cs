@@ -81,6 +81,7 @@ private void Update()
             }
         }
         */
+
         //If the UI is showing (meaning isSpeaking is true), then that must mean that the dialogue is currently active.
         //Pressing space (TESTING PURPOSES) advances the dialogue.
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown("return") && isSpeaking())
@@ -137,9 +138,6 @@ private void Update()
     //This functions returns true if the displayed text is equal to the entire sentence.
     private bool isTypedOut()
     {
-        Debug.Log("It is currently typed out.");
-        pressEnterToContinueAnim.Play("PressEnterToContinue"); //Play the animation
-        Debug.Log("Animation should have played.");
         return textField.text == currDialogue.sentences[currSentenceIndex].text;
     }
 
@@ -150,7 +148,6 @@ private void Update()
             //If the entire sentence is already typed out, then advance to the next dialogue.
             if (isTypedOut())
             {
-               
                 //If our index is still in range with how many sentences we have...
                 if (currSentenceIndex < currDialogue.sentences.Length - 1)
                 {

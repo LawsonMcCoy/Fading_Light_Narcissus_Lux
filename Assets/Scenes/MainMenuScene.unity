@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18349427, g: 0.2290588, b: 0.30577734, a: 1}
+  m_IndirectSpecularColor: {r: 0.18349427, g: 0.2290588, b: 0.3057774, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -971,6 +971,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 545629565, guid: 71a6fbc3f0f66249396f50495a2d2d90, type: 3}
+      propertyPath: m_PlayAutomatically
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127236317, guid: 71a6fbc3f0f66249396f50495a2d2d90, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1688704146, guid: 71a6fbc3f0f66249396f50495a2d2d90, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1997411482730373349, guid: 71a6fbc3f0f66249396f50495a2d2d90, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1018,6 +1030,10 @@ PrefabInstance:
     - target: {fileID: 1997411482730373371, guid: 71a6fbc3f0f66249396f50495a2d2d90, type: 3}
       propertyPath: m_Name
       value: DialogueManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814810378978165605, guid: 71a6fbc3f0f66249396f50495a2d2d90, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71a6fbc3f0f66249396f50495a2d2d90, type: 3}
@@ -1262,7 +1278,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1021729135
 MonoBehaviour:
   m_ObjectHideFlags: 0

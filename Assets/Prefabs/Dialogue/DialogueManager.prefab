@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1997411482730373349}
   - component: {fileID: 1997411482730373370}
+  - component: {fileID: 545629565}
   m_Layer: 0
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -49,7 +50,23 @@ MonoBehaviour:
   speakerName: {fileID: 7814810380106203184}
   textField: {fileID: 7814810380537080808}
   typeSpeed: 0.02
-  pressEnterToContinueAnim: {fileID: 376536962702771809}
+  pressEnterToContinueAnim: {fileID: 545629565}
+--- !u!111 &545629565
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997411482730373371}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 160902a6765c1674eb8b1c00e91bc620, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 160902a6765c1674eb8b1c00e91bc620, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &417858392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58,12 +75,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 1997411482730373349}
     m_Modifications:
     - target: {fileID: 376536963099657529, guid: 4185544874abc688b952079e90c76f56, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 376536963099657529, guid: 4185544874abc688b952079e90c76f56, type: 3}
       propertyPath: m_PlayAutomatically
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7814810378859151421, guid: 4185544874abc688b952079e90c76f56, type: 3}
       propertyPath: m_Name
       value: DialogueUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814810378859151421, guid: 4185544874abc688b952079e90c76f56, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7814810378859151553, guid: 4185544874abc688b952079e90c76f56, type: 3}
       propertyPath: m_Pivot.x
@@ -149,13 +174,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 376536963099657529, guid: 4185544874abc688b952079e90c76f56, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4185544874abc688b952079e90c76f56, type: 3}
---- !u!111 &376536962702771809 stripped
-Animation:
-  m_CorrespondingSourceObject: {fileID: 376536963099657529, guid: 4185544874abc688b952079e90c76f56, type: 3}
-  m_PrefabInstance: {fileID: 417858392}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7814810378978165605 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7814810378859151421, guid: 4185544874abc688b952079e90c76f56, type: 3}
