@@ -31,7 +31,7 @@ public class Player : CombatEntity
     private void Start()
     {
         playerHealth = gameObject.GetComponent<PlayerHealth>();
-        if (gameObject.GetComponent<HealthManager>() != null)
+        if (gameObject.GetComponent<HealthManager>().GetType() ==  typeof(HealthManager))
         {
             Destroy(gameObject.GetComponent<HealthManager>());
         }

@@ -1,5 +1,24 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9093962685145182393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4850d63ead855e4286e1418d5b14467, type: 3}
+  m_Name: RepeatNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: d556869619ad4e54dab6f135c39f990a
+  position: {x: 0, y: 0}
+  NodeName: 
+  myTree: {fileID: 11400000}
+  child: {fileID: 0}
 --- !u!114 &-4397391682966845609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,8 +34,8 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 4bcd3ab8f4bb6514fa730308930c65ce
-  position: {x: -65.44999, y: 99.99999}
-  NodeName: 
+  position: {x: 13.400003, y: -24.30008}
+  NodeName: go to Ika
   myTree: {fileID: 11400000}
   destination: 0
 --- !u!114 &11400000
@@ -36,6 +55,51 @@ MonoBehaviour:
   nodes:
   - {fileID: 8621316797458655555}
   - {fileID: -4397391682966845609}
+  - {fileID: 7926489326116634265}
+  - {fileID: 4944258344759131113}
+  - {fileID: -9093962685145182393}
+--- !u!114 &4944258344759131113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71501ae08ef50b54289338c8c10704be, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: ddae1a7cf87de98478280a4a0f4cb0f4
+  position: {x: -216.70802, y: 99.99999}
+  NodeName: 
+  myTree: {fileID: 11400000}
+  children:
+  - {fileID: -4397391682966845609}
+  - {fileID: 7926489326116634265}
+--- !u!114 &7926489326116634265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e564f630f0d5c04dbcac4c9f6ab7e6f, type: 3}
+  m_Name: MeleeAttack
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 10c1ed2b700532c40b25aaebece2f1ca
+  position: {x: -12.000139, y: 212.82796}
+  NodeName: attack Player
+  myTree: {fileID: 11400000}
+  mask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &8621316797458655555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,5 +118,5 @@ MonoBehaviour:
   position: {x: -559.80005, y: 100.05}
   NodeName: 
   myTree: {fileID: 0}
-  child: {fileID: -4397391682966845609}
+  child: {fileID: 4944258344759131113}
   loaded: 0
