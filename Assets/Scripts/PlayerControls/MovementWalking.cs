@@ -13,9 +13,11 @@ public class MovementWalking : MovementMode
     [SerializeField] private float staminaRegainRate; //The amount of stamina regain per second while walking
     [SerializeField] private float dashJumpForce; //How strong the player can jump at the end of dash
     [SerializeField] private float walkingDampingCoefficient; //The damping coefficient to the stop the player
-
+    [SerializeField] private float staminaSprintLostRate; //The amount of stamina lost per second whening sprinting
+    [SerializeField] private float sprintModifier; //The multiplier to the speed when you are sprinting
 
     private float turnValue;
+    private bool sprinting; //A boolean to check if the player is sprinting
 
     //readable data
 
@@ -52,7 +54,7 @@ public class MovementWalking : MovementMode
         CheckGroundStatus();
 
         //Enable gravity when walking
-        self.rigidbody.useGravity = true; 
+        // self.rigidbody.useGravity = true; 
 
         modeUIColor = new Color(1f, 0.8f, 0f, 1f);
         movementModeText.color = modeUIColor;
@@ -115,19 +117,58 @@ public class MovementWalking : MovementMode
             {
                 Vector3 horizontalVelocity = self.rigidbody.velocity;
                 horizontalVelocity.y = 0.0f; //set vertical component to zero
-                AddForce(walkingDampingCoefficient * (moveVector - horizontalVelocity), ForceMode.Force);
+                if (!sprinting)
+                {
+                    AddForce(walkingDampingCoefficient * (moveVector - horizontalVelocity), ForceMode.Force);
+                }
+                else
+                {
+                    AddForce(walkingDampingCoefficient * ((sprintModifier * moveVector) - horizontalVelocity), ForceMode.Force);
+                }
             }
 
             //rotate the player
             Quaternion newRotation = self.rigidbody.rotation * Quaternion.Euler(0, turnValue * Time.fixedDeltaTime, 0);
             self.rigidbody.rotation = newRotation;
 
-            //Regain stamina when on ground only
-            stamina.Add(staminaRegainRate * Time.fixedDeltaTime);
+            if (!sprinting)
+            {
+                //Regain stamina when on ground only
+                stamina.Add(staminaRegainRate * Time.fixedDeltaTime);
+            }
+            else
+            {
+                //when sprinting lose stamina
+                stamina.Subtract(staminaSprintLostRate * Time.fixedDeltaTime);
+
+                if (stamina.ResourceAmount() == 0)
+                {
+                    sprinting = false;
+                }
+            }
         }
         else
         {
             //In Midair
+            
+            //we will automatically transition to either hovering or gliding
+
+            //First so that we can jump properly the transition will only occur 
+            //if we are falling
+            if (/*self.rigidbody.velocity.y < 0) ||*/ (!forceNoMovement && moveVector != Vector3.zero))
+            {
+                //next we will check if we are sprinting
+                if (sprinting)
+                {
+                    //if yes then go into a glide
+                    Transition(Modes.GLIDING);
+                }
+                else
+                {
+                    //if no then go into a hover
+                    Transition(Modes.HOVERING);
+                }
+            }
         }
         
         CheckForTransitions();
@@ -151,6 +192,7 @@ public class MovementWalking : MovementMode
         Debug.Log($"Perform Dash Jump {dashJumpForce * Vector3.up}");
         //perform the dash jump
         AddForce(dashJumpForce * Vector3.up, ForceMode.Impulse);
+        DisableControlForTime(commonData.transitionMovementLockTime); //disable movement briefly after jump
     }
     
     //zeroing out rotational motion during movement restricted events
@@ -213,18 +255,9 @@ public class MovementWalking : MovementMode
 
                         //jump with impulse
                         AddForce(jumpForceVector, ForceMode.Impulse);
+                        DisableControlForTime(commonData.transitionMovementLockTime); //disable movement briefly after a jump
                     } //end if (!input.isPressed)
                 }//end if (onGround)
-                else
-                {
-                    //In midair, transition into Hovering
-                    //note that you can only hover if you have stamina
-                    if (input.isPressed && stamina.ResourceAmount() > 0)
-                    {
-                        //previousBoolean = !midairTransition;
-                        Transition(Modes.HOVERING);
-                    }
-                } //end else (if (onGround))
             } //end else (if (dashing))
         } //end if (inputReady)
     }
@@ -234,16 +267,18 @@ public class MovementWalking : MovementMode
     {
         if (inputReady)
         {
-            if (onGround)
+            if (stamina.ResourceAmount() > 0)
             {
-                //TODO implement sprinting
+                //If space is held down on the ground then
+                //the player is sprinting
+                sprinting = input.isPressed;
             }
             else
             {
                 if (input.isPressed)
                 {
                     //previousBoolean = !midairTransition;
-                    Transition(Modes.GLIDING);
+                    // Transition(Modes.GLIDING);
                 }
             }
         }

@@ -79,7 +79,7 @@ public class MovementFlying : MovementMode
         base.OnEnable();
         
         //enable gravity
-        self.rigidbody.useGravity = true;
+        // self.rigidbody.useGravity = true;
 
         //enable rotation
         self.rigidbody.freezeRotation = false;
@@ -373,10 +373,10 @@ public class MovementFlying : MovementMode
             *********************************************************************************/
 
             //add a tilt torque for turning
-            turnTiltTorqueMagnitude = -Mathf.Abs(turnSpeed * turnValue); //needs to be negative to tilt up for the turn
+            turnTiltTorqueMagnitude = turnSpeed * turnValue; //needs to be negative to tilt up for the turn
             // Debug.Log($"turn tilt magnitude {turnTiltTorqueMagnitude}, speed {turnSpeed}, turn value {turnValue}");
 
-            turnTiltTorque = transform.right * turnTiltTorqueMagnitude;
+            turnTiltTorque = Vector3.down * turnTiltTorqueMagnitude;
 
             /***********************************************************************************
             With both components of the turn torque computed, we can compute the full turn torque
@@ -465,8 +465,8 @@ public class MovementFlying : MovementMode
     {
         if (input.isPressed)
         {
-            // Debug.Log((int)Modes.HOVERING);
             Transition(Modes.WALKING);
+            StartCoroutine(DisableControlForTime(commonData.transitionMovementLockTime));
         }
     }
 

@@ -38,7 +38,7 @@ public abstract class MovementMode : MonoBehaviour
         private set;
     }
 
-    protected  bool forceNoMovement = false; //when true the player cannot walk or move while hovering
+    protected static bool forceNoMovement = false; //when true the player cannot walk or move while hovering
 
     private Vector2 wasdInput;
     protected Vector3 moveVector;
