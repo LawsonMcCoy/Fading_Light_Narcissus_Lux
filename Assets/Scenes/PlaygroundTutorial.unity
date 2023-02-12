@@ -4472,8 +4472,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 38.269493, y: 0.55812454, z: 59.32849}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 38.269493, y: 0.55812454, z: 58.376953}
+  m_Center: {x: 0, y: 0, z: 0.47576904}
 --- !u!1 &1446911841
 GameObject:
   m_ObjectHideFlags: 0
@@ -4613,7 +4613,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1493161016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6, y: 39.1, z: 722.7}
+  m_LocalPosition: {x: 1.6, y: 51.1, z: 724.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4995,6 +4995,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 809324500423899685, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7204556638568947315, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: m_Interpolate
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8435698845848507069, guid: ec0818a79a32c5142a50aee692950d76, type: 3}

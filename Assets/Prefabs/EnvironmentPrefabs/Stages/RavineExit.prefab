@@ -156,19 +156,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8180805718403125792, guid: 8061ab81db8512144a291202293dabb5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.23469669
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8180805718403125792, guid: 8061ab81db8512144a291202293dabb5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8180805718403125792, guid: 8061ab81db8512144a291202293dabb5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.97206867
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8180805718403125792, guid: 8061ab81db8512144a291202293dabb5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8180805718403125792, guid: 8061ab81db8512144a291202293dabb5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -176,7 +176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8180805718403125792, guid: 8061ab81db8512144a291202293dabb5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 152.853
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8180805718403125792, guid: 8061ab81db8512144a291202293dabb5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -185,6 +185,18 @@ PrefabInstance:
     - target: {fileID: 8180805718403125793, guid: 8061ab81db8512144a291202293dabb5, type: 3}
       propertyPath: m_Name
       value: DashIslandSpawnPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 8180805718403125795, guid: 8061ab81db8512144a291202293dabb5, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8180805718403125795, guid: 8061ab81db8512144a291202293dabb5, type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8180805718403125795, guid: 8061ab81db8512144a291202293dabb5, type: 3}
+      propertyPath: m_Center.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8061ab81db8512144a291202293dabb5, type: 3}
