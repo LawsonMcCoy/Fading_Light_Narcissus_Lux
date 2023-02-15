@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1274466077221555461}
   m_Layer: 0
-  m_Name: MovingStandardPlatform 1
+  m_Name: MovingStandardIsland
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,6 +117,7 @@ MonoBehaviour:
   moveSpeed: 3
   waitTime: 1
   loopPath: 1
+  loopCycle: 0
 --- !u!1 &1274466078658261438
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +213,7 @@ MeshRenderer:
   m_Materials:
   - {fileID: -6126091556477775235, guid: 6e951fc6b2757a246b15707273882bec, type: 3}
   - {fileID: 8911647698024284698, guid: 12f9a46c590daa6418c1c910bbdbcb6c, type: 3}
-  - {fileID: -9117483709511198939, guid: 1634aec4b945ee248a2644f8df8643f2, type: 3}
+  - {fileID: -436311623246891856, guid: dd07d2c9c0101ec48a891df70cb87e33, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
