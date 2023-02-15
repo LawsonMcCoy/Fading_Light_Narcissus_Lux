@@ -364,6 +364,7 @@ MonoBehaviour:
   stamina: {fileID: 2271143012148580341}
   coefficientOfDrag: 0.1
   dragScalingValues: {x: 5, y: 2, z: 1}
+  absoluteWindRateOfChange: 5
   windTunnelMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -457,6 +458,7 @@ MonoBehaviour:
   stamina: {fileID: 2271143012148580341}
   coefficientOfDrag: 0.5
   dragScalingValues: {x: 0.5, y: 3, z: 0.5}
+  absoluteWindRateOfChange: 30
   windTunnelMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -488,6 +490,7 @@ MonoBehaviour:
   stamina: {fileID: 2271143012148580341}
   coefficientOfDrag: 0
   dragScalingValues: {x: 0, y: 0, z: 0}
+  absoluteWindRateOfChange: 0
   windTunnelMask:
     serializedVersion: 2
     m_Bits: 1024

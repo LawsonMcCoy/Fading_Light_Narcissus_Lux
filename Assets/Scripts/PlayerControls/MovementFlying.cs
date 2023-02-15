@@ -158,7 +158,8 @@ public class MovementFlying : MovementMode
         //calculate lift
 
         //Calculate the magnitude of the horizontal velocity
-        forwardWind = Vector3.Project(relativeWind, this.transform.forward);
+        // forwardWind = Vector3.Project(relativeWind, this.transform.forward);
+        forwardWind = Vector3.Project(-self.rigidbody.velocity, this.transform.forward);
 
         //Calculate the coefficient of lift using animation curves
         coefficientOfLift = coefficientOfLiftCurve.Evaluate(angleOfAttack);

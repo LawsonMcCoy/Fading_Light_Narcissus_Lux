@@ -152,7 +152,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4551106}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 76, y: 39.5, z: -82.2}
+  m_LocalPosition: {x: 76, y: 90.9, z: -23.4}
   m_LocalScale: {x: 30, y: 100, z: 50}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4951,7 +4951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aea9b52aae8b2d80bf99de0ee637e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wind: {x: 0, y: 0, z: -20}
+  wind: {x: 0, y: 0, z: -30}
   windParticles: {fileID: 4551109}
 --- !u!64 &4551111
 MeshCollider:
@@ -5802,7 +5802,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 595091603}
   m_LocalRotation: {x: -0.27059793, y: 0.65328157, z: -0.65328157, w: -0.27059793}
-  m_LocalPosition: {x: 168.5, y: 60.4, z: -102.4}
+  m_LocalPosition: {x: 204.6, y: 92.4, z: -66.3}
   m_LocalScale: {x: 15, y: 100, z: 15}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10601,7 +10601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aea9b52aae8b2d80bf99de0ee637e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wind: {x: -20, y: 0, z: -20}
+  wind: {x: 0, y: 5, z: 0}
   windParticles: {fileID: 595091606}
 --- !u!64 &595091608
 MeshCollider:
@@ -21971,7 +21971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aea9b52aae8b2d80bf99de0ee637e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wind: {x: 5, y: 0, z: 5}
+  wind: {x: 0, y: 10, z: 0}
   windParticles: {fileID: 1800440999}
 --- !u!64 &1800441001
 MeshCollider:
@@ -22498,16 +22498,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7204556638568947312, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: coefficientOfDrag
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7204556638568947312, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: staminaRegainRate
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7204556638568947312, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: dragScalingValues.x
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7204556638568947312, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: dragScalingValues.y
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7204556638568947312, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: dragScalingValues.z
@@ -22518,8 +22522,20 @@ PrefabInstance:
       value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: dragScalingValues.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: speedBoostMagnitude
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: absoluteWindRateOfChange
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+      propertyPath: coefficientOfInducedDrag
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7204556638568947315, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: m_Interpolate

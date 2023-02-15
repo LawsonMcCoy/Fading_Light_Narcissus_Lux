@@ -56,7 +56,10 @@ public abstract class MovementMode : MonoBehaviour
     [SerializeField] private Vector3 dragScalingValues; //A scaling vector to allow drag to unevenly applied in different directions
 
     //Wind
-    private Vector3 absoluteWind = Vector3.zero;
+    private Vector3 targetAbsoluteWind = Vector3.zero; //The absolute wind Ikas is suppose to feel, he may not due to gradual transitions in wind felt
+    private Vector3 absoluteWind = Vector3.zero; //The actually absolute wind felt by IKa, it will slowly approach the targetAbsoluteWind
+    [Tooltip("The maximun rate of change of the absolute wind")]
+    [SerializeField] private float absoluteWindRateOfChange; 
     public Vector3 relativeWind 
     {
         get;
@@ -95,6 +98,9 @@ public abstract class MovementMode : MonoBehaviour
         //inform the player class that the active movement mode has changed
         //pass in reference to new active movement mode (this)
         self.activeMovementMode = this;
+
+        //keep the same absolute wind from before the transition
+        absoluteWind = targetAbsoluteWind;
     }
 
     protected virtual void Start()
@@ -113,9 +119,22 @@ public abstract class MovementMode : MonoBehaviour
         //update the moveVector
         moveVector = wasdInput.x * speed * this.transform.right + wasdInput.y * speed * this.transform.forward;
 
+        //update the absolute wind to approach its target value
+        Vector3 absoluteWindDifference = targetAbsoluteWind - absoluteWind;
+        float absoluteWindMaxChangeAmount = absoluteWindRateOfChange * Time.fixedDeltaTime;
+        if (absoluteWindDifference.magnitude < absoluteWindMaxChangeAmount)
+        {
+            absoluteWind = targetAbsoluteWind;
+        }
+        else
+        {
+            absoluteWind += absoluteWindMaxChangeAmount * absoluteWindDifference.normalized;
+        }
+
         //compute new relative wind value
         relativeWind = absoluteWind - self.rigidbody.velocity;
-        Debug.Log($"relative wind {Quaternion.Inverse(self.rigidbody.rotation) * relativeWind}, absolute wind {Quaternion.Inverse(self.rigidbody.rotation) * absoluteWind}, velocity {Quaternion.Inverse(self.rigidbody.rotation) * self.rigidbody.velocity}"); 
+        Debug.Log($"relative wind {Quaternion.Inverse(self.rigidbody.rotation) * relativeWind}, absolute wind {Quaternion.Inverse(self.rigidbody.rotation) * absoluteWind}, velocity {Quaternion.Inverse(self.rigidbody.rotation) * self.rigidbody.velocity}, absolute wind target {targetAbsoluteWind}"); 
+        Debug.Log($"In world coordinates: relative wind {relativeWind}, absolute wind {absoluteWind}, velocity {self.rigidbody.velocity}, absolute wind target {targetAbsoluteWind}"); 
 
         //use the relativeWind to compute the regular drag force
         // Debug.Log($"inverse drag {Quaternion.Inverse(self.rigidbody.rotation) * dragScalingValues}, world drag {self.rigidbody.rotation * dragScalingValues}, local wind {Quaternion.Inverse(self.rigidbody.rotation) * relativeWind}");
@@ -124,6 +143,7 @@ public abstract class MovementMode : MonoBehaviour
         drag = self.rigidbody.rotation * drag;
 
         //apply the drag force
+        Debug.Log($"drag force {drag}");
         AddForce(drag, ForceMode.Force);
     }
 
@@ -132,7 +152,7 @@ public abstract class MovementMode : MonoBehaviour
         if (Utilities.ObjectInLayer(triggered.gameObject, windTunnelMask))
         {
             //entered a wind tunnel, add its wind to the absolute wind
-            absoluteWind += triggered.GetComponent<WindTunnel>().getWindValue();
+            targetAbsoluteWind += triggered.GetComponent<WindTunnel>().getWindValue();
         }
     }
 
@@ -141,7 +161,7 @@ public abstract class MovementMode : MonoBehaviour
         if (Utilities.ObjectInLayer(triggered.gameObject, windTunnelMask))
         {
             //exited a wind tunnel, subtract its wind to the absolute wind
-            absoluteWind -= triggered.GetComponent<WindTunnel>().getWindValue();
+            targetAbsoluteWind -= triggered.GetComponent<WindTunnel>().getWindValue();
         }
     }
 

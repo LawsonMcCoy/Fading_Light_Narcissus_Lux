@@ -9,9 +9,9 @@ public class WindTunnel : MonoBehaviour
     [SerializeField] private Vector3 wind;
     [SerializeField] private ParticleSystem windParticles;
 
-    private void Awake()
+    private void Start()
     {
-        Debug.Log("Test");
+        Debug.Log($"Wind Info: {windParticles}");
         //make the wind particles blow in the correct directions
         ParticleSystem.ShapeModule windShape = windParticles.shape;
         Quaternion windDirection = Quaternion.LookRotation(wind);//this.transform.rotation * wind); //create a rotation to point in the wind direction 
