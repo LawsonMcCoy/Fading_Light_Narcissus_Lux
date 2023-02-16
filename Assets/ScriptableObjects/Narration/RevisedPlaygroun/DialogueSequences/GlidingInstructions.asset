@@ -13,6 +13,15 @@ MonoBehaviour:
   m_Name: GlidingInstructions
   m_EditorClassIdentifier: 
   sentences:
+  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
+    text: AYY! That is a long way down *Where that Ogre go?*
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Glide to the other side of the gap. To glide press shift while in the air.
-      If you hold shift while gliding you will gain a boost at the cost of stamina
+    text: BOY, WHAT ARE YOU DOING OVER THERE!!!!
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: HURRY UP AND GLIDE OVER!!!!!!
+  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
+    text: ARE YOU CRA.... And he is gone. How am I suppose to get across without
+      falling to death.
+  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
+    text: While in air, pressing shift will initiate a glide. You also hold shift
+      on the ground the sprint, and jump while sprinting to glide.

@@ -14,7 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentences:
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Climbing the cliff using dashing. Right click to dash.
+    text: About time you made it! It will be hard to get up those cliff through normal
+      means, so I'm going to teach you how to dash.
+  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
+    text: Sir, I-I don't think I can handle anymore of this.
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: There are a few ways to do this. First dashing into an object will bounce
-      you off of it. Second jumping while dashing causes you to jump extra high.
+    text: Ugh! Get over it boy! When I was your age, I had to glide through malestroms
+      just to get dinner.
+  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
+    text: That is a lie and you know it!
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: If you are so smart why don't you figure out how to get to the top of the
+      island yourself. *With a giant burst of wind he shoots to the top of the Island*
+  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
+    text: And this again. Why did I have to say something. Not that he would of been
+      any help anyways.
+  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
+    text: You may dash by right clicking. Try dashing into objects.
