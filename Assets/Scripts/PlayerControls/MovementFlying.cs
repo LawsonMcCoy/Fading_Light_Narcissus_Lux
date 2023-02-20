@@ -40,6 +40,7 @@ public class MovementFlying : MovementMode
 
 
     //Testing
+    [SerializeField] private bool windImpactsLift;
     [SerializeField] private bool alternateTurning;
     [SerializeField] private float alternateTiltDampingPower; //A fine toning constant to increase the damping power on the velocity
     [SerializeField] private float alternateTurnDampingPower; //A fine toning constant to increase the damping power on the velocity
@@ -158,8 +159,14 @@ public class MovementFlying : MovementMode
         //calculate lift
 
         //Calculate the magnitude of the horizontal velocity
-        // forwardWind = Vector3.Project(relativeWind, this.transform.forward);
-        forwardWind = Vector3.Project(-self.rigidbody.velocity, this.transform.forward);
+        if (windImpactsLift)
+        {
+            forwardWind = Vector3.Project(relativeWind, this.transform.forward);
+        }
+        else 
+        {
+            forwardWind = Vector3.Project(-self.rigidbody.velocity, this.transform.forward);
+        }
 
         //Calculate the coefficient of lift using animation curves
         coefficientOfLift = coefficientOfLiftCurve.Evaluate(angleOfAttack);
