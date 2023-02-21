@@ -206,6 +206,7 @@ public class NarrationManager : MonoBehaviour
         narrationPaused = true;
 
         yield return new WaitForSeconds(delayTime);
+
         EventManager.Instance.Notify(EventTypes.Events.LOAD_SCENE);
         Debug.Log("scene loaded");
         //unpause the narration after some amount of time
@@ -225,7 +226,7 @@ public class NarrationManager : MonoBehaviour
         {
             ProcessSave(sequence);
         }
-
+        EventManager.Instance.Notify(EventTypes.Events.LOAD_SCENE);
         //Once the post load processing is completed
         //unpause the narration
         narrationPaused = false;

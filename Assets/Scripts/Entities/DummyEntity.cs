@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Melee))]
 public class DummyEntity : CombatEntity
 {
     public NavMeshAgent agent;
@@ -13,6 +15,7 @@ public class DummyEntity : CombatEntity
         agent = this.GetComponent<NavMeshAgent>();
         tree.setAI(this.gameObject);
         tree = tree.Clone();
+        gameObject.tag = "Enemy";
     }
 
     // Update is called once per frame

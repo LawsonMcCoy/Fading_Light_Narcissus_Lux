@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AI_Actions : MonoBehaviour
+public class AI_Destinations: MonoBehaviour
 {
     //is a singleton that all AI will use to access data;
+    /*
     public static AI_Actions Instance
     {
         get;
@@ -21,7 +22,7 @@ public class AI_Actions : MonoBehaviour
         //make listener for when there is a new scene
         EventManager.Instance.Subscribe(EventTypes.Events.LOAD_SCENE, updateDestinations);
     }
-
+    */
     public enum Dest
     {
         IKA,
@@ -29,6 +30,7 @@ public class AI_Actions : MonoBehaviour
     }
 
     //data
+    /*
     [SerializeField]private GameObject Ika;
     [SerializeField]private GameObject tree;
 
@@ -64,5 +66,5 @@ public class AI_Actions : MonoBehaviour
         EventManager.Instance.Unsubscribe(EventTypes.Events.LOAD_SCENE, updateDestinations);
         Instance = null;
 
-    }
+    }*/
 }

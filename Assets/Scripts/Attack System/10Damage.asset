@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 829d73f1f82fb1cd395fcb0bf5e35461, type: 3}
-  m_Name: LoadPlaygroundSceneSequence
+  m_Script: {fileID: 11500000, guid: dfd4d9f5707537d4ea003809e4f25671, type: 3}
+  m_Name: 10Damage
   m_EditorClassIdentifier: 
-  saveScene: 0
-  saveSuccesful: 1
-  spawnIndex: 0
-  scene: 2
-  isGameScene: 1
+  damage: 10
+  coolDownInSeconds: 5
