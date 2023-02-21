@@ -9,11 +9,16 @@ public class GoToNode : ActionNode
     private NavMeshAgent agent;
     private GameObject enemy;
     public AI_Destinations.Dest destination;
+
+    public void Awake()
+    {
+        setEnemy();
+    }
     protected override void OnStart()
     {
         myAI = myTree.getAI();
         agent = myAI.GetComponent<NavMeshAgent>();
-        EventManager.Instance.Subscribe(EventTypes.Events.LOAD_SCENE, setEnemy);
+        //EventManager.Instance.Subscribe(EventTypes.Events.LOAD_SCENE, setEnemy);
         //enemy = AI_Actions.Instance.getDest(destination);
     }
 
@@ -24,6 +29,10 @@ public class GoToNode : ActionNode
         {
             Debug.Log("set the enemy");
             enemy = GameObject.FindGameObjectWithTag("Player");
+        }
+        else if(destination == AI_Destinations.Dest.TREE)
+        {
+            enemy = GameObject.FindGameObjectWithTag("Tree");
         }
     }
     protected override void OnStop()

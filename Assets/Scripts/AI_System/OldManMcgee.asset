@@ -94,12 +94,12 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 10c1ed2b700532c40b25aaebece2f1ca
-  position: {x: -12.000139, y: 212.82796}
+  position: {x: 13, y: 215}
   NodeName: attack Player
   myTree: {fileID: 11400000}
   mask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 1032
 --- !u!114 &8621316797458655555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,4 +119,3 @@ MonoBehaviour:
   NodeName: 
   myTree: {fileID: 0}
   child: {fileID: 5684435400647034877}
-  loaded: 0
