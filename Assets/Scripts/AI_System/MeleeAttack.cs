@@ -22,7 +22,6 @@ public class MeleeAttack : ActionNode
     protected override State OnUpdate()
     {
         attackSpell.Cast();
-        Debug.Log("attacked");
         return Node.State.FAILURE;
     }
 }

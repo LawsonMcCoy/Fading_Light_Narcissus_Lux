@@ -6,6 +6,9 @@ public class Melee : Spell
 {
     private bool m_Started;
     private LayerMask layer;
+
+    public float coolDownInSeconds;
+    private float nextAttackTime;
     public void Start()
     {
         m_Started = true;
@@ -21,16 +24,22 @@ public class Melee : Spell
     {
         //find objects hit in a box
         //used transform.forward to place box in front of gameobject
-        Collider[] hits = Physics.OverlapBox(gameObject.transform.position + transform.forward *3, Vector3.one * 3, Quaternion.identity, layer);
-
-        for(int i = 0; i < hits.Length; i++)
+        if (Time.time > nextAttackTime)
         {
-            Collider hit = hits[i];
-            GameObject entity = hit.gameObject;
-            for(int j = 0; j < effects.Count; j++)
+            Collider[] hits = Physics.OverlapBox(gameObject.transform.position + transform.forward * 3, Vector3.one * 3, Quaternion.identity, layer);
+
+            for (int i = 0; i < hits.Length; i++)
             {
-                ApplySpellEffect(entity, effects[j]);
+                Collider hit = hits[i];
+                GameObject entity = hit.gameObject;
+                for (int j = 0; j < effects.Count; j++)
+                {
+                    ApplySpellEffect(entity, effects[j]);
+                }
             }
+            nextAttackTime = Time.time + coolDownInSeconds;
+            Debug.Log("attacked player");
+
         }
         //apply spell effects
     }
