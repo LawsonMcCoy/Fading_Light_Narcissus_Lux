@@ -7,12 +7,15 @@ public class MeleeAttack : ActionNode
     private GameObject myAI;
     private Melee attackSpell;
     public LayerMask mask;
-    protected override void OnStart()
-    {
 
+    public void Awake()
+    {
         myAI = myTree.getAI();
         attackSpell = myAI.GetComponent<Melee>();
         attackSpell.setLayerMask(mask);
+    }
+    protected override void OnStart()
+    {
     }
 
     protected override void OnStop()

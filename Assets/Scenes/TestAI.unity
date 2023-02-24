@@ -107,7 +107,7 @@ NavMeshSettings:
     serializedVersion: 2
     agentTypeID: 0
     agentRadius: 0.5
-    agentHeight: 2
+    agentHeight: 1.59
     agentSlope: 45
     agentClimb: 0.4
     ledgeDropHeight: 0
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: fc768e2e775e98a4c8262da80ca22f09, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 9e6920df0a4feca40b26f7bc129710e2, type: 2}
 --- !u!1001 &10840962
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5476,7 +5476,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 4.05
+  m_StoppingDistance: 4.81
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -6624,6 +6624,10 @@ PrefabInstance:
     - target: {fileID: 2594992599452440461, guid: a0d883965b4d31d41bf17755e92ab8fe, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 2936960299566629756, guid: a0d883965b4d31d41bf17755e92ab8fe, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3407136574621682999, guid: a0d883965b4d31d41bf17755e92ab8fe, type: 3}
       propertyPath: m_RootOrder
@@ -8034,8 +8038,16 @@ PrefabInstance:
       value: tree_fat_darkh
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6eb819f2ae4cc084da4dddec9342ec50, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6eb819f2ae4cc084da4dddec9342ec50, type: 3}
+      propertyPath: m_TagString
+      value: Tree
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6eb819f2ae4cc084da4dddec9342ec50, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6eb819f2ae4cc084da4dddec9342ec50, type: 3}
@@ -8060,8 +8072,22 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.755, y: 1.150387, z: 0.65385}
+  m_Size: {x: 0.45, y: 1.03, z: 0.65385}
   m_Center: {x: 0, y: 0.5751935, z: 0.00000011920929}
+--- !u!114 &3821831713824086769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3821831713824086762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d78b2907ecf9744486bb01a433df197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resource: 0
+  maxResource: 50
 --- !u!4 &3821831713973570042
 Transform:
   m_ObjectHideFlags: 0
