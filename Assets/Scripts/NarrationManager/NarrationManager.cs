@@ -135,8 +135,6 @@ public class NarrationManager : MonoBehaviour
         currentScene = sequence.scene;
         SceneManager.LoadScene((int)sequence.scene);
 
-       
-
         //Post load processing, this is done in a coroutine
         //so we can wait full the scene to be fully loaded 
         //before the post load processing. Since it is done
@@ -164,6 +162,7 @@ public class NarrationManager : MonoBehaviour
         //This is for the Quest UI.
         CurrentObjectiveActive = sequence;
         //pause the narration until the objective system reports completion
+
         narrationPaused = true;
     }
 
@@ -208,6 +207,8 @@ public class NarrationManager : MonoBehaviour
 
         yield return new WaitForSeconds(delayTime);
 
+        EventManager.Instance.Notify(EventTypes.Events.LOAD_SCENE);
+        Debug.Log("scene loaded");
         //unpause the narration after some amount of time
         narrationPaused = false;
     }
@@ -225,7 +226,7 @@ public class NarrationManager : MonoBehaviour
         {
             ProcessSave(sequence);
         }
-
+        EventManager.Instance.Notify(EventTypes.Events.LOAD_SCENE);
         //Once the post load processing is completed
         //unpause the narration
         narrationPaused = false;

@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4397391682966845609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c126dcf997ac448408cca7a2409d24e2, type: 3}
+  m_Name: GoToNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 4bcd3ab8f4bb6514fa730308930c65ce
+  position: {x: 13.400003, y: -24.30008}
+  NodeName: go to Ika
+  myTree: {fileID: 11400000}
+  destination: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 270d45d981650274ca7d39b317c3c634, type: 3}
+  m_Name: OldManMcgee
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: 8621316797458655555}
+  treeState: 0
+  nodes:
+  - {fileID: 8621316797458655555}
+  - {fileID: -4397391682966845609}
+  - {fileID: 7926489326116634265}
+  - {fileID: 4944258344759131113}
+  - {fileID: 5684435400647034877}
+--- !u!114 &4944258344759131113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71501ae08ef50b54289338c8c10704be, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: ddae1a7cf87de98478280a4a0f4cb0f4
+  position: {x: -216.70802, y: 99.99999}
+  NodeName: 
+  myTree: {fileID: 11400000}
+  children:
+  - {fileID: -4397391682966845609}
+  - {fileID: 7926489326116634265}
+--- !u!114 &5684435400647034877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4850d63ead855e4286e1418d5b14467, type: 3}
+  m_Name: RepeatNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 58b6ea20a0f0e8342b158179fc0cd860
+  position: {x: -399.03244, y: 100.00003}
+  NodeName: 
+  myTree: {fileID: 11400000}
+  child: {fileID: 4944258344759131113}
+--- !u!114 &7926489326116634265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e564f630f0d5c04dbcac4c9f6ab7e6f, type: 3}
+  m_Name: MeleeAttack
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 10c1ed2b700532c40b25aaebece2f1ca
+  position: {x: 13, y: 215}
+  NodeName: attack Player
+  myTree: {fileID: 11400000}
+  mask:
+    serializedVersion: 2
+    m_Bits: 1032
+--- !u!114 &8621316797458655555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 002c4931053343a49b7624394504ec96, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: da0f61e8fefcda1429c53bdba39eaaf2
+  position: {x: -559.80005, y: 100.05}
+  NodeName: 
+  myTree: {fileID: 0}
+  child: {fileID: 5684435400647034877}

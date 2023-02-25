@@ -11,6 +11,7 @@ public class HealthManager : ResourceManager
     {
         //initialized base class data members
         base.Awake();
+        Debug.Log($"I have {resource} life left");
 
         //The entity is initailized to an alive state
         dead = false;
@@ -21,7 +22,7 @@ public class HealthManager : ResourceManager
     public override void Subtract(float damage)
     {
         base.Subtract(damage);
-
+        Debug.Log($"I have {resource} life left");
         if(resource <= 0.0)
         {
             dead = true;

@@ -11,7 +11,10 @@ public class GoalPost : MonoBehaviour
     [SerializeField] private ObjectiveSequence objective;
     private GameObject currentPost;
     private int currentIndex;
-
+    private GameObject player;
+    public int distance;
+    private bool active;
+    private bool warned;
     private void Start()
     {
         Debug.Log("Goal Post Start");
@@ -73,6 +76,15 @@ public class GoalPost : MonoBehaviour
         currentIndex = 0;
         currentPost = Posts[currentIndex];
         currentPost.GetComponent<Post>().makeCurrent();
+
+        //find player too notify if they get too far away from the objective
+        player = GameObject.FindGameObjectWithTag("Player");
+        active = true;
+        warned = false;
+        if(distance == 0)
+        {
+            distance = 20;
+        }
     }
 
     public void reachedAGoal()
@@ -100,6 +112,7 @@ public class GoalPost : MonoBehaviour
                 currentPost.SetActive(false);
             }
             Debug.Log("No more checkPoints");
+            active = false;
             objective.reachedGoal();
         }
     }
@@ -108,6 +121,29 @@ public class GoalPost : MonoBehaviour
         //taken from old objectiveManager
         Debug.Log("Finished");
         NarrationManager.Instance.ReportCompletion();
+    }
+
+    public void Update()
+    {
+        if (active)
+        {
+            if (distance < Vector3.Distance(currentPost.transform.position, player.transform.position))
+            {
+                if (!warned)
+                {
+                    EventManager.Instance.Notify(EventTypes.Events.OBJECTIVE_TOO_FAR);
+                    warned = true;
+                }
+            }
+            else
+            {
+                if (warned)
+                {
+                    EventManager.Instance.Notify(EventTypes.Events.OBJECCTIVE_WITHIN_DISTANCE);
+                    warned = false;
+                }
+            }
+        }
     }
     private void OnDestroy()
     {
