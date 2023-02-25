@@ -13,6 +13,11 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Text speakerName; //For the speaker name being displayed in the UI
     [SerializeField] private Text textField; //For the dialogue text being displayed in the UI
 
+    //This is for the
+    [SerializeField] private Text pressEnterToContinueText;
+    [SerializeField] private Image rightArrowImage;
+    private float fadeDuration = 2f;
+
     //Reference to the lines of dialogue (ScriptableObject)
     ///
     /// Ideally, we want to have the objects within the scene to be "Interactable" that holds their own dialogues
@@ -60,27 +65,8 @@ public class DialogueManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-private void Update()
+    private void Update()
     {
-        /*
-        //TESTING PURPOSES: Clicking on an object such as the capsule in the middle to start the dialogue.
-        //Ideally, we want the Narration Manager to handle this, as certain Narration Sequences will have playing dialogue as a sequence.
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit) && Input.GetMouseButtonDown(0)) //If raycast hit and left clicked
-        {
-            Transform clickableObject = hit.transform;
-            if (clickableObject.CompareTag("Player")) //If the clickable object is a player (TESTING PURPOSES: the capsule is a player)
-            {
-                Debug.Log("Clicked on a clickable object!");
-                if (!isSpeaking()) //If the dialoguebox is already present (meaning that someone is already speaking)
-                {                  //Then don't re-do it.
-                    showUI();
-                    StartDialogue(insertedDialogue);
-                }
-            }
-        }
-        */
 
         //If the UI is showing (meaning isSpeaking is true), then that must mean that the dialogue is currently active.
         //Pressing space (TESTING PURPOSES) advances the dialogue.
@@ -89,6 +75,13 @@ private void Update()
             ContinueDialogue();
         }
     }
+
+    #endregion
+
+    #region Helper Functions
+    
+
+    //COROUTINE: Typing out the dialogue letter by letter.
     private IEnumerator Type(string text)
     {
         //For each letter in our sentences, 
@@ -96,13 +89,20 @@ private void Update()
         {
             //Update the text field by adding each letter per iteration
             textField.text += letter;
+            Debug.Log("Currently Typing...");
             //And then wait for typeSpeed seconds before displaying the next letter.
             yield return new WaitForSecondsRealtime(typeSpeed);
+
+            Debug.Log("Done typing: " + textField.text);
+            if (isTypedOut())
+            {
+                Debug.Log("The sentence is typed out! Playing the animation now.");
+                pressEnterToContinueText.color = new Color(pressEnterToContinueText.color.r, pressEnterToContinueText.color.g, pressEnterToContinueText.color.b, 1f);
+                rightArrowImage.color = new Color(rightArrowImage.color.r, rightArrowImage.color.g, rightArrowImage.color.b, 1f);
+
+            }
         }
     }
-    #endregion
-
-    #region Helper Functions
 
     //This function checks to see if there is a dialogue currently active
     //(Just checks to see if the UI is on, meaning it is active)
@@ -148,6 +148,8 @@ private void Update()
             //If the entire sentence is already typed out, then advance to the next dialogue.
             if (isTypedOut())
             {
+                pressEnterToContinueText.color = new Color(pressEnterToContinueText.color.r, pressEnterToContinueText.color.g, pressEnterToContinueText.color.b, 0f);
+                rightArrowImage.color = new Color(rightArrowImage.color.r, rightArrowImage.color.g, rightArrowImage.color.b, 0f);
                 //If our index is still in range with how many sentences we have...
                 if (currSentenceIndex < currDialogue.sentences.Length - 1)
                 {

@@ -64,7 +64,7 @@ Animation:
   m_Animations:
   - {fileID: 7400000, guid: 160902a6765c1674eb8b1c00e91bc620, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!1001 &417858392
@@ -74,21 +74,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1997411482730373349}
     m_Modifications:
-    - target: {fileID: 376536963099657529, guid: 4185544874abc688b952079e90c76f56, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 376536963099657529, guid: 4185544874abc688b952079e90c76f56, type: 3}
-      propertyPath: m_PlayAutomatically
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7814810378859151421, guid: 4185544874abc688b952079e90c76f56, type: 3}
       propertyPath: m_Name
       value: DialogueUI
       objectReference: {fileID: 0}
     - target: {fileID: 7814810378859151421, guid: 4185544874abc688b952079e90c76f56, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7814810378859151553, guid: 4185544874abc688b952079e90c76f56, type: 3}
       propertyPath: m_Pivot.x
@@ -174,8 +166,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 376536963099657529, guid: 4185544874abc688b952079e90c76f56, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4185544874abc688b952079e90c76f56, type: 3}
 --- !u!1 &7814810378978165605 stripped
 GameObject:
