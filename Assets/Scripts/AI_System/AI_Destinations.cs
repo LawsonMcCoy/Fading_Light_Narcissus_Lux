@@ -30,7 +30,7 @@ public class AI_Destinations: MonoBehaviour
     }
 
     //data
-    /*
+    
     [SerializeField]private GameObject Ika;
     [SerializeField]private GameObject tree;
 
@@ -38,22 +38,21 @@ public class AI_Destinations: MonoBehaviour
     {
         Ika = GameObject.FindGameObjectWithTag("Player");
     }
-    public GameObject getDest(Dest destination)
+    public static GameObject getGameObjectFromDestination(Dest destination)
     {
         if (destination == Dest.IKA)
         {
-            if(Ika != null)
-            {
-                Debug.Log("giving Ika to node");
-                return Ika;
-            }
+           
+            Debug.Log("giving Ika to node");
+            return GameObject.FindGameObjectWithTag("Player");
+            
         }
-        return tree;
+        return null;
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        updateDestinations();
     }
 
     // Update is called once per frame
@@ -61,10 +60,12 @@ public class AI_Destinations: MonoBehaviour
     {
         
     }
+    /*
     private void OnDestroy()
     {
         EventManager.Instance.Unsubscribe(EventTypes.Events.LOAD_SCENE, updateDestinations);
         Instance = null;
 
-    }*/
+    }
+    */
 }

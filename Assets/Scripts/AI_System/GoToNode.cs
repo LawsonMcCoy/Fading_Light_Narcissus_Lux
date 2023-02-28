@@ -12,7 +12,7 @@ public class GoToNode : ActionNode
 
     public void Awake()
     {
-        setEnemy();
+        enemy = AI_Destinations.getGameObjectFromDestination(destination);
     }
     protected override void OnStart()
     {
@@ -22,19 +22,7 @@ public class GoToNode : ActionNode
         //enemy = AI_Actions.Instance.getDest(destination);
     }
 
-    public void setEnemy()
-    {
-        //enemy = AI_Actions.Instance.getDest(destination);
-        if(destination == AI_Destinations.Dest.IKA)
-        {
-            Debug.Log("set the enemy");
-            enemy = GameObject.FindGameObjectWithTag("Player");
-        }
-        else if(destination == AI_Destinations.Dest.TREE)
-        {
-            enemy = GameObject.FindGameObjectWithTag("Tree");
-        }
-    }
+   
     protected override void OnStop()
     {
         //EventManager.Instance.Unsubscribe(EventTypes.Events.LOAD_SCENE, setEnemy);

@@ -11,7 +11,6 @@ public class BehaviorTree : ScriptableObject
 
     public List<Node> nodes = new List<Node>();
     private GameObject thisAI;
-
     public Node.State Update()
     {
         if(rootNode.state == Node.State.RUNNING)
@@ -93,8 +92,8 @@ public class BehaviorTree : ScriptableObject
     }
     public List<Node> GetChildren(Node parent)
     {
-        List<Node> children = new List<Node>()
-            ;
+        List<Node> children = new List<Node>();
+
         DecoratorNode dec = parent as DecoratorNode;
         if (dec && dec.child != null)
         {
@@ -129,4 +128,5 @@ public class BehaviorTree : ScriptableObject
     {
         return thisAI;
     }
+    
 }
