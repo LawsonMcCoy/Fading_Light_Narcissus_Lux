@@ -9,7 +9,10 @@ public class ProjectileNode : ActionNode
     private Projectile projectileSpell;
     public LayerMask mask;
     public AI_Destinations.Dest target;
+    public float velocity;
+    public float despawn_Distance;
     private GameObject enemy;
+   
 
     public float coolDownInSeconds;
     private float nextAttackTime;
@@ -17,8 +20,12 @@ public class ProjectileNode : ActionNode
     public void Awake()
     {
         myAI = myTree.getAI();
+
         projectileSpell = myAI.GetComponent<Projectile>();
         projectileSpell.setLayerMask(mask);
+        projectileSpell.SetDespawnDistance(despawn_Distance);
+        projectileSpell.setVelocity(velocity);
+
         nextAttackTime = Time.time;
         enemy = AI_Destinations.getGameObjectFromDestination(target);
     }

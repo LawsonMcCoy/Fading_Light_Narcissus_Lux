@@ -5,11 +5,11 @@ using UnityEngine;
 public class Projectile : Spell
 {
     public GameObject projectile;
-    public float velocity = 10f;
-    public float coolDown = 5f;
+    private float velocity = 10f;
     private LayerMask mask;
     private GameObject enemy;
     public AI_Destinations.Dest target;
+    private float despawn_Distance;
 
     public override void Cast()
     {
@@ -17,12 +17,17 @@ public class Projectile : Spell
 
         GameObject p = Instantiate(projectile, transform.position + new Vector3(0, 1, 0),
                                                 angle);
-        ProjectileLogic logic = p.GetComponent<ProjectileLogic>();
 
-        logic.hit.AddListener(ApplySpellEffects);
-        logic.setLayerMask(mask);
         Vector3 direction_and_speed = p.transform.forward * velocity;
         p.GetComponent<Rigidbody>().AddForce(direction_and_speed, ForceMode.VelocityChange);
+
+        ProjectileLogic logic = p.GetComponent<ProjectileLogic>();
+        logic.hit.AddListener(ApplySpellEffects);
+        logic.setLayerMask(mask);
+        logic.SetDespawnDistanceAndVelocity(despawn_Distance, velocity);
+        logic.startTimer();
+
+       
     
     }
 
@@ -48,5 +53,13 @@ public class Projectile : Spell
     public void setLayerMask(LayerMask mask)
     {
         this.mask = mask;
+    }
+    public void SetDespawnDistance(float dist)
+    {
+        despawn_Distance = dist;
+    }
+    public void setVelocity(float v)
+    {
+        velocity = v;
     }
 }
