@@ -189,6 +189,7 @@ GameObject:
   - component: {fileID: -3263997419229935752}
   - component: {fileID: 7411154130443785276}
   - component: {fileID: 2832632588534044553}
+  - component: {fileID: 1429294828335395734}
   m_Layer: 3
   m_Name: Ika
   m_TagString: Player
@@ -362,12 +363,13 @@ MonoBehaviour:
   - {fileID: 7204556638568947313}
   - {fileID: 7204556638568947314}
   stamina: {fileID: 2271143012148580341}
+  windManager: {fileID: 1429294828335395734}
+  coefficientOfDrag: 0.1
+  dragScalingValues: {x: 5, y: 2, z: 1}
+  absoluteWindRateOfChange: 5
   movementModeText: {fileID: 8925406608850753112}
-  forwardThrustMagnitude: 5
   liftPower: 1
   coefficientOfInducedDrag: 0.5
-  coefficientOfDrag: 0.1
-  dragScalingValues: {x: 1, y: 2, z: 1}
   coefficientOfLiftCurve:
     serializedVersion: 2
     m_Curve:
@@ -428,12 +430,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 535
   windParticles: {fileID: -3263997419229935752}
+  windImpactsLift: 0
   alternateTurning: 1
   alternateTiltDampingPower: 10
   alternateTurnDampingPower: 10
   alternateTurnSpringConstant: 5
-  speedBoostMagnitude: 50
-  speedBoostStaminaCost: 10
+  speedBoostMagnitude: 0
+  speedBoostStaminaCost: 0
 --- !u!114 &7204556638568947313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,6 +455,10 @@ MonoBehaviour:
   - {fileID: 7204556638568947313}
   - {fileID: 7204556638568947314}
   stamina: {fileID: 2271143012148580341}
+  windManager: {fileID: 1429294828335395734}
+  coefficientOfDrag: 0.5
+  dragScalingValues: {x: 0.5, y: 3, z: 0.5}
+  absoluteWindRateOfChange: 30
   movementModeText: {fileID: 8925406608850753112}
   hoverSpeed: 18
   turnSpeed: 5
@@ -459,7 +466,9 @@ MonoBehaviour:
   hoveringDampingCoefficient: 5
   alternateHover: 1
   hoverFallBase: 2
-  hoverFallExponent: 1
+  hoverFallExponent: 0.1
+  hoverRecoveryRate: 0
+  walkModeHoverPunishment: 0
 --- !u!114 &7204556638568947312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,6 +487,10 @@ MonoBehaviour:
   - {fileID: 7204556638568947313}
   - {fileID: 7204556638568947314}
   stamina: {fileID: 2271143012148580341}
+  windManager: {fileID: 1429294828335395734}
+  coefficientOfDrag: 0
+  dragScalingValues: {x: 0, y: 0, z: 0}
+  absoluteWindRateOfChange: 0
   movementModeText: {fileID: 8925406608850753112}
   walkSpeed: 15
   turnSpeed: 5
@@ -501,6 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d78b2907ecf9744486bb01a433df197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resource: 0
   maxResource: 0
 --- !u!114 &2271143012148580341
 MonoBehaviour:
@@ -514,6 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aaf7a884415f7064acfc008d39078ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resource: 0
   maxResource: 100
   staminaUI: {fileID: 1098352053598332953}
 --- !u!198 &-3263997419229935752
@@ -5308,7 +5323,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e923ae69c714c6f4aba0510e3995a87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resource: 0
   maxResource: 0
+--- !u!114 &1429294828335395734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8435698845848507070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10037578893596638adabc9e3085b339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windTunnelMask:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!1001 &7852022201217180424
 PrefabInstance:
   m_ObjectHideFlags: 0
