@@ -9,6 +9,7 @@ using UnityEngine.UI;
 //to have a cleaner code base. This class will serve as the parent
 //class for each movement mode, so any common behavior can be 
 //implemented here
+[RequireComponent(typeof(AbsoluteWindManager))]
 public abstract class MovementMode : MonoBehaviour
 {
     [SerializeField] protected MovementModeData commonData; //A scriptable object containing all serialize data
@@ -17,6 +18,7 @@ public abstract class MovementMode : MonoBehaviour
                                                                                    //index 1 is hovering
                                                                                    //index 2 is flying
     [SerializeField] protected StaminaManager stamina; //A reference to the stamina manager for the player
+    [SerializeField] private AbsoluteWindManager windManager; //A reference to the component responsible for maintaining the wind
 
     //an enum for the movement modes define in the order 
     //walking, hovering, and flying, so that there int values
@@ -49,6 +51,25 @@ public abstract class MovementMode : MonoBehaviour
                                //a mode that you just transition from when the button to transition
                                //is the same
 
+    //drag
+    [Tooltip("a fine toning value for regular drag (this is combination of all forms of drag expect for induced drag, it is also scaled by drageScalingValues)")]
+    [SerializeField] private float coefficientOfDrag; //a fine toning value for regular drag
+    [Tooltip("A scaling vector to allow drag to unevenly applied in different directions")]
+    [SerializeField] private Vector3 dragScalingValues; //A scaling vector to allow drag to unevenly applied in different directions
+
+    //Wind
+    private Vector3 absoluteWind = Vector3.zero; //The actually absolute wind felt by IKa, it wildl slowly approach the windManager.absoluteWind
+                                                 //TO do later: change the name to something that makes more sense, windManager.absoluteWind is the
+                                                 //actual absolute wind, but to create a gradual transition whenever the wind is changed, this variable
+                                                 //is used
+    [Tooltip("The maximun rate of change of the absolute wind")]
+    [SerializeField] private float absoluteWindRateOfChange; 
+    public Vector3 relativeWind 
+    {
+        get;
+        protected set;
+    } //the wind for Ika's frame of reference
+
     #region Ui Section
     [SerializeField] protected Text movementModeText;
     protected Color modeUIColor;
@@ -80,6 +101,9 @@ public abstract class MovementMode : MonoBehaviour
         //inform the player class that the active movement mode has changed
         //pass in reference to new active movement mode (this)
         self.activeMovementMode = this;
+
+        //keep the same absolute wind from before the transition
+        absoluteWind = windManager.absoluteWind;
     }
 
     protected virtual void Start()
@@ -97,7 +121,58 @@ public abstract class MovementMode : MonoBehaviour
     {
         //update the moveVector
         moveVector = wasdInput.x * speed * this.transform.right + wasdInput.y * speed * this.transform.forward;
+
+        //update the absolute wind to approach its target value
+        Vector3 absoluteWindDifference = windManager.absoluteWind - windManager.absoluteWind;
+        float absoluteWindMaxChangeAmount = absoluteWindRateOfChange * Time.fixedDeltaTime;
+        if (absoluteWindDifference.magnitude < absoluteWindMaxChangeAmount)
+        {
+            absoluteWind = windManager.absoluteWind;
+        }
+        else
+        {
+            absoluteWind += absoluteWindMaxChangeAmount * absoluteWindDifference.normalized;
+        }
+
+        //compute new relative wind value
+        relativeWind = absoluteWind - self.rigidbody.velocity;
+
+        //use the relativeWind to compute the regular drag force
+        // Debug.Log($"inverse drag {Quaternion.Inverse(self.rigidbody.rotation) * dragScalingValues}, world drag {self.rigidbody.rotation * dragScalingValues}, local wind {Quaternion.Inverse(self.rigidbody.rotation) * relativeWind}");
+        Vector3 localRelativeWind = Quaternion.Inverse(self.rigidbody.rotation) * relativeWind;
+        Vector3 drag = coefficientOfDrag * Vector3.Scale(localRelativeWind, dragScalingValues);
+        drag = self.rigidbody.rotation * drag;
+
+        //apply the drag force
+        AddForce(drag, ForceMode.Force);
     }
+
+    // private void OnTriggerEnter(Collider triggered)
+    // {
+    //     if (Utilities.ObjectInLayer(triggered.gameObject, windTunnelMask))
+    //     {
+    //         //entered a wind tunnel, add its wind to the absolute wind
+    //         windManager.absoluteWind += triggered.GetComponent<WindTunnel>().getWindValue();
+    //     }
+    // }
+
+    // private void OnTriggerStay(Collider triggered)
+    // {
+    //     if (Utilities.ObjectInLayer(triggered.gameObject, windTunnelMask))
+    //     {
+    //         //entered a wind tunnel, add its wind to the absolute wind
+    //         windManager.absoluteWind += triggered.GetComponent<WindTunnel>().getWindValue();
+    //     }
+    // }
+
+    // private void OnTriggerExit(Collider triggered)
+    // {
+    //     if (Utilities.ObjectInLayer(triggered.gameObject, windTunnelMask))
+    //     {
+    //         //exited a wind tunnel, subtract its wind to the absolute wind
+    //         windManager.absoluteWind -= triggered.GetComponent<WindTunnel>().getWindValue();
+    //     }
+    // }
 
     //A visitor function to determine which type of movement mode this script is
     public abstract void GetMovementUpdate(MovementUpdateReciever updateReciever);
@@ -114,7 +189,6 @@ public abstract class MovementMode : MonoBehaviour
         if (this.enabled)
         {
             //enable new movement mode
-            Debug.Log($"Transitioning to {transitionToMode}");
             movementModes[(int)transitionToMode].enabled = true;
 
             movementModeText.text = transitionToMode.ToString();

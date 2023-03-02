@@ -17,6 +17,9 @@ public class MovementHovering : MovementMode
     [SerializeField] private bool alternateHover;
     [SerializeField] private float hoverFallBase;
     [SerializeField] private float hoverFallExponent;
+    [Tooltip("The rate that the hover fall rate recovery to zero when Ika is being pushed up by wind")]
+    [SerializeField] private float hoverRecoveryRate;
+    [SerializeField] private float walkModeHoverPunishment;
     private float hoverTime; //The amount of time Ika as been hovering, used to calculate hover fall rate
 
     protected override void Awake()
@@ -35,7 +38,6 @@ public class MovementHovering : MovementMode
 
         StartCoroutine(DelayInput());
 
-        Debug.Log("Now hovering");
         
         //disable rotation
         self.rigidbody.freezeRotation = true;
@@ -48,11 +50,19 @@ public class MovementHovering : MovementMode
         // self.rigidbody.rotation = Quaternion.Euler(currentEuler);
         self.rigidbody.MoveRotation(Quaternion.Euler(currentEuler));
 
-        //stop all motion
-        // self.rigidbody.velocity = Vector3.zero;
-
-        //just started hovering, so set hoverTime to zero
-        hoverTime = 0f;
+        //stop vertical motion
+        //The formule is negaitve y velocity (to stop the player) plus the exponential (to reduce the power)
+        //If the exponential has a larger magnitude then just set the scale factor to zero (don't affect veritical motion)
+        float verticalStopScaleFactor = Mathf.Pow(hoverFallBase, hoverFallExponent * hoverTime);
+        if (verticalStopScaleFactor >= Mathf.Abs(self.rigidbody.velocity.y))
+        {
+            verticalStopScaleFactor = 0;
+        }
+        else 
+        {
+            verticalStopScaleFactor -=self.rigidbody.velocity.y;
+        }
+        AddForce(verticalStopScaleFactor * Vector3.up, ForceMode.Impulse);
 
         modeUIColor = new Color(0f, 0.8f, 0f, 1f);
         movementModeText.color = modeUIColor;
@@ -67,16 +77,35 @@ public class MovementHovering : MovementMode
         base.FixedUpdate();
 
         //update the hover time
-        hoverTime += Time.fixedDeltaTime;
+        if (self.rigidbody.velocity.y > 0)
+        {
+            //if something is pushing the player up, then reduce the hover time
+            hoverTime = Mathf.MoveTowards(hoverTime, 0, hoverRecoveryRate); //The move towards is used to prevent negative times
+        }
+        else
+        {
+            //Otherwise counts the seconds the player has been hovering for
+            hoverTime += Time.fixedDeltaTime;
+        }
 
         //Calculate the hover force to keep the player in the air
-        Vector3 hoverForce = -Physics.gravity * Mathf.Pow(hoverFallBase, -hoverFallExponent * hoverTime);
+        Vector3 hoverForce = -Physics.gravity - Mathf.Pow(hoverFallBase, hoverFallExponent * hoverTime) * Vector3.up;
+        if (Vector3.Dot(Physics.gravity, hoverForce) > 0)
+        {
+            hoverForce = Vector3.zero; //Don't apply hoverforce after it becomes a downward force
+        }
+        // Debug.Log($"Hover time: {hoverTime}, Hover force: {hoverForce}, Relative wind: {relativeWind}");
 
         //move the player 
         Vector3 moveForce = Vector3.zero;
         if (!forceNoMovement)
         {
             moveForce = hoveringDampingCoefficient * (moveVector - self.rigidbody.velocity); //use controls to determine the horizontal components
+            moveForce.y = 0; //player input does not affect motion in the vertical direction
+            // if (self.rigidbody.velocity.y <= 0)
+            // {
+            //     moveForce.y = 0; //player input does not affect motion in the vertical direction
+            // }
         }
 
         //apply the forces
@@ -89,6 +118,9 @@ public class MovementHovering : MovementMode
         //if you land on the ground then transition to walking
         if (IsGrounded())
         {
+            //reset the hover time when the player touches the ground
+            hoverTime = 0f;
+
             Transition(Modes.WALKING);
         }
     }
@@ -138,6 +170,9 @@ public class MovementHovering : MovementMode
     {
         if (input.isPressed && inputReady)
         {
+            //punish the player with extra hover time
+            hoverTime += walkModeHoverPunishment;
+
             Transition(Modes.WALKING);
             StartCoroutine(DisableControlForTime(commonData.transitionMovementLockTime));
         }

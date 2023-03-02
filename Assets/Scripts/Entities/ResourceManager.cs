@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
 {
-    protected float resource; //The value of the resource being managed
+    [SerializeField] protected float resource; //The value of the resource being managed
     [SerializeField] protected float maxResource; //The max value of the resource
 
     protected virtual void Awake()

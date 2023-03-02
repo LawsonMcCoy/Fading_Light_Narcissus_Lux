@@ -6,15 +6,10 @@ using UnityEngine.InputSystem;
 public class MovementFlying : MovementMode
 {
     //movement force values
-    [SerializeField] private float forwardThrustMagnitude;
     [Tooltip("A fine toning value for the magnitude of lift")]
     [SerializeField] private float liftPower; //A fine toning value for the magnitude of lift
     [Tooltip("a fine toning value for the magnitude of induce drag (This is a side effect of lift an always points parrallel to air flow over wings)")]
     [SerializeField] private float coefficientOfInducedDrag; //a fine toning value for the magnitude of induce drag
-    [Tooltip("a fine toning value for regular drag (this is combination of all forms of drag expect for induced drag, it is also scaled by drageScalingValues)")]
-    [SerializeField] private float coefficientOfDrag; //a fine toning value for regular drag
-    [Tooltip("A scaling vector to allow drag to unevenly applied in different directions")]
-    [SerializeField] private Vector3 dragScalingValues; //A scaling vector to allow drag to unevenly applied in different directions
     [Tooltip("an animation curve used to compute the coefficient of lift from the angle of attack")]
     [SerializeField] private AnimationCurve coefficientOfLiftCurve; //an animation curve used to compute the coefficient 
                                                                     //of lift from the angle of attack
@@ -22,11 +17,6 @@ public class MovementFlying : MovementMode
     //values used in calculation of the flight forces, some are properties to allow UI to read the values
     private float angleOfAttack; //the angle between the velocity and the horizontal plane
     private Vector3 localVelocity;
-    public Vector3 relativeWind 
-    {
-        get;
-        private set;
-    } //the wind for Ika's frame of reference
 
     //turning torques values
     [Tooltip("The speed that Ika changes his pitch at when W or S is pressed")]
@@ -49,6 +39,7 @@ public class MovementFlying : MovementMode
 
 
     //Testing
+    [SerializeField] private bool windImpactsLift;
     [SerializeField] private bool alternateTurning;
     [SerializeField] private float alternateTiltDampingPower; //A fine toning constant to increase the damping power on the velocity
     [SerializeField] private float alternateTurnDampingPower; //A fine toning constant to increase the damping power on the velocity
@@ -113,9 +104,6 @@ public class MovementFlying : MovementMode
         //calculate angle of attack
         angleOfAttack = Mathf.Atan2(-localVelocity.y, localVelocity.z) * Mathf.Rad2Deg;
 
-        //apply a thrust force
-        // AddForce(transform.forward * forwardThrustMagnitude);
-
         //apply lift
         AddLift();
 
@@ -144,19 +132,20 @@ public class MovementFlying : MovementMode
         float coefficientOfLift;
         float liftMagnitude;
         Vector3 lift;
-        Vector3 localDragScaleValues; //drage scale values after rotating them to local space
-        Vector3 drag;
         float inducedDragMagnitude;
         Vector3 inducedDrag;
-
-        //calculate the relative wind, for now just the opposite of velocity
-        //later add in the absolute wind vector
-        relativeWind = -self.rigidbody.velocity;
         
         //calculate lift
 
         //Calculate the magnitude of the horizontal velocity
-        forwardWind = Vector3.Project(relativeWind, this.transform.forward);
+        if (windImpactsLift)
+        {
+            forwardWind = Vector3.Project(relativeWind, this.transform.forward);
+        }
+        else 
+        {
+            forwardWind = Vector3.Project(-self.rigidbody.velocity, this.transform.forward);
+        }
 
         //Calculate the coefficient of lift using animation curves
         coefficientOfLift = coefficientOfLiftCurve.Evaluate(angleOfAttack);
@@ -167,20 +156,11 @@ public class MovementFlying : MovementMode
 
         //compute lift Magnitude 
         liftMagnitude = coefficientOfLift * liftPower * forwardWind.sqrMagnitude;
-        // Debug.Log($"lift magnitude: {liftMagnitude}, coefficient of lift {coefficientOfLift}, angle of attack {angleOfAttack}");
 
         //apply lift in the perpendicular to air flow and right side
         lift = Vector3.Cross(transform.right, forwardWind.normalized) * liftMagnitude;
 
-        Debug.DrawLine(transform.position, transform.position + lift, Color.red);
         AddForce(lift, ForceMode.Force);
-
-        //calculate the regular drag
-        localDragScaleValues = Quaternion.Inverse(self.rigidbody.rotation) * dragScalingValues;
-        drag = coefficientOfDrag * Vector3.Scale(relativeWind, dragScalingValues);
-
-        //apply the drag force
-        AddForce(drag, ForceMode.Force);
 
         //calculate the induce drag
         inducedDragMagnitude = coefficientOfLift * coefficientOfLift * coefficientOfInducedDrag * forwardWind.sqrMagnitude;
