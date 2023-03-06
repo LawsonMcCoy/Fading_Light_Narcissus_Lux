@@ -7,8 +7,6 @@ public class Melee : Spell
     private bool m_Started;
     private LayerMask layer;
 
-    public float coolDownInSeconds;
-    private float nextAttackTime;
     public void Start()
     {
         m_Started = true;
@@ -24,8 +22,7 @@ public class Melee : Spell
     {
         //find objects hit in a box
         //used transform.forward to place box in front of gameobject
-        if (Time.time > nextAttackTime)
-        {
+        
             Collider[] hits = Physics.OverlapBox(gameObject.transform.position + transform.forward * 3, Vector3.one * 3, Quaternion.identity, layer);
 
             for (int i = 0; i < hits.Length; i++)
@@ -37,11 +34,7 @@ public class Melee : Spell
                     ApplySpellEffect(entity, effects[j]);
                 }
             }
-            nextAttackTime = Time.time + coolDownInSeconds;
             Debug.Log("attacked player");
-
-        }
-        //apply spell effects
     }
 
     //Draw the Box Overlap as a gizmo to show where it currently is testing. Click the Gizmos button to see this

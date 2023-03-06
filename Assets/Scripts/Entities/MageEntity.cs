@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(Melee))]
-public class DummyEntity : CombatEntity
+[RequireComponent(typeof(Projectile))]
+
+public class MageEntity : CombatEntity
 {
+
     [HideInInspector]public NavMeshAgent agent;
     public BehaviorTree tree;
     // Start is called before the first frame update

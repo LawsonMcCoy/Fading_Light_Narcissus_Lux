@@ -8,8 +8,12 @@ public class MeleeAttack : ActionNode
     private Melee attackSpell;
     public LayerMask mask;
 
+    public float coolDownInSeconds;
+    private float nextAttackTime;
+
     public void Awake()
     {
+        nextAttackTime = Time.time;
         myAI = myTree.getAI();
         attackSpell = myAI.GetComponent<Melee>();
         attackSpell.setLayerMask(mask);
@@ -24,7 +28,15 @@ public class MeleeAttack : ActionNode
 
     protected override State OnUpdate()
     {
-        attackSpell.Cast();
-        return Node.State.FAILURE;
+        if (Time.time > nextAttackTime)
+        {
+            attackSpell.Cast();
+            nextAttackTime = Time.time + coolDownInSeconds;
+            return Node.State.SUCCESS;
+        }
+        else
+        {
+            return Node.State.RUNNING;
+        }
     }
 }
