@@ -35,9 +35,11 @@ public abstract class Node : ScriptableObject
         }
         return state;
     }
-    public virtual Node Clone()
+    public virtual Node Clone(BehaviorTree tree)
     {
-        return Instantiate(this);
+        Node node = Instantiate(this);
+        node.myTree = tree;
+        return node;
     }
     protected abstract void OnStart();
     protected abstract void OnStop();

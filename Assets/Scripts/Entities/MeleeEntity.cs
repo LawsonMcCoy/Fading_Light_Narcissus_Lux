@@ -24,7 +24,9 @@ public class MeleeEntity : CombatEntity
 
         agent = this.GetComponent<NavMeshAgent>();
         tree.setAI(this.gameObject);
+        Debug.Log(tree.name);
         tree = tree.Clone();
+        Debug.Log(tree.name);
         if (objective != null)
         {
             activated = false;

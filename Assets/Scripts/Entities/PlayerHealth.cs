@@ -12,5 +12,6 @@ public class PlayerHealth : HealthManager
       
         //gameObject.transform.position = saveData.spawnPoint;
         EventManager.Instance.Notify(EventTypes.Events.PLAYER_DEATH);
+
     }
 }

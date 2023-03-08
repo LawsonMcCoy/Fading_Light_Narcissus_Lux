@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Melee))]
 public class PlayerAttack : MonoBehaviour
 {
     public InputActionAsset playerActions;
