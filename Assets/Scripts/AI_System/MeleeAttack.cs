@@ -10,16 +10,22 @@ public class MeleeAttack : ActionNode
 
     public float coolDownInSeconds;
     private float nextAttackTime;
+    private bool isSetUp;
 
     public void Awake()
     {
-        nextAttackTime = Time.time;
-        myAI = myTree.getAI();
-        attackSpell = myAI.GetComponent<Melee>();
-        attackSpell.setLayerMask(mask);
+        isSetUp = false;
     }
     protected override void OnStart()
     {
+        if (!isSetUp)
+        {
+            nextAttackTime = Time.time;
+            myAI = myTree.getAI();
+            attackSpell = myAI.GetComponent<Melee>();
+            attackSpell.setLayerMask(mask);
+            isSetUp = true;
+        }
     }
 
     protected override void OnStop()
@@ -36,7 +42,7 @@ public class MeleeAttack : ActionNode
         }
         else
         {
-            return Node.State.RUNNING;
+            return Node.State.FAILURE;
         }
     }
 }

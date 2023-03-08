@@ -61,12 +61,15 @@ public class ObjectiveSequence : NarrationSequence
     }
 
     //called when enemies are killed
-    public void decreaseEnemies(int amount)
+    public void EnemyDeath()
     {
-        enemiesToKill -= amount;
+        enemiesToKill -= 1;
         if (enemiesToKill <= 0)
         {
-            objectiveCompletion.Invoke(enemiesToKill);
+            if(NarrationManager.Instance != null)
+            {
+                NarrationManager.Instance.ReportCompletion();
+            }
         }
     }
 

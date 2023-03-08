@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 //[RequireComponent(typeof(BoxCollider))]
 
@@ -15,6 +16,7 @@ public class GoalPost : MonoBehaviour
     public int distance;
     private bool active;
     private bool warned;
+    private bool enemyMode = false;
     private void Start()
     {
         Debug.Log("Goal Post Start");
@@ -22,6 +24,11 @@ public class GoalPost : MonoBehaviour
         objective.activateObjective.AddListener(Activate);
 
         objective.cancel.AddListener(Cancel);
+
+        if(objective.enemiesToKill > 0)
+        {
+            enemyMode = true;
+        }
     }
 
     private void Cancel()
@@ -38,21 +45,31 @@ public class GoalPost : MonoBehaviour
     private void resetPosts()
     {
         Debug.Log("reset is called.");
-        if (objective.resetCourse)
+        //checks if holding onto enemyAI or posts
+        if (enemyMode)
         {
+           
+        }
+        else
+        {
+
+
+            if (objective.resetCourse)
+            {
+                for (int i = 0; i < Posts.Length; i++)
+                {
+                    Posts[i].SetActive(true);
+                }
+            }
             for (int i = 0; i < Posts.Length; i++)
             {
-                Posts[i].SetActive(true);
+                Post currentPostScript = Posts[i].GetComponent<Post>();
+                if (currentPostScript == null)
+                {
+                    Posts[i].AddComponent<Post>();
+                }
+                Posts[i].GetComponent<Post>().initializePost(gameObject.GetComponent<GoalPost>());
             }
-        }
-        for (int i = 0; i < Posts.Length; i++)
-        {
-            Post currentPostScript = Posts[i].GetComponent<Post>();
-            if(currentPostScript == null)
-            {
-                Posts[i].AddComponent<Post>();
-            }
-            Posts[i].GetComponent<Post>().initializePost(gameObject.GetComponent<GoalPost>());
         }
 
     }
@@ -70,20 +87,24 @@ public class GoalPost : MonoBehaviour
         //end of old objectivemanager script
         Debug.Log("Activating goal post");
         //make the posts appear and give Post class to posts
-        resetPosts();     
+        resetPosts();
 
         //set up objective
-        currentIndex = 0;
-        currentPost = Posts[currentIndex];
-        currentPost.GetComponent<Post>().makeCurrent();
-
-        //find player too notify if they get too far away from the objective
-        player = GameObject.FindGameObjectWithTag("Player");
-        active = true;
-        warned = false;
-        if(distance == 0)
+        if (!enemyMode)
         {
-            distance = 20;
+            currentIndex = 0;
+            currentPost = Posts[currentIndex];
+            currentPost.GetComponent<Post>().makeCurrent();
+
+
+            //find player too notify if they get too far away from the objective
+            player = GameObject.FindGameObjectWithTag("Player");
+            active = true;
+            warned = false;
+            if (distance == 0)
+            {
+                distance = 20;
+            }
         }
     }
 

@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerHealth))]
+[RequireComponent(typeof(PlayerAttack))]
+
 public class Player : CombatEntity
 {
     [SerializeField] public PlayerInput playerInput;
