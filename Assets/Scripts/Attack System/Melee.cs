@@ -6,7 +6,7 @@ public class Melee : Spell
 {
     private bool m_Started;
     private LayerMask layer;
-
+    public Vector3 hitBoxSize;
     public void Start()
     {
         m_Started = true;
@@ -16,6 +16,10 @@ public class Melee : Spell
             insta.damage = 10;
             effects.Add(insta);
         }
+        if(hitBoxSize == Vector3.zero)
+        {
+            hitBoxSize = Vector3.one;
+        }
         
     }
     public override void Cast()
@@ -23,7 +27,8 @@ public class Melee : Spell
         //find objects hit in a box
         //used transform.forward to place box in front of gameobject
         
-            Collider[] hits = Physics.OverlapBox(gameObject.transform.position + transform.forward * 3, Vector3.one * 3, Quaternion.identity, layer);
+            Collider[] hits = Physics.OverlapBox(transform.position + transform.forward * new Vector3(hitBoxSize.x, 0, hitBoxSize.z).magnitude,
+                hitBoxSize, Quaternion.identity, layer);
 
             for (int i = 0; i < hits.Length; i++)
             {
@@ -33,8 +38,9 @@ public class Melee : Spell
                 {
                     ApplySpellEffect(entity, effects[j]);
                 }
-            }
-            Debug.Log("attacked player");
+            //Debug.Log("attacked player");
+
+        }
     }
 
     //Draw the Box Overlap as a gizmo to show where it currently is testing. Click the Gizmos button to see this
@@ -45,7 +51,7 @@ public class Melee : Spell
         if (m_Started)
             //Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
             Debug.Log("draw box");
-            Gizmos.DrawWireCube(transform.position + transform.forward * 3, Vector3.one * 3);
+            Gizmos.DrawWireCube(transform.position + transform.forward * new Vector3(hitBoxSize.x, 0, hitBoxSize.z).magnitude , hitBoxSize * 2);
     }
     public void setLayerMask(LayerMask mask)
     {

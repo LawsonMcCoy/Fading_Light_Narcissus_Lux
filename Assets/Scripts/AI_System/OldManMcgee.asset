@@ -18,7 +18,7 @@ MonoBehaviour:
   position: {x: 13.400003, y: -24.30008}
   NodeName: go to Ika
   myTree: {fileID: 11400000}
-  destination: 1
+  destination: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   myTree: {fileID: 11400000}
   mask:
     serializedVersion: 2
-    m_Bits: 1032
+    m_Bits: 8
   coolDownInSeconds: 5
 --- !u!114 &8621316797458655555
 MonoBehaviour:
