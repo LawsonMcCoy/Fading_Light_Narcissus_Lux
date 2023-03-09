@@ -70,7 +70,7 @@ public class DialogueManager : MonoBehaviour
 
         //If the UI is showing (meaning isSpeaking is true), then that must mean that the dialogue is currently active.
         //Pressing space (TESTING PURPOSES) advances the dialogue.
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown("return") && isSpeaking())
+        if (Input.GetMouseButtonDown(0) && isSpeaking() || Input.GetKeyDown("return") && isSpeaking())
         {
             ContinueDialogue();
         }
