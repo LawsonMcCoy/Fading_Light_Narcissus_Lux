@@ -49,6 +49,8 @@ MonoBehaviour:
   dialogueUI: {fileID: 7814810378978165605}
   speakerName: {fileID: 7814810380106203184}
   textField: {fileID: 7814810380537080808}
+  pressEnterToContinueText: {fileID: 1688704146}
+  rightArrowImage: {fileID: 1127236317}
   typeSpeed: 0.02
   pressEnterToContinueAnim: {fileID: 545629565}
 --- !u!111 &545629565
@@ -74,6 +76,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1997411482730373349}
     m_Modifications:
+    - target: {fileID: 2085590986, guid: 4185544874abc688b952079e90c76f56, type: 3}
+      propertyPath: m_Text
+      value: LEFT-CLICK TO CONTINUE
+      objectReference: {fileID: 0}
     - target: {fileID: 7814810378859151421, guid: 4185544874abc688b952079e90c76f56, type: 3}
       propertyPath: m_Name
       value: DialogueUI
@@ -168,6 +174,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4185544874abc688b952079e90c76f56, type: 3}
+--- !u!114 &1127236317 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1540899205, guid: 4185544874abc688b952079e90c76f56, type: 3}
+  m_PrefabInstance: {fileID: 417858392}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1688704146 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2085590986, guid: 4185544874abc688b952079e90c76f56, type: 3}
+  m_PrefabInstance: {fileID: 417858392}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7814810378978165605 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7814810378859151421, guid: 4185544874abc688b952079e90c76f56, type: 3}

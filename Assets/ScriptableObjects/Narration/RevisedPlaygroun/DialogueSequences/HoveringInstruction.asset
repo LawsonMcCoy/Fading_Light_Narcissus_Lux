@@ -14,17 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentences:
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Welcome the the cave of hovering
+    text: Welcome the the cave of hovering!
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: 'It is not actually called that '
+    text: It is not actually called that.
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: If I say it is called that, then IT IS CALLED THAT
+    text: If I say it is called that, then IT IS CALLED THAT!
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Now to learn how to hover. Start by jumping, and then while you are still
-      in the air press space again
+    text: Now this cave is dedicated towards hovering places that are normally out
+      of reach by quickly jumping.
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: While hovering you can still use move and look around like you can while
-      walking, but now you are in the air
-  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Don't stay in the air for too long though, you will get tired and plummet
-      to the ground
+    text: So, jump as high as you can!
+  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
+    text: Urgh...yes, sir.
