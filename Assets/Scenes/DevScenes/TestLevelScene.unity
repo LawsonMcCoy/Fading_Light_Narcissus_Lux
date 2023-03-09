@@ -480,18 +480,6 @@ PrefabInstance:
       propertyPath: jumpForceHonrizontal
       value: 3.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947313, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: hoverFallExponent
-      value: 1.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947313, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: hoverRecoveryRate
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947313, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: walkModeHoverPunishment
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7204556638568947314, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: windImpactsLift
       value: 1
@@ -531,10 +519,6 @@ PrefabInstance:
     - target: {fileID: 7204556638568947316, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: spawn.z
       value: 12.060449
-      objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947316, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: yDeathDistance
-      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 7204556638568947316, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: playerSpawnPointTag
