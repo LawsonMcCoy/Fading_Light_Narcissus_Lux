@@ -9,8 +9,9 @@ public class PlayerHealth : HealthManager
     protected override void OnDeath()
     {
         Debug.Log("You died!");
-      
+
         //gameObject.transform.position = saveData.spawnPoint;
+        Add(1000.0f);
         EventManager.Instance.Notify(EventTypes.Events.PLAYER_DEATH);
 
     }

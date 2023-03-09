@@ -190,6 +190,8 @@ GameObject:
   - component: {fileID: 7411154130443785276}
   - component: {fileID: 2832632588534044553}
   - component: {fileID: 1429294828335395734}
+  - component: {fileID: 1585376930101242946}
+  - component: {fileID: 9129172142239567828}
   m_Layer: 3
   m_Name: Ika
   m_TagString: Player
@@ -343,7 +345,7 @@ MonoBehaviour:
   playerInput: {fileID: 7204556638568947317}
   spawn: {x: 0, y: 0, z: 0}
   spawnNumber: 0
-  yDeathDistance: -10
+  yDeathDistance: -40
   positionToCenterDistance: 0
 --- !u!114 &7204556638568947314
 MonoBehaviour:
@@ -5340,6 +5342,37 @@ MonoBehaviour:
   windTunnelMask:
     serializedVersion: 2
     m_Bits: 2048
+--- !u!114 &1585376930101242946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8435698845848507070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 590965104d5333e41bde89e1763342ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effects: []
+  hitBoxSize: {x: 0, y: 0, z: 0}
+--- !u!114 &9129172142239567828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8435698845848507070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e05b224f972d07a4180620471574fd21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerActions: {fileID: 0}
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
+  meleeCoolDownInSeconds: 0
 --- !u!1001 &7852022201217180424
 PrefabInstance:
   m_ObjectHideFlags: 0
