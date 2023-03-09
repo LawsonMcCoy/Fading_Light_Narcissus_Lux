@@ -13,5 +13,14 @@ MonoBehaviour:
   m_Name: EndOfDemo
   m_EditorClassIdentifier: 
   sentences:
-  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
-    text: End of Demo
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: Time to put everything you learn to the test.
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: Let see if you can get to that island before me!
+  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
+    text: Oh you're on old main.
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: When you finally make it over there, go through to the end of the cave.
+      There are a few differents routes you could take.
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: See if you can find me.

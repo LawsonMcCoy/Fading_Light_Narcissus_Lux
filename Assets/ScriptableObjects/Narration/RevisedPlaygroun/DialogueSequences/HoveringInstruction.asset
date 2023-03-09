@@ -14,15 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentences:
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Welcome the the cave of hovering!
+    text: Welcome to the cave of hovering, Ika.
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
     text: It is not actually called that.
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
     text: If I say it is called that, then IT IS CALLED THAT!
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Now this cave is dedicated towards hovering places that are normally out
-      of reach by quickly jumping.
-  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: So, jump as high as you can!
-  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: Urgh...yes, sir.
+    text: This cave will challenge your hovering skills, I will be waiting at that
+      exit.
