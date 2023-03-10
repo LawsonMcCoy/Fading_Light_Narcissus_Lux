@@ -343,7 +343,7 @@ MonoBehaviour:
   rigidbody: {fileID: 7204556638568947315}
   collider: {fileID: 7204556638568947323}
   playerInput: {fileID: 7204556638568947317}
-  spawn: {x: 0, y: 0, z: 0}
+  spawn: {x: -0.84695935, y: 74.44912, z: 12.060449}
   spawnNumber: 0
   yDeathDistance: -30
   positionToCenterDistance: 0
@@ -367,11 +367,11 @@ MonoBehaviour:
   stamina: {fileID: 2271143012148580341}
   windManager: {fileID: 1429294828335395734}
   coefficientOfDrag: 0.1
-  dragScalingValues: {x: 5, y: 2, z: 1}
-  absoluteWindRateOfChange: 5
+  dragScalingValues: {x: 5, y: 7, z: 1}
+  absoluteWindRateOfChange: 40
   movementModeText: {fileID: 8925406608850753112}
   liftPower: 1
-  coefficientOfInducedDrag: 0.5
+  coefficientOfInducedDrag: 0
   coefficientOfLiftCurve:
     serializedVersion: 2
     m_Curve:
@@ -432,12 +432,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 535
   windParticles: {fileID: -3263997419229935752}
-  windImpactsLift: 0
+  windImpactsLift: 1
   alternateTurning: 1
   alternateTiltDampingPower: 10
   alternateTurnDampingPower: 10
   alternateTurnSpringConstant: 5
-  speedBoostMagnitude: 0
+  speedBoostMagnitude: 10
   speedBoostStaminaCost: 0
 --- !u!114 &7204556638568947313
 MonoBehaviour:
@@ -490,16 +490,16 @@ MonoBehaviour:
   - {fileID: 7204556638568947314}
   stamina: {fileID: 2271143012148580341}
   windManager: {fileID: 1429294828335395734}
-  coefficientOfDrag: 0
-  dragScalingValues: {x: 0, y: 0, z: 0}
+  coefficientOfDrag: 0.1
+  dragScalingValues: {x: 5, y: 5, z: 1}
   absoluteWindRateOfChange: 0
   movementModeText: {fileID: 8925406608850753112}
   walkSpeed: 15
   turnSpeed: 5
   jumpForceVertical: 8
-  jumpForceHonrizontal: 5
+  jumpForceHonrizontal: 3.5
   jumpForceStationary: 11
-  staminaRegainRate: 5
+  staminaRegainRate: 10
   dashJumpForce: 15
   walkingDampingCoefficient: 10
   staminaSprintLostRate: 5

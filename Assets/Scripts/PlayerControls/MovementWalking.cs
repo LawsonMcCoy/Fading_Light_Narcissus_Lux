@@ -29,7 +29,6 @@ public class MovementWalking : MovementMode
     }
     
     //Helper UI
-    private bool uiLoaded;
     private bool midairTransition;
     private bool previousBoolean;
 
@@ -41,7 +40,6 @@ public class MovementWalking : MovementMode
         speed = walkSpeed;
 
         turnValue = 0;
-        uiLoaded = true;
         midairTransition = false;
     }
 
