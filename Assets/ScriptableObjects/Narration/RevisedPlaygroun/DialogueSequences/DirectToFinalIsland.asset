@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17942a21488c9d62d96891e964b6098a, type: 3}
-  m_Name: HoveringInstruction
+  m_Name: DirectToFinalIsland
   m_EditorClassIdentifier: 
   sentences:
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: Welcome to the cave of hovering, Ika.
+    text: Time to put everything you learn to the test.
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: Let see if you can get to that island before me!
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: It is not actually called that.
+    text: Oh you're on old main.
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: If I say it is called that, then IT IS CALLED THAT!
+    text: When you finally make it over there, go through to the end of the cave.
+      There are a few differents routes you could take.
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: This cave will challenge your hovering skills, I will be waiting at that
-      exit.
+    text: See if you can find me.

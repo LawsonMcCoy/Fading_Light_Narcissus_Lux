@@ -13,9 +13,22 @@ MonoBehaviour:
   m_Name: VerticalTunnelInstruction
   m_EditorClassIdentifier: 
   sentences:
+  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
+    text: AAAAAAAAAAAYYYYYYYYYYYYYYYYYYYYY!!!!!!!!!!!!!!!!!!!!!!!!!
+  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
+    text: Am I safe?! *Exhale* I am on solid ground. Never doing that again.
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: WHERE ARE YOU BOY!!!!!!!!!!!!!!!
+  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
+    text: ME!!! WHERE ARE YOU!!!!!!!!!!!!
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: On the other side of the vertical tunnel, there is an island. Quick, use
+      your glide to swoop under the roof of that tunnel and land on the island on
+      the other side.
+  - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
+    text: YOU MEAN DROP TO MY DEATH!!!!!!
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: I SAID QUICK!!!!!!!!!
+  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
     text: More you angle down the more speed you gain, then you can use that speed
-      to regain some of you altitiude.
-  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: On the other side of the vertical tunnel, is an Island. Use your glide
-      to swoop under the roof that tunnel and land on the island on the other side
+      to regain some of your altitude.
