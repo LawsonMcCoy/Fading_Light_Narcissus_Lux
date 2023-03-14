@@ -17,20 +17,28 @@ public class ProjectileNode : ActionNode
     public float coolDownInSeconds;
     private float nextAttackTime;
 
+    private bool isSetup;
+
     public void Awake()
     {
-        myAI = myTree.getAI();
-
-        projectileSpell = myAI.GetComponent<Projectile>();
-        projectileSpell.setLayerMask(mask);
-        projectileSpell.SetDespawnDistance(despawn_Distance);
-        projectileSpell.setVelocity(velocity);
-
-        nextAttackTime = Time.time;
-        enemy = AI_Destinations.getGameObjectFromDestination(target);
+        isSetup = false;
     }
     protected override void OnStart()
     {
+        if (!isSetup)
+        {
+            myAI = myTree.getAI();
+
+            projectileSpell = myAI.GetComponent<Projectile>();
+            projectileSpell.setLayerMask(mask);
+            projectileSpell.SetDespawnDistance(despawn_Distance);
+            projectileSpell.setVelocity(velocity);
+
+            nextAttackTime = Time.time;
+            enemy = AI_Destinations.getGameObjectFromDestination(target);
+
+            isSetup = true;
+        }
     }
 
     protected override void OnStop()
