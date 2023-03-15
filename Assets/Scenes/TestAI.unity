@@ -3913,7 +3913,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7204556638568947316, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
   m_PrefabInstance: {fileID: 1590919698}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1590919699}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9795ea4e00e7c454bac7a7148c33a109, type: 3}
@@ -5045,18 +5045,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2832632588534044553, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: maxResource
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947315, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: m_Interpolate
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947598, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: maxResource
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 8435698845848507069, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -5105,45 +5093,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ika
       objectReference: {fileID: 0}
-    - target: {fileID: 9129172142239567828, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: mask.m_Bits
-      value: 4096
-      objectReference: {fileID: 0}
-    - target: {fileID: 9129172142239567828, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: playerActions
-      value: 
-      objectReference: {fileID: -944628639613478452, guid: 76adc8863cc6e7c5bb51ced76f19982e, type: 3}
-    - target: {fileID: 9129172142239567828, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: coolDownInSeconds
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9129172142239567828, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: meleeCoolDownInSeconds
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7204556638568947598, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
---- !u!1 &1590919699 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8435698845848507070, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-  m_PrefabInstance: {fileID: 1590919698}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1590919700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1590919699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 590965104d5333e41bde89e1763342ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effects:
-  - {fileID: 11400000, guid: 5ac1670d20feb394cb0880030b1bf693, type: 2}
-  hitBoxSize: {x: 2, y: 2, z: 2}
 --- !u!1 &1599922536
 GameObject:
   m_ObjectHideFlags: 0
