@@ -519,6 +519,7 @@ MonoBehaviour:
   resource: 0
   maxResource: 100
   staminaUI: {fileID: 2263291884150126816}
+  staminaUIBackground: {fileID: 8664975466024137726}
 --- !u!198 &-3263997419229935752
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5547,3 +5548,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8664975466024137726 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 351601228495863823, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+  m_PrefabInstance: {fileID: 8980474742695900145}
+  m_PrefabAsset: {fileID: 0}

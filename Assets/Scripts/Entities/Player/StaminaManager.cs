@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class StaminaManager : ResourceManager
 {
-    [SerializeField] Slider staminaUI;
+    [SerializeField] private Slider staminaUI;
+    [SerializeField] private GameObject staminaUIBackground;
+    private float lerpValue = 0f;
+    private float lerpDuration = 0.2f;
 
     public override void Subtract(float amountToSubtract)
     {
@@ -17,7 +20,16 @@ public class StaminaManager : ResourceManager
             resource = 0;
         }
 
+
+        if (lerpValue < 1f)
+        {
+            lerpValue += Time.deltaTime / lerpDuration;
+            staminaUIBackground.GetComponent<Image>().color = Color.Lerp(staminaUI.GetComponentInChildren<Image>().color, new Color32(255, 165, 0, 255), lerpValue);
+        }
+        
+
         staminaUI.value = resource;
+        lerpValue = 0f;
     }
 
     //temp function
@@ -25,6 +37,13 @@ public class StaminaManager : ResourceManager
     {
         base.Add(amountToAdd);
 
+        if (lerpValue < 1f)
+        {
+            lerpValue += Time.deltaTime / lerpDuration;
+            staminaUIBackground.GetComponent<Image>().color = Color.Lerp(staminaUI.GetComponentInChildren<Image>().color, Color.white, lerpValue);
+        }
+
         staminaUI.value = resource;
+        lerpValue = 0f;
     }
 }
