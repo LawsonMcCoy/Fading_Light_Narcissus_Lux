@@ -56,7 +56,7 @@ public class ProjectileNode : ActionNode
             // ObjA is looking mostly towards ObjB
             if (Time.time > nextAttackTime)
             {
-                projectileSpell.Cast();
+                projectileSpell.Cast(enemy);
                 nextAttackTime = Time.time + coolDownInSeconds;
                 return Node.State.SUCCESS;
             }
