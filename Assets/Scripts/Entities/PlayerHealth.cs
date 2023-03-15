@@ -88,7 +88,7 @@ public class PlayerHealth : HealthManager
             
         }
 
-        healthBar.transform.position = startPos;
+        //healthBar.transform.position = startPos;
         lerpValue = 0f;
     }
 

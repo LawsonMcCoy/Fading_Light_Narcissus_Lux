@@ -903,73 +903,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 809324500423899685, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+    - target: {fileID: 1976445809265158876, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 809324500423899685, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+    - target: {fileID: 1976445809265158876, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1585376930101242946, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: hitBoxSize.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1585376930101242946, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: hitBoxSize.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1585376930101242946, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: hitBoxSize.z
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1585376930101242946, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: effects.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1585376930101242946, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: effects.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 5ac1670d20feb394cb0880030b1bf693, type: 2}
-    - target: {fileID: 2832632588534044553, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: maxResource
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832632588534044553, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: healthbarSprites.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2832632588534044553, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: healthbarSprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 0ff85f15ff37b984eb99dd39fe6358cd, type: 3}
-    - target: {fileID: 2832632588534044553, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: healthbarSprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 60f4938cc83a8f44495568ac4717808b, type: 3}
-    - target: {fileID: 2832632588534044553, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: healthbarSprites.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: 04fa4ccec52f53c4388a764729a703cd, type: 3}
-    - target: {fileID: 2832632588534044553, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: healthbarSprites.Array.data[3]
-      value: 
-      objectReference: {fileID: 21300000, guid: f7a528c764037cf4cb0fae3b840a4bff, type: 3}
-    - target: {fileID: 2832632588534044553, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: healthbarSprites.Array.data[4]
-      value: 
-      objectReference: {fileID: 21300000, guid: b51a387afd120d741ac076dbae17402f, type: 3}
-    - target: {fileID: 2832632588534044553, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: healthbarSprites.Array.data[5]
-      value: 
-      objectReference: {fileID: 21300000, guid: 5a5bb5e332c5b3245952bf1f87e77cde, type: 3}
-    - target: {fileID: 7204556638568947315, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: m_Interpolate
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7204556638568947316, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: yDeathDistance
-      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 8435698845848507069, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: m_RootOrder
@@ -1018,18 +958,6 @@ PrefabInstance:
     - target: {fileID: 8435698845848507070, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: m_Name
       value: Ika
-      objectReference: {fileID: 0}
-    - target: {fileID: 9129172142239567828, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: mask.m_Bits
-      value: 4096
-      objectReference: {fileID: 0}
-    - target: {fileID: 9129172142239567828, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: playerActions
-      value: 
-      objectReference: {fileID: -944628639613478452, guid: 76adc8863cc6e7c5bb51ced76f19982e, type: 3}
-    - target: {fileID: 9129172142239567828, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: meleeCoolDownInSeconds
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
