@@ -2033,11 +2033,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.025000004, y: 0.024999999, z: 0.0050000013}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &497383728 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8664975466024137726, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-  m_PrefabInstance: {fileID: 1590919698}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &507974690
 GameObject:
   m_ObjectHideFlags: 0
@@ -5049,22 +5044,6 @@ PrefabInstance:
     - target: {fileID: 1976445809265158876, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2271143012148580341, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: staminaUIBackground
-      value: 
-      objectReference: {fileID: 497383728}
-    - target: {fileID: 2933276983120554512, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2933276983120554512, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2933276983120554512, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
-      propertyPath: m_Color.r
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8435698845848507069, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: m_RootOrder
