@@ -6,41 +6,32 @@ using UnityEngine.UI;
 
 public class PlayerHealth : HealthManager
 {
-    [SerializeField] private Sprite[] healthbarSprites;
-    [SerializeField] private GameObject healthBar;
+    [SerializeField] private Sprite[] healthbarSprites; //A list of all the different sprites, partitioned by 20
+    [SerializeField] private GameObject healthBar; //Reference to the healthbar object.
+    private int healthBarIndex = 0;
+
+    //For the shaking animation
+    [SerializeField] private float shakeDuration = 0.7f;
+    [SerializeField] private float shakeDistance = 5f;
+    [SerializeField] private float delayBetweenShakes = 0f;
+
+    //For the changing of colors
+    private float lerpValue = 0f;
+
+
 
     public override void Subtract(float damage)
     {
         base.Subtract(damage);
 
-        if (base.resource == 80)
-        {
-            healthBar.GetComponent<Image>().sprite = healthbarSprites[1];
-        }
-        else if (base.resource == 60)
-        {
-            healthBar.GetComponent<Image>().sprite = healthbarSprites[2];
-        }
-        else if (base.resource == 40)
-        {
-            healthBar.GetComponent<Image>().sprite = healthbarSprites[3];
-        }
-        else if (base.resource == 20)
-        {
-            healthBar.GetComponent<Image>().sprite = healthbarSprites[4];
-        }
-        else if (base.resource == 0)
-        {
-            healthBar.GetComponent<Image>().sprite = healthbarSprites[5];
-        }
-    }
+        beginShakeHealthBarCoroutine();
 
-    public override void Add(float amountToAdd)
-    {
-        base.Add(amountToAdd);
-        if (base.resource == base.maxResource)
+        //Partitioned by 20 (since there are 5 leaves)
+        if ((base.maxResource - base.resource) % (base.maxResource / 5) == 0)
         {
-            healthBar.GetComponent<Image>().sprite = healthbarSprites[0];
+            healthBarIndex++;
+
+            healthBar.GetComponent<Image>().sprite = healthbarSprites[healthBarIndex];
         }
     }
 
@@ -51,7 +42,55 @@ public class PlayerHealth : HealthManager
 
         //gameObject.transform.position = saveData.spawnPoint;
         Add(1000.0f);
+        healthBarIndex = 0; //Reset healthbar index
+        healthBar.GetComponent<Image>().sprite = healthbarSprites[healthBarIndex]; //Update it back to full health sprite.
         EventManager.Instance.Notify(EventTypes.Events.PLAYER_DEATH);
 
     }
+
+    public void beginShakeHealthBarCoroutine()
+    {
+        Debug.Log("Shaking now");
+        StartCoroutine(ShakeHealthbar());
+    }
+
+    private IEnumerator ShakeHealthbar()
+    {
+        Vector3 startPos = healthBar.transform.position;
+        Color origColor = healthBar.GetComponent<Image>().color;
+
+        float timer = 0f;
+        while (timer < shakeDuration)
+        {
+            timer += Time.deltaTime;
+
+            lerpValue += Time.deltaTime / shakeDuration;
+            healthBar.GetComponent<Image>().color = Color.Lerp(healthBar.GetComponent<Image>().color, Color.red, lerpValue);
+
+            Vector3 newPos = startPos + (Random.insideUnitSphere * shakeDistance);
+            newPos.y = healthBar.transform.position.y;
+            newPos.z = healthBar.transform.position.z;
+
+            healthBar.transform.position = newPos;
+
+            healthBar.GetComponent<Image>().color = Color.Lerp(healthBar.GetComponent<Image>().color, origColor, lerpValue);
+
+            if (delayBetweenShakes > 0f)
+            {
+                yield return new WaitForSeconds(delayBetweenShakes);
+            }
+            else
+            {
+                
+                yield return null;
+            }
+
+            
+        }
+
+        healthBar.transform.position = startPos;
+        lerpValue = 0f;
+    }
+
+
 }

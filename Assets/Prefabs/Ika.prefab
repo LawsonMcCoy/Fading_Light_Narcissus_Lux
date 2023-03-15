@@ -5321,6 +5321,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b51a387afd120d741ac076dbae17402f, type: 3}
   - {fileID: 21300000, guid: 5a5bb5e332c5b3245952bf1f87e77cde, type: 3}
   healthBar: {fileID: 6898511031144035633}
+  shakeDuration: 0.7
+  shakeDistance: 5
+  delayBetweenShakes: 0
 --- !u!114 &1429294828335395734
 MonoBehaviour:
   m_ObjectHideFlags: 0
