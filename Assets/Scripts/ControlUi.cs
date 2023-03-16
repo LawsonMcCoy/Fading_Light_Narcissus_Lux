@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ControlUi : MonoBehaviour
 {
-    [SerializeField] Player player;
     [SerializeField] private string[] controlUiLabels = new string[]
             {"Space Text", "Shift Text", "Right-Mouse Text"};
     [SerializeField] private string[] controlImagesLabels = new string[]
@@ -18,15 +17,12 @@ public class ControlUi : MonoBehaviour
     private int controlUiLength;
     private Text[] controlUiTexts;
     private string[] stringControls = new string[]
-        {"Walk", "Hover", "Glide", "Dash", "Jump", "Sprint", "Attack", "---"};
+        {"Walk", "Hover", "Glide", "Dash", "Jump", "Sprint", "Attack", "Boost", "---"};
 
     // Image UI
     private int controlImagesLength;
     private Image[] controlImages;
     bool isRunning = false;
-
-    // Other values
-    
 
     //an enum for the string version of each character mode 
     //they are used as int values that matches the index of stringControls
@@ -40,6 +36,7 @@ public class ControlUi : MonoBehaviour
         JUMPMODE,
         SPRINTMODE,
         ATTACKMODE,
+        BOOSTMODE,
         NOMODE
     }
 
@@ -72,14 +69,14 @@ public class ControlUi : MonoBehaviour
     public void TransitionWalkUI()
     {
         controlUiTexts[0].text = stringControls[(int)Controls.JUMPMODE];    //Space
-        controlUiTexts[1].text = stringControls[(int)Controls.SPRINTMODE];  //Shift
+        controlUiTexts[1].text = stringControls[(int)Controls.NOMODE];      //Shift
         controlUiTexts[2].text = stringControls[(int)Controls.DASHMODE];    //Right-click
     }
 
     public void TransitionMidairUI()
     {
-        controlUiTexts[0].text = stringControls[(int)Controls.NOMODE];      //Space
-        controlUiTexts[1].text = stringControls[(int)Controls.GLIDEMODE];      //Shift
+        controlUiTexts[0].text = stringControls[(int)Controls.HOVERMODE];   //Space
+        controlUiTexts[1].text = stringControls[(int)Controls.GLIDEMODE];   //Shift
         controlUiTexts[2].text = stringControls[(int)Controls.DASHMODE];    //Right-click
     }
 
@@ -93,7 +90,7 @@ public class ControlUi : MonoBehaviour
     public void TransitionGlideUI()
     {
         controlUiTexts[0].text = stringControls[(int)Controls.WALKMODE];    //Space
-        controlUiTexts[1].text = stringControls[(int)Controls.NOMODE];      //Shift
+        controlUiTexts[1].text = stringControls[(int)Controls.BOOSTMODE];   //Shift
         controlUiTexts[2].text = stringControls[(int)Controls.DASHMODE];    //right-click
     }
 

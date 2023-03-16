@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 7411154130443785276}
   - component: {fileID: 2832632588534044553}
   - component: {fileID: 1429294828335395734}
-  - component: {fileID: 235672090943284772}
+  - component: {fileID: 1585376930101242946}
   - component: {fileID: 9129172142239567828}
   - component: {fileID: 1590919700}
   m_Layer: 3
@@ -343,9 +343,9 @@ MonoBehaviour:
   rigidbody: {fileID: 7204556638568947315}
   collider: {fileID: 7204556638568947323}
   playerInput: {fileID: 7204556638568947317}
-  spawn: {x: -0.84695935, y: 74.44912, z: 12.060449}
+  spawn: {x: 0, y: 0, z: 0}
   spawnNumber: 0
-  yDeathDistance: -40
+  yDeathDistance: -20
   positionToCenterDistance: 0
 --- !u!114 &7204556638568947314
 MonoBehaviour:
@@ -367,11 +367,11 @@ MonoBehaviour:
   stamina: {fileID: 2271143012148580341}
   windManager: {fileID: 1429294828335395734}
   coefficientOfDrag: 0.1
-  dragScalingValues: {x: 5, y: 7, z: 1}
-  absoluteWindRateOfChange: 40
-  movementModeText: {fileID: 8925406608850753112}
+  dragScalingValues: {x: 5, y: 2, z: 1}
+  absoluteWindRateOfChange: 5
+  movementModeText: {fileID: 7749455397533992609}
   liftPower: 1
-  coefficientOfInducedDrag: 0
+  coefficientOfInducedDrag: 0.5
   coefficientOfLiftCurve:
     serializedVersion: 2
     m_Curve:
@@ -432,12 +432,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 535
   windParticles: {fileID: -3263997419229935752}
-  windImpactsLift: 1
+  windImpactsLift: 0
   alternateTurning: 1
   alternateTiltDampingPower: 10
   alternateTurnDampingPower: 10
   alternateTurnSpringConstant: 5
-  speedBoostMagnitude: 10
+  speedBoostMagnitude: 0
   speedBoostStaminaCost: 0
 --- !u!114 &7204556638568947313
 MonoBehaviour:
@@ -490,16 +490,16 @@ MonoBehaviour:
   - {fileID: 7204556638568947314}
   stamina: {fileID: 2271143012148580341}
   windManager: {fileID: 1429294828335395734}
-  coefficientOfDrag: 0.1
-  dragScalingValues: {x: 5, y: 5, z: 1}
+  coefficientOfDrag: 0
+  dragScalingValues: {x: 0, y: 0, z: 0}
   absoluteWindRateOfChange: 0
   movementModeText: {fileID: 7749455397533992609}
   walkSpeed: 15
   turnSpeed: 5
   jumpForceVertical: 8
-  jumpForceHonrizontal: 3.5
+  jumpForceHonrizontal: 5
   jumpForceStationary: 11
-  staminaRegainRate: 10
+  staminaRegainRate: 5
   dashJumpForce: 15
   walkingDampingCoefficient: 10
   staminaSprintLostRate: 5
@@ -5340,7 +5340,7 @@ MonoBehaviour:
   windTunnelMask:
     serializedVersion: 2
     m_Bits: 2048
---- !u!114 &235672090943284772
+--- !u!114 &1585376930101242946
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5349,12 +5349,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8435698845848507070}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 433884dc24ed0d04c90eaa68190b7cd2, type: 3}
+  m_Script: {fileID: 11500000, guid: 590965104d5333e41bde89e1763342ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   effects:
   - {fileID: 11400000, guid: 5ac1670d20feb394cb0880030b1bf693, type: 2}
-  projectile: {fileID: 5869335827381571155, guid: d37159eb56a94244797d23dd09084849, type: 3}
+  hitBoxSize: {x: 1.5, y: 1.5, z: 1.5}
 --- !u!114 &9129172142239567828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5372,9 +5372,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   meleeCoolDownInSeconds: 2
-  projectileCoolDownInSeconds: 2
-  projectileVelocity: 10
-  projectileDistance: 50
 --- !u!114 &1590919700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5390,16 +5387,44 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: 5ac1670d20feb394cb0880030b1bf693, type: 2}
   hitBoxSize: {x: 2, y: 2, z: 2}
---- !u!1001 &7852022201217180424
+--- !u!1001 &8980474742695900145
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 8435698845848507069}
     m_Modifications:
-    - target: {fileID: 5155540502793154485, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 1550939909718596145, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 220.8617
+      objectReference: {fileID: 0}
+    - target: {fileID: 1550939909718596145, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 190.1176
+      objectReference: {fileID: 0}
+    - target: {fileID: 1550939909718596145, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000030517578
+      objectReference: {fileID: 0}
+    - target: {fileID: 1550939909718596145, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 2960429919892260640, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -489.4629
+      objectReference: {fileID: 0}
+    - target: {fileID: 2960429919892260640, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -176.4854
+      objectReference: {fileID: 0}
+    - target: {fileID: 2960429919892260640, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 2960429919892260640, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5436026844986832134, guid: 701e21908f821c145b5ee922bb5ad244, type: 3}
       propertyPath: m_Pivot.x

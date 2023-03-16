@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Defeat2Enemies
   m_EditorClassIdentifier: 
   enemiesToKill: 2
-  Description: Defeat 2 enemies (use "E" to use a melee attack and "R" for projectile
-    attack)
+  Description: Defeat 2 enemies
   resetCourse: 0
   disapear: 0

@@ -17,28 +17,20 @@ public class ProjectileNode : ActionNode
     public float coolDownInSeconds;
     private float nextAttackTime;
 
-    private bool isSetup;
-
     public void Awake()
     {
-        isSetup = false;
+        myAI = myTree.getAI();
+
+        projectileSpell = myAI.GetComponent<Projectile>();
+        projectileSpell.setLayerMask(mask);
+        projectileSpell.SetDespawnDistance(despawn_Distance);
+        projectileSpell.setVelocity(velocity);
+
+        nextAttackTime = Time.time;
+        enemy = AI_Destinations.getGameObjectFromDestination(target);
     }
     protected override void OnStart()
     {
-        if (!isSetup)
-        {
-            myAI = myTree.getAI();
-
-            projectileSpell = myAI.GetComponent<Projectile>();
-            projectileSpell.setLayerMask(mask);
-            projectileSpell.SetDespawnDistance(despawn_Distance);
-            projectileSpell.setVelocity(velocity);
-
-            nextAttackTime = Time.time;
-            enemy = AI_Destinations.getGameObjectFromDestination(target);
-
-            isSetup = true;
-        }
     }
 
     protected override void OnStop()
@@ -56,7 +48,7 @@ public class ProjectileNode : ActionNode
             // ObjA is looking mostly towards ObjB
             if (Time.time > nextAttackTime)
             {
-                projectileSpell.Cast(enemy);
+                projectileSpell.Cast();
                 nextAttackTime = Time.time + coolDownInSeconds;
                 return Node.State.SUCCESS;
             }

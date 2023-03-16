@@ -85,15 +85,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Projectile",
-                    "type": "Button",
-                    "id": "c1d2656e-92e3-4296-a2ce-eff25e4955ef",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -248,17 +239,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b3d5d039-8387-4920-a822-4b9e6d53a397",
-                    "path": "<Keyboard>/r",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Projectile",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

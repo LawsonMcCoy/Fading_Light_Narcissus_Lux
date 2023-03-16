@@ -80,11 +80,8 @@ public class MovementFlying : MovementMode
 
         //I feel that this could be done better using either
         //the event system or MovementUpdateReciever interface
-        if (controlUi.enabled && controlUi != null)
-        {
-            controlUi.TransitionGlideUI();
-            controlUi.IndicateModeChange();
-        }
+        controlUi.TransitionGlideUI();
+        controlUi.IndicateModeChange();
 
         //Play the wind particles, so the player sees wind when in flight
         windParticles.Play();
