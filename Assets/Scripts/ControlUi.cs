@@ -79,7 +79,7 @@ public class ControlUi : MonoBehaviour
     public void TransitionMidairUI()
     {
         controlUiTexts[0].text = stringControls[(int)Controls.NOMODE];      //Space
-        controlUiTexts[1].text = stringControls[(int)Controls.NOMODE];      //Shift
+        controlUiTexts[1].text = stringControls[(int)Controls.GLIDEMODE];      //Shift
         controlUiTexts[2].text = stringControls[(int)Controls.DASHMODE];    //Right-click
     }
 
