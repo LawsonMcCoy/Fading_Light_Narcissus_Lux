@@ -22,6 +22,7 @@ public class ObjectiveSequence : NarrationSequence
     public string Description;
     public bool resetCourse;
     public bool disapear;
+    private int enemiesLeft;
 
     /*subscribe to this event to listen for the completion of objective
     event takes an int. Decrease number of enemies to kill until 0
@@ -63,8 +64,8 @@ public class ObjectiveSequence : NarrationSequence
     //called when enemies are killed
     public void EnemyDeath()
     {
-        enemiesToKill -= 1;
-        if (enemiesToKill <= 0)
+        enemiesLeft -= 1;
+        if (enemiesLeft <= 0)
         {
             if(NarrationManager.Instance != null)
             {

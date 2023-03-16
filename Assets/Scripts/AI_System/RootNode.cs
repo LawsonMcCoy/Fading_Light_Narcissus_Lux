@@ -33,10 +33,15 @@ public class RootNode : Node
         //return Node.State.RUNNING;
     }
 
-    public override Node Clone()
+    public override Node Clone(BehaviorTree tree)
     {
+        Debug.Log("root is being cloned");
         RootNode node = Instantiate(this);
-        node.child = child.Clone();
+        node.myTree = tree;
+
+        node.child = child.Clone(tree);
+
+        Debug.Log(node.myTree);
         return node;
     }
 }

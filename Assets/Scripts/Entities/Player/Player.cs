@@ -51,7 +51,9 @@ public class Player : CombatEntity
         {
             //this.transform.position = spawn.position;
             //kill player
-            playerHealth.Subtract(1000.0f);
+            playerHealth.Subtract(playerHealth.ResourceAmount());
+            playerHealth.Add(1000f);    //restore health
+
         }
 
         //Right now the position of the Ika's model is at the base of the model
@@ -75,7 +77,6 @@ public class Player : CombatEntity
     }
     private void Respawn()
     {
-        playerHealth.Add(1000f);    //restore health
         gameObject.transform.position = spawn;  //reset player position;
     }
 

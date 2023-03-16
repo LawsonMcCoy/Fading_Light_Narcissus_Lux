@@ -10,10 +10,11 @@ using UnityEngine.Events;
 public class ProjectileLogic : MonoBehaviour
 {
     // Start is called before the first frame update
-    public UnityEvent<GameObject> hit;
+    [HideInInspector]public UnityEvent<GameObject> hit;
     private LayerMask mask;
     private float despawn_Distance;
     private float despawn_Time;
+    private string tag;
     void Start()
     {
     }
@@ -36,6 +37,10 @@ public class ProjectileLogic : MonoBehaviour
             hit.Invoke(other.gameObject);
             Destroy(gameObject);
         }
+        else if(tag == other.tag)
+        {
+            //do nothing, it touched itself
+        }
         else
         {
             Destroy(gameObject);
@@ -57,6 +62,11 @@ public class ProjectileLogic : MonoBehaviour
         yield return new WaitForSeconds(despawn_Time);
         Destroy(gameObject);
     }
+    public void setTag(string tag)
+    {
+        this.tag = tag;
+    }
+    
     public void startTimer()
     {
         StartCoroutine(destroyObject());

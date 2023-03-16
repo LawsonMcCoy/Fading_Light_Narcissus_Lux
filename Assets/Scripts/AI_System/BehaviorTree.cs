@@ -117,7 +117,9 @@ public class BehaviorTree : ScriptableObject
     public BehaviorTree Clone()
     {
         BehaviorTree tree = Instantiate(this);
-        tree.rootNode = tree.rootNode.Clone();
+        tree.setAI(thisAI);
+        Debug.Log(tree.getAI().name);
+        tree.rootNode = tree.rootNode.Clone(tree);
         return tree;
     }
     public void setAI(GameObject ai)

@@ -6,10 +6,13 @@ public abstract class CompositeNode : Node
 {
     public List<Node> children = new List<Node>();
 
-    public override Node Clone()
+    public override Node Clone(BehaviorTree tree)
     {
         CompositeNode node = Instantiate(this);
-        node.children = children.ConvertAll(c => c.Clone());
+        node.myTree = tree;
+
+        node.children = children.ConvertAll(c => c.Clone(tree));
+
         return node;
     }
 }
