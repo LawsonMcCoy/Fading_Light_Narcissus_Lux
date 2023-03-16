@@ -13,11 +13,15 @@ public class PlayerHealth : HealthManager
     //For the shaking animation
     [SerializeField] private float shakeDuration = 0.7f;
     [SerializeField] private float shakeDistance = 5f;
-    [SerializeField] private float delayBetweenShakes = 0f;
+    private Vector3 startPos;
 
     //For the changing of colors
     private float lerpValue = 0f;
 
+    private void Start()
+    {
+        startPos = healthBar.transform.position;
+    }
 
 
     public override void Subtract(float damage)
@@ -56,7 +60,7 @@ public class PlayerHealth : HealthManager
 
     private IEnumerator ShakeHealthbar()
     {
-        Vector3 startPos = healthBar.transform.position;
+        //Vector3 startPos = healthBar.transform.position;
         Color origColor = healthBar.GetComponent<Image>().color;
 
         float timer = 0f;
@@ -68,27 +72,18 @@ public class PlayerHealth : HealthManager
             healthBar.GetComponent<Image>().color = Color.Lerp(healthBar.GetComponent<Image>().color, Color.red, lerpValue);
 
             Vector3 newPos = startPos + (Random.insideUnitSphere * shakeDistance);
-            newPos.y = healthBar.transform.position.y;
-            newPos.z = healthBar.transform.position.z;
+            //newPos.y = healthBar.transform.position.y;
+            //newPos.z = healthBar.transform.position.z;
 
             healthBar.transform.position = newPos;
 
             healthBar.GetComponent<Image>().color = Color.Lerp(healthBar.GetComponent<Image>().color, origColor, lerpValue);
 
-            if (delayBetweenShakes > 0f)
-            {
-                yield return new WaitForSeconds(delayBetweenShakes);
-            }
-            else
-            {
-                
-                yield return null;
-            }
+            yield return null;
 
-            
         }
 
-        //healthBar.transform.position = startPos;
+        healthBar.transform.position = startPos;
         lerpValue = 0f;
     }
 
