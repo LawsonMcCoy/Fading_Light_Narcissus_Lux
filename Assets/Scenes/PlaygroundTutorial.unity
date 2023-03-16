@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.20611256, g: 0.30532512, b: 0.3065017, a: 1}
+  m_IndirectSpecularColor: {r: 0.20621209, g: 0.30538738, b: 0.30684066, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1139,11 +1139,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 809324500423899685, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+    - target: {fileID: 1706822971523607938, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 809324500423899685, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
+    - target: {fileID: 1706822971523607938, guid: ec0818a79a32c5142a50aee692950d76, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -1533,7 +1533,7 @@ PrefabInstance:
       objectReference: {fileID: 2123346510}
     - target: {fileID: 223240804650087946, guid: ceb66c0a53ae1f74084fc27894b8d3d7, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 223240804650087946, guid: ceb66c0a53ae1f74084fc27894b8d3d7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2436,6 +2436,14 @@ PrefabInstance:
     - target: {fileID: 6689076497915909122, guid: 76e648bda6f05194d983b3d0d384fdab, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6744555635162369964, guid: 76e648bda6f05194d983b3d0d384fdab, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6744555635846815845, guid: 76e648bda6f05194d983b3d0d384fdab, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7216141597777835195, guid: 76e648bda6f05194d983b3d0d384fdab, type: 3}
       propertyPath: m_StaticEditorFlags
