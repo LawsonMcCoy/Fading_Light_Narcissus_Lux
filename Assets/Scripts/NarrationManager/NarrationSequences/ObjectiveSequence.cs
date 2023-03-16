@@ -39,6 +39,7 @@ public class ObjectiveSequence : NarrationSequence
     public UnityEvent cancel;
     private void OnEnable()
     {
+        enemiesLeft = enemiesToKill;
         if (resetCourse)
         {
             reachGoal = 1; //1 is used to represesnt incomplete

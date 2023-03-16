@@ -29,7 +29,6 @@ public class MovementWalking : MovementMode
     }
     
     //Helper UI
-    private bool uiLoaded;
     private bool midairTransition;
     private bool previousBoolean;
 
@@ -41,7 +40,6 @@ public class MovementWalking : MovementMode
         speed = walkSpeed;
 
         turnValue = 0;
-        uiLoaded = true;
         midairTransition = false;
     }
 
@@ -300,20 +298,24 @@ public class MovementWalking : MovementMode
 
     private void DisplayUiControls()
     {
-        // A way to know if a transition occured between midair and walk once:
-        if (midairTransition == true && previousBoolean == false)  // MIDAIR TRANSITION
-        {
-            previousBoolean = midairTransition;
-            controlUi.TransitionMidairUI();
-            controlUi.IndicateModeChange();
-            Debug.Log("Now jumping");
+        if (controlUi.enabled && controlUi != null)
+        { 
+            // A way to know if a transition occured between midair and walk once:
+            if (midairTransition == true && previousBoolean == false)  // MIDAIR TRANSITION
+            {
+                previousBoolean = midairTransition;
+                controlUi.TransitionMidairUI();
+                controlUi.IndicateModeChange();
+                Debug.Log("Now jumping");
+            }
+            else if (midairTransition == false && previousBoolean == true) // WALK TRANSITION
+            {
+                previousBoolean = midairTransition;
+                controlUi.TransitionWalkUI();
+                controlUi.IndicateModeChange();
+                Debug.Log("Now walking");
         }
-        else if (midairTransition == false && previousBoolean == true) // WALK TRANSITION
-        {
-            previousBoolean = midairTransition;
-            controlUi.TransitionWalkUI();
-            controlUi.IndicateModeChange();
-            Debug.Log("Now walking");
+        
         }
     }
 }

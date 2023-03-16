@@ -12,6 +12,7 @@ public class MeleeAttack : ActionNode
     private float nextAttackTime;
     private bool isSetUp;
 
+    private ParticleSystem hitParticle;
     public void Awake()
     {
         isSetUp = false;
@@ -24,6 +25,8 @@ public class MeleeAttack : ActionNode
             myAI = myTree.getAI();
             attackSpell = myAI.GetComponent<Melee>();
             attackSpell.setLayerMask(mask);
+
+            hitParticle = myAI.GetComponentInChildren<ParticleSystem>();
             isSetUp = true;
         }
     }
@@ -36,6 +39,7 @@ public class MeleeAttack : ActionNode
     {
         if (Time.time > nextAttackTime)
         {
+            hitParticle.Play();
             attackSpell.Cast();
             nextAttackTime = Time.time + coolDownInSeconds;
             return Node.State.SUCCESS;
