@@ -8,7 +8,8 @@ public class PlayerHealth : HealthManager
 {
     [SerializeField] private Sprite[] healthbarSprites; //A list of all the different sprites, partitioned by 20
     [SerializeField] private GameObject healthBar; //Reference to the healthbar object.
-    private int healthBarIndex = 0;
+    private int healthBarIndex = 0; //Index for the array of healthbar sprites.
+    private bool isBeingDamaged = false; //A boolean value to check if we're currently being damaged (vulnerability cooldown)
 
     //For the shaking animation
     [SerializeField] private float shakeDuration = 0.7f;
@@ -26,16 +27,23 @@ public class PlayerHealth : HealthManager
 
     public override void Subtract(float damage)
     {
-        base.Subtract(damage);
-
-        beginShakeHealthBarCoroutine();
-
-        //Partitioned by 20 (since there are 5 leaves)
-        if ((base.maxResource - base.resource) % (base.maxResource / 5) == 0)
+        //Check to see if we're currently being damaged. If not,
+        if (isBeingDamaged == false)
         {
-            healthBarIndex++;
+            //We are now being damaged.
+            isBeingDamaged = true;
+            base.Subtract(damage);
 
-            healthBar.GetComponent<Image>().sprite = healthbarSprites[healthBarIndex];
+            beginShakeHealthBarCoroutine();
+
+            //Partitioned by 20 (since there are 5 leaves)
+            //Make sure that the health isn't 100 (b/c 100-100 or 0 mod 20 is also 0)
+            if ((base.maxResource - base.resource) % (base.maxResource / 5) == 0 && base.maxResource != base.resource)
+            {
+
+                healthBarIndex++;
+                healthBar.GetComponent<Image>().sprite = healthbarSprites[healthBarIndex];
+            }
         }
     }
 
@@ -44,25 +52,22 @@ public class PlayerHealth : HealthManager
     {
         Debug.Log("You died!");
 
-        //gameObject.transform.position = saveData.spawnPoint;
+        //Restore player's health back to full.
         Add(1000.0f);
         healthBarIndex = 0; //Reset healthbar index
-        healthBar.GetComponent<Image>().sprite = healthbarSprites[healthBarIndex]; //Update it back to full health sprite.
+        healthBar.GetComponent<Image>().sprite = healthbarSprites[healthBarIndex]; //Update it back to the full health sprite.
+        isBeingDamaged = false; //Reset the boolean that checks if we're being damaged back to false.
         EventManager.Instance.Notify(EventTypes.Events.PLAYER_DEATH);
 
     }
 
     public void beginShakeHealthBarCoroutine()
     {
-        Debug.Log("Shaking now");
         StartCoroutine(ShakeHealthbar());
     }
 
     private IEnumerator ShakeHealthbar()
     {
-        //Vector3 startPos = healthBar.transform.position;
-        Color origColor = healthBar.GetComponent<Image>().color;
-
         float timer = 0f;
         while (timer < shakeDuration)
         {
@@ -77,7 +82,7 @@ public class PlayerHealth : HealthManager
 
             healthBar.transform.position = newPos;
 
-            healthBar.GetComponent<Image>().color = Color.Lerp(healthBar.GetComponent<Image>().color, origColor, lerpValue);
+            healthBar.GetComponent<Image>().color = Color.Lerp(healthBar.GetComponent<Image>().color, Color.white, lerpValue);
 
             yield return null;
 
@@ -85,6 +90,8 @@ public class PlayerHealth : HealthManager
 
         healthBar.transform.position = startPos;
         lerpValue = 0f;
+        //healthBar.GetComponent<Image>().color = Color.white;
+        isBeingDamaged = false;
     }
 
 
