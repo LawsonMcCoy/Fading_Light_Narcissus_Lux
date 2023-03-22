@@ -20,5 +20,7 @@ MonoBehaviour:
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
     text: If I say it is called that, then IT IS CALLED THAT!
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: This cave will challenge your hovering skills, I will be waiting at that
-      exit.
+    text: This cave will challenge your hovering skills so experiment and figure
+      out how do you reach high places.
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: I will be waiting at that exit.

@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentences:
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: "What're you looking at? Walk yourself to that playground, young boy!\r"
-  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: "You should know how by pressing them WASD keys.\r"
+    text: "What're you looking at? Let's go back to learn gliding, young boy!\r"
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: "Don't you mean legs?\r"
+    text: B-but how do I get across those floating islands?
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: "Don't be smart with me, boy! Now get across and touch that yellow flower.\r"
+    text: 'How did you get here in the first place? '
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: But I can't walk on air.
-  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: But you can jump can't you. Just press space.
+    text: Ah, right. I float across...
+  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
+    text: You can walk with WASD.
+  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
+    text: You can also jump by selecting SPACE. See what happens when you move around
+      once you're in midair.
