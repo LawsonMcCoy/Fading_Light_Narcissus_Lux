@@ -10,18 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17942a21488c9d62d96891e964b6098a, type: 3}
-  m_Name: UnderAttack
+  m_Name: EnemiesDefeated
   m_EditorClassIdentifier: 
   sentences:
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: Whoa! Who are they?! They look like you...but rotten.
+    text: '*Huff Huff*'
   - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
-    text: I don't know, boy. Take care of them while I check outside!
+    text: 'Ika get up here! '
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: O-oh okay sir!
+    text: '*Huff* How?'
+  - character: {fileID: 11400000, guid: 6a6867dcfd3df9de39a47dd4cc225fb7, type: 2}
+    text: I call thy wind for aid. A gale that shows the way. Whether through light,
+      rain, or snow. Blow me away or my foes.
   - character: {fileID: 11400000, guid: 61cadd1c70cebc24dbef3fe19a942119, type: 2}
-    text: '*I''m not scared. If I was able to glide, then I can also fight!*'
-  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
-    text: Select E for melee attack.
-  - character: {fileID: 11400000, guid: b1647d75cf216bd488c25a8e01f74b5f, type: 2}
-    text: Select R for magic attack.
+    text: Whoa...
